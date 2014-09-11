@@ -42,10 +42,10 @@ public class DistanceLine : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision other)
+	void OnTriggerEnter(Collider other)
 	{
 		//Debug.Log("Hit");
-		target = other.transform;
+		target = other.gameObject.transform;
 	}
 
 

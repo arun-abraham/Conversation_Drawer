@@ -7,6 +7,8 @@ public class SimpleMover : MonoBehaviour {
 	public float externalMultiplier = 1;
 	public bool moving;
 
+	private float movePower = 5;
+
 	void Update() {
 		if (!moving) {
 			currentSpeed = 0;
@@ -21,6 +23,18 @@ public class SimpleMover : MonoBehaviour {
 			speed = maxSpeed;
 		}
 		currentSpeed = speed * externalMultiplier;
-		transform.position += direction * currentSpeed * Time.deltaTime;
+		//transform.position += direction * currentSpeed * Time.deltaTime;
+		rigidbody.AddForce(direction * currentSpeed);
+
+
+	
+
+
+		Debug.Log(rigidbody.velocity);
+	}
+
+	public void SlowDown()
+	{
+		rigidbody.velocity = rigidbody.velocity * 0.99f;
 	}
 }

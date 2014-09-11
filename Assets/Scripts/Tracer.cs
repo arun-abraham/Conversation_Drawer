@@ -45,6 +45,8 @@ public class Tracer : MonoBehaviour {
 		} else if (Input.GetMouseButton (0)) {
 			DragAndDraw();
 		}
+		else
+			mover.SlowDown();
 	}
 
 	public void StartLine(bool startAtVertex = false, Vector3 startVertex = new Vector3())
