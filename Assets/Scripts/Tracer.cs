@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Tracer : MonoBehaviour {
 	public Camera gameCamera = null;
 	private LineRenderer lineRenderer = null;
+	public SimpleMover mover;
 	private int vertexCount = 0;
 	private int stableVertexCount = 0;
 	public float minDragToDraw = 1.0f;
@@ -27,6 +28,9 @@ public class Tracer : MonoBehaviour {
 			nonCritMat = (Material)Instantiate(Resources.Load(globals.noncritmat));
 			nonCritLineMakerPrefab = (GameObject)Instantiate(Resources.Load(globals.noncritprefab));
 		}*/
+
+		mover = GetComponent<SimpleMover>();
+		mover.moving = false;
 		vertexCount = 0;
 		stableVertexCount = 0;
 	}
@@ -45,25 +49,43 @@ public class Tracer : MonoBehaviour {
 
 	public void StartLine(bool startAtVertex = false, Vector3 startVertex = new Vector3())
 	{		
-		Vector3 touchPosition = TouchPointInWorld();
-		transform.position = touchPosition;
+		//Vector3 mousePosition = MousePointInWorld();
+		//transform.position = MousePosition;
 		
 		// If this line is not on the required path, create a separate polyline.
 		CreateLineMaker(true);
 		
-		AddVertex(touchPosition);
+		AddVertex(transform.position);
 	}
 
 	private void DragAndDraw(bool criticalLine = true) {
-		Vector3 touchPosition = TouchPointInWorld();
-		Vector3 translationToTouch = touchPosition - transform.position;
-		if (translationToTouch.sqrMagnitude > minDragToDraw * minDragToDraw) {
-			transform.Translate (translationToTouch);
-			AddVertex (touchPosition);
+		Vector3 mousePosition = MousePointInWorld();
+		Vector3 toMouse = mousePosition - transform.position;
+		if (toMouse.sqrMagnitude > minDragToDraw * minDragToDraw)
+		{
+			//transform.Translate (translationToTouch);
+			float toMouseMag = toMouse.magnitude;
+			if (toMouseMag > 0)
+			{
+				toMouse /= toMouseMag;
+				float speedRamp = 1;
+				/*if (speedRampRadius > 0)
+				{
+					speedRamp = toMouseMag / speedRampRadius;
+				}*/
+				float moveDist = mover.maxSpeed * speedRamp;
+				if (moveDist > toMouseMag)
+				{
+					moveDist = toMouseMag;
+				}
+				mover.Move(toMouse, moveDist, true);
+			}
+			mover.moving = true;
+			AddVertex(transform.position);
 		}
 	}
 
-	private Vector3 TouchPointInWorld() {
+	private Vector3 MousePointInWorld() {
 		Vector3 touchPosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
 		touchPosition.z = transform.position.z;
 		return touchPosition;
