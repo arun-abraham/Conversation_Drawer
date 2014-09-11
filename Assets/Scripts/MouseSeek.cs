@@ -9,6 +9,10 @@ public class MouseSeek : MonoBehaviour
 
 	void Start()
 	{
+		if(gameCamera == null)
+		{
+			gameCamera = Camera.main;
+		}
 		if (mover == null)
 		{
 			mover = GetComponent<SimpleMover>();
@@ -50,10 +54,6 @@ public class MouseSeek : MonoBehaviour
 			{
 				toMouse /= toMouseMag;
 				float moveDist = mover.maxSpeed;
-				if (moveDist > toMouseMag)
-				{
-					moveDist = toMouseMag;
-				}
 				mover.Move(toMouse, moveDist, true);
 			}
 			mover.moving = true;
