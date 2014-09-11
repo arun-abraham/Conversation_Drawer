@@ -72,7 +72,7 @@ public class FollowScore : MonoBehaviour {
 				}
 				else if (score < 0)
 				{
-					score += Mathf.Min(decay, score);
+					score += Mathf.Min(decay, -score);
 				}
 				else
 				{
