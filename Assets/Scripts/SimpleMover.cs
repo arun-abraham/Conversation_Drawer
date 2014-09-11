@@ -26,11 +26,30 @@ public class SimpleMover : MonoBehaviour {
 		//transform.position += direction * currentSpeed * Time.deltaTime;
 		rigidbody.AddForce(direction * currentSpeed);
 
+		if(rigidbody.velocity.x > 20)
+		{
+			rigidbody.velocity = new Vector3(20f, rigidbody.velocity.y, 0);
+		}
+
+		if(rigidbody.velocity.x < -20)
+		{
+			rigidbody.velocity = new Vector3(-20f, rigidbody.velocity.y, 0);
+		}
+
+		if(rigidbody.velocity.y > 20)
+		{
+			rigidbody.velocity = new Vector3(rigidbody.velocity.x, 20f, 0);
+		}
+
+		if(rigidbody.velocity.y < -20)
+		{
+			rigidbody.velocity = new Vector3(rigidbody.velocity.x, -20f, 0);
+		}
 
 	
 
 
-		Debug.Log(rigidbody.velocity);
+		//Debug.Log(rigidbody.velocity);
 	}
 
 	public void SlowDown()
