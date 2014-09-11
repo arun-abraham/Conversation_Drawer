@@ -2,11 +2,35 @@
 using System.Collections;
 
 public class WaveSeek : MonoBehaviour {
+	public Tracer tracer;
+	public SimpleWave wave;
 	public Vector3 primaryDirection = Vector3.down;
 	public float currentSpeed;
 	public float amplitude;
 	public float wavelength;
-	public float wavePortion;
+	public float waveStep;
+	private Vector3 waveStartPoint;
+
+	void Start()
+	{
+		/*if (mover == null)
+		{
+			mover = GetComponent<SimpleMover>();
+		}*/
+		if (tracer == null)
+		{
+			tracer = GetComponent<Tracer>();
+		}
+		if (tracer)
+		{
+			tracer.StartLine();
+			waveStartPoint = transform.position;
+		}
+		if (wave == null)
+		{
+			wave = GetComponent<SimpleWave>();
+		}
+	}
 
 	void Update()
 	{
@@ -16,14 +40,17 @@ public class WaveSeek : MonoBehaviour {
 		}
 
 		// TODO use speed to determine how far along the curve to move, not just in the primary direction.
-		float primaryMove = currentSpeed * Time.deltaTime;
-		float step = primaryMove / wavelength;
-		wavePortion += step;
-		if (wavePortion > 1)
+		waveStep += currentSpeed * Time.deltaTime;
+		if (waveStep > 1)
 		{
-			wavePortion -= 1;
+			waveStep -= 1;
+			waveStartPoint = transform.position;
 		}
-		Debug.Log(wavePortion);
-		transform.position += (primaryDirection * primaryMove) + (Vector3.Cross(primaryDirection, Vector3.forward) * amplitude * Mathf.Cos(Mathf.PI * 2 * wavePortion)); 
+		transform.position = wave.FindWavePoint(primaryDirection, waveStartPoint, waveStep);
+		
+		if (tracer != null)
+		{
+			tracer.AddVertex(transform.position);
+		}
 	}
 }

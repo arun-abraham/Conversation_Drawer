@@ -43,7 +43,7 @@ public class MouseSeek : MonoBehaviour
 	{
 		Vector3 mousePosition = MousePointInWorld();
 		Vector3 toMouse = mousePosition - transform.position;
-		if (tracer == null && toMouse.sqrMagnitude > tracer.minDragToDraw * tracer.minDragToDraw)
+		if (tracer == null || toMouse.sqrMagnitude > tracer.minDragToDraw * tracer.minDragToDraw)
 		{
 			float toMouseMag = toMouse.magnitude;
 			if (toMouseMag > 0)
