@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WaveAI: MonoBehaviour {
+public class WaveSeek : MonoBehaviour {
 	public Vector3 primaryDirection = Vector3.down;
 	public float currentSpeed;
 	public float amplitude;
@@ -24,6 +24,6 @@ public class WaveAI: MonoBehaviour {
 			wavePortion -= 1;
 		}
 		Debug.Log(wavePortion);
-		transform.position += /*(primaryDirection * primaryMove) + */(Vector3.Cross(primaryDirection, Vector3.forward) * amplitude * Mathf.Sin(Mathf.PI * 2 * wavePortion)); 
+		transform.position += (primaryDirection * primaryMove) + (Vector3.Cross(primaryDirection, Vector3.forward) * amplitude * Mathf.Cos(Mathf.PI * 2 * wavePortion)); 
 	}
 }
