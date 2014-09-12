@@ -39,7 +39,7 @@ public class WaveSeek : MonoBehaviour {
 
 		distanceTravelled += mover.maxSpeed * Time.deltaTime;
 		float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, distanceTravelled);
-		mover.MoveTo(wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime), true);
+		mover.MoveTo(wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime));
 		
 		if (tracer != null)
 		{
