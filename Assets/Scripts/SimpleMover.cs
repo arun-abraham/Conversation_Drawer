@@ -47,6 +47,15 @@ public class SimpleMover : MonoBehaviour {
 		transform.position += velocity * Time.deltaTime;
 	}
 
+	public void MoveTo(Vector3 position, bool updateVelocity = false)
+	{
+		if (updateVelocity && Time.deltaTime > 0)
+		{
+			velocity = (position - transform.position) / Time.deltaTime;
+		}
+		transform.position = position;
+	}
+
 	public void SlowDown()
 	{
 		velocity *= dampening;
