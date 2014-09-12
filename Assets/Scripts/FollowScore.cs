@@ -16,6 +16,7 @@ public class FollowScore : MonoBehaviour {
 	public bool forcingScore = false;
 	public float scoreDecay;
 	private float startSpeed;
+	public bool allowBoosts = true;
 
 	void Start()
 	{
@@ -82,17 +83,19 @@ public class FollowScore : MonoBehaviour {
 					mover.maxSpeed = startSpeed;
 				}
 			}
-			
 
-			if(score >= scoreLimit && !forcingScore)
+			if (allowBoosts)
 			{
-				mover.maxSpeed += scoreLimitBoost;
-				forcingScore = true;
-			}
-			else if (score <= -scoreLimit && !forcingScore)
-			{
-				mover.maxSpeed -= scoreLimitBoost;
-				forcingScore = true;
+				if (score >= scoreLimit && !forcingScore)
+				{
+					mover.maxSpeed += scoreLimitBoost;
+					forcingScore = true;
+				}
+				else if (score <= -scoreLimit && !forcingScore)
+				{
+					mover.maxSpeed -= scoreLimitBoost;
+					forcingScore = true;
+				}
 			}
 		}
 	}

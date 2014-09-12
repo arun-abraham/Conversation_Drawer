@@ -6,9 +6,7 @@ public class WaveSeek : MonoBehaviour {
 	public SimpleWave wave;
 	public Vector3 primaryDirection = Vector3.down;
 	public float currentSpeed;
-	public float amplitude;
-	public float wavelength;
-	public float waveStep;
+	public float distanceTravelled;
 	private Vector3 waveStartPoint;
 
 	void Start()
@@ -40,13 +38,14 @@ public class WaveSeek : MonoBehaviour {
 		}
 
 		// TODO use speed to determine how far along the curve to move, not just in the primary direction.
-		waveStep += currentSpeed * Time.deltaTime;
-		if (waveStep > 1)
+		distanceTravelled += currentSpeed * Time.deltaTime;
+		/*if (waveStep > 1)
 		{
 			waveStep -= 1;
 			waveStartPoint = transform.position;
-		}
-		transform.position = wave.FindWavePoint(primaryDirection, waveStartPoint, waveStep);
+		}*/
+		float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, distanceTravelled);
+		transform.position = wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime);
 		
 		if (tracer != null)
 		{
