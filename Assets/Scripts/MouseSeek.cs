@@ -6,6 +6,8 @@ public class MouseSeek : MonoBehaviour
 	public Camera gameCamera = null;
 	public SimpleMover mover;
 	public Tracer tracer;
+	public bool requireMouseDown;
+	private bool startedLine;
 
 	void Start()
 	{
@@ -30,14 +32,15 @@ public class MouseSeek : MonoBehaviour
 
 	private void HandleTouches()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) || (!requireMouseDown && !startedLine))
 		{
 			if (tracer)
 			{
 				tracer.StartLine();
+				startedLine = true;
 			}
 		}
-		else if (Input.GetMouseButton(0))
+		else if (Input.GetMouseButton(0) || (!requireMouseDown && startedLine))
 		{
 			Drag();
 		}
