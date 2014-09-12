@@ -6,8 +6,11 @@ public class MouseSeek : MonoBehaviour
 	public Camera gameCamera = null;
 	public SimpleMover mover;
 	public Tracer tracer;
+	public float acceleration;
 	public bool requireMouseDown;
+	public bool directVelocity;
 	private bool startedLine;
+	
 
 	void Start()
 	{
@@ -44,22 +47,26 @@ public class MouseSeek : MonoBehaviour
 		{
 			Drag();
 		}
+		else
+		{
+			mover.SlowDown();
+		}
 	}
 
 	private void Drag(bool criticalLine = true)
 	{
 		Vector3 mousePosition = MousePointInWorld();
 		Vector3 toMouse = mousePosition - transform.position;
-		if (tracer == null || toMouse.sqrMagnitude > tracer.minDragToDraw * tracer.minDragToDraw)
+		if (tracer == null || toMouse.sqrMagnitude > Mathf.Pow(tracer.minDragToDraw, 2))
 		{
-			float toMouseMag = toMouse.magnitude;
-			if (toMouseMag > 0)
+			if (directVelocity)
 			{
-				toMouse /= toMouseMag;
-				float moveDist = mover.maxSpeed;
-				mover.Move(toMouse, moveDist, true);
+				mover.Move(toMouse.normalized, mover.maxSpeed, true);
 			}
-			mover.moving = true;
+			else
+			{
+				mover.Accelerate(toMouse.normalized * acceleration);
+			}
 			if (tracer != null)
 			{
 				tracer.AddVertex(transform.position);

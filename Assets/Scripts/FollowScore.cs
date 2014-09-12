@@ -8,7 +8,6 @@ public class FollowScore : MonoBehaviour {
 	public Tracer leader;
 	public int oldNearestIndex = 0;
 	public float followThreshold;
-	public GameObject perfectFollower;
 	public float score = 0;
 	public float perfectScoreIncrement;
 	public float scoreLimit;
@@ -53,11 +52,7 @@ public class FollowScore : MonoBehaviour {
 			Vector3 nearestToNext = (nextVertex - nearestVertex).normalized;
 			Vector3 nearestToFollower = (transform.position - nearestVertex);
 			Vector3 pointOnPath = Helper.ProjectVector(nearestToNext, nearestToFollower) + nearestVertex;
-			float followerToPathDist = (transform.position - pointOnPath).magnitude;
-			//Debug.Log((Helper.ProjectVector(nearestToNext, nearestToFollower) + nearestVertex) + " " + followerToPathDist);
-			// TODO remove this
-			perfectFollower.transform.position = pointOnPath;
-			
+			float followerToPathDist = (transform.position - pointOnPath).magnitude;			
 			
 			if (!forcingScore)
 			{

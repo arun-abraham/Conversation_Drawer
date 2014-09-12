@@ -30,7 +30,7 @@ public class SimpleWave : MonoBehaviour
 		{
 			// Iteratively estimate based on error and rate of change, preventing an estimate from being negative.
 			float nextEstimateTime = estimateTime - error / SpeedAtTime(estimateTime);
-			if (false)//nextEstimateTime < 0)
+			if (nextEstimateTime < 0)
 			{
 				estimateTime = (estimateTime + nextEstimateTime) / 2;
 			}
