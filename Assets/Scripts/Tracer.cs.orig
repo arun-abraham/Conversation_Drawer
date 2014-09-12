@@ -17,6 +17,23 @@ public class Tracer : MonoBehaviour {
 		stableVertexCount = 0;
 	}
 
+<<<<<<< HEAD
+=======
+	void Update() {
+		HandleTouches();
+	}
+	
+	private void HandleTouches() {		
+		if (Input.GetMouseButtonDown (0)) {
+			StartLine();
+		} else if (Input.GetMouseButton (0)) {
+			DragAndDraw();
+		}
+		else
+			mover.SlowDown();
+	}
+
+>>>>>>> 4d3e16bdc1848ad251987c45be1bb596d5291c63
 	public void StartLine(bool startAtVertex = false, Vector3 startVertex = new Vector3())
 	{		
 		// If this line is not on the required path, create a separate polyline.
@@ -30,13 +47,12 @@ public class Tracer : MonoBehaviour {
 			// Preserve look of the most recent line segement if the new vertex
 			// drastically changes the direction of motion. Without this, the line segement
 			// gets distorted as only the center point is ever stored.
-			if (Vector3.Dot((position - lastVertex).normalized, lastDirection) < 0.6f) {
+			/*if (Vector3.Dot((position - lastVertex).normalized, lastDirection) < 0.6f) {
+				lineRenderer.SetVertexCount(++vertexCount);
 				Vector3 midPosition = lastVertex + (lastDirection * minDragToDraw / 4);
-				vertices.Add(midPosition);
-				lineRenderer.SetVertexCount(vertices.Count);
-				lineRenderer.SetPosition(vertices.Count - 1, midPosition); 
+				lineRenderer.SetPosition(vertexCount - 1, midPosition); 
 				lastVertex = midPosition;
-			}
+			}*/
 		}
 
 		vertices.Add(position);

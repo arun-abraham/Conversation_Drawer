@@ -37,21 +37,12 @@ public class ScrollDrag : MonoBehaviour {
 		// Separate mouse position in terms of the primary direction.
 		Vector3 mouseInverseY = Input.mousePosition;
 		mouseInverseY.y = Screen.height - mouseInverseY.y;
-		Vector3 mouseParallel = ProjectVector(primaryDirection, mouseInverseY);
-		Vector3 mousePerpendicular = ProjectVector(Vector3.Cross(primaryDirection, Vector3.forward), mouseInverseY);
+		Vector3 mouseParallel = Helper.ProjectVector(primaryDirection, mouseInverseY);
+		Vector3 mousePerpendicular = Helper.ProjectVector(Vector3.Cross(primaryDirection, Vector3.forward), mouseInverseY);
 
 		// Calculate speed based on how far along the primary direction the mouse is.
-		Vector3 screenParallel = ProjectVector(primaryDirection, new Vector3(Screen.width, Screen.height));
+		Vector3 screenParallel = Helper.ProjectVector(primaryDirection, new Vector3(Screen.width, Screen.height));
 		float speedFactor = mouseParallel.magnitude / screenParallel.magnitude;
 		currentSpeed = (speedFactor * (maxSpeed - minSpeed)) + minSpeed;
-	}
-
-	private Vector3 ProjectVector(Vector3 baseDirection, Vector3 projectee)
-	{
-		baseDirection.Normalize();
-		float projecteeMag = projectee.magnitude;
-		float projecteeDotBase = Vector3.Dot(projectee / projecteeMag, baseDirection);
-		Vector3 projection = baseDirection * projecteeMag * projecteeDotBase;
-		return projection;
 	}
 }
