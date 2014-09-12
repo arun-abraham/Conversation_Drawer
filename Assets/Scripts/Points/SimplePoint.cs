@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SimplePoint : MonoBehaviour {
 
+	public AudioClip Gong;
+
 	public bool pointMade;
 
 	public GameObject lilPoint1;
@@ -36,6 +38,11 @@ public class SimplePoint : MonoBehaviour {
 			renderer.material.color = Color.cyan;
 			print("Good Point");
 			pointMade = true;
+			rotSpeed = 50.0f;
+			audio.PlayOneShot(Gong);
+			rotVect.y = 1;
+			BroadcastMessage("IsHitOff");
+
 		}
 	
 	}

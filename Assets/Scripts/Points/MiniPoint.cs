@@ -21,6 +21,7 @@ public class MiniPoint : MonoBehaviour {
 		{
 			isHit = true;
 			renderer.material.color = Color.cyan;
+			audio.Play();
 		}
 		
 	}

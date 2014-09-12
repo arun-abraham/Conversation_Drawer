@@ -21,7 +21,14 @@ public class Detail : MonoBehaviour {
 		{
 			isHit = true;
 			renderer.material.color = Color.blue;
+			audio.Play();
 		}
+	}
+
+	void IsHitOff ()
+	{
+		isHit = false;
+		renderer.material.color = Color.blue;
 	}
 
 }

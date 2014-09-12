@@ -27,6 +27,7 @@ public class LongDetail : MonoBehaviour {
 		if (collide.gameObject.tag == "Player")
 		{
 			setHitOn();
+			audio.Play();
 		}
 		
 	}
@@ -42,6 +43,13 @@ public class LongDetail : MonoBehaviour {
 		isHit = false;
 		renderer.material = myMaterial;
 	}
+
+	void IsHitOff ()
+	{
+		isHit = false;
+		renderer.material.color = Color.blue;
+	}
+
 	
 	
 }

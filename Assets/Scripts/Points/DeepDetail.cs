@@ -35,6 +35,8 @@ void Update () {
 
 			if(isHit == true)
 				setHitOn();
+
+			audio.Play();
 		}
 		
 	}
@@ -71,7 +73,13 @@ void Update () {
 	{
 		waiting = false;
 	}
-	
+
+	void IsHitOff ()
+	{
+		isHit = false;
+		renderer.material.color = Color.blue;
+	}
+
 	
 	
 }

@@ -4,6 +4,8 @@ using System.Collections;
 public class LongPoint : MonoBehaviour {
 
 	public bool pointMade;
+
+	public AudioClip Gong;
 	
 	public GameObject lilPoint1;
 	public GameObject lilPoint2;
@@ -36,8 +38,14 @@ public class LongPoint : MonoBehaviour {
 			renderer.material.color = Color.cyan;
 			print("Good Point");
 			pointMade = true;
+			rotSpeed = 50.0f;
+			audio.PlayOneShot(Gong);
+			rotVect.y = 2;
+			BroadcastMessage("IsHitOff");
 		}
 		
 	}
+
+
 	
 }
