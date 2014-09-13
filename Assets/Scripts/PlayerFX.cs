@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerVFX : MonoBehaviour {
+public class PlayerFX : MonoBehaviour {
 	public CameraShake cameraShake;
 	public float cameraShakeFactor;
 

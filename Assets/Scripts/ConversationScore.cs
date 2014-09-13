@@ -12,10 +12,12 @@ public class ConversationScore : MonoBehaviour {
 	public float perfectScoreIncrement;
 	public float scoreLimit;
 	public float scoreLimitBoost;
-	public bool forcingScore = false;
+	public bool changingBoost = false;
 	public float scoreDecayTime;
+	public float scoreDecayed;
 	private float startSpeed;
-	public bool allowBoosts = true;
+	public int boostLevels;
+	public int currentBoostLevel = 0;
 	public Camera gameCamera = null;
 
 	void Start()
@@ -63,51 +65,50 @@ public class ConversationScore : MonoBehaviour {
 			Vector3 pointOnPath = Helper.ProjectVector(nearestToNext, nearestToFollower) + nearestVertex;
 			float followerToPathDist = (transform.position - pointOnPath).magnitude;			
 			
-			if (!forcingScore)
+			if (!changingBoost)
 			{
 				float scoreFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
 				score += perfectScoreIncrement * scoreFactor * Time.deltaTime;
 			}
 			else
 			{
-				float decayPortion = Time.deltaTime / scoreDecayTime;
-				
-				if (score > 0)
-				{
-					score -= Mathf.Min(decayPortion * scoreLimit, score);
-					mover.maxSpeed += scoreLimitBoost * decayPortion;
-				}
-				else if (score < 0)
-				{
-					score += Mathf.Min(decayPortion * scoreLimit, -score);
-					mover.maxSpeed -= scoreLimitBoost * decayPortion;
-				}
-				else
+				scoreDecayed += Time.deltaTime;
+				if (scoreDecayed >= scoreDecayTime)
 				{
 					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
-					forcingScore = false;
-					mover.maxSpeed = startSpeed;
+					changingBoost = false;
+					scoreDecayed = 0;
 				}
 			}
-
-			if (allowBoosts)
+			
+			float scoreReq = scoreLimit * (1 -((partnerTracer.transform.position - transform.position).magnitude / partnerLink.breakingThreshold));
+				
+			// Boost speed if score exceeds requirement.
+			if (score >= scoreReq && !changingBoost)
 			{
-				float scoreReq = scoreLimit * (1 -((partnerTracer.transform.position - transform.position).magnitude / partnerLink.breakingThreshold));
-				if (score >= scoreReq && !forcingScore)
+				mover.maxSpeed = startSpeed + scoreLimitBoost;
+			}
+			else
+			{
+				mover.maxSpeed = startSpeed;
+			}
+
+			// Update boost levels 
+			if (boostLevels > 0)
+			{
+				if (score > (scoreLimit / boostLevels) * (currentBoostLevel + 1))
 				{
-					mover.maxSpeed = startSpeed + scoreLimitBoost;
-					//forcingScore = true;
-					//SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
+					currentBoostLevel++;
+					changingBoost = true;
+					SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
+					
 				}
-				else
+				else if (score < (scoreLimit / boostLevels) * currentBoostLevel)
 				{
-					mover.maxSpeed = startSpeed;
+					currentBoostLevel--;
+					changingBoost = true;
+					SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
 				}
-				//else if (score <= -scoreLimit && !forcingScore)
-				//{
-					//forcingScore = true;
-					//SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
-				//}
 			}
 		}
 	}
