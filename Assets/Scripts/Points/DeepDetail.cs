@@ -52,7 +52,7 @@ void Update () {
 	{
 		isHitOnce = true;
 		renderer.material.color = Color.red; 
-		Invoke("setHitOnceOff",5.0f);
+		Invoke("setHitOnceOff",7.0f);
 	}
 	
 	void setHitOnceOff ()
