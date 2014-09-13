@@ -9,13 +9,16 @@ public class ConversationScore : MonoBehaviour {
 	public int oldNearestIndex = 0;
 	public float followThreshold;
 	public float score = 0;
-	public float perfectScoreIncrement;
-	public float scoreLimit;
-	public float scoreLimitBoost;
-	public bool forcingScore = false;
-	public float scoreDecayTime;
+	public float scoreToLead;
+	public float scorePortionExponent = 1;
+	public float scoreDeboostOffset = 0.1f;
+	public float rewardSpeedBoost;
+	public int boostLevels;
+	private int currentBoostLevel = 0;
+	private bool changingBoostLevel = false;
+	public float changeTime;
+	private float changeTimeElapsed;
 	private float startSpeed;
-	public bool allowBoosts = true;
 	public Camera gameCamera = null;
 
 	void Start()
@@ -61,46 +64,59 @@ public class ConversationScore : MonoBehaviour {
 			Vector3 nearestToNext = (nextVertex - nearestVertex).normalized;
 			Vector3 nearestToFollower = (transform.position - nearestVertex);
 			Vector3 pointOnPath = Helper.ProjectVector(nearestToNext, nearestToFollower) + nearestVertex;
-			float followerToPathDist = (transform.position - pointOnPath).magnitude;			
+			float followerToPathDist = (transform.position - pointOnPath).magnitude;
+
+			// Determine how the required score to get a reward speed boost.
+			float scorePortion = 1 - (partnerTracer.transform.position - transform.position).magnitude / (partnerLink.converseDistance);
+			float scoreReq = scoreToLead * Mathf.Max(Mathf.Pow(scorePortion, scorePortionExponent), 0);
+
+			// Update score based on accuracy.
+			float accuracyFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
+			score += accuracyFactor * Time.deltaTime;
 			
-			if (!forcingScore)
+			// Handle special behavior while changing boost level.
+			if (changingBoostLevel)
 			{
-				float scoreFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
-				score += perfectScoreIncrement * scoreFactor * Time.deltaTime;
+				changeTimeElapsed += Time.deltaTime;
+				if (changeTimeElapsed >= changeTime)
+				{
+					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+					changingBoostLevel = false;
+					changeTimeElapsed = 0;
+				}
+			}			
+
+			// Boost speed if score exceeds requirement.
+			if (score >= scoreReq && accuracyFactor > 0)
+			{
+				mover.maxSpeed = startSpeed + rewardSpeedBoost;
 			}
 			else
 			{
-				float decayPortion = Time.deltaTime / scoreDecayTime;
-				
-				if (score > 0)
-				{
-					score -= Mathf.Min(decayPortion * scoreLimit, score);
-					mover.maxSpeed += scoreLimitBoost * decayPortion;
-				}
-				else if (score < 0)
-				{
-					score += Mathf.Min(decayPortion * scoreLimit, -score);
-					mover.maxSpeed -= scoreLimitBoost * decayPortion;
-				}
-				else
-				{
-					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
-					forcingScore = false;
-					mover.maxSpeed = startSpeed;
-				}
+				mover.maxSpeed = startSpeed;
 			}
 
-			if (allowBoosts)
+			// Update boost level. 
+			if (boostLevels > 0)
 			{
-				if (score >= scoreLimit && !forcingScore)
+				float scorePortionPerBoost = 1.0f / Mathf.Pow(boostLevels + 1, scorePortionExponent);
+				if (scorePortion > scorePortionPerBoost * Mathf.Pow((currentBoostLevel + 1), scorePortionExponent))
 				{
-					forcingScore = true;
-					SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
+					if (currentBoostLevel < boostLevels && accuracyFactor > 0)
+					{
+						currentBoostLevel++;
+						changingBoostLevel = true;
+						SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
+					}
 				}
-				else if (score <= -scoreLimit && !forcingScore)
+				else if (scorePortion < scorePortionPerBoost * Mathf.Pow((currentBoostLevel - scoreDeboostOffset), scorePortionExponent))
 				{
-					forcingScore = true;
-					SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
+					if (currentBoostLevel > 0)
+					{
+						currentBoostLevel--;
+						changingBoostLevel = true;
+						SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
+					}
 				}
 			}
 		}
