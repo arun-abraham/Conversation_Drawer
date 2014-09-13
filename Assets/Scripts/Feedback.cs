@@ -5,7 +5,7 @@ public class Feedback : MonoBehaviour {
 
 	public CameraShake cameraShake;
 	public float cameraShakeFactor;
-	public GameObject pSysPrefab;
+	public GameObject particleTrail;
 	public GameObject colorExplosionPrefab;
 	private GameObject player;
 	private GameObject pSys;
@@ -17,7 +17,6 @@ public class Feedback : MonoBehaviour {
 	private Color boostColorTwo;
 	private Color boostColorThree;
 	private Color boostColorFour;
-	private bool exploded = false;
 	private int boostLevel = 0;
 	private Tracer tracer;
 
@@ -27,7 +26,7 @@ public class Feedback : MonoBehaviour {
 		{
 			cameraShake = Camera.main.GetComponent<CameraShake>();
 		}
-		pSys = (GameObject)Instantiate(pSysPrefab);
+		pSys = (GameObject)Instantiate(particleTrail);
 		player = GameObject.FindGameObjectWithTag("Converser");
 		prevPos = player.transform.position;
 		startColor = player.renderer.material.color;
@@ -42,9 +41,6 @@ public class Feedback : MonoBehaviour {
 	void Update () {
 		pSys.transform.position = player.transform.position;
 		pSys.particleSystem.startColor = player.renderer.material.color;
-		//pSys.particleSystem.renderer.material.color = player.renderer.material.color;
-
-
 
 		currentDir = player.transform.position - prevPos;
 
