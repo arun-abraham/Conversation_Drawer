@@ -9,15 +9,16 @@ public class ConversationScore : MonoBehaviour {
 	public int oldNearestIndex = 0;
 	public float followThreshold;
 	public float score = 0;
-	public float perfectScoreIncrement;
-	public float scoreLimit;
-	public float scoreLimitBoost;
-	public bool changingBoost = false;
-	public float scoreDecayTime;
-	public float scoreDecayed;
-	private float startSpeed;
+	public float scoreToLead;
+	public float scorePortionExponent = 1;
+	public float scoreDeboostOffset = 0.1f;
+	public float rewardSpeedBoost;
 	public int boostLevels;
-	public int currentBoostLevel = 0;
+	private int currentBoostLevel = 0;
+	private bool changingBoostLevel = false;
+	public float changeTime;
+	private float changeTimeElapsed;
+	private float startSpeed;
 	public Camera gameCamera = null;
 
 	void Start()
@@ -63,51 +64,59 @@ public class ConversationScore : MonoBehaviour {
 			Vector3 nearestToNext = (nextVertex - nearestVertex).normalized;
 			Vector3 nearestToFollower = (transform.position - nearestVertex);
 			Vector3 pointOnPath = Helper.ProjectVector(nearestToNext, nearestToFollower) + nearestVertex;
-			float followerToPathDist = (transform.position - pointOnPath).magnitude;			
+			float followerToPathDist = (transform.position - pointOnPath).magnitude;
+
+			// Determine how the required score to get a reward speed boost.
+			float scorePortion = 1 - (partnerTracer.transform.position - transform.position).magnitude / (partnerLink.converseDistance);
+			float scoreReq = scoreToLead * Mathf.Max(Mathf.Pow(scorePortion, scorePortionExponent), 0);
+
+			// Update score based on accuracy.
+			float accuracyFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
+			score += accuracyFactor * Time.deltaTime;
 			
-			if (!changingBoost)
+			// Handle special behavior while changing boost level.
+			if (changingBoostLevel)
 			{
-				float scoreFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
-				score += perfectScoreIncrement * scoreFactor * Time.deltaTime;
-			}
-			else
-			{
-				scoreDecayed += Time.deltaTime;
-				if (scoreDecayed >= scoreDecayTime)
+				changeTimeElapsed += Time.deltaTime;
+				if (changeTimeElapsed >= changeTime)
 				{
 					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
-					changingBoost = false;
-					scoreDecayed = 0;
+					changingBoostLevel = false;
+					changeTimeElapsed = 0;
 				}
-			}
-			
-			float scoreReq = scoreLimit * (1 -((partnerTracer.transform.position - transform.position).magnitude / partnerLink.breakingThreshold));
-				
+			}			
+
 			// Boost speed if score exceeds requirement.
-			if (score >= scoreReq && !changingBoost)
+			if (score >= scoreReq && accuracyFactor > 0)
 			{
-				mover.maxSpeed = startSpeed + scoreLimitBoost;
+				mover.maxSpeed = startSpeed + rewardSpeedBoost;
 			}
 			else
 			{
 				mover.maxSpeed = startSpeed;
 			}
 
-			// Update boost levels 
+			// Update boost level. 
 			if (boostLevels > 0)
 			{
-				if (score > (scoreLimit / boostLevels) * (currentBoostLevel + 1))
+				float scorePortionPerBoost = 1.0f / Mathf.Pow(boostLevels + 1, scorePortionExponent);
+				if (scorePortion > scorePortionPerBoost * Mathf.Pow((currentBoostLevel + 1), scorePortionExponent))
 				{
-					currentBoostLevel++;
-					changingBoost = true;
-					SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
-					
+					if (currentBoostLevel < boostLevels && accuracyFactor > 0)
+					{
+						currentBoostLevel++;
+						changingBoostLevel = true;
+						SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
+					}
 				}
-				else if (score < (scoreLimit / boostLevels) * currentBoostLevel)
+				else if (scorePortion < scorePortionPerBoost * Mathf.Pow((currentBoostLevel - scoreDeboostOffset), scorePortionExponent))
 				{
-					currentBoostLevel--;
-					changingBoost = true;
-					SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
+					if (currentBoostLevel > 0)
+					{
+						currentBoostLevel--;
+						changingBoostLevel = true;
+						SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
+					}
 				}
 			}
 		}

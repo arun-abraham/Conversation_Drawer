@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Tracer : MonoBehaviour {
-	private LineRenderer lineRenderer = null;
+	public LineRenderer lineRenderer = null;
 	private List<Vector3> vertices;
 	private int stableVertexCount = 0;
 	public float minDragToDraw = 1.0f;
