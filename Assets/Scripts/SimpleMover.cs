@@ -5,6 +5,7 @@ public class SimpleMover : MonoBehaviour {
 	public float maxSpeed;
 	public Vector3 velocity;
 	public float dampening = 0.9f;
+	public float dampeningThreshold;
 	public float externalSpeedMultiplier = 1;
 	private bool moving;
 	public bool Moving
@@ -14,7 +15,7 @@ public class SimpleMover : MonoBehaviour {
 
 	void Update() {
 		transform.position += velocity * Time.deltaTime;
-		if (velocity.sqrMagnitude < 0.0001f) {
+		if (velocity.sqrMagnitude < Mathf.Pow(dampeningThreshold, 2)) {
 			velocity = Vector3.zero;
 			moving = false;
 		}
