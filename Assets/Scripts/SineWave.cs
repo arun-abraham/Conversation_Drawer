@@ -21,7 +21,7 @@ public class SineWave : SimpleWave {
 		return wavePoint;
 	}
 
-	protected virtual float SpeedAtTime(float time)
+	protected override float SpeedAtTime(float time)
 	{
 		return Mathf.Cos(Mathf.PI * 2 * time);
 	}

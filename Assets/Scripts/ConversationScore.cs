@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowScore : MonoBehaviour {
+public class ConversationScore : MonoBehaviour {
 	public SimpleMover mover;
-	public WaveSeek leaderMover;
+	public PartnerLink partnerLink;
 	public Tracer tracer;
-	public Tracer leader;
+	public Tracer partnerTracer;
 	public int oldNearestIndex = 0;
 	public float followThreshold;
 	public float score = 0;
@@ -24,33 +24,37 @@ public class FollowScore : MonoBehaviour {
 		{
 			mover = GetComponent<SimpleMover>();
 		}
+		if (partnerLink == null)
+		{
+			partnerLink = GetComponent<PartnerLink>();
+		}
 		if (tracer == null)
 		{
 			tracer = GetComponent<Tracer>();
 		}
 		startSpeed = mover.maxSpeed;
 	}
-
+	
 	void Update()
 	{
-		if (!mover.Moving)
+		if (!mover.Moving || partnerLink.Partner == null)
 		{
 			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 		}
-		else if (leader.GetVertexCount() > 1 || tracer.GetVertexCount() > 1)
+		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
 			// Find nearest vertex on leader line and the vertex after it.
-			int nearestIndex = leader.FindNearestIndex(transform.position, oldNearestIndex);
-			Vector3 nearestVertex = leader.GetVertex(nearestIndex);
+			int nearestIndex = partnerTracer.FindNearestIndex(transform.position, oldNearestIndex);
+			Vector3 nearestVertex = partnerTracer.GetVertex(nearestIndex);
 			Vector3 nextVertex;
-			if (nearestIndex < leader.GetVertexCount() - 1)
+			if (nearestIndex < partnerTracer.GetVertexCount() - 1)
 			{
-				nextVertex = leader.GetVertex(nearestIndex + 1);
+				nextVertex = partnerTracer.GetVertex(nearestIndex + 1);
 			}
 			else
 			{
 				nextVertex = nearestVertex;
-				nearestVertex = leader.GetVertex(nearestIndex - 1);
+				nearestVertex = partnerTracer.GetVertex(nearestIndex - 1);
 			}
 
 			// Compare follower to leader line.
@@ -82,8 +86,6 @@ public class FollowScore : MonoBehaviour {
 				{
 					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 					forcingScore = false;
-					//leaderMover.currentSpeed += scoreLimitBoost;
-					// TODO Should we update the leader's speed instead?
 					mover.maxSpeed = startSpeed;
 				}
 			}
@@ -102,5 +104,18 @@ public class FollowScore : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	private void LinkPartner()
+	{
+		if (partnerLink != null && partnerLink.Partner != null)
+		{
+			partnerTracer = partnerLink.Partner.tracer;
+		}
+	}
+
+	private void UnlinkPartner()
+	{
+		partnerTracer = null;
 	}
 }
