@@ -92,16 +92,22 @@ public class ConversationScore : MonoBehaviour {
 
 			if (allowBoosts)
 			{
-				if (score >= scoreLimit && !forcingScore)
+				float scoreReq = scoreLimit * (1 -((partnerTracer.transform.position - transform.position).magnitude / partnerLink.breakingThreshold));
+				if (score >= scoreReq && !forcingScore)
 				{
-					forcingScore = true;
-					SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
+					mover.maxSpeed = startSpeed + scoreLimitBoost;
+					//forcingScore = true;
+					//SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
 				}
-				else if (score <= -scoreLimit && !forcingScore)
+				else
 				{
-					forcingScore = true;
-					SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
+					mover.maxSpeed = startSpeed;
 				}
+				//else if (score <= -scoreLimit && !forcingScore)
+				//{
+					//forcingScore = true;
+					//SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
+				//}
 			}
 		}
 	}
