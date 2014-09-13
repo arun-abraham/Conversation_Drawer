@@ -10,7 +10,6 @@ public class MouseSeek : MonoBehaviour
 	public bool requireMouseDown;
 	public bool directVelocity;
 	private bool startedLine;
-	
 
 	void Start()
 	{

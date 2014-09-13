@@ -13,9 +13,10 @@ public class FollowScore : MonoBehaviour {
 	public float scoreLimit;
 	public float scoreLimitBoost;
 	public bool forcingScore = false;
-	public float scoreDecay;
+	public float scoreDecayTime;
 	private float startSpeed;
 	public bool allowBoosts = true;
+	public Camera gameCamera = null;
 
 	void Start()
 	{
@@ -32,7 +33,11 @@ public class FollowScore : MonoBehaviour {
 
 	void Update()
 	{
-		if (leader.GetVertexCount() > 1 || tracer.GetVertexCount() > 1)
+		if (!mover.Moving)
+		{
+			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+		}
+		else if (leader.GetVertexCount() > 1 || tracer.GetVertexCount() > 1)
 		{
 			// Find nearest vertex on leader line and the vertex after it.
 			int nearestIndex = leader.FindNearestIndex(transform.position, oldNearestIndex);
@@ -61,17 +66,21 @@ public class FollowScore : MonoBehaviour {
 			}
 			else
 			{
-				float decay = scoreDecay * Time.deltaTime;
+				float decayPortion = Time.deltaTime / scoreDecayTime;
+				
 				if (score > 0)
 				{
-					score -= Mathf.Min(decay, score);
+					score -= Mathf.Min(decayPortion * scoreLimit, score);
+					mover.maxSpeed += scoreLimitBoost * decayPortion;
 				}
 				else if (score < 0)
 				{
-					score += Mathf.Min(decay, -score);
+					score += Mathf.Min(decayPortion * scoreLimit, -score);
+					mover.maxSpeed -= scoreLimitBoost * decayPortion;
 				}
 				else
 				{
+					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 					forcingScore = false;
 					//leaderMover.currentSpeed += scoreLimitBoost;
 					// TODO Should we update the leader's speed instead?
@@ -83,13 +92,13 @@ public class FollowScore : MonoBehaviour {
 			{
 				if (score >= scoreLimit && !forcingScore)
 				{
-					mover.maxSpeed += scoreLimitBoost;
 					forcingScore = true;
+					SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
 				}
 				else if (score <= -scoreLimit && !forcingScore)
 				{
-					mover.maxSpeed -= scoreLimitBoost;
 					forcingScore = true;
+					SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
 				}
 			}
 		}
