@@ -6,6 +6,8 @@ public class LongDetail : MonoBehaviour {
 	public Material myMaterial;
 	
 	public bool isHit = false;
+
+	public bool allDone = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,20 +16,22 @@ public class LongDetail : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if(isHit == true)
+
+
+		if(allDone == true)
 		{
-			Invoke("setHitOff",3.0f);
+			renderer.material.color = Color.blue;
 		}
-		
+
 	}
 	
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Player")
+		if (collide.gameObject.tag == "Converser")
 		{
 			setHitOn();
 			audio.Play();
+			Invoke("setHitOff",3.0f);
 		}
 		
 	}
@@ -47,7 +51,7 @@ public class LongDetail : MonoBehaviour {
 	void IsHitOff ()
 	{
 		isHit = false;
-		renderer.material.color = Color.blue;
+		allDone = true;
 	}
 
 	

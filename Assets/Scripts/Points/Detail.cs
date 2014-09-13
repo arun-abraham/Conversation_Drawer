@@ -17,7 +17,7 @@ public class Detail : MonoBehaviour {
 
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Player")
+		if (collide.gameObject.tag == "Converser")
 		{
 			isHit = true;
 			renderer.material.color = Color.blue;

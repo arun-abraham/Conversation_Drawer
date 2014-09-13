@@ -6,6 +6,7 @@ public class DeepDetail : MonoBehaviour {
 public Material myMaterial;
 	
 public bool isHit = false;
+public bool allDone = false;
 private bool isHitOnce = false;
 private bool waiting = false;
 	
@@ -17,11 +18,16 @@ void Start () {
 // Update is called once per frame
 void Update () {
 
+		if(allDone == true)
+		{
+			renderer.material.color = Color.blue;
+		}
+
 	}
 	
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Player")
+		if (collide.gameObject.tag == "Converser")
 		{
 			if(isHitOnce == false && isHit == false)
 			{
@@ -77,7 +83,7 @@ void Update () {
 	void IsHitOff ()
 	{
 		isHit = false;
-		renderer.material.color = Color.blue;
+		allDone = true;
 	}
 
 	
