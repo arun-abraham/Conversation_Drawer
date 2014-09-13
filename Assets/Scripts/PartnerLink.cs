@@ -11,7 +11,10 @@ public class PartnerLink : MonoBehaviour {
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
-	public LineRenderer partnerLine;
+	private LineRenderer partnerLine;
+	public float partnerLineSize = 0.25f;
+	private float partnerLineAlteredSize;
+	public float partnerLineShrink = 0.9f;
 	[HideInInspector]
 	public SimpleMover mover;
 	[HideInInspector]
@@ -58,7 +61,7 @@ public class PartnerLink : MonoBehaviour {
 		}
 
 		// Handle partners seperating.
-		if (partner != null)
+		if (partner != null && seekingPartner)
 		{
 			// Show that partners are close to separating.
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
@@ -74,9 +77,26 @@ public class PartnerLink : MonoBehaviour {
 			{
 				if (partnerLine != null)
 				{
+					partnerLine.SetWidth(partnerLineSize, partnerLineSize);
+					partnerLineAlteredSize = partnerLineSize;
 					partnerLine.SetVertexCount(2);
 					partnerLine.SetPosition(0, transform.position);
 					partnerLine.SetPosition(1, partner.transform.position);
+				}
+			}
+			else
+			{
+				if (partnerLine != null)
+				{
+					partnerLineAlteredSize *= partnerLineShrink;
+					partnerLine.SetWidth(partnerLineAlteredSize, partnerLineAlteredSize);
+					partnerLine.SetVertexCount(2);
+					partnerLine.SetPosition(0, transform.position);
+					partnerLine.SetPosition(1, partner.transform.position);
+					if (partnerLineAlteredSize / partnerLineSize < (1 - partnerLineShrink))
+					{
+						partnerLine.SetVertexCount(0);
+					}
 				}
 			}
 		}
