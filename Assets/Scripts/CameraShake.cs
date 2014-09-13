@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class CameraShake : MonoBehaviour {
-
-
+	private bool shaking = false;
+	private float shakeAmount = 0;
+	public Vector3 stableLocalPosition;
 
 	//For Testing:
 
@@ -17,14 +18,32 @@ public class CameraShake : MonoBehaviour {
 	
 	}*/
 
-
-	public void ShakeCamera(bool shaking, float shakeAmount)
+	void Start()
 	{
-		if(shaking)
+		stableLocalPosition = transform.localPosition;
+	}
+
+	void Update()
+	{
+		if (shaking)
 		{
-			camera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
-			camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, camera.transform.localPosition.y, -10f);
+			camera.transform.localPosition = stableLocalPosition + Random.insideUnitSphere * shakeAmount;
+			camera.transform.localPosition = new Vector3(camera.transform.localPosition.x, camera.transform.localPosition.y, stableLocalPosition.z);
 		}
+	}
+
+	public void ShakeCamera(float shakeAmount)
+	{
+		shaking = true;
+		this.shakeAmount = shakeAmount;
+		stableLocalPosition = transform.localPosition;
+	}
+
+	public void StopShaking()
+	{
+		shaking = false;
+		shakeAmount = 0;
+		transform.localPosition = stableLocalPosition;
 	}
 	
 }

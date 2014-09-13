@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowScore : MonoBehaviour {
+public class ConversationScore : MonoBehaviour {
 	public SimpleMover mover;
-	public WaveSeek leaderMover;
+	public PartnerLink partnerLink;
 	public Tracer tracer;
-	public Tracer leader;
+	public Tracer partnerTracer;
 	public int oldNearestIndex = 0;
 	public float followThreshold;
 	public float score = 0;
@@ -13,9 +13,10 @@ public class FollowScore : MonoBehaviour {
 	public float scoreLimit;
 	public float scoreLimitBoost;
 	public bool forcingScore = false;
-	public float scoreDecay;
+	public float scoreDecayTime;
 	private float startSpeed;
 	public bool allowBoosts = true;
+	public Camera gameCamera = null;
 
 	void Start()
 	{
@@ -23,29 +24,37 @@ public class FollowScore : MonoBehaviour {
 		{
 			mover = GetComponent<SimpleMover>();
 		}
+		if (partnerLink == null)
+		{
+			partnerLink = GetComponent<PartnerLink>();
+		}
 		if (tracer == null)
 		{
 			tracer = GetComponent<Tracer>();
 		}
 		startSpeed = mover.maxSpeed;
 	}
-
+	
 	void Update()
 	{
-		if (leader.GetVertexCount() > 1 || tracer.GetVertexCount() > 1)
+		if (!mover.Moving || partnerLink.Partner == null)
+		{
+			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+		}
+		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
 			// Find nearest vertex on leader line and the vertex after it.
-			int nearestIndex = leader.FindNearestIndex(transform.position, oldNearestIndex);
-			Vector3 nearestVertex = leader.GetVertex(nearestIndex);
+			int nearestIndex = partnerTracer.FindNearestIndex(transform.position, oldNearestIndex);
+			Vector3 nearestVertex = partnerTracer.GetVertex(nearestIndex);
 			Vector3 nextVertex;
-			if (nearestIndex < leader.GetVertexCount() - 1)
+			if (nearestIndex < partnerTracer.GetVertexCount() - 1)
 			{
-				nextVertex = leader.GetVertex(nearestIndex + 1);
+				nextVertex = partnerTracer.GetVertex(nearestIndex + 1);
 			}
 			else
 			{
 				nextVertex = nearestVertex;
-				nearestVertex = leader.GetVertex(nearestIndex - 1);
+				nearestVertex = partnerTracer.GetVertex(nearestIndex - 1);
 			}
 
 			// Compare follower to leader line.
@@ -61,20 +70,22 @@ public class FollowScore : MonoBehaviour {
 			}
 			else
 			{
-				float decay = scoreDecay * Time.deltaTime;
+				float decayPortion = Time.deltaTime / scoreDecayTime;
+				
 				if (score > 0)
 				{
-					score -= Mathf.Min(decay, score);
+					score -= Mathf.Min(decayPortion * scoreLimit, score);
+					mover.maxSpeed += scoreLimitBoost * decayPortion;
 				}
 				else if (score < 0)
 				{
-					score += Mathf.Min(decay, -score);
+					score += Mathf.Min(decayPortion * scoreLimit, -score);
+					mover.maxSpeed -= scoreLimitBoost * decayPortion;
 				}
 				else
 				{
+					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 					forcingScore = false;
-					//leaderMover.currentSpeed += scoreLimitBoost;
-					// TODO Should we update the leader's speed instead?
 					mover.maxSpeed = startSpeed;
 				}
 			}
@@ -83,15 +94,28 @@ public class FollowScore : MonoBehaviour {
 			{
 				if (score >= scoreLimit && !forcingScore)
 				{
-					mover.maxSpeed += scoreLimitBoost;
 					forcingScore = true;
+					SendMessage("SpeedBoost", SendMessageOptions.DontRequireReceiver);
 				}
 				else if (score <= -scoreLimit && !forcingScore)
 				{
-					mover.maxSpeed -= scoreLimitBoost;
 					forcingScore = true;
+					SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
 				}
 			}
 		}
+	}
+
+	private void LinkPartner()
+	{
+		if (partnerLink != null && partnerLink.Partner != null)
+		{
+			partnerTracer = partnerLink.Partner.tracer;
+		}
+	}
+
+	private void UnlinkPartner()
+	{
+		partnerTracer = null;
 	}
 }

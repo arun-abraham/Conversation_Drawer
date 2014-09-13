@@ -7,10 +7,9 @@ public class MouseSeek : MonoBehaviour
 	public SimpleMover mover;
 	public Tracer tracer;
 	public float acceleration;
-	public bool requireMouseDown;
+	public bool toggleSeek;
 	public bool directVelocity;
 	private bool startedLine;
-	
 
 	void Start()
 	{
@@ -35,20 +34,21 @@ public class MouseSeek : MonoBehaviour
 
 	private void HandleTouches()
 	{
-		if (Input.GetMouseButtonDown(0) || (!requireMouseDown && !startedLine))
+		if (Input.GetMouseButtonDown(0))
 		{
+			startedLine = !(toggleSeek && startedLine);
 			if (tracer)
 			{
 				tracer.StartLine();
-				startedLine = true;
 			}
 		}
-		else if (Input.GetMouseButton(0) || (!requireMouseDown && startedLine))
+		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && startedLine))
 		{
 			Drag();
 		}
 		else
 		{
+			startedLine = false;
 			mover.SlowDown();
 		}
 	}
