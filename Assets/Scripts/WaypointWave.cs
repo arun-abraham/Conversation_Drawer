@@ -41,25 +41,33 @@ public class WaypointWave : SimpleWave {
 			previous = current;
 
 			// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
-			if (waypoints[previous].loopBackTo != null && (waypoints[previous].maxLoopBacks < 0 || waypoints[previous].maxLoopBacks > waypoints[previous].loopBacks))
+			if (waypoints[previous].loopBackTo != null)
 			{
-				waypoints[previous].loopBacks++;
-				Vector3 newStart = waypoints[previous].transform.position;
-				int newPrevious = 0;
-				for (int i = 0; i < waypoints.Count; i++)
+				if (waypoints[previous].maxLoopBacks < 0 || waypoints[previous].maxLoopBacks > waypoints[previous].loopBacks)
 				{
-					if (waypoints[i] == waypoints[previous].loopBackTo)
+					waypoints[previous].loopBacks++;
+					Vector3 newStart = waypoints[previous].transform.position;
+					int newPrevious = 0;
+					for (int i = 0; i < waypoints.Count; i++)
 					{
-						newPrevious = i;
+						if (waypoints[i] == waypoints[previous].loopBackTo)
+						{
+							newPrevious = i;
+						}
+						else
+						{
+							Vector3 toNext = waypoints[i].transform.position - waypoints[previous].loopBackTo.transform.position;
+							waypoints[i].transform.position = newStart + toNext;
+						}
 					}
-					else
-					{
-						Vector3 toNext = waypoints[i].transform.position - waypoints[previous].loopBackTo.transform.position;
-						waypoints[i].transform.position =newStart + toNext;					
-					}
+					waypoints[previous].loopBackTo.transform.position = newStart;
+					previous = newPrevious;
 				}
-				waypoints[previous].loopBackTo.transform.position = newStart;
-				previous = newPrevious;
+				else
+				{
+					waypoints[previous].loopBacks = 0;
+				}
+				
 			}
 			current = previous + 1;
 
