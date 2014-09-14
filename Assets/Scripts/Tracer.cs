@@ -3,18 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Tracer : MonoBehaviour {
-	private LineRenderer lineRenderer = null;
+	public LineRenderer lineRenderer = null;
 	private List<Vector3> vertices;
-	private int stableVertexCount = 0;
 	public float minDragToDraw = 1.0f;
 	public GameObject lineMakerPrefab = null;
-	private Vector3 almostLastVertex = Vector3.zero;
 	private Vector3 lastVertex = Vector3.zero;
 	private Vector3 lastDirection = Vector3.zero;
 
 	void Start() {
 		vertices = new List<Vector3>();
-		stableVertexCount = 0;
 	}
 
 	public void StartLine(bool startAtVertex = false, Vector3 startVertex = new Vector3())
@@ -43,7 +40,6 @@ public class Tracer : MonoBehaviour {
 		lineRenderer.SetVertexCount(vertices.Count);
 		lineRenderer.SetPosition(vertices.Count - 1, position); 
 		lastDirection = (position - lastVertex).normalized;
-		almostLastVertex = lastVertex;
 		lastVertex = position;
 	}	
 	
