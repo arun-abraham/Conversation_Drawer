@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class WaypointWave : SimpleWave {
 	[SerializeField]
-	List<Waypoint> waypoints;
+	public List<Waypoint> waypoints;
+	public bool showWaypoints;
 	public int current;
 	private int previous;
 	private float travelToPrevious = 0;
@@ -12,6 +13,10 @@ public class WaypointWave : SimpleWave {
 
 	void Start()
 	{
+		for (int i = 0; i < waypoints.Count; i++)
+		{
+			waypoints[i].renderer.enabled = showWaypoints;
+		}
 		SeekNextWaypoint();
 		transform.position = waypoints[previous].transform.position;
 	}

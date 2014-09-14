@@ -5,9 +5,10 @@ public class WaveSeek : MonoBehaviour {
 	public SimpleMover mover;
 	public PartnerLink partnerLink;
 	public Tracer tracer;
+	public float partnerWeight;
 	public SimpleWave wave;
 	public Vector3 primaryDirection = Vector3.down;
-	public float distanceTravelled;
+	public float waveDistanceTravelled;
 	private Vector3 waveStartPoint;
 
 	void Start()
@@ -37,6 +38,8 @@ public class WaveSeek : MonoBehaviour {
 
 	void Update()
 	{
+		partnerWeight = Mathf.Clamp(partnerWeight, 0, 1);
+
 		if (primaryDirection.sqrMagnitude != 1)
 		{
 			primaryDirection.Normalize();
@@ -46,11 +49,27 @@ public class WaveSeek : MonoBehaviour {
 		{
 			if (wave.arcResetable)
 			{
-				distanceTravelled = 0;
+				waveDistanceTravelled = 0;
+				wave.arcResetable = false;
 			}
-			distanceTravelled += mover.maxSpeed * Time.deltaTime;
-			float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, distanceTravelled);
-			mover.MoveTo(wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime));
+			waveDistanceTravelled += mover.maxSpeed * Time.deltaTime;
+			float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, waveDistanceTravelled);
+			Vector3 destination = wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime);
+
+			Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
+			fromPartner.z = 0;
+			Vector3 fromPast = destination - transform.position;
+			fromPast.z = 0;
+
+			if (partnerWeight > 0 && Vector3.Dot(fromPartner, fromPast) <= 0)
+			{
+				Vector3 waveFollowChange = fromPast * (1 - partnerWeight);
+				
+				Vector3 considerPartnerChange = fromPartner.normalized * mover.maxSpeed * partnerWeight * Time.deltaTime;
+				destination = transform.position + waveFollowChange + considerPartnerChange;
+			}
+
+			mover.Accelerate(destination - transform.position);
 			
 			if (tracer != null)
 			{
