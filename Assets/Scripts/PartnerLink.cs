@@ -7,7 +7,13 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return partner; }
 	}
+	private bool leading;
+	public bool Leading
+	{
+		get { return leading; }
+	}
 	public bool seekingPartner;
+	public bool leadOnMeet;
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
@@ -21,6 +27,7 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	
 
 
 	void Awake()
@@ -55,6 +62,8 @@ public class PartnerLink : MonoBehaviour {
 					if (potentialPartner != null)
 					{
 						SetPartner(potentialPartner);
+						leading = !leadOnMeet;
+						SetLeading(leadOnMeet);
 					}
 				}
 			}
@@ -122,6 +131,26 @@ public class PartnerLink : MonoBehaviour {
 		else
 		{
 			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+		}
+	}
+
+	public void SetLeading(bool isLead, bool updatePartner = true)
+	{
+		if (leading != isLead)
+		{
+			leading = isLead;
+			if (isLead)
+			{
+				SendMessage("StartLeading", SendMessageOptions.DontRequireReceiver);
+			}
+			else
+			{
+				SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
+			}
+			if (partner != null && updatePartner)
+			{
+				partner.SetLeading(!isLead, false);
+			}
 		}
 	}
 }

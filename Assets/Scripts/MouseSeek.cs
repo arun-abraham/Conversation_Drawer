@@ -6,7 +6,6 @@ public class MouseSeek : MonoBehaviour
 	public Camera gameCamera = null;
 	public SimpleMover mover;
 	public Tracer tracer;
-	public float acceleration;
 	public bool toggleSeek;
 	public bool directVelocity;
 	private bool startedLine;
@@ -65,7 +64,7 @@ public class MouseSeek : MonoBehaviour
 			}
 			else
 			{
-				mover.Accelerate(toMouse.normalized * acceleration);
+				mover.Accelerate(toMouse);
 			}
 			if (tracer != null)
 			{

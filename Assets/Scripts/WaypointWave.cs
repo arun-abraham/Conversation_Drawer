@@ -4,16 +4,21 @@ using System.Collections.Generic;
 
 public class WaypointWave : SimpleWave {
 	[SerializeField]
-	List<Waypoint> waypoints;
+	public List<Waypoint> waypoints;
+	public bool showWaypoints;
 	public int current;
 	private int previous;
 	private float travelToPrevious = 0;
-	private float prevToCurDist;
+	private float prevToCurDist = 0;
 
 	void Start()
 	{
-		previous = current - 1;
-		transform.position = waypoints[current].transform.position;
+		for (int i = 0; i < waypoints.Count; i++)
+		{
+			waypoints[i].renderer.enabled = showWaypoints;
+		}
+		SeekNextWaypoint();
+		transform.position = waypoints[previous].transform.position;
 	}
 
 	public override Vector3 FindWavePoint(Vector3 primaryDirection, Vector3 startPoint, float time)
@@ -34,14 +39,37 @@ public class WaypointWave : SimpleWave {
 			return -1;
 		}
 
-		// If the distance travelled has exceeded the span between the current waypoint, update it.
-		if (arcLength - travelToPrevious >= prevToCurDist)
-		{
-			travelToPrevious += prevToCurDist;
-			previous = current;
+		// Ignore given arc length, and determine it based on travel between current and previous waypoints.
+		float projection = Helper.ProjectVector(waypoints[current].transform.position - waypoints[previous].transform.position, transform.position - waypoints[previous].transform.position).magnitude;
+		projection += arcLength;
 
-			// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
-			if (waypoints[previous].loopBackTo != null && (waypoints[previous].maxLoopBacks < 0 || waypoints[previous].maxLoopBacks > waypoints[previous].loopBacks))
+		if (prevToCurDist <= 0)
+		{
+			return -1;
+		}
+
+		float time = projection / prevToCurDist;
+
+		// If the distance travelled has exceeded the span between the current waypoint, update it.
+		if (time > 1)
+		{
+			SeekNextWaypoint();
+			time -= 1;
+		}
+
+		arcResetable = true;
+		return time;
+	}
+
+	private void SeekNextWaypoint()
+	{
+		travelToPrevious += prevToCurDist;
+		previous = current;
+
+		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
+		if (waypoints[previous].loopBackTo != null)
+		{
+			if (waypoints[previous].maxLoopBacks < 0 || waypoints[previous].maxLoopBacks > waypoints[previous].loopBacks)
 			{
 				waypoints[previous].loopBacks++;
 				Vector3 newStart = waypoints[previous].transform.position;
@@ -55,30 +83,28 @@ public class WaypointWave : SimpleWave {
 					else
 					{
 						Vector3 toNext = waypoints[i].transform.position - waypoints[previous].loopBackTo.transform.position;
-						waypoints[i].transform.position =newStart + toNext;					
+						waypoints[i].transform.position = newStart + toNext;
 					}
 				}
 				waypoints[previous].loopBackTo.transform.position = newStart;
 				previous = newPrevious;
 			}
-			current = previous + 1;
-
-			// Calculate distance from previous waypoint to the one sought now.
-			if (current < waypoints.Count)
-			{
-				prevToCurDist = (waypoints[current].transform.position - waypoints[previous].transform.position).magnitude;
-			}
 			else
 			{
-				prevToCurDist = 0;
+				waypoints[previous].loopBacks = 0;
 			}
-		}
 
-		if (prevToCurDist <= 0)
+		}
+		current = previous + 1;
+
+		// Calculate distance from previous waypoint to the one sought now.
+		if (current < waypoints.Count)
 		{
-			return -1;
+			prevToCurDist = (waypoints[current].transform.position - waypoints[previous].transform.position).magnitude;
 		}
-
-		return (Mathf.Max(arcLength, travelToPrevious) - travelToPrevious) / prevToCurDist;
+		else
+		{
+			prevToCurDist = 0;
+		}
 	}
 }
