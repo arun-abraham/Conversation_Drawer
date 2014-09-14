@@ -18,6 +18,11 @@ public class SineWave : SimpleWave {
 		wavePoint += transverse;
 		wavePoint += startPoint;
 
+		if (time >= 1)
+		{
+			arcResetable = true;
+		}
+
 		return wavePoint;
 	}
 

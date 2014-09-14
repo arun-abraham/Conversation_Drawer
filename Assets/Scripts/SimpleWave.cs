@@ -6,7 +6,7 @@ public class SimpleWave : MonoBehaviour
 	public int maxEstimates = 10;
 	public float estimateTolerance;
 	public float wavelength;
-	
+	public bool arcResetable;
 
 	public virtual Vector3 FindWavePoint(Vector3 primaryDirection, Vector3 startPoint, float time)
 	{
@@ -17,6 +17,11 @@ public class SimpleWave : MonoBehaviour
 
 		Vector3 wavePoint = primaryDirection * wavelength * time;
 		wavePoint += startPoint;
+
+		if (time >= 1)
+		{
+			arcResetable = true;
+		}
 
 		return wavePoint;
 	}

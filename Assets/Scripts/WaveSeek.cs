@@ -44,6 +44,10 @@ public class WaveSeek : MonoBehaviour {
 
 		if (partnerLink.Partner != null)
 		{
+			if (wave.arcResetable)
+			{
+				distanceTravelled = 0;
+			}
 			distanceTravelled += mover.maxSpeed * Time.deltaTime;
 			float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, distanceTravelled);
 			mover.MoveTo(wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime));
