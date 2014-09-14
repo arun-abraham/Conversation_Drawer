@@ -5,6 +5,7 @@ public class SimpleMover : MonoBehaviour {
 	public float maxSpeed;
 	public Vector3 velocity;
 	public float acceleration;
+	public float handling;
 	public float dampening = 0.9f;
 	public float dampeningThreshold;
 	public float externalSpeedMultiplier = 1;
@@ -31,7 +32,26 @@ public class SimpleMover : MonoBehaviour {
 		{
 			direction.Normalize();
 		}
-		velocity += direction * acceleration * Time.deltaTime;
+
+		if (velocity.sqrMagnitude <= 0) 
+		{
+			velocity += direction * acceleration * Time.deltaTime;
+		}
+		else 
+		{
+			Vector3 parallel = Helper.ProjectVector(velocity, direction);
+			Vector3 perpendicular = direction - parallel;
+
+			//if (velocity.sqrMagnitude >= Mathf.Pow(maxSpeed, 2))
+			//{
+			//	velocity += perpendicular * handling * Time.deltaTime;
+			//}
+			//else
+			//{
+				velocity += ((parallel * acceleration) + (perpendicular * handling)) * Time.deltaTime;
+			//}
+		}
+
 		if (velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
 		{
 			velocity = velocity.normalized * maxSpeed;

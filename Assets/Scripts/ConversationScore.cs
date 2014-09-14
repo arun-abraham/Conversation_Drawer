@@ -47,7 +47,7 @@ public class ConversationScore : MonoBehaviour {
 		}
 		else if (partnerLink.Leading)
 		{
-			// Should not have to do this every frame.
+			// TODO Should not have to do this every frame.
 			mover.maxSpeed = startSpeed;
 		}
 		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
