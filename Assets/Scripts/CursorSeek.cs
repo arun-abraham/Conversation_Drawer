@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CursorSeek : MonoBehaviour {
-
+	public bool useController = false;
 	public Camera gameCamera = null;
 	public SimpleMover mover;
 	public Tracer tracer;
@@ -10,6 +10,7 @@ public class CursorSeek : MonoBehaviour {
 	public bool directVelocity;
 	private bool startedLine;
 	public GameObject cursor;
+	public bool toggleSeek;
 
 	// Use this for initialization
 	void Start () {
@@ -30,13 +31,40 @@ public class CursorSeek : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		FollowCursor();
+		if (useController)
+		{ 
+			FollowCursor(); 
+		}
+		else
+		{
+			HandleTouches();
+		}
 	}
+
+	private void HandleTouches()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			startedLine = !(toggleSeek && startedLine);
+			if (tracer)
+			{
+				tracer.StartLine();
+			}
+		}
+		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && startedLine))
+		{
+			Drag();
+		}
+		else
+		{
+			startedLine = false;
+			mover.SlowDown();
+		}
+	}
+
 
 	private void FollowCursor()
 	{
-		//if (cursor.active)
-	
 		if (cursor.GetComponent<ControllerSeek>().active)
 		{
 			if (tracer)
@@ -53,23 +81,33 @@ public class CursorSeek : MonoBehaviour {
 
 	private void Drag(bool criticalLine = true)
 	{
-		//Vector3 mousePosition = MousePointInWorld();
-		//Vector3 toMouse = mousePosition - transform.position;
+		Vector3 dragForward = MousePointInWorld() - transform.position;
+		if (useController)
+		{
+			dragForward = cursor.GetComponent<ControllerSeek>().forward;
+		}
 
-		//if (tracer == null || cursor.GetComponent<ControllerSeek>.forward  Mathf.Pow(tracer.minDragToDraw, 2))
+		if (tracer == null || useController || dragForward.sqrMagnitude > Mathf.Pow(tracer.minDragToDraw, 2))
 		{
 			if (directVelocity)
 			{
-				mover.Move(cursor.GetComponent<ControllerSeek>().forward.normalized, mover.maxSpeed, true);
+				mover.Move(dragForward, mover.maxSpeed, true);
 			}
 			else
 			{
-				mover.Accelerate(cursor.GetComponent<ControllerSeek>().forward);
+				mover.Accelerate(dragForward);
 			}
 			if (tracer != null)
 			{
 				tracer.AddVertex(transform.position);
 			}
 		}
+	}
+
+	private Vector3 MousePointInWorld()
+	{
+		Vector3 touchPosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
+		touchPosition.z = transform.position.z;
+		return touchPosition;
 	}
 }
