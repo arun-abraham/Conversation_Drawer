@@ -8,24 +8,62 @@ public class ControllerFeedback : MonoBehaviour {
 	float intensity;
 	float startTime;
 
+	bool isVibrating;
+
 	// Use this for initialization
 	void Start () {
-		intensity = 0.0f;
+		isVibrating = true;
+		intensity = 0.5f;
 		duration = 3.0f;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time - startTime < duration)
+		
+		if (Time.time - startTime > duration)
 		{
-			GamePad.SetVibration(0, intensity, intensity);
+			EndVibration();
 		}
+
+		if (!isVibrating)
+		{
+			EndVibration();
+		}
+
+		GamePad.SetVibration(0, intensity, intensity);
+
 	}
 
-	void HardVibrate (float time) {
+	public void HardVibrate (float time) {
 		startTime = Time.time;
 		intensity = 0.5f;
 		duration = 0.5f;
+	}
+
+	public void SoftVibrate (float time) {
+		startTime = Time.time;
+		intensity = 0.3f;
+		duration = 0.5f;
+	}
+
+	public void SetVibration (float intensity)
+	{
+		isVibrating = true;
+		this.intensity = intensity;
+	}
+
+	public void SetVibration (float intensity, float duration)
+	{
+		isVibrating = true;
+		this.intensity = intensity;
+		this.duration = duration;
+		startTime = Time.time;
+	}
+
+	public void EndVibration ()
+	{
+		isVibrating = false;
+		intensity = 0.0f;
 	}
 }

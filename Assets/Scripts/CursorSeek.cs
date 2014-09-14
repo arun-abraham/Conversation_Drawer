@@ -6,8 +6,7 @@ public class CursorSeek : MonoBehaviour {
 	public Camera gameCamera = null;
 	public SimpleMover mover;
 	public Tracer tracer;
-	public float acceleration;
-	public bool requireMouseDown;
+	//public bool requireMouseDown;
 	public bool directVelocity;
 	private bool startedLine;
 	public GameObject cursor;
@@ -65,7 +64,7 @@ public class CursorSeek : MonoBehaviour {
 			}
 			else
 			{
-				mover.Accelerate(cursor.GetComponent<ControllerSeek>().forward.normalized * acceleration);
+				mover.Accelerate(cursor.GetComponent<ControllerSeek>().forward);
 			}
 			if (tracer != null)
 			{

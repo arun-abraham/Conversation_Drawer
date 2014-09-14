@@ -7,6 +7,7 @@ public class Feedback : MonoBehaviour {
 	public float cameraShakeFactor;
 	public GameObject particleTrail;
 	public GameObject colorExplosionPrefab;
+	public ControllerFeedback controllerFeedback;
 	private GameObject player;
 	private GameObject pSys;
 	private GameObject colExp;
@@ -66,6 +67,7 @@ public class Feedback : MonoBehaviour {
 	{
 		if (cameraShake != null)
 		{
+			controllerFeedback.SetVibration(0.5f, 0.5f);
 			cameraShake.ShakeCamera(cameraShakeFactor);
 		}
 		ChangeBoost(1);
@@ -80,6 +82,7 @@ public class Feedback : MonoBehaviour {
 	{
 		if (cameraShake != null)
 		{
+			//controllerFeedback.EndVibration();
 			cameraShake.StopShaking();
 		}
 	}
