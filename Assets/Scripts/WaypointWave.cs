@@ -10,6 +10,7 @@ public class WaypointWave : SimpleWave {
 	private int previous;
 	private float travelToPrevious = 0;
 	private float prevToCurDist = 0;
+	private bool collideWithWaypoint = false;
 
 	void Start()
 	{
@@ -51,10 +52,11 @@ public class WaypointWave : SimpleWave {
 		float time = projection / prevToCurDist;
 
 		// If the distance travelled has exceeded the span between the current waypoint, update it.
-		if (time > 1)
+		if (time > 1 || collideWithWaypoint)
 		{
 			SeekNextWaypoint();
 			time -= 1;
+			collideWithWaypoint = false;
 		}
 
 		arcResetable = true;
@@ -105,6 +107,13 @@ public class WaypointWave : SimpleWave {
 		else
 		{
 			prevToCurDist = 0;
+		}
+	}
+
+	void OnTriggerEnter (Collider otherCol){
+		if(otherCol.gameObject == waypoints[current].gameObject){
+			collideWithWaypoint = true;
+			//Debug.Log("Colliding");
 		}
 	}
 }
