@@ -4,6 +4,7 @@ using System.Collections;
 public class SimpleMover : MonoBehaviour {
 	public float maxSpeed;
 	public Vector3 velocity;
+	public float acceleration;
 	public float dampening = 0.9f;
 	public float dampeningThreshold;
 	public float externalSpeedMultiplier = 1;
@@ -25,8 +26,12 @@ public class SimpleMover : MonoBehaviour {
 		}
 	}
 
-	public void Accelerate(Vector3 acceleration) {
-		velocity += acceleration * Time.deltaTime;
+	public void Accelerate(Vector3 direction) {
+		if (direction.sqrMagnitude != 1)
+		{
+			direction.Normalize();
+		}
+		velocity += direction * acceleration * Time.deltaTime;
 		if (velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
 		{
 			velocity = velocity.normalized * maxSpeed;
