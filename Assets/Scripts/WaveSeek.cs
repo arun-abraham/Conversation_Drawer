@@ -47,33 +47,44 @@ public class WaveSeek : MonoBehaviour {
 
 		if (partnerLink.Partner != null)
 		{
-			if (wave.arcResetable)
+			if (partnerLink.Leading)
 			{
-				waveDistanceTravelled = 0;
-				wave.arcResetable = false;
+				if (wave.arcResetable)
+				{
+					waveDistanceTravelled = 0;
+					wave.arcResetable = false;
+				}
+				waveDistanceTravelled += mover.maxSpeed * Time.deltaTime;
+				float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, waveDistanceTravelled);
+				Vector3 destination = wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime);
+
+				Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
+				fromPartner.z = 0;
+				Vector3 fromPast = destination - transform.position;
+				fromPast.z = 0;
+
+				if (partnerWeight > 0 && Vector3.Dot(fromPartner, fromPast) <= 0)
+				{
+					Vector3 waveFollowChange = fromPast * (1 - partnerWeight);
+
+					Vector3 considerPartnerChange = fromPartner.normalized * mover.maxSpeed * partnerWeight * Time.deltaTime;
+					destination = transform.position + waveFollowChange + considerPartnerChange;
+				}
+
+				mover.Accelerate(destination - transform.position);
+
+				if (tracer != null)
+				{
+					tracer.AddVertex(transform.position);
+				}
 			}
-			waveDistanceTravelled += mover.maxSpeed * Time.deltaTime;
-			float estimateTime = wave.ApproximateWaveTime(primaryDirection, waveStartPoint, waveDistanceTravelled);
-			Vector3 destination = wave.FindWavePoint(primaryDirection, waveStartPoint, estimateTime);
-
-			Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
-			fromPartner.z = 0;
-			Vector3 fromPast = destination - transform.position;
-			fromPast.z = 0;
-
-			if (partnerWeight > 0 && Vector3.Dot(fromPartner, fromPast) <= 0)
+			else
 			{
-				Vector3 waveFollowChange = fromPast * (1 - partnerWeight);
-				
-				Vector3 considerPartnerChange = fromPartner.normalized * mover.maxSpeed * partnerWeight * Time.deltaTime;
-				destination = transform.position + waveFollowChange + considerPartnerChange;
-			}
-
-			mover.Accelerate(destination - transform.position);
-			
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);
+				mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
+				if (tracer != null)
+				{
+					tracer.AddVertex(transform.position);
+				}
 			}
 		}
 	}

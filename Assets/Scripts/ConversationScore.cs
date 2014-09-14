@@ -10,6 +10,7 @@ public class ConversationScore : MonoBehaviour {
 	public float followThreshold;
 	public float score = 0;
 	public float scoreToLead;
+	public float proximityToLead;
 	public float scorePortionExponent = 1;
 	public float scoreDeboostOffset = 0.1f;
 	public float rewardSpeedBoost;
@@ -43,6 +44,11 @@ public class ConversationScore : MonoBehaviour {
 		if (!mover.Moving || partnerLink.Partner == null)
 		{
 			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+		}
+		else if (partnerLink.Leading)
+		{
+			// Should not have to do this every frame.
+			mover.maxSpeed = startSpeed;
 		}
 		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
@@ -85,6 +91,14 @@ public class ConversationScore : MonoBehaviour {
 					changeTimeElapsed = 0;
 				}
 			}			
+
+			// Start leading if score is high enough.
+			if (score >= scoreToLead && scorePortion >= proximityToLead)
+			{
+				partnerLink.SetLeading(true);
+				mover.MoveTo(partnerLink.Partner.transform.position + (partnerLink.Partner.transform.position - transform.position));
+				mover.maxSpeed = startSpeed;
+			}
 
 			// Boost speed if score exceeds requirement.
 			if (score >= scoreReq && accuracyFactor > 0)
