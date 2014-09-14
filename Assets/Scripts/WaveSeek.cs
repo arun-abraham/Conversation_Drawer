@@ -87,5 +87,9 @@ public class WaveSeek : MonoBehaviour {
 				}
 			}
 		}
+		else
+		{
+			mover.SlowDown();
+		}
 	}
 }
