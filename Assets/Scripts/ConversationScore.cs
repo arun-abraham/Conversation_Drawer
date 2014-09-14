@@ -78,7 +78,7 @@ public class ConversationScore : MonoBehaviour {
 
 			// Update score based on accuracy.
 			float accuracyFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
-			score += accuracyFactor * Time.deltaTime;
+			score = Mathf.Max(accuracyFactor * Time.deltaTime, 0);
 			
 			// Handle special behavior while changing boost level.
 			if (changingBoostLevel)
