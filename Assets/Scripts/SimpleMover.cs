@@ -2,6 +2,17 @@
 using System.Collections;
 
 public class SimpleMover : MonoBehaviour {
+
+	public bool n = false;
+	public bool s = false;
+	public bool e = false;
+	public bool w = false;
+	public bool ne = false;
+	public bool se = false;
+	public bool sw = false;
+	public bool nw = false;
+
+
 	public float maxSpeed;
 	public Vector3 velocity;
 	public float dampening = 0.9f;
@@ -23,6 +34,50 @@ public class SimpleMover : MonoBehaviour {
 		{
 			moving = true;
 		}
+
+
+	// coordinates
+		if(velocity.x > 0 && velocity.y == 0)
+			e = true;
+		else
+			e = false;
+
+		if(velocity.x < 0 && velocity.y == 0)
+			w = true;
+		else
+			w = false;
+
+		if(velocity.x == 0 && velocity.y > 0)
+			n = true;
+		else
+			n = false;
+
+		if(velocity.x == 0 && velocity.y < 0)
+			s = true;
+		else
+			s = false;
+
+		if(velocity.x > 0 && velocity.y > 0)
+			ne = true;
+		else
+			ne = false;
+
+		if(velocity.x > 0 && velocity.y < 0)
+			se = true;
+		else
+			se = false;
+
+		if(velocity.x < 0 && velocity.y < 0)
+			sw = true;
+		else
+			sw = false;
+
+		if(velocity.x < 0 && velocity.y > 0)
+			nw = true;
+		else
+			nw = false;
+		//
+
 	}
 
 	public void Accelerate(Vector3 acceleration) {
