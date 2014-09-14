@@ -14,7 +14,6 @@ public class WaypointSeek : MonoBehaviour {
 	public PartnerLink partnerLink;
 	public Tracer tracer;
 	public float partnerWeight;
-	public GameObject waypointContainer;
 
 	void Start()
 	{
@@ -38,16 +37,6 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			waypoints[i].renderer.enabled = showWaypoints;
 		}
-
-		if (waypointContainer != null)
-		{
-			Waypoint[] waypointObjects = waypointContainer.GetComponentsInChildren<Waypoint>();
-			for (int i = 0; i < waypointObjects.Length; i++)
-			{
-				waypoints.Add(waypointObjects[i]);
-			}
-		}
-
 		SeekNextWaypoint();
 		transform.position = waypoints[previous].transform.position;
 	}
@@ -95,7 +84,7 @@ public class WaypointSeek : MonoBehaviour {
 
 	public Vector3 FindSeekingPoint(Vector3 velocity)
 	{
-		if (waypoints.Count <= 0 && current >= waypoints.Count)
+		if (current >= waypoints.Count)
 		{
 			return transform.position;
 		}
@@ -115,11 +104,6 @@ public class WaypointSeek : MonoBehaviour {
 
 	private void SeekNextWaypoint()
 	{
-		if (waypoints.Count <= 0)
-		{
-			return;
-		}
-
 		previous = current;
 
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
@@ -156,7 +140,7 @@ public class WaypointSeek : MonoBehaviour {
 
 	void OnTriggerEnter(Collider otherCol)
 	{
-		if (waypoints.Count > 0 && otherCol.gameObject == waypoints[current].gameObject)
+		if (otherCol.gameObject == waypoints[current].gameObject)
 		{
 			collideWithWaypoint = true;
 		}
