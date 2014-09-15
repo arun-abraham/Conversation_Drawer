@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Feedback : MonoBehaviour {
 
-	public GameObject pSysPrefab;
+	public CameraShake cameraShake;
+	public float cameraShakeFactor;
+	public GameObject particleTrail;
 	public GameObject colorExplosionPrefab;
+	public ControllerFeedback controllerFeedback;
 	private GameObject player;
 	private GameObject pSys;
 	private GameObject colExp;
@@ -15,14 +18,17 @@ public class Feedback : MonoBehaviour {
 	private Color boostColorTwo;
 	private Color boostColorThree;
 	private Color boostColorFour;
-	private bool exploded = false;
 	private int boostLevel = 0;
 	private Tracer tracer;
 
 	// Use this for initialization
 	void Start () {
-		pSys = (GameObject)Instantiate(pSysPrefab);
-		player = GameObject.FindGameObjectWithTag("Converser");
+		if (cameraShake == null)
+		{
+			cameraShake = Camera.main.GetComponent<CameraShake>();
+		}
+		pSys = (GameObject)Instantiate(particleTrail);
+		player = gameObject;
 		prevPos = player.transform.position;
 		startColor = player.renderer.material.color;
 		boostColorOne = new Color(0.3f, 0.2f, 0.5f, 1.0f);
@@ -36,9 +42,6 @@ public class Feedback : MonoBehaviour {
 	void Update () {
 		pSys.transform.position = player.transform.position;
 		pSys.particleSystem.startColor = player.renderer.material.color;
-		//pSys.particleSystem.renderer.material.color = player.renderer.material.color;
-
-
 
 		currentDir = player.transform.position - prevPos;
 
@@ -60,26 +63,52 @@ public class Feedback : MonoBehaviour {
 		}
 	}
 
-	void SpeedBoost() {
-		if(boostLevel == 3)
+	void SpeedBoost()
+	{
+		if (cameraShake != null)
+		{
+			controllerFeedback.SetVibration(0.5f, 0.5f);
+			cameraShake.ShakeCamera(cameraShakeFactor);
+		}
+		ChangeBoost(1);
+	}
+
+	void SpeedDrain()
+	{
+		ChangeBoost(-1);
+	}
+
+	void SpeedNormal()
+	{
+		if (cameraShake != null)
+		{
+			//controllerFeedback.EndVibration();
+			cameraShake.StopShaking();
+		}
+	}
+
+	private void ChangeBoost(int levelChange)
+	{
+		boostLevel = Mathf.Clamp(boostLevel + levelChange, 0, 4);
+		if (boostLevel == 4)
 		{
 			player.renderer.material.color = boostColorFour;
-			boostLevel++;
 		}
-		else if(boostLevel == 2)
+		else if (boostLevel == 3)
 		{
 			player.renderer.material.color = boostColorThree;
-			boostLevel++;
 		}
-		else if(boostLevel == 1)
+		else if (boostLevel == 2)
 		{
 			player.renderer.material.color = boostColorTwo;
-			boostLevel++;
 		}
-		else if(boostLevel == 0)
+		else if (boostLevel == 1)
 		{
 			player.renderer.material.color = boostColorOne;
-			boostLevel++;
+		}
+		else if (boostLevel == 0)
+		{
+			player.renderer.material.color = startColor;
 		}
 		tracer.lineRenderer.material.color = player.renderer.material.color;
 		colExp = (GameObject)Instantiate(colorExplosionPrefab);

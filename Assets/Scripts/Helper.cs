@@ -10,7 +10,11 @@ public class Helper {
 		}
 		
 		float projecteeMag = projectee.magnitude;
-		float projecteeDotBase = Vector3.Dot(projectee / projecteeMag, baseDirection);
+		float projecteeDotBase = 0;
+		if (projecteeMag > 0)
+		{
+			projecteeDotBase = Vector3.Dot(projectee / projecteeMag, baseDirection);
+		}
 		Vector3 projection = baseDirection * projecteeMag * projecteeDotBase;
 		return projection;
 	}

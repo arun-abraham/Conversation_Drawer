@@ -7,7 +7,18 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return partner; }
 	}
+	private Conversation conversation;
+	public Conversation Conversation
+	{
+		get { return conversation; }
+	}
+	private bool leading;
+	public bool Leading
+	{
+		get { return leading; }
+	}
 	public bool seekingPartner;
+	public bool leadOnMeet;
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
@@ -21,7 +32,6 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
-
 
 	void Awake()
 	{
@@ -54,7 +64,14 @@ public class PartnerLink : MonoBehaviour {
 					PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
 					if (potentialPartner != null)
 					{
-						SetPartner(potentialPartner);
+						if (leadOnMeet)
+						{
+							ConversationManger.Instance.StartConversation(this, potentialPartner);
+						}
+						else
+						{
+							ConversationManger.Instance.StartConversation(potentialPartner, this);
+						}
 					}
 				}
 			}
@@ -67,7 +84,7 @@ public class PartnerLink : MonoBehaviour {
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
 			if (sqrDist > Mathf.Pow(converseDistance * breakingThreshold, 2))
 			{
-				SetPartner(null);
+				ConversationManger.Instance.EndConversation(this, partner);
 				if (partnerLine != null)
 				{
 					partnerLine.SetVertexCount(0);
@@ -102,26 +119,36 @@ public class PartnerLink : MonoBehaviour {
 		}
 	}
 
-	public void SetPartner(PartnerLink partner, bool updatePartner = true)
+	public void SetPartner(PartnerLink partner)
 	{
-		if (updatePartner && this.partner != null && this.partner.partner == this)
-		{
-			this.partner.SetPartner(null, false);
-		}
-
 		this.partner = partner;
 
 		if (partner != null)
 		{
+			conversation = ConversationManger.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
-			if (updatePartner)
-			{
-				partner.SetPartner(this, false);
-			}
 		}
 		else
 		{
+			conversation = null;
 			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+		}
+	}
+
+	public void SetLeading(bool isLead, bool updatePartner = true)
+	{
+		leading = isLead;
+		if (isLead)
+		{
+			SendMessage("StartLeading", SendMessageOptions.DontRequireReceiver);
+		}
+		else
+		{
+			SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
+		}
+		if (partner != null && updatePartner)
+		{
+			partner.SetLeading(!isLead, false);
 		}
 	}
 }
