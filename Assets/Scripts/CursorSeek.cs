@@ -107,20 +107,17 @@ public class CursorSeek : MonoBehaviour {
 			dragForward = cursor.GetComponent<ControllerSeek>().forward;
 		}
 
-		if (tracer == null || useController || dragForward.sqrMagnitude > Mathf.Pow(tracer.minDragToDraw, 2))
+		if (directVelocity)
 		{
-			if (directVelocity)
-			{
-				mover.Move(dragForward, mover.maxSpeed, true);
-			}
-			else
-			{
-				mover.Accelerate(dragForward);
-			}
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);
-			}
+			mover.Move(dragForward, mover.maxSpeed, true);
+		}
+		else
+		{
+			mover.Accelerate(dragForward);
+		}
+		if (tracer != null)
+		{
+			tracer.AddVertex(transform.position);
 		}
 	}
 
