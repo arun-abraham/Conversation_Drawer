@@ -9,14 +9,15 @@ public class Tracer : MonoBehaviour {
 	public GameObject lineMakerPrefab = null;
 	private Vector3 lastVertex = Vector3.zero;
 	private Vector3 lastDirection = Vector3.zero;
+	public int maxVertices;
 
 	void Start() {
 		vertices = new List<Vector3>();
 	}
 
 	public void StartLine(bool startAtVertex = false, Vector3 startVertex = new Vector3())
-	{		
-		// If this line is not on the required path, create a separate polyline.
+	{
+		DestroyLine();
 		CreateLineMaker(true);
 		
 		AddVertex(transform.position);
@@ -49,6 +50,17 @@ public class Tracer : MonoBehaviour {
 		lineRenderer = newLineMaker.GetComponent<LineRenderer>();
 		lineRenderer.SetVertexCount(0);
 		vertices = new List<Vector3>();
+	}
+
+	public void DestroyLine()
+	{
+		if (lineRenderer != null)
+		{
+			vertices.Clear();
+			lineRenderer.SetVertexCount(0);
+			GameObject.Destroy(lineRenderer);
+			lineRenderer = null;
+		}
 	}
 
 	public int FindNearestIndex(Vector3 point, int startIndex = 0)

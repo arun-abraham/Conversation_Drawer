@@ -45,11 +45,14 @@ public class CursorSeek : MonoBehaviour {
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			startedLine = !(toggleSeek && startedLine);
-			if (tracer)
+			if (!startedLine)
 			{
-				tracer.StartLine();
+				if (tracer)
+				{
+					tracer.StartLine();
+				}
 			}
+			startedLine = !(toggleSeek && startedLine);
 		}
 		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && startedLine))
 		{
@@ -59,6 +62,10 @@ public class CursorSeek : MonoBehaviour {
 		{
 			startedLine = false;
 			mover.SlowDown();
+			if (tracer)
+			{
+				tracer.DestroyLine();
+			}
 		}
 	}
 
@@ -67,15 +74,28 @@ public class CursorSeek : MonoBehaviour {
 	{
 		if (cursor.GetComponent<ControllerSeek>().active)
 		{
-			if (tracer)
+			if (!startedLine)
 			{
 				startedLine = true;
+				if (tracer != null)
+				{
+					tracer.StartLine();
+				}
+			}
+			else
+			{
 				Drag();
 			}
+				
 		}
 		else
 		{
 			mover.SlowDown();
+			if (tracer)
+			{
+				tracer.DestroyLine();
+			}
+			startedLine = false;
 		}
 	}
 
