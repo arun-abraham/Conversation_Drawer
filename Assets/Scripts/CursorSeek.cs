@@ -45,11 +45,14 @@ public class CursorSeek : MonoBehaviour {
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			startedLine = !(toggleSeek && startedLine);
-			if (tracer)
+			if (!startedLine)
 			{
-				tracer.StartLine();
+				if (tracer)
+				{
+					tracer.StartLine();
+				}
 			}
+			startedLine = !(toggleSeek && startedLine);
 		}
 		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && startedLine))
 		{
@@ -59,6 +62,10 @@ public class CursorSeek : MonoBehaviour {
 		{
 			startedLine = false;
 			mover.SlowDown();
+			if (tracer)
+			{
+				tracer.DestroyLine();
+			}
 		}
 	}
 
@@ -67,15 +74,28 @@ public class CursorSeek : MonoBehaviour {
 	{
 		if (cursor.GetComponent<ControllerSeek>().active)
 		{
-			if (tracer)
+			if (!startedLine)
 			{
 				startedLine = true;
+				if (tracer != null)
+				{
+					tracer.StartLine();
+				}
+			}
+			else
+			{
 				Drag();
 			}
+				
 		}
 		else
 		{
 			mover.SlowDown();
+			if (tracer)
+			{
+				tracer.DestroyLine();
+			}
+			startedLine = false;
 		}
 	}
 
@@ -87,20 +107,17 @@ public class CursorSeek : MonoBehaviour {
 			dragForward = cursor.GetComponent<ControllerSeek>().forward;
 		}
 
-		if (tracer == null || useController || dragForward.sqrMagnitude > Mathf.Pow(tracer.minDragToDraw, 2))
+		if (directVelocity)
 		{
-			if (directVelocity)
-			{
-				mover.Move(dragForward, mover.maxSpeed, true);
-			}
-			else
-			{
-				mover.Accelerate(dragForward);
-			}
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);
-			}
+			mover.Move(dragForward, mover.maxSpeed, true);
+		}
+		else
+		{
+			mover.Accelerate(dragForward);
+		}
+		if (tracer != null)
+		{
+			tracer.AddVertex(transform.position);
 		}
 	}
 

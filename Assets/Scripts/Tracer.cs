@@ -4,25 +4,26 @@ using System.Collections.Generic;
 
 public class Tracer : MonoBehaviour {
 	public LineRenderer lineRenderer = null;
+	public int maxVertices = -1;
 	private List<Vector3> vertices;
-	public float minDragToDraw = 1.0f;
 	public GameObject lineMakerPrefab = null;
 	private Vector3 lastVertex = Vector3.zero;
 	private Vector3 lastDirection = Vector3.zero;
-
+	
 	void Start() {
 		vertices = new List<Vector3>();
 	}
 
 	public void StartLine(bool startAtVertex = false, Vector3 startVertex = new Vector3())
-	{		
-		// If this line is not on the required path, create a separate polyline.
+	{
+		DestroyLine();
 		CreateLineMaker(true);
 		
 		AddVertex(transform.position);
 	}
 
 	public void AddVertex(Vector3 position) {	
+		/* Line Presevation.
 		if (vertices.Count > 1) {
 			// Preserve look of the most recent line segement if the new vertex
 			// drastically changes the direction of motion. Without this, the line segement
@@ -34,13 +35,30 @@ public class Tracer : MonoBehaviour {
 				lineRenderer.SetPosition(vertices.Count - 1, midPosition); 
 				lastVertex = midPosition;
 			}
-		}
+		}*/
 
+		// Add new vertex.
 		vertices.Add(position);
 		lineRenderer.SetVertexCount(vertices.Count);
 		lineRenderer.SetPosition(vertices.Count - 1, position); 
 		lastDirection = (position - lastVertex).normalized;
 		lastVertex = position;
+
+		// Keep vertex count within limits.
+		if (maxVertices >= 0 && vertices.Count > maxVertices)
+		{
+			int replaceOffset = vertices.Count - maxVertices;
+			for (int i = 0; i < maxVertices; i++)
+			{
+				vertices[i] = vertices[i + replaceOffset];
+				lineRenderer.SetPosition(i, vertices[i]);
+			}
+			for (int i = maxVertices - 1; i < vertices.Count; i++)
+			{
+				vertices.RemoveAt(i);
+			}
+			lineRenderer.SetVertexCount(maxVertices);
+		}
 	}	
 	
 	public void CreateLineMaker(bool criticalLine) {		
@@ -49,6 +67,17 @@ public class Tracer : MonoBehaviour {
 		lineRenderer = newLineMaker.GetComponent<LineRenderer>();
 		lineRenderer.SetVertexCount(0);
 		vertices = new List<Vector3>();
+	}
+
+	public void DestroyLine()
+	{
+		if (lineRenderer != null)
+		{
+			vertices.Clear();
+			lineRenderer.SetVertexCount(0);
+			GameObject.Destroy(lineRenderer);
+			lineRenderer = null;
+		}
 	}
 
 	public int FindNearestIndex(Vector3 point, int startIndex = 0)
