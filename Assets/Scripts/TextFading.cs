@@ -26,12 +26,6 @@ public class TextFading : MonoBehaviour {
 
 		if(player != null)
 		{
-			Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
-
-			if(conversation != null)
-				text.text = conversation.title;
-		
-
 			var distance = Vector3.Distance(player.transform.position, transform.position) - 5f;
 
 			if(!convoStart)
@@ -61,7 +55,12 @@ public class TextFading : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "Converser" && other.gameObject != transform.parent.gameObject)
+		{
 			player = other.gameObject;
+
+			Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
+			text.text = conversation.title;
+		}		
 	}
 	
 	void OnTriggerExit(Collider other)
