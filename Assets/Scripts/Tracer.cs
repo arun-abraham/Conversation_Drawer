@@ -37,28 +37,32 @@ public class Tracer : MonoBehaviour {
 			}
 		}*/
 
-		// Add new vertex.
-		vertices.Add(position);
-		lineRenderer.SetVertexCount(vertices.Count);
-		lineRenderer.SetPosition(vertices.Count - 1, position); 
-		lastDirection = (position - lastVertex).normalized;
-		lastVertex = position;
-
-		// Keep vertex count within limits.
-		if (maxVertices >= 0 && vertices.Count > maxVertices)
+		if (lineRenderer)
 		{
-			int replaceOffset = vertices.Count - maxVertices;
-			for (int i = 0; i < maxVertices; i++)
+			// Add new vertex.
+			vertices.Add(position);
+			lineRenderer.SetVertexCount(vertices.Count);
+			lineRenderer.SetPosition(vertices.Count - 1, position);
+			lastDirection = (position - lastVertex).normalized;
+			lastVertex = position;
+
+			// Keep vertex count within limits.
+			if (maxVertices >= 0 && vertices.Count > maxVertices)
 			{
-				vertices[i] = vertices[i + replaceOffset];
-				lineRenderer.SetPosition(i, vertices[i]);
+				int replaceOffset = vertices.Count - maxVertices;
+				for (int i = 0; i < maxVertices; i++)
+				{
+					vertices[i] = vertices[i + replaceOffset];
+					lineRenderer.SetPosition(i, vertices[i]);
+				}
+				for (int i = maxVertices - 1; i < vertices.Count; i++)
+				{
+					vertices.RemoveAt(i);
+				}
+				lineRenderer.SetVertexCount(maxVertices);
 			}
-			for (int i = maxVertices - 1; i < vertices.Count; i++)
-			{
-				vertices.RemoveAt(i);
-			}
-			lineRenderer.SetVertexCount(maxVertices);
 		}
+		
 	}	
 	
 	public void CreateLineMaker(bool criticalLine) {		

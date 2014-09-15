@@ -26,7 +26,6 @@ public class TextFading : MonoBehaviour {
 
 		if(player != null)
 		{
-			Debug.Log(ConversationManger.Instance);
 			Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
 
 			if(conversation != null)

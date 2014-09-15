@@ -82,7 +82,6 @@ public class Feedback : MonoBehaviour {
 	{
 		if (cameraShake != null)
 		{
-			//controllerFeedback.EndVibration();
 			cameraShake.StopShaking();
 		}
 	}
