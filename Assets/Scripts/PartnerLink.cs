@@ -18,7 +18,6 @@ public class PartnerLink : MonoBehaviour {
 		get { return leading; }
 	}
 	public bool seekingPartner;
-	public bool leadOnMeet;
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
@@ -64,14 +63,7 @@ public class PartnerLink : MonoBehaviour {
 					PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
 					if (potentialPartner != null)
 					{
-						if (leadOnMeet)
-						{
-							ConversationManger.Instance.StartConversation(this, potentialPartner);
-						}
-						else
-						{
-							ConversationManger.Instance.StartConversation(potentialPartner, this);
-						}
+						ConversationManger.Instance.StartConversation(this, potentialPartner);
 					}
 				}
 			}
@@ -140,6 +132,14 @@ public class PartnerLink : MonoBehaviour {
 		leading = isLead;
 		if (isLead)
 		{
+			if (conversation.partner1 == this)
+			{
+				conversation.partner1Leads = true;
+			}
+			else
+			{
+				conversation.partner1Leads = false;
+			}
 			SendMessage("StartLeading", SendMessageOptions.DontRequireReceiver);
 		}
 		else

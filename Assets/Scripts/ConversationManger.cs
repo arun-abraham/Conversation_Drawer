@@ -37,10 +37,19 @@ public class ConversationManger : MonoBehaviour {
 
 		// Start conversation and setup parameters.
 		startedConversation.inProgress = true;
+		
 		partner1.SetPartner(partner2);
-		partner1.SetLeading(true);
 		partner2.SetPartner(partner1);
-		partner2.SetLeading(false);
+		if (startedConversation.partner1Leads)
+		{
+			startedConversation.partner1.SetLeading(true);
+			startedConversation.partner2.SetLeading(false);
+		}
+		else
+		{
+			startedConversation.partner1.SetLeading(false);
+			startedConversation.partner2.SetLeading(true);
+		}
 		startedConversation.initiateDistance = Mathf.Min(partner1.converseDistance, partner2.converseDistance);
 		startedConversation.warningDistance = Mathf.Min(partner1.converseDistance * partner1.warningThreshold, partner2.converseDistance * partner2.warningThreshold);
 		startedConversation.breakingDistance = Mathf.Min(partner1.converseDistance * partner1.breakingThreshold, partner2.converseDistance * partner2.breakingThreshold);
@@ -86,6 +95,7 @@ public class Conversation
 	public string title;
 	public PartnerLink partner1;
 	public PartnerLink partner2;
+	public bool partner1Leads;
 	[HideInInspector]
 	public bool inProgress;
 	[HideInInspector]
