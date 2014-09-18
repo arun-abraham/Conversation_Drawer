@@ -15,7 +15,6 @@ public class ControllerFeedback : MonoBehaviour {
 		isVibrating = true;
 		intensity = 0.0f;
 		duration = 0.0f;
-
 	}
 	
 	// Update is called once per frame

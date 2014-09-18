@@ -16,6 +16,7 @@ public class WaypointSeek : MonoBehaviour {
 	private bool startedLine = false;
 	public float partnerWeight;
 	public GameObject waypointContainer;
+	public bool moveWithoutPartner = false;
 	
 	void Start()
 	{
@@ -48,7 +49,7 @@ public class WaypointSeek : MonoBehaviour {
 				waypoints = new List<Waypoint>();
 				while (waypoints.Count < waypointObjects.Length)
 				{
-					if (startIndex + waypoints.Count >= waypointObjects.Length)
+					if (startIndex > 0 && startIndex + waypoints.Count >= waypointObjects.Length)
 					{
 						startIndex = 0;
 					}
@@ -112,6 +113,21 @@ public class WaypointSeek : MonoBehaviour {
 				{
 					tracer.AddVertex(transform.position);
 				}
+			}
+		}
+		else if (moveWithoutPartner)
+		{
+			if (tracer != null && !startedLine)
+			{
+				tracer.StartLine();
+				startedLine = true;
+			}
+			Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+			mover.Accelerate(destination - transform.position);
+			mover.Accelerate(destination - transform.position);
+			if (tracer != null)
+			{
+				tracer.AddVertex(transform.position);
 			}
 		}
 		else

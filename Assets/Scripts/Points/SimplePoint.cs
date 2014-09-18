@@ -36,7 +36,7 @@ public class SimplePoint : MonoBehaviour {
 		   lilPoint5.GetComponent<Detail>().isHit && lilPoint6.GetComponent<Detail>().isHit && lilPoint7.GetComponent<Detail>().isHit && lilPoint8.GetComponent<Detail>().isHit) 
 		{
 			renderer.material.color = Color.cyan;
-			print("Good Point");
+			//print("Good Point");
 			pointMade = true;
 			rotSpeed = 50.0f;
 			audio.PlayOneShot(Gong);
