@@ -7,7 +7,6 @@ public class ConversationScore : MonoBehaviour {
 	public Tracer tracer;
 	public Tracer partnerTracer;
 	public int oldNearestIndex = 0;
-	public float followThreshold;
 	public float score = 0;
 	public float scoreToLead;
 	public float proximityToLead;
@@ -77,9 +76,21 @@ public class ConversationScore : MonoBehaviour {
 			float scoreReq = scoreToLead * Mathf.Max(Mathf.Pow(scorePortion, scorePortionExponent), 0);
 
 			// Update score based on accuracy.
+			float indexPortion = (float)nearestIndex / partnerTracer.GetVertexCount();
+			float followThreshold = (((indexPortion * partnerTracer.trailNearWidth) + ((1 - indexPortion) * partnerTracer.trailFarWidth))) / 2;
 			float accuracyFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
 			score = Mathf.Max(accuracyFactor * Time.deltaTime, 0);
 			
+			// Show if player is in partner wake or not.
+			if (accuracyFactor > 0)
+			{
+				SendMessage("EnterWake", SendMessageOptions.DontRequireReceiver);
+			}
+			else
+			{
+				SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
+			}
+
 			// Handle special behavior while changing boost level.
 			if (changingBoostLevel)
 			{
