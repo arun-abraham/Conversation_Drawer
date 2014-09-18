@@ -309,6 +309,8 @@ MonoBehaviour:
   partnerWeight: 0
   waypointContainer: {fileID: 0}
   moveWithoutPartner: 0
+  desireToLead: .5
+  inPartnerWake: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +325,8 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   maxVertices: 200
   lineMakerPrefab: {fileID: 100000, guid: c891b65162786984b82eac5b567f21f4, type: 2}
+  trailNearWidth: 1
+  trailFarWidth: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,9 +370,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seekingPartner: 0
-  converseDistance: 0
-  warningThreshold: 0
-  breakingThreshold: 0
+  converseDistance: 5
+  warningThreshold: 1.5
+  breakingThreshold: 3
   partnerLineSize: .25
   partnerLineShrink: .899999976
   mover: {fileID: 0}

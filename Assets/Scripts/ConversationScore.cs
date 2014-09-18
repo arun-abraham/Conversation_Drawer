@@ -18,7 +18,7 @@ public class ConversationScore : MonoBehaviour {
 	private bool changingBoostLevel = false;
 	public float changeTime;
 	private float changeTimeElapsed;
-	private float startSpeed;
+	public float startSpeed;
 	public Camera gameCamera = null;
 
 	void Start()
@@ -43,11 +43,13 @@ public class ConversationScore : MonoBehaviour {
 		if (!mover.Moving || partnerLink.Partner == null)
 		{
 			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+			SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
 		}
 		else if (partnerLink.Leading)
 		{
 			// TODO Should not have to do this every frame.
 			mover.maxSpeed = startSpeed;
+			SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
 		}
 		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
@@ -72,7 +74,8 @@ public class ConversationScore : MonoBehaviour {
 			float followerToPathDist = (transform.position - pointOnPath).magnitude;
 
 			// Determine how the required score to get a reward speed boost.
-			float scorePortion = 1 - (partnerTracer.transform.position - transform.position).magnitude / (partnerLink.converseDistance);
+			Vector3 toPartner = (partnerTracer.transform.position - transform.position);
+			float scorePortion = 1 - toPartner.magnitude / (partnerLink.Conversation.initiateDistance);
 			float scoreReq = scoreToLead * Mathf.Max(Mathf.Pow(scorePortion, scorePortionExponent), 0);
 
 			// Update score based on accuracy.
@@ -104,17 +107,18 @@ public class ConversationScore : MonoBehaviour {
 			}			
 
 			// Start leading if score is high enough.
-			if (score >= scoreToLead && scorePortion >= proximityToLead)
+			if (score >= scoreToLead && (toPartner.sqrMagnitude <= Mathf.Pow(partnerLink.Partner.yieldProximity, 2) || Vector3.Dot(toPartner, partnerLink.Partner.mover.velocity) < 0))
 			{
 				partnerLink.SetLeading(true);
-				mover.MoveTo(partnerLink.Partner.transform.position + (partnerLink.Partner.transform.position - transform.position));
+				mover.MoveTo(partnerLink.Partner.transform.position + mover.velocity.normalized * partnerLink.yieldProximity * 2);
 				mover.maxSpeed = startSpeed;
+				SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 			}
 
 			// Boost speed if score exceeds requirement.
 			if (score >= scoreReq && accuracyFactor > 0)
 			{
-				mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1) + 0.3f);
+				mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
 			}
 			else
 			{

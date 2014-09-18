@@ -12,7 +12,7 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return conversation; }
 	}
-	private bool leading;
+	public bool leading;
 	public bool Leading
 	{
 		get { return leading; }
@@ -31,6 +31,7 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	public float yieldProximity = 1;
 
 	void Awake()
 	{

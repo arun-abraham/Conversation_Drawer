@@ -17,6 +17,12 @@ public class WaypointSeek : MonoBehaviour {
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
+	public float maxDesireToLead = 1;
+	public float minDesireToLead = 0;
+	public float inWakeLeadGrowth = 0.1f;
+	public float outWakeLeadGrowth = 0.1f;
+	public float desireToLead;
+	public bool inPartnerWake = false;
 	
 	void Start()
 	{
@@ -108,7 +114,19 @@ public class WaypointSeek : MonoBehaviour {
 			}
 			else
 			{
-				mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
+				Mathf.Clamp(desireToLead, 0, 1);
+				Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
+				Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
+				if (inPartnerWake)
+				{
+					mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
+					desireToLead += inWakeLeadGrowth * Time.deltaTime;
+				}
+				else
+				{
+					mover.Accelerate(toPartner);
+					desireToLead += outWakeLeadGrowth * Time.deltaTime;
+				}
 				if (tracer != null)
 				{
 					tracer.AddVertex(transform.position);
@@ -208,5 +226,20 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			collideWithWaypoint = true;
 		}
+	}
+
+	private void StartLeading()
+	{
+		desireToLead = minDesireToLead;
+	}
+
+	private void EnterWake()
+	{
+		inPartnerWake = true;
+	}
+
+	private void ExitWake()
+	{
+		inPartnerWake = false;
 	}
 }
