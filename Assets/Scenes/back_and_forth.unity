@@ -1558,7 +1558,7 @@ MonoBehaviour:
   partnerTracer: {fileID: 0}
   oldNearestIndex: 0
   score: 0
-  scoreToLead: 0
+  scoreToLead: 1
   proximityToLead: .949999988
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
@@ -1721,7 +1721,8 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
-  yieldProximity: 2
+  startYieldProximity: 1
+  endYieldProximity: 2
   yieldSpeedModifier: -.100000001
   inWake: 0
 --- !u!120 &120367383
@@ -2345,6 +2346,10 @@ Prefab:
     - target: {fileID: 11400008, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: yieldSpeedModifier
       value: -.100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: scoreToLead
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
@@ -2989,7 +2994,7 @@ MonoBehaviour:
   maxSpeed: 15
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 30
+  handling: 50
   dampening: .899999976
   dampeningThreshold: 0
   externalSpeedMultiplier: 1
@@ -3019,7 +3024,8 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
-  yieldProximity: 2
+  startYieldProximity: 1
+  endYieldProximity: 2
   yieldSpeedModifier: -.100000001
   inWake: 0
 --- !u!54 &1609370465
@@ -3055,7 +3061,7 @@ MonoBehaviour:
   partnerTracer: {fileID: 0}
   oldNearestIndex: 0
   score: 0
-  scoreToLead: 0
+  scoreToLead: 1
   proximityToLead: .949999988
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
@@ -3431,6 +3437,10 @@ Prefab:
     - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: handling
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}

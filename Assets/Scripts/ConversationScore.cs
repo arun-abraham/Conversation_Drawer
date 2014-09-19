@@ -105,7 +105,7 @@ public class ConversationScore : MonoBehaviour {
 			float indexPortion = (float)nearestIndex / partnerTracer.GetVertexCount();
 			float followThreshold = (((indexPortion * partnerTracer.trailNearWidth) + ((1 - indexPortion) * partnerTracer.trailFarWidth))) / 2;
 			float accuracyFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
-			score = Mathf.Max(accuracyFactor * Time.deltaTime, 0);
+			//score += Mathf.Max(accuracyFactor * Time.deltaTime, 0);
 			
 			// Show if player is in partner wake or not.
 			if (accuracyFactor > 0)
@@ -130,19 +130,31 @@ public class ConversationScore : MonoBehaviour {
 			}			
 
 			// Start leading if following closely enough.
-			if (canTakeLead && partnerLink.InWake && score >= scoreToLead && partnerLink.ShouldLead(partnerLink.Partner))
+			if (canTakeLead && partnerLink.InWake)
 			{
-				partnerLink.SetLeading(true);
-				//mover.MoveTo(partnerLink.Partner.transform.position + mover.velocity.normalized * partnerLink.yieldProximity * 2);
-				mover.maxSpeed = startSpeed;
-				SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
-				partnerLink.Partner.SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
+				if (!partnerLink.ShouldLead(partnerLink.Partner))
+				{
+					score = 0;
+				}
+				else if (score > scoreToLead)
+				{
+					partnerLink.SetLeading(true);
+					//mover.MoveTo(partnerLink.Partner.transform.position + mover.velocity.normalized * partnerLink.yieldProximity * 2);
+					mover.maxSpeed = startSpeed;
+					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+					partnerLink.Partner.SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
+					score = 0;
+				}
+				else
+				{
+					score += Time.deltaTime;
+				}
 			}
 
 			// Boost speed if score exceeds requirement.
 			if (!partnerLink.Yielding)
 			{
-				if (score >= scoreReq && accuracyFactor > 0)
+				if (/*score >= scoreReq && */accuracyFactor > 0)
 				{
 					mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
 				}
