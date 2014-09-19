@@ -103,7 +103,7 @@ public class ConversationScore : MonoBehaviour {
 			// Boost speed if score exceeds requirement.
 			if (score >= scoreReq && accuracyFactor > 0)
 			{
-				mover.maxSpeed = startSpeed + rewardSpeedBoost;
+				mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1) + 0.3f);
 			}
 			else
 			{

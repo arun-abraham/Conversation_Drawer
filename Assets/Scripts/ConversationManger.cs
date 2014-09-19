@@ -26,6 +26,14 @@ public class ConversationManger : MonoBehaviour {
 		}
 	}
 
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
 	public bool StartConversation(PartnerLink partner1, PartnerLink partner2)
 	{
 		// Find conversation and return false if not found or already in progress.
