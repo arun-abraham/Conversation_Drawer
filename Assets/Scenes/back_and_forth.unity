@@ -1586,6 +1586,10 @@ MonoBehaviour:
   dampening: .949999988
   dampeningThreshold: 1.5
   externalSpeedMultiplier: 1
+  freeze:
+    velocityX: 0
+    velocityY: 0
+    velocityZ: 1
 --- !u!114 &120367375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,7 +1721,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
-  yieldProximity: 1
+  yieldProximity: 2
+  yieldSpeedModifier: -.100000001
+  inWake: 0
 --- !u!120 &120367383
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1941,44 +1947,6 @@ Transform:
   - {fileID: 841700000}
   m_Father: {fileID: 120367379}
   m_RootOrder: 2
---- !u!1 &467874166
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 467874168}
-  - 192: {fileID: 467874167}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!192 &467874167
-OcclusionArea:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 467874166}
-  serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_IsViewVolume: 1
---- !u!4 &467874168
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 467874166}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.45009995, y: 10.7007122, z: -6.59033298}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!1 &841699999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2333,18 @@ Prefab:
     - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: ForceModule.enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: yieldProximity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: yieldSpeedModifier
+      value: -.100000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
@@ -2923,7 +2903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
@@ -2935,8 +2915,7 @@ MonoBehaviour:
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
-  desireToLead: 1
-  inPartnerWake: 0
+  desireToLead: .5
 --- !u!23 &1609370459
 Renderer:
   m_ObjectHideFlags: 0
@@ -3014,6 +2993,10 @@ MonoBehaviour:
   dampening: .899999976
   dampeningThreshold: 0
   externalSpeedMultiplier: 1
+  freeze:
+    velocityX: 0
+    velocityY: 0
+    velocityZ: 1
 --- !u!114 &1609370464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3036,7 +3019,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
-  yieldProximity: 1
+  yieldProximity: 2
+  yieldSpeedModifier: -.100000001
+  inWake: 0
 --- !u!54 &1609370465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3435,8 +3420,16 @@ Prefab:
       propertyPath: trailFarWidth
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: yieldProximity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: yieldSpeedModifier
+      value: -.100000001
+      objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
-      propertyPath: desireToLead
+      propertyPath: showWaypoints
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

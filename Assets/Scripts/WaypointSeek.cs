@@ -22,7 +22,7 @@ public class WaypointSeek : MonoBehaviour {
 	public float inWakeLeadGrowth = 0.1f;
 	public float outWakeLeadGrowth = 0.1f;
 	public float desireToLead;
-	public bool inPartnerWake = false;
+	private bool yielding = false;
 	
 	void Start()
 	{
@@ -117,7 +117,11 @@ public class WaypointSeek : MonoBehaviour {
 				Mathf.Clamp(desireToLead, 0, 1);
 				Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
 				Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
-				if (inPartnerWake)
+				if (partnerLink.Yielding)
+				{
+					mover.Accelerate(partnerLink.Partner.mover.velocity);
+				}
+				else if (partnerLink.InWake)
 				{
 					mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
 					desireToLead += inWakeLeadGrowth * Time.deltaTime;
@@ -231,15 +235,15 @@ public class WaypointSeek : MonoBehaviour {
 	private void StartLeading()
 	{
 		desireToLead = minDesireToLead;
+		Vector3 waypointOffset = transform.position - waypoints[current].transform.position;
+		for (int i = 0; i < waypoints.Count; i++)
+		{
+			waypoints[i].transform.position += waypointOffset;
+		}
 	}
 
-	private void EnterWake()
+	private void StartYielding()
 	{
-		inPartnerWake = true;
-	}
-
-	private void ExitWake()
-	{
-		inPartnerWake = false;
+		yielding = true;
 	}
 }

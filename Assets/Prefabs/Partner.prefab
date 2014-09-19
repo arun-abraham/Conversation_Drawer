@@ -309,8 +309,11 @@ MonoBehaviour:
   partnerWeight: 0
   waypointContainer: {fileID: 0}
   moveWithoutPartner: 0
+  maxDesireToLead: 1
+  minDesireToLead: 0
+  inWakeLeadGrowth: .100000001
+  outWakeLeadGrowth: .100000001
   desireToLead: .5
-  inPartnerWake: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,6 +361,10 @@ MonoBehaviour:
   dampening: .899999976
   dampeningThreshold: 0
   externalSpeedMultiplier: 1
+  freeze:
+    velocityX: 0
+    velocityY: 0
+    velocityZ: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56d86b5491f62f46b8990126f139f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leading: 0
   seekingPartner: 0
   converseDistance: 5
   warningThreshold: 1.5
@@ -378,6 +386,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  yieldProximity: 1
+  yieldSpeedModifier: -.5
+  inWake: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

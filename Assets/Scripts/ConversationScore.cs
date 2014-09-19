@@ -20,6 +20,7 @@ public class ConversationScore : MonoBehaviour {
 	private float changeTimeElapsed;
 	public float startSpeed;
 	public Camera gameCamera = null;
+	private bool canTakeLead = false;
 
 	void Start()
 	{
@@ -43,16 +44,38 @@ public class ConversationScore : MonoBehaviour {
 		if (!mover.Moving || partnerLink.Partner == null)
 		{
 			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
-			SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
+			partnerLink.InWake = false;
 		}
 		else if (partnerLink.Leading)
 		{
 			// TODO Should not have to do this every frame.
 			mover.maxSpeed = startSpeed;
+
 			SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
+			canTakeLead = false;
 		}
 		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
+			if (!canTakeLead)
+			{
+				if (!partnerLink.ShouldYield(partnerLink.Partner))
+				{
+					canTakeLead = true;
+					SendMessage("EndYielding", SendMessageOptions.DontRequireReceiver);
+					if (partnerLink.Yielding)
+					{
+						mover.externalSpeedMultiplier -= partnerLink.yieldSpeedModifier;
+						partnerLink.Yielding = false;
+					}
+					
+				}
+				else if (!partnerLink.Yielding && mover.velocity.sqrMagnitude > Mathf.Pow(mover.maxSpeed * partnerLink.yieldSpeedModifier, 2))
+				{
+					mover.externalSpeedMultiplier += partnerLink.yieldSpeedModifier;
+					partnerLink.Yielding = true;
+				}
+			}
+
 			// Find nearest vertex on leader line and the vertex after it.
 			int nearestIndex = partnerTracer.FindNearestIndex(transform.position, oldNearestIndex);
 			Vector3 nearestVertex = partnerTracer.GetVertex(nearestIndex);
@@ -87,11 +110,11 @@ public class ConversationScore : MonoBehaviour {
 			// Show if player is in partner wake or not.
 			if (accuracyFactor > 0)
 			{
-				SendMessage("EnterWake", SendMessageOptions.DontRequireReceiver);
+				partnerLink.InWake = true;
 			}
 			else
 			{
-				SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
+				partnerLink.InWake = false;
 			}
 
 			// Handle special behavior while changing boost level.
@@ -106,29 +129,33 @@ public class ConversationScore : MonoBehaviour {
 				}
 			}			
 
-			// Start leading if score is high enough.
-			if (score >= scoreToLead && (toPartner.sqrMagnitude <= Mathf.Pow(partnerLink.Partner.yieldProximity, 2) || Vector3.Dot(toPartner, partnerLink.Partner.mover.velocity) < 0))
+			// Start leading if following closely enough.
+			if (canTakeLead && partnerLink.InWake && score >= scoreToLead && partnerLink.ShouldLead(partnerLink.Partner))
 			{
 				partnerLink.SetLeading(true);
-				mover.MoveTo(partnerLink.Partner.transform.position + mover.velocity.normalized * partnerLink.yieldProximity * 2);
+				//mover.MoveTo(partnerLink.Partner.transform.position + mover.velocity.normalized * partnerLink.yieldProximity * 2);
 				mover.maxSpeed = startSpeed;
 				SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
+				partnerLink.Partner.SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
 			}
 
 			// Boost speed if score exceeds requirement.
-			if (score >= scoreReq && accuracyFactor > 0)
+			if (!partnerLink.Yielding)
 			{
-				mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
-			}
-			else
-			{
-				mover.maxSpeed = startSpeed;
+				if (score >= scoreReq && accuracyFactor > 0)
+				{
+					mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
+				}
+				else
+				{
+					mover.maxSpeed = startSpeed;
+				}
 			}
 
 			// Update boost level. 
 			if (boostLevels > 0)
 			{
-				float scorePortionPerBoost = 1.0f / Mathf.Pow(boostLevels + 1, scorePortionExponent);
+				/*float scorePortionPerBoost = 1.0f / Mathf.Pow(boostLevels + 1, scorePortionExponent);
 				if (scorePortion > scorePortionPerBoost * Mathf.Pow((currentBoostLevel + 1), scorePortionExponent))
 				{
 					if (currentBoostLevel < boostLevels && accuracyFactor > 0)
@@ -146,7 +173,7 @@ public class ConversationScore : MonoBehaviour {
 						changingBoostLevel = true;
 						SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
 					}
-				}
+				}*/
 			}
 		}
 	}
@@ -156,11 +183,13 @@ public class ConversationScore : MonoBehaviour {
 		if (partnerLink != null && partnerLink.Partner != null)
 		{
 			partnerTracer = partnerLink.Partner.tracer;
+			canTakeLead = true;
 		}
 	}
 
 	private void UnlinkPartner()
 	{
 		partnerTracer = null;
+		canTakeLead = false;
 	}
 }
