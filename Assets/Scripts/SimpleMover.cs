@@ -41,7 +41,15 @@ public class SimpleMover : MonoBehaviour {
 		{
 			Vector3 parallel = Helper.ProjectVector(velocity, direction);
 			Vector3 perpendicular = direction - parallel;
-			velocity += ((parallel * acceleration) + (perpendicular * handling)) * Time.deltaTime;
+
+			//if (velocity.sqrMagnitude >= Mathf.Pow(maxSpeed, 2))
+			//{
+			//	velocity += perpendicular * handling * Time.deltaTime;
+			//}
+			//else
+			//{
+				velocity += ((parallel * acceleration) + (perpendicular * handling)) * Time.deltaTime;
+			//}
 		}
 
 		if (velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))

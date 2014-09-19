@@ -28,7 +28,7 @@ public class Feedback : MonoBehaviour {
 			cameraShake = Camera.main.GetComponent<CameraShake>();
 		}
 		pSys = (GameObject)Instantiate(particleTrail);
-		player = GameObject.FindGameObjectWithTag("Converser");
+		player = gameObject;
 		prevPos = player.transform.position;
 		startColor = player.renderer.material.color;
 		boostColorOne = new Color(0.3f, 0.2f, 0.5f, 1.0f);
@@ -82,7 +82,6 @@ public class Feedback : MonoBehaviour {
 	{
 		if (cameraShake != null)
 		{
-			//controllerFeedback.EndVibration();
 			cameraShake.StopShaking();
 		}
 	}
