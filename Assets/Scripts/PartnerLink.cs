@@ -105,7 +105,7 @@ public class PartnerLink : MonoBehaviour {
 			{
 				PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
 				Conversation potentionalConversation = ConversationManger.Instance.FindConversation(this, potentialPartner);
-				if (potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(potentionalConversation.initiateDistance, 2))
+				if (potentionalConversation != null && potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(potentionalConversation.initiateDistance, 2))
 				{
 					ConversationManger.Instance.StartConversation(this, potentialPartner);
 				}
