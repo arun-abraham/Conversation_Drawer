@@ -52,7 +52,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
-    startWidth: 1
+    startWidth: 12
     endWidth: 1
     m_StartColor:
       serializedVersion: 2

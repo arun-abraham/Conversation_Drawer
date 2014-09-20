@@ -20,6 +20,7 @@ public class Feedback : MonoBehaviour {
 	private Color boostColorFour;
 	private int boostLevel = 0;
 	private Tracer tracer;
+	public bool showParticleTrail;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class Feedback : MonoBehaviour {
 			cameraShake = Camera.main.GetComponent<CameraShake>();
 		}
 		pSys = (GameObject)Instantiate(particleTrail);
+		pSys.particleSystem.enableEmission = false;
 		player = gameObject;
 		prevPos = player.transform.position;
 		startColor = player.renderer.material.color;
@@ -114,5 +116,21 @@ public class Feedback : MonoBehaviour {
 		colExp.particleSystem.startColor = player.renderer.material.color;
 		colExp.transform.position = player.transform.position;
 		Destroy(colExp, 3.1f);
+	}
+
+	private void EnterWake()
+	{
+		if (!pSys.particleSystem.enableEmission)
+		{
+			pSys.particleSystem.enableEmission = true;
+		}
+	}
+
+	private void ExitWake()
+	{
+		if (pSys.particleSystem.enableEmission)
+		{
+			pSys.particleSystem.enableEmission = false;
+		}
 	}
 }

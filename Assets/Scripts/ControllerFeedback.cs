@@ -30,7 +30,7 @@ public class ControllerFeedback : MonoBehaviour {
 			EndVibration();
 		}
 
-		GamePad.SetVibration(0, intensity, intensity);
+		//GamePad.SetVibration(0, intensity, intensity);
 
 	}
 
