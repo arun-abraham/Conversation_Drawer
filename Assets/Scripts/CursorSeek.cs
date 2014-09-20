@@ -8,8 +8,10 @@ public class CursorSeek : MonoBehaviour {
 	public Tracer tracer;
 	//public bool requireMouseDown;
 	public bool directVelocity;
-	private bool startedLine;
+	private bool seeking;
 	public GameObject cursor;
+	public Tail tail;
+	private Collider tailTrigger;
 	public bool toggleSeek;
 
 	// Use this for initialization
@@ -26,7 +28,11 @@ public class CursorSeek : MonoBehaviour {
 		{
 			tracer = GetComponent<Tracer>();
 		}
-		tracer.StartLine();
+
+		if (tail != null)
+		{
+			tailTrigger = tail.trigger;
+		}
 	}
 	
 	// Update is called once per frame
@@ -39,32 +45,37 @@ public class CursorSeek : MonoBehaviour {
 		{
 			HandleTouches();
 		}
+
+		if (tracer != null)
+		{
+			if (tail != null)
+			{
+				tracer.AddVertex(tail.transform.position);
+			}
+			else
+			{
+				tracer.AddVertex(transform.position);
+			}
+		}
 	}
 
 	private void HandleTouches()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (!startedLine)
-			{
-				if (tracer)
-				{
-					tracer.StartLine();
-				}
-			}
-			startedLine = !(toggleSeek && startedLine);
+			seeking = !(toggleSeek && seeking);
 		}
-		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && startedLine))
+		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && seeking))
 		{
 			Drag();
 		}
 		else
 		{
-			startedLine = false;
+			seeking = false;
 			mover.SlowDown();
-			if (tracer)
+			if (tailTrigger != null)
 			{
-				tracer.DestroyLine();
+				tail.trigger.enabled = true;
 			}
 		}
 	}
@@ -74,28 +85,23 @@ public class CursorSeek : MonoBehaviour {
 	{
 		if (cursor.GetComponent<ControllerSeek>().active)
 		{
-			if (!startedLine)
+			if (!seeking)
 			{
-				startedLine = true;
-				if (tracer != null)
-				{
-					tracer.StartLine();
-				}
+				seeking = true;
 			}
 			else
 			{
 				Drag();
 			}
-				
 		}
 		else
 		{
 			mover.SlowDown();
-			if (tracer)
+			seeking = false;
+			if (tailTrigger != null)
 			{
-				tracer.DestroyLine();
+				tail.trigger.enabled = true;
 			}
-			startedLine = false;
 		}
 	}
 
@@ -115,10 +121,6 @@ public class CursorSeek : MonoBehaviour {
 		{
 			mover.Accelerate(dragForward);
 		}
-		if (tracer != null)
-		{
-			tracer.AddVertex(transform.position);
-		}
 	}
 
 	private Vector3 MousePointInWorld()
@@ -126,5 +128,25 @@ public class CursorSeek : MonoBehaviour {
 		Vector3 touchPosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
 		touchPosition.z = transform.position.z;
 		return touchPosition;
+	}
+
+	private void TailStartFollow()
+	{
+		if (tracer != null)
+		{
+			tracer.StartLine();
+		}
+		if (tailTrigger != null)
+		{
+			tail.trigger.enabled = false;
+		}
+	}
+
+	private void TailEndFollow()
+	{
+		if (tracer)
+		{
+			tracer.DestroyLine();
+		}
 	}
 }

@@ -12,7 +12,7 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return conversation; }
 	}
-	private bool leading;
+	public bool leading;
 	public bool Leading
 	{
 		get { return leading; }
@@ -31,6 +31,51 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	private bool yielding;
+	public bool Yielding
+	{
+		get { return yielding; }
+		set 
+		{
+			if (value != yielding)
+			{
+				yielding = value; 
+				if (yielding == true)
+				{
+					SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
+				}
+				else
+				{
+					SendMessage("EndYielding", SendMessageOptions.DontRequireReceiver);
+				}
+			}
+			
+		}
+	}
+	public float startYieldProximity = 1;
+	public float endYieldProximity = 2;
+	public float yieldSpeedModifier = -0.5f;
+	public bool inWake = false;
+	public bool InWake
+	{
+		get { return inWake; }
+		set
+		{
+			if (value != inWake)
+			{
+				inWake = value;
+				if (inWake == true)
+				{
+					SendMessage("EnterWake", SendMessageOptions.DontRequireReceiver);
+				}
+				else
+				{
+					SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
+				}
+			}
+
+		}
+	}
 
 	void Awake()
 	{
@@ -150,5 +195,21 @@ public class PartnerLink : MonoBehaviour {
 		{
 			partner.SetLeading(!isLead, false);
 		}
+	}
+
+	public bool ShouldLead(PartnerLink leader)
+	{
+		Vector3 toLeader = leader.transform.position - transform.position;
+		bool far = toLeader.sqrMagnitude >= Mathf.Pow(leader.startYieldProximity, 2);
+		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
+		return !far || !behind;
+	}
+
+	public bool ShouldYield(PartnerLink leader)
+	{
+		Vector3 toLeader = leader.transform.position - transform.position;
+		bool far = toLeader.sqrMagnitude >= Mathf.Pow(leader.startYieldProximity + endYieldProximity, 2);
+		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
+		return !far || !behind;
 	}
 }

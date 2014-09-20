@@ -13,10 +13,17 @@ public class WaypointSeek : MonoBehaviour {
 	public SimpleMover mover;
 	public PartnerLink partnerLink;
 	public Tracer tracer;
-	private bool startedLine = false;
+	public Tail tail;
+	private Collider tailTrigger;
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
+	public float maxDesireToLead = 1;
+	public float minDesireToLead = 0;
+	public float inWakeLeadGrowth = 0.1f;
+	public float outWakeLeadGrowth = 0.1f;
+	public float desireToLead;
+	private bool yielding = false;
 	
 	void Start()
 	{
@@ -31,6 +38,10 @@ public class WaypointSeek : MonoBehaviour {
 		if (tracer == null)
 		{
 			tracer = GetComponent<Tracer>();
+		}
+		if (tail != null)
+		{
+			tailTrigger = tail.trigger;
 		}
 		
 		if (waypointContainer != null)
@@ -76,12 +87,6 @@ public class WaypointSeek : MonoBehaviour {
 		
 		if (partnerLink.Partner != null)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
-
 			if (partnerLink.Leading)
 			{
 				Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
@@ -100,43 +105,53 @@ public class WaypointSeek : MonoBehaviour {
 				}
 				
 				mover.Accelerate(destination - transform.position);
-				
-				if (tracer != null)
-				{
-					tracer.AddVertex(transform.position);
-				}
 			}
 			else
 			{
-				mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
-				if (tracer != null)
+				Mathf.Clamp(desireToLead, 0, 1);
+				Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
+				Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
+				if (partnerLink.Yielding)
 				{
-					tracer.AddVertex(transform.position);
+					mover.Accelerate(partnerLink.Partner.mover.velocity);
+				}
+				else if (partnerLink.InWake)
+				{
+					mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
+					desireToLead += inWakeLeadGrowth * Time.deltaTime;
+				}
+				else
+				{
+					mover.Accelerate(toPartner);
+					desireToLead += outWakeLeadGrowth * Time.deltaTime;
 				}
 			}
 		}
 		else if (moveWithoutPartner)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
 			Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
 			mover.Accelerate(destination - transform.position);
 			mover.Accelerate(destination - transform.position);
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);
-			}
+
 		}
 		else
 		{
 			mover.SlowDown();
-			if (tracer)
+			if (tailTrigger != null)
 			{
-				tracer.DestroyLine();
-				startedLine = false;
+				tail.trigger.enabled = true;
+			}
+		}
+
+		if (tracer != null)
+		{
+			if (tail != null)
+			{
+				tracer.AddVertex(tail.transform.position);
+			}
+			else
+			{
+				tracer.AddVertex(transform.position);
 			}
 		}
 	}
@@ -207,6 +222,41 @@ public class WaypointSeek : MonoBehaviour {
 		if (waypoints != null && current < waypoints.Count && otherCol.gameObject == waypoints[current].gameObject)
 		{
 			collideWithWaypoint = true;
+		}
+	}
+
+	private void StartLeading()
+	{
+		desireToLead = minDesireToLead;
+		Vector3 waypointOffset = transform.position - waypoints[current].transform.position;
+		for (int i = 0; i < waypoints.Count; i++)
+		{
+			waypoints[i].transform.position += waypointOffset;
+		}
+	}
+
+	private void StartYielding()
+	{
+		yielding = true;
+	}
+
+	private void TailStartFollow()
+	{
+		if (tracer != null)
+		{
+			tracer.StartLine();
+		}
+		if (tailTrigger != null)
+		{
+			tail.trigger.enabled = false;
+		}
+	}
+	
+	private void TailEndFollow()
+	{
+		if (tracer)
+		{
+			tracer.DestroyLine();
 		}
 	}
 }
