@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 103414799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1075348134}
   - {fileID: 1783046213}
@@ -130,8 +130,8 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   maxVertices: 200
   lineMakerPrefab: {fileID: 100000, guid: c891b65162786984b82eac5b567f21f4, type: 2}
-  trailNearWidth: 1
-  trailFarWidth: 12
+  trailNearWidth: 10
+  trailFarWidth: 40
 --- !u!114 &103414802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leading: 0
   seekingPartner: 0
-  converseDistance: 5
+  converseDistance: 20
   warningThreshold: 1.5
   breakingThreshold: 3
   partnerLineSize: .25
@@ -226,8 +226,8 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
-  startYieldProximity: 3
-  endYieldProximity: 2
+  startYieldProximity: 10
+  endYieldProximity: 10
   yieldSpeedModifier: -.100000001
   inWake: 0
 --- !u!114 &103414806
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b0f58affdedc74185d1be54789c64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 15
+  maxSpeed: 16.5
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
   handling: 50
@@ -723,6 +723,46 @@ Prefab:
       propertyPath: waypointContainer
       value: 
       objectReference: {fileID: 374753964}
+    - target: {fileID: 400012, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 400012, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 400012, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: maxSpeed
+      value: 16.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: endYieldProximity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: startYieldProximity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: trailNearWidth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: trailFarWidth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 13500002, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: converseDistance
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 659477472}
@@ -799,7 +839,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 25
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &771223052
 Transform:
@@ -2777,7 +2817,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1687348086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -11.7980003, z: .100000001}
+  m_LocalPosition: {x: 0, y: -29.1709995, z: .100000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 374753965}
