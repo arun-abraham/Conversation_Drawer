@@ -17,6 +17,10 @@ public class WaypointSeek : MonoBehaviour {
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
+
+	public bool orbit = false;
+	public float orbitRadius = 5.0f;
+
 	
 	void Start()
 	{
@@ -108,7 +112,12 @@ public class WaypointSeek : MonoBehaviour {
 			}
 			else
 			{
-				mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
+				if(orbit)
+					BeginOrbit();
+				else{
+					mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
+
+				}
 				if (tracer != null)
 				{
 					tracer.AddVertex(transform.position);
@@ -208,5 +217,12 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			collideWithWaypoint = true;
 		}
+	}
+	void BeginOrbit(){
+		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
+		//transform.position = Vector3.MoveTowards(transform.position, partnerLink.Partner.transform.position + destination, speed * Time.deltaTime);
+		mover.MoveTo(partnerLink.Partner.transform.position + destination);
+		mover.maxSpeed += Time.deltaTime;
 	}
 }
