@@ -1879,7 +1879,7 @@ Transform:
   m_GameObject: {fileID: 202822620}
   m_LocalRotation: {x: .5, y: .5, z: -.5, w: .5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .100000001, y: 1, z: .5}
+  m_LocalScale: {x: .100000001, y: 1, z: .75}
   m_Children: []
   m_Father: {fileID: 1295375418}
   m_RootOrder: 1
@@ -3324,8 +3324,8 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
-  startYieldProximity: 3
-  endYieldProximity: 2
+  startYieldProximity: 2
+  endYieldProximity: 3
   yieldSpeedModifier: -.100000001
   inWake: 0
 --- !u!54 &1609370465
@@ -3580,7 +3580,7 @@ Transform:
   m_GameObject: {fileID: 2002333699}
   m_LocalRotation: {x: .5, y: .5, z: -.5, w: .5}
   m_LocalPosition: {x: 85.6674194, y: 199.394257, z: 9.5826664}
-  m_LocalScale: {x: .100000001, y: 1, z: .5}
+  m_LocalScale: {x: .100000001, y: 1, z: .75}
   m_Children: []
   m_Father: {fileID: 1215136222}
   m_RootOrder: 1

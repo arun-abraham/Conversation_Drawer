@@ -64,6 +64,10 @@ public class CursorSeek : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0))
 		{
 			seeking = !(toggleSeek && seeking);
+			if (tail == null)
+			{
+				tracer.StartLine();
+			}
 		}
 		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && seeking))
 		{
@@ -73,6 +77,10 @@ public class CursorSeek : MonoBehaviour {
 		{
 			seeking = false;
 			mover.SlowDown();
+			if (tail == null)
+			{
+				tracer.DestroyLine();
+			}
 			if (tailTrigger != null)
 			{
 				tail.trigger.enabled = true;
@@ -88,6 +96,10 @@ public class CursorSeek : MonoBehaviour {
 			if (!seeking)
 			{
 				seeking = true;
+				if (tail == null)
+				{
+					tracer.StartLine();
+				}
 			}
 			else
 			{
@@ -98,6 +110,10 @@ public class CursorSeek : MonoBehaviour {
 		{
 			mover.SlowDown();
 			seeking = false;
+			if (tail == null)
+			{
+				tracer.DestroyLine();
+			}
 			if (tailTrigger != null)
 			{
 				tail.trigger.enabled = true;
