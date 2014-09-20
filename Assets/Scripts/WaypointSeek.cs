@@ -109,7 +109,7 @@ public class WaypointSeek : MonoBehaviour {
 				
 				if (tracer != null)
 				{
-					tracer.AddVertex(transform.position);
+					tracer.AddVertex(transform.position);// - (mover.velocity.normalized * partnerLink.startYieldProximity));
 				}
 			}
 			else
@@ -133,7 +133,7 @@ public class WaypointSeek : MonoBehaviour {
 				}
 				if (tracer != null)
 				{
-					tracer.AddVertex(transform.position);
+					tracer.AddVertex(transform.position);// - (mover.velocity.normalized * partnerLink.startYieldProximity));
 				}
 			}
 		}
@@ -149,7 +149,7 @@ public class WaypointSeek : MonoBehaviour {
 			mover.Accelerate(destination - transform.position);
 			if (tracer != null)
 			{
-				tracer.AddVertex(transform.position);
+				tracer.AddVertex(transform.position);// - (mover.velocity.normalized * partnerLink.startYieldProximity));
 			}
 		}
 		else
