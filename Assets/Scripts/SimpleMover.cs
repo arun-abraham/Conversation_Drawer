@@ -19,7 +19,13 @@ public class SimpleMover : MonoBehaviour {
 	void Update() {
 		externalSpeedMultiplier = Mathf.Max(externalSpeedMultiplier, 0);
 
+		if (velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2) * externalSpeedMultiplier)
+		{
+			velocity = velocity.normalized * maxSpeed * externalSpeedMultiplier;
+		}
+
 		transform.position += velocity * Time.deltaTime;
+
 		if (velocity.sqrMagnitude < Mathf.Pow(dampeningThreshold, 2)) {
 			velocity = Vector3.zero;
 			moving = false;
@@ -28,6 +34,11 @@ public class SimpleMover : MonoBehaviour {
 		{
 			moving = true;
 		}
+	}
+
+	public void Stop()
+	{
+		velocity = Vector3.zero;
 	}
 
 	public void Accelerate(Vector3 direction) {
@@ -56,7 +67,7 @@ public class SimpleMover : MonoBehaviour {
 		ApplyFreezes();
 	}
 
-	public void Move(Vector3 direction, float speed, bool clampSpeed)
+	public void Move(Vector3 direction, float speed, bool clampSpeed = true)
 	{
 		if (direction.sqrMagnitude != 1)
 		{

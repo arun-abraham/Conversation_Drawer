@@ -13,7 +13,8 @@ public class WaypointSeek : MonoBehaviour {
 	public SimpleMover mover;
 	public PartnerLink partnerLink;
 	public Tracer tracer;
-	private bool startedLine = false;
+	public Tail tail;
+	private Collider tailTrigger;
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
@@ -37,6 +38,10 @@ public class WaypointSeek : MonoBehaviour {
 		if (tracer == null)
 		{
 			tracer = GetComponent<Tracer>();
+		}
+		if (tail != null)
+		{
+			tailTrigger = tail.trigger;
 		}
 		
 		if (waypointContainer != null)
@@ -82,12 +87,6 @@ public class WaypointSeek : MonoBehaviour {
 		
 		if (partnerLink.Partner != null)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
-
 			if (partnerLink.Leading)
 			{
 				Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
@@ -106,11 +105,6 @@ public class WaypointSeek : MonoBehaviour {
 				}
 				
 				mover.Accelerate(destination - transform.position);
-				
-				if (tracer != null)
-				{
-					tracer.AddVertex(transform.position);// - (mover.velocity.normalized * partnerLink.startYieldProximity));
-				}
 			}
 			else
 			{
@@ -131,34 +125,33 @@ public class WaypointSeek : MonoBehaviour {
 					mover.Accelerate(toPartner);
 					desireToLead += outWakeLeadGrowth * Time.deltaTime;
 				}
-				if (tracer != null)
-				{
-					tracer.AddVertex(transform.position);// - (mover.velocity.normalized * partnerLink.startYieldProximity));
-				}
 			}
 		}
 		else if (moveWithoutPartner)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
 			Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
 			mover.Accelerate(destination - transform.position);
 			mover.Accelerate(destination - transform.position);
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);// - (mover.velocity.normalized * partnerLink.startYieldProximity));
-			}
+
 		}
 		else
 		{
 			mover.SlowDown();
-			if (tracer)
+			if (tailTrigger != null)
 			{
-				tracer.DestroyLine();
-				startedLine = false;
+				tail.trigger.enabled = true;
+			}
+		}
+
+		if (tracer != null)
+		{
+			if (tail != null)
+			{
+				tracer.AddVertex(tail.transform.position);
+			}
+			else
+			{
+				tracer.AddVertex(transform.position);
 			}
 		}
 	}
@@ -245,5 +238,25 @@ public class WaypointSeek : MonoBehaviour {
 	private void StartYielding()
 	{
 		yielding = true;
+	}
+
+	private void TailStartFollow()
+	{
+		if (tracer != null)
+		{
+			tracer.StartLine();
+		}
+		if (tailTrigger != null)
+		{
+			tail.trigger.enabled = false;
+		}
+	}
+	
+	private void TailEndFollow()
+	{
+		if (tracer)
+		{
+			tracer.DestroyLine();
+		}
 	}
 }

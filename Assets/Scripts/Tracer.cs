@@ -12,7 +12,8 @@ public class Tracer : MonoBehaviour {
 	public float trailNearWidth = 1;
 	public float trailFarWidth = 1;
 	
-	void Start() {
+	void Start() 
+	{
 		vertices = new List<Vector3>();
 	}
 
