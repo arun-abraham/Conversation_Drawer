@@ -24,6 +24,8 @@ public class WaypointSeek : MonoBehaviour {
 	public float outWakeLeadGrowth = 0.1f;
 	public float desireToLead;
 	private bool yielding = false;
+	public bool orbit = false;
+	public float orbitRadius = 5.0f;
 	
 	void Start()
 	{
@@ -118,6 +120,10 @@ public class WaypointSeek : MonoBehaviour {
 				if (partnerLink.Yielding)
 				{
 					mover.Accelerate(partnerLink.Partner.mover.velocity);
+				}
+				else if(orbit)
+				{
+					BeginOrbit();
 				}
 				else if (partnerLink.InWake)
 				{
@@ -230,6 +236,14 @@ public class WaypointSeek : MonoBehaviour {
 			
 		}
 		current = previous + 1;
+	}
+
+	void BeginOrbit()
+	{
+		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
+		mover.MoveTo(partnerLink.Partner.transform.position + destination);
+		mover.maxSpeed += Time.deltaTime;
 	}
 	
 	void OnTriggerEnter(Collider otherCol)
