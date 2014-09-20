@@ -103,13 +103,11 @@ public class PartnerLink : MonoBehaviour {
 			GameObject[] potentials = GameObject.FindGameObjectsWithTag("Converser");
 			for (int i = 0; i < potentials.Length; i++)
 			{
-				if (potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(converseDistance, 2))
+				PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
+				Conversation potentionalConversation = ConversationManger.Instance.FindConversation(this, potentialPartner);
+				if (potentionalConversation != null && potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(potentionalConversation.initiateDistance, 2))
 				{
-					PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
-					if (potentialPartner != null)
-					{
-						ConversationManger.Instance.StartConversation(this, potentialPartner);
-					}
+					ConversationManger.Instance.StartConversation(this, potentialPartner);
 				}
 			}
 		}
@@ -119,7 +117,7 @@ public class PartnerLink : MonoBehaviour {
 		{
 			// Show that partners are close to separating.
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
-			if (sqrDist > Mathf.Pow(converseDistance * breakingThreshold, 2))
+			if (sqrDist > Mathf.Pow(conversation.breakingDistance, 2))
 			{
 				ConversationManger.Instance.EndConversation(this, partner);
 				if (partnerLine != null)
@@ -127,7 +125,7 @@ public class PartnerLink : MonoBehaviour {
 					partnerLine.SetVertexCount(0);
 				}
 			}
-			else if (sqrDist > Mathf.Pow(converseDistance * warningThreshold, 2))
+			else if (sqrDist > Mathf.Pow(conversation.warningDistance, 2))
 			{
 				if (partnerLine != null)
 				{

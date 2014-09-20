@@ -136,10 +136,9 @@ public class ConversationScore : MonoBehaviour {
 				{
 					score = 0;
 				}
-				else if (score > scoreToLead)
+				else if (scoreToLead >= 0 && score > scoreToLead)
 				{
 					partnerLink.SetLeading(true);
-					//mover.MoveTo(partnerLink.Partner.transform.position + mover.velocity.normalized * partnerLink.yieldProximity * 2);
 					mover.maxSpeed = startSpeed;
 					SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 					partnerLink.Partner.SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
@@ -154,7 +153,7 @@ public class ConversationScore : MonoBehaviour {
 			// Boost speed if score exceeds requirement.
 			if (!partnerLink.Yielding)
 			{
-				if (/*score >= scoreReq && */accuracyFactor > 0)
+				if (accuracyFactor > 0)
 				{
 					mover.maxSpeed = startSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
 				}
