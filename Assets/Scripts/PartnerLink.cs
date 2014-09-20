@@ -103,10 +103,10 @@ public class PartnerLink : MonoBehaviour {
 			GameObject[] potentials = GameObject.FindGameObjectsWithTag("Converser");
 			for (int i = 0; i < potentials.Length; i++)
 			{
-				if (potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(converseDistance, 2))
+				PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
+				if (potentialPartner != null)
 				{
-					PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
-					if (potentialPartner != null)
+					if (potentialPartner.gameObject != gameObject && (transform.position - potentialPartner.transform.position).sqrMagnitude <= Mathf.Pow(Mathf.Max(converseDistance, potentialPartner.converseDistance), 2))
 					{
 						ConversationManger.Instance.StartConversation(this, potentialPartner);
 					}

@@ -58,10 +58,10 @@ public class ConversationManger : MonoBehaviour {
 			startedConversation.partner1.SetLeading(false);
 			startedConversation.partner2.SetLeading(true);
 		}
-		startedConversation.initiateDistance = Mathf.Min(partner1.converseDistance, partner2.converseDistance);
-		startedConversation.warningDistance = Mathf.Min(partner1.converseDistance * partner1.warningThreshold, partner2.converseDistance * partner2.warningThreshold);
-		startedConversation.breakingDistance = Mathf.Min(partner1.converseDistance * partner1.breakingThreshold, partner2.converseDistance * partner2.breakingThreshold);
 
+		startedConversation.initiateDistance = Mathf.Max(partner1.converseDistance, partner2.converseDistance);
+		startedConversation.warningDistance = Mathf.Max(partner1.converseDistance * partner1.warningThreshold, partner2.converseDistance * partner2.warningThreshold);
+		startedConversation.breakingDistance = Mathf.Max(partner1.converseDistance * partner1.breakingThreshold, partner2.converseDistance * partner2.breakingThreshold);
 		return true;
 	}
 
