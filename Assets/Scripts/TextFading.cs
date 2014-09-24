@@ -16,9 +16,30 @@ public class TextFading : MonoBehaviour {
 	private bool convoStart = false;
 
 	// Use this for initialization
-	void Start () {
-		
-		text.color = new Color(1f, 0f, 1f, 0);
+	void Awake () 
+	{
+		if (text == null)
+		{
+			text = GameObject.FindGameObjectWithTag("ConversationTitle").GetComponent<Text>();
+		}
+		if (player == null && text != null)
+		{
+			Transform maybePlayer = transform;
+			while (maybePlayer.tag != "Converser" && maybePlayer != transform.root)
+			{
+				maybePlayer = maybePlayer.parent;
+			}
+			if (maybePlayer.tag == "Converser")
+			{
+				player = maybePlayer.gameObject;
+			}
+		}
+
+		if (text != null)
+		{
+			text.color = new Color(1f, 0f, 1f, 0);
+			text.text = "";
+		}
 	}
 	
 	// Update is called once per frame
@@ -26,27 +47,33 @@ public class TextFading : MonoBehaviour {
 
 		if(player != null)
 		{
-			var distance = Vector3.Distance(player.transform.position, transform.position) - 5f;
-
-			if(!convoStart)
+			Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
+			if (conversation != null)
 			{
-				alpha = 1 - (distance/20);
+				var distance = Vector3.Distance(player.transform.position, transform.position);
 
-				if(distance <=20)
+				if (text != null)
 				{
-					text.color = new Color(1f, 0f, 1f, alpha);
-					
+					if (!convoStart)
+					{
+						alpha = Mathf.Clamp(1 - (distance / (conversation.breakingDistance)), 0, 1);
+						if (distance <= (conversation.breakingDistance))
+						{
+							text.color = new Color(1f, 0f, 1f, alpha);
+
+						}
+						if (distance < conversation.initiateDistance)
+						{
+							convoStart = true;
+						}
+					}
+
+					if (alpha > 0 && convoStart)
+					{
+						alpha = Mathf.Max(alpha - Time.deltaTime, 0);
+						text.color = new Color(1f, 0.92f, 0.016f, alpha);
+					}
 				}
-				if(distance < 2f)
-				{
-					convoStart = true;
-				}
-			}
-			
-			if(alpha > 0 && convoStart)
-			{
-				alpha -= .01f;
-				text.color = new Color(1f, 0.92f, 0.016f, alpha);
 			}
 		}
 		
@@ -58,8 +85,18 @@ public class TextFading : MonoBehaviour {
 		{
 			player = other.gameObject;
 
-			Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
-			text.text = conversation.title;
+			if (text != null)
+			{
+				Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
+				if (conversation != null)
+				{
+					text.text = conversation.title;
+				}
+				else
+				{
+					text.text = "";
+				}
+			}
 		}		
 	}
 	
@@ -70,7 +107,6 @@ public class TextFading : MonoBehaviour {
 			player = null;
 			convoStart = false;
 		}
-
 	}
 
 }

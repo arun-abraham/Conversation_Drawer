@@ -13,10 +13,19 @@ public class WaypointSeek : MonoBehaviour {
 	public SimpleMover mover;
 	public PartnerLink partnerLink;
 	public Tracer tracer;
-	private bool startedLine = false;
+	public Tail tail;
+	private Collider tailTrigger;
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
+	public float maxDesireToLead = 1;
+	public float minDesireToLead = 0;
+	public float inWakeLeadGrowth = 0.1f;
+	public float outWakeLeadGrowth = 0.1f;
+	public float desireToLead;
+	private bool yielding = false;
+	public bool orbit = false;
+	public float orbitRadius = 5.0f;
 	
 	void Start()
 	{
@@ -31,6 +40,10 @@ public class WaypointSeek : MonoBehaviour {
 		if (tracer == null)
 		{
 			tracer = GetComponent<Tracer>();
+		}
+		if (tail != null)
+		{
+			tailTrigger = tail.trigger;
 		}
 		
 		if (waypointContainer != null)
@@ -59,6 +72,7 @@ public class WaypointSeek : MonoBehaviour {
 		}
 		
 		SeekNextWaypoint();
+		collideWithWaypoint = false;
 		if (previous >= 0 && previous < waypoints.Count)
 		{
 			transform.position = waypoints[previous].transform.position;
@@ -76,15 +90,13 @@ public class WaypointSeek : MonoBehaviour {
 		
 		if (partnerLink.Partner != null)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
-
 			if (partnerLink.Leading)
 			{
-				Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				Vector3 destination = transform.position;
+				if (current < waypoints.Count)
+				{
+					destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				}
 				
 				Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
 				fromPartner.z = 0;
@@ -100,50 +112,79 @@ public class WaypointSeek : MonoBehaviour {
 				}
 				
 				mover.Accelerate(destination - transform.position);
-				
-				if (tracer != null)
+				if (tracer.lineRenderer == null && tail == null)
 				{
-					tracer.AddVertex(transform.position);
+					tracer.StartLine();
 				}
 			}
 			else
 			{
-				mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
-				if (tracer != null)
+				Mathf.Clamp(desireToLead, 0, 1);
+				Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
+				Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
+				if (partnerLink.Yielding)
 				{
-					tracer.AddVertex(transform.position);
+					mover.Accelerate(partnerLink.Partner.mover.velocity);
+				}
+				else if(orbit)
+				{
+					BeginOrbit();
+				}
+				else if (partnerLink.InWake)
+				{
+					mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
+					desireToLead += inWakeLeadGrowth * Time.deltaTime;
+				}
+				else
+				{
+					mover.Accelerate(toPartner);
+					desireToLead += outWakeLeadGrowth * Time.deltaTime;
+				}
+				if (tracer.lineRenderer == null && tail == null)
+				{
+					tracer.StartLine();
 				}
 			}
 		}
 		else if (moveWithoutPartner)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
 			Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
 			mover.Accelerate(destination - transform.position);
 			mover.Accelerate(destination - transform.position);
-			if (tracer != null)
+			if (tracer.lineRenderer == null && tail == null)
 			{
-				tracer.AddVertex(transform.position);
+				tracer.StartLine();
 			}
 		}
 		else
 		{
 			mover.SlowDown();
-			if (tracer)
+			if (tail == null)
 			{
 				tracer.DestroyLine();
-				startedLine = false;
+			}
+			if (tailTrigger != null)
+			{
+				tail.trigger.enabled = true;
+			}
+		}
+
+		if (tracer != null)
+		{
+			if (tail != null)
+			{
+				tracer.AddVertex(tail.transform.position);
+			}
+			else
+			{
+				tracer.AddVertex(transform.position);
 			}
 		}
 	}
 	
 	public Vector3 FindSeekingPoint(Vector3 velocity)
 	{
-		if (waypoints == null || waypoints.Count <= 0 && current >= waypoints.Count)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return transform.position;
 		}
@@ -163,12 +204,20 @@ public class WaypointSeek : MonoBehaviour {
 	
 	private void SeekNextWaypoint()
 	{
-		if (waypoints == null || waypoints.Count <= 0)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return;
 		}
-		
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(1, 1, 1, 1);
+		}
+
 		previous = current;
+		collideWithWaypoint = false;
+
+		
 		
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
@@ -200,6 +249,19 @@ public class WaypointSeek : MonoBehaviour {
 			
 		}
 		current = previous + 1;
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(0, 1, 0, 1);
+		}
+	}
+
+	void BeginOrbit()
+	{
+		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
+		mover.MoveTo(partnerLink.Partner.transform.position + destination);
+		mover.maxSpeed += Time.deltaTime;
 	}
 	
 	void OnTriggerEnter(Collider otherCol)
@@ -207,6 +269,41 @@ public class WaypointSeek : MonoBehaviour {
 		if (waypoints != null && current < waypoints.Count && otherCol.gameObject == waypoints[current].gameObject)
 		{
 			collideWithWaypoint = true;
+		}
+	}
+
+	private void StartLeading()
+	{
+		desireToLead = minDesireToLead;
+		Vector3 waypointOffset = transform.position - waypoints[previous].transform.position;
+		for (int i = 0; i < waypoints.Count; i++)
+		{
+			waypoints[i].transform.position += waypointOffset;
+		}
+	}
+
+	private void StartYielding()
+	{
+		yielding = true;
+	}
+
+	private void TailStartFollow()
+	{
+		if (tracer != null)
+		{
+			tracer.StartLine();
+		}
+		if (tailTrigger != null)
+		{
+			tail.trigger.enabled = false;
+		}
+	}
+	
+	private void TailEndFollow()
+	{
+		if (tracer)
+		{
+			tracer.DestroyLine();
 		}
 	}
 }

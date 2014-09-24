@@ -9,8 +9,11 @@ public class Tracer : MonoBehaviour {
 	public GameObject lineMakerPrefab = null;
 	private Vector3 lastVertex = Vector3.zero;
 	private Vector3 lastDirection = Vector3.zero;
+	public float trailNearWidth = 1;
+	public float trailFarWidth = 1;
 	
-	void Start() {
+	void Start() 
+	{
 		vertices = new List<Vector3>();
 	}
 
@@ -70,6 +73,7 @@ public class Tracer : MonoBehaviour {
 		newLineMaker.transform.parent = transform;
 		lineRenderer = newLineMaker.GetComponent<LineRenderer>();
 		lineRenderer.SetVertexCount(0);
+		lineRenderer.SetWidth(trailFarWidth, trailNearWidth);
 		vertices = new List<Vector3>();
 	}
 

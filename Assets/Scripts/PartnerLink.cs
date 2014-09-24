@@ -12,7 +12,7 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return conversation; }
 	}
-	private bool leading;
+	public bool leading;
 	public bool Leading
 	{
 		get { return leading; }
@@ -31,6 +31,53 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	private bool yielding;
+	public bool Yielding
+	{
+		get { return yielding; }
+		set 
+		{
+			if (value != yielding)
+			{
+				yielding = value; 
+				if (yielding == true)
+				{
+					SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
+				}
+				else
+				{
+					SendMessage("EndYielding", SendMessageOptions.DontRequireReceiver);
+				}
+			}
+			
+		}
+	}
+	public float startYieldProximity = 1;
+	public float endYieldProximity = 2;
+	public float yieldSpeedModifier = -0.5f;
+	public float timeToOvertake = 3;
+	public float timeToYield = 3;
+	public bool inWake = false;
+	public bool InWake
+	{
+		get { return inWake; }
+		set
+		{
+			if (value != inWake)
+			{
+				inWake = value;
+				if (inWake == true)
+				{
+					SendMessage("EnterWake", SendMessageOptions.DontRequireReceiver);
+				}
+				else
+				{
+					SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
+				}
+			}
+
+		}
+	}
 
 	void Awake()
 	{
@@ -58,13 +105,11 @@ public class PartnerLink : MonoBehaviour {
 			GameObject[] potentials = GameObject.FindGameObjectsWithTag("Converser");
 			for (int i = 0; i < potentials.Length; i++)
 			{
-				if (potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(converseDistance, 2))
+				PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
+				Conversation potentionalConversation = ConversationManger.Instance.FindConversation(this, potentialPartner);
+				if (potentionalConversation != null && potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(potentionalConversation.initiateDistance, 2))
 				{
-					PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
-					if (potentialPartner != null)
-					{
-						ConversationManger.Instance.StartConversation(this, potentialPartner);
-					}
+					ConversationManger.Instance.StartConversation(this, potentialPartner);
 				}
 			}
 		}
@@ -74,7 +119,7 @@ public class PartnerLink : MonoBehaviour {
 		{
 			// Show that partners are close to separating.
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
-			if (sqrDist > Mathf.Pow(converseDistance * breakingThreshold, 2))
+			if (sqrDist > Mathf.Pow(conversation.breakingDistance, 2))
 			{
 				ConversationManger.Instance.EndConversation(this, partner);
 				if (partnerLine != null)
@@ -82,7 +127,7 @@ public class PartnerLink : MonoBehaviour {
 					partnerLine.SetVertexCount(0);
 				}
 			}
-			else if (sqrDist > Mathf.Pow(converseDistance * warningThreshold, 2))
+			else if (sqrDist > Mathf.Pow(conversation.warningDistance, 2))
 			{
 				if (partnerLine != null)
 				{
@@ -150,5 +195,21 @@ public class PartnerLink : MonoBehaviour {
 		{
 			partner.SetLeading(!isLead, false);
 		}
+	}
+
+	public bool ShouldLead(PartnerLink leader)
+	{
+		Vector3 toLeader = leader.transform.position - transform.position;
+		bool far = toLeader.sqrMagnitude >= Mathf.Pow(leader.startYieldProximity, 2);
+		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
+		return !far || !behind;
+	}
+
+	public bool ShouldYield(PartnerLink leader)
+	{
+		Vector3 toLeader = leader.transform.position - transform.position;
+		bool far = toLeader.sqrMagnitude >= Mathf.Pow(leader.startYieldProximity + endYieldProximity, 2);
+		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
+		return !far || !behind;
 	}
 }

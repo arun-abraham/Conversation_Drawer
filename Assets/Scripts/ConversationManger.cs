@@ -24,6 +24,11 @@ public class ConversationManger : MonoBehaviour {
 		{
 			conversations = new List<Conversation>();
 		}
+
+		for (int i = 0; i < conversations.Count; i++)
+		{
+			DefineConversation(conversations[i]);
+		}
 	}
 
 	void Update()
@@ -32,6 +37,17 @@ public class ConversationManger : MonoBehaviour {
 		{
 			Application.Quit();
 		}
+	}
+
+	public void DefineConversation(Conversation conversation)
+	{
+		if (conversation.partner1 != null && conversation.partner2 != null)
+		{
+			conversation.initiateDistance = Mathf.Max(conversation.partner1.converseDistance, conversation.partner2.converseDistance);
+			conversation.warningDistance = Mathf.Max(conversation.partner1.converseDistance * conversation.partner1.warningThreshold, conversation.partner2.converseDistance * conversation.partner2.warningThreshold);
+			conversation.breakingDistance = Mathf.Max(conversation.partner1.converseDistance * conversation.partner1.breakingThreshold, conversation.partner2.converseDistance * conversation.partner2.breakingThreshold);
+		}
+		
 	}
 
 	public bool StartConversation(PartnerLink partner1, PartnerLink partner2)
@@ -58,10 +74,7 @@ public class ConversationManger : MonoBehaviour {
 			startedConversation.partner1.SetLeading(false);
 			startedConversation.partner2.SetLeading(true);
 		}
-		startedConversation.initiateDistance = Mathf.Min(partner1.converseDistance, partner2.converseDistance);
-		startedConversation.warningDistance = Mathf.Min(partner1.converseDistance * partner1.warningThreshold, partner2.converseDistance * partner2.warningThreshold);
-		startedConversation.breakingDistance = Mathf.Min(partner1.converseDistance * partner1.breakingThreshold, partner2.converseDistance * partner2.breakingThreshold);
-
+		
 		return true;
 	}
 
