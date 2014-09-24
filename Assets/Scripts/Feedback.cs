@@ -22,10 +22,6 @@ public class Feedback : MonoBehaviour {
 	private Tracer tracer;
 	public bool showParticleTrail;
 
-	public Color CrazyColorOne;
-	public Color CrazyColorTwo;
-	public Color CrazyColorThree;
-
 	// Use this for initialization
 	void Start () {
 		if (cameraShake == null)
@@ -136,24 +132,5 @@ public class Feedback : MonoBehaviour {
 		{
 			pSys.particleSystem.enableEmission = false;
 		}
-	}
-
-	private void CrazyColorMode(){
-		colExp.particleSystem.startSpeed = 16.0f;
-		colExp.particleSystem.emissionRate = 350.0f;
-		colExp.particleSystem.startSize = 4.2f;
-
-
-		colExp = (GameObject)Instantiate(colorExplosionPrefab);
-		colExp.particleSystem.startColor = CrazyColorOne;
-		colExp.transform.position = player.transform.position;
-
-		colExp = (GameObject)Instantiate(colorExplosionPrefab);
-		colExp.particleSystem.startColor = CrazyColorTwo;
-		colExp.transform.position = player.transform.position;
-
-		colExp = (GameObject)Instantiate(colorExplosionPrefab);
-		colExp.particleSystem.startColor = CrazyColorThree;
-		colExp.transform.position = player.transform.position;
 	}
 }
