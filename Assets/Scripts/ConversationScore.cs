@@ -8,8 +8,6 @@ public class ConversationScore : MonoBehaviour {
 	public Tracer partnerTracer;
 	public int oldNearestIndex = 0;
 	public float score = 0;
-	public float scoreToLead;
-	public float proximityToLead;
 	public float scorePortionExponent = 1;
 	public float scoreDeboostOffset = 0.1f;
 	public float rewardSpeedBoost;
@@ -99,7 +97,6 @@ public class ConversationScore : MonoBehaviour {
 			// Determine how the required score to get a reward speed boost.
 			Vector3 toPartner = (partnerTracer.transform.position - transform.position);
 			float scorePortion = 1 - toPartner.magnitude / (partnerLink.Conversation.initiateDistance);
-			float scoreReq = scoreToLead * Mathf.Max(Mathf.Pow(scorePortion, scorePortionExponent), 0);
 
 			// Update score based on accuracy.
 			float indexPortion = (float)nearestIndex / partnerTracer.GetVertexCount();
@@ -130,6 +127,7 @@ public class ConversationScore : MonoBehaviour {
 			}			
 
 			// Start leading if following closely enough.
+			float scoreToLead = Mathf.Min(partnerLink.timeToOvertake,partnerLink.Partner.timeToYield);
 			if (canTakeLead && partnerLink.InWake)
 			{
 				if (!partnerLink.ShouldLead(partnerLink.Partner))
@@ -166,7 +164,7 @@ public class ConversationScore : MonoBehaviour {
 			// Update boost level. 
 			if (boostLevels > 0)
 			{
-				/*float scorePortionPerBoost = 1.0f / Mathf.Pow(boostLevels + 1, scorePortionExponent);
+				float scorePortionPerBoost = 1.0f / Mathf.Pow(boostLevels + 1, scorePortionExponent);
 				if (scorePortion > scorePortionPerBoost * Mathf.Pow((currentBoostLevel + 1), scorePortionExponent))
 				{
 					if (currentBoostLevel < boostLevels && accuracyFactor > 0)
@@ -184,7 +182,7 @@ public class ConversationScore : MonoBehaviour {
 						changingBoostLevel = true;
 						SendMessage("SpeedDrain", SendMessageOptions.DontRequireReceiver);
 					}
-				}*/
+				}
 			}
 		}
 	}

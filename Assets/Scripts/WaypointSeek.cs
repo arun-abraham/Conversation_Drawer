@@ -86,7 +86,6 @@ public class WaypointSeek : MonoBehaviour {
 	
 	void Update()
 	{
-		Debug.Log(collideWithWaypoint);
 		partnerWeight = Mathf.Clamp(partnerWeight, 0, 1);
 		
 		if (partnerLink.Partner != null)
@@ -209,9 +208,16 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			return;
 		}
-		
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(1, 1, 1, 1);
+		}
+
 		previous = current;
 		collideWithWaypoint = false;
+
+		
 		
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
@@ -243,6 +249,11 @@ public class WaypointSeek : MonoBehaviour {
 			
 		}
 		current = previous + 1;
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(0, 1, 0, 1);
+		}
 	}
 
 	void BeginOrbit()

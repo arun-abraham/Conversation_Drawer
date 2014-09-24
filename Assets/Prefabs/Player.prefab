@@ -532,8 +532,6 @@ MonoBehaviour:
   partnerTracer: {fileID: 0}
   oldNearestIndex: 0
   score: 0
-  scoreToLead: 3
-  proximityToLead: .949999988
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
   rewardSpeedBoost: 2
@@ -622,6 +620,8 @@ MonoBehaviour:
   startYieldProximity: 3
   endYieldProximity: 2
   yieldSpeedModifier: -.100000001
+  timeToOvertake: 3
+  timeToYield: 3
   inWake: 0
 --- !u!114 &11400012
 MonoBehaviour:
