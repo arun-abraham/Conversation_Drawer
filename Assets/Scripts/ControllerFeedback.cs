@@ -13,9 +13,8 @@ public class ControllerFeedback : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		isVibrating = true;
-		intensity = 0.5f;
-		duration = 3.0f;
-
+		intensity = 0.0f;
+		duration = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -31,7 +30,7 @@ public class ControllerFeedback : MonoBehaviour {
 			EndVibration();
 		}
 
-		GamePad.SetVibration(0, intensity, intensity);
+		//GamePad.SetVibration(0, intensity, intensity);
 
 	}
 

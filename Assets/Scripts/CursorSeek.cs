@@ -2,14 +2,17 @@
 using System.Collections;
 
 public class CursorSeek : MonoBehaviour {
-
+	public bool useController = false;
 	public Camera gameCamera = null;
 	public SimpleMover mover;
 	public Tracer tracer;
 	//public bool requireMouseDown;
 	public bool directVelocity;
-	private bool startedLine;
+	private bool seeking;
 	public GameObject cursor;
+	public Tail tail;
+	private Collider tailTrigger;
+	public bool toggleSeek;
 
 	// Use this for initialization
 	void Start () {
@@ -25,51 +28,141 @@ public class CursorSeek : MonoBehaviour {
 		{
 			tracer = GetComponent<Tracer>();
 		}
-		tracer.StartLine();
+
+		if (tail != null)
+		{
+			tailTrigger = tail.trigger;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		FollowCursor();
+		if (useController)
+		{ 
+			FollowCursor(); 
+		}
+		else
+		{
+			HandleTouches();
+		}
+
+		if (tracer != null)
+		{
+			if (tail != null)
+			{
+				tracer.AddVertex(tail.transform.position);
+			}
+			else
+			{
+				tracer.AddVertex(transform.position);
+			}
+		}
 	}
+
+	private void HandleTouches()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			seeking = !(toggleSeek && seeking);
+			if (tail == null)
+			{
+				tracer.StartLine();
+			}
+		}
+		else if ((!toggleSeek && Input.GetMouseButton(0)) || (toggleSeek && seeking))
+		{
+			Drag();
+		}
+		else
+		{
+			seeking = false;
+			mover.SlowDown();
+			if (tail == null)
+			{
+				tracer.DestroyLine();
+			}
+			if (tailTrigger != null)
+			{
+				tail.trigger.enabled = true;
+			}
+		}
+	}
+
 
 	private void FollowCursor()
 	{
-		//if (cursor.active)
-	
 		if (cursor.GetComponent<ControllerSeek>().active)
 		{
-			if (tracer)
+			if (!seeking)
 			{
-				startedLine = true;
+				seeking = true;
+				if (tail == null)
+				{
+					tracer.StartLine();
+				}
+			}
+			else
+			{
 				Drag();
 			}
 		}
 		else
 		{
 			mover.SlowDown();
+			seeking = false;
+			if (tail == null)
+			{
+				tracer.DestroyLine();
+			}
+			if (tailTrigger != null)
+			{
+				tail.trigger.enabled = true;
+			}
 		}
 	}
 
 	private void Drag(bool criticalLine = true)
 	{
-		//Vector3 mousePosition = MousePointInWorld();
-		//Vector3 toMouse = mousePosition - transform.position;
-
-		//if (tracer == null || cursor.GetComponent<ControllerSeek>.forward  Mathf.Pow(tracer.minDragToDraw, 2))
+		Vector3 dragForward = MousePointInWorld() - transform.position;
+		if (useController)
 		{
-			if (directVelocity)
-			{
-				mover.Move(cursor.GetComponent<ControllerSeek>().forward.normalized, mover.maxSpeed, true);
-			}
-			else
-			{
-				mover.Accelerate(cursor.GetComponent<ControllerSeek>().forward);
-			}
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);
-			}
+			dragForward = cursor.GetComponent<ControllerSeek>().forward;
+		}
+
+		if (directVelocity)
+		{
+			mover.Move(dragForward, mover.maxSpeed, true);
+		}
+		else
+		{
+			mover.Accelerate(dragForward);
+		}
+	}
+
+	private Vector3 MousePointInWorld()
+	{
+		Vector3 touchPosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
+		touchPosition.z = transform.position.z;
+		return touchPosition;
+	}
+
+	private void TailStartFollow()
+	{
+		if (tracer != null)
+		{
+			tracer.StartLine();
+		}
+		if (tailTrigger != null)
+		{
+			tail.trigger.enabled = false;
+		}
+	}
+
+	private void TailEndFollow()
+	{
+		if (tracer)
+		{
+			tracer.DestroyLine();
 		}
 	}
 }
