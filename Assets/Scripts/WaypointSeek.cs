@@ -72,6 +72,7 @@ public class WaypointSeek : MonoBehaviour {
 		}
 		
 		SeekNextWaypoint();
+		collideWithWaypoint = false;
 		if (previous >= 0 && previous < waypoints.Count)
 		{
 			transform.position = waypoints[previous].transform.position;
@@ -85,13 +86,18 @@ public class WaypointSeek : MonoBehaviour {
 	
 	void Update()
 	{
+		Debug.Log(collideWithWaypoint);
 		partnerWeight = Mathf.Clamp(partnerWeight, 0, 1);
 		
 		if (partnerLink.Partner != null)
 		{
 			if (partnerLink.Leading)
 			{
-				Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				Vector3 destination = transform.position;
+				if (current < waypoints.Count)
+				{
+					destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				}
 				
 				Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
 				fromPartner.z = 0;
@@ -179,7 +185,7 @@ public class WaypointSeek : MonoBehaviour {
 	
 	public Vector3 FindSeekingPoint(Vector3 velocity)
 	{
-		if (waypoints == null || waypoints.Count <= 0 && current >= waypoints.Count)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return transform.position;
 		}
@@ -199,12 +205,13 @@ public class WaypointSeek : MonoBehaviour {
 	
 	private void SeekNextWaypoint()
 	{
-		if (waypoints == null || waypoints.Count <= 0)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return;
 		}
 		
 		previous = current;
+		collideWithWaypoint = false;
 		
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
@@ -257,7 +264,7 @@ public class WaypointSeek : MonoBehaviour {
 	private void StartLeading()
 	{
 		desireToLead = minDesireToLead;
-		Vector3 waypointOffset = transform.position - waypoints[current].transform.position;
+		Vector3 waypointOffset = transform.position - waypoints[previous].transform.position;
 		for (int i = 0; i < waypoints.Count; i++)
 		{
 			waypoints[i].transform.position += waypointOffset;
