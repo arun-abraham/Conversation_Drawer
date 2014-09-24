@@ -114,31 +114,7 @@ public class WaypointSeek : MonoBehaviour {
 			}
 			else
 			{
-				Mathf.Clamp(desireToLead, 0, 1);
-				Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
-				Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
-				if (partnerLink.Yielding)
-				{
-					mover.Accelerate(partnerLink.Partner.mover.velocity);
-				}
-				else if(orbit)
-				{
-					BeginOrbit();
-				}
-				else if (partnerLink.InWake)
-				{
-					mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
-					desireToLead += inWakeLeadGrowth * Time.deltaTime;
-				}
-				else
-				{
-					mover.Accelerate(toPartner);
-					desireToLead += outWakeLeadGrowth * Time.deltaTime;
-				}
-				if (tracer.lineRenderer == null && tail == null)
-				{
-					tracer.StartLine();
-				}
+				SeekPartner();
 			}
 		}
 		else if (moveWithoutPartner)
@@ -238,12 +214,40 @@ public class WaypointSeek : MonoBehaviour {
 		current = previous + 1;
 	}
 
+	public void SeekPartner()
+	{
+		Mathf.Clamp(desireToLead, 0, 1);
+		Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
+		Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
+		if (partnerLink.Yielding)
+		{
+			mover.Accelerate(partnerLink.Partner.mover.velocity);
+		}
+		else if(orbit)
+		{
+			BeginOrbit();
+		}
+		else if (partnerLink.InWake)
+		{
+			mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
+			desireToLead += inWakeLeadGrowth * Time.deltaTime;
+		}
+		else
+		{
+			mover.Accelerate(toPartner);
+			desireToLead += outWakeLeadGrowth * Time.deltaTime;
+		}
+		if (tracer.lineRenderer == null && tail == null)
+		{
+			tracer.StartLine();
+		}
+	}
+
 	void BeginOrbit()
 	{
 		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
-		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
-		mover.MoveTo(partnerLink.Partner.transform.position + destination);
-		mover.maxSpeed += Time.deltaTime;
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, transform.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
+		mover.Move((partnerLink.Partner.transform.position + destination) - transform.position, mover.maxSpeed);
 	}
 	
 	void OnTriggerEnter(Collider otherCol)
