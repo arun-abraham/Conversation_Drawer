@@ -41,7 +41,7 @@ public class ConversationScore : MonoBehaviour {
 	
 	void Update()
 	{
-		if (!mover.Moving || partnerLink.Partner == null)
+		if (!mover.Moving || partnerLink.Partner == null || partnerLink.Conversation == null)
 		{
 			SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 			partnerLink.InWake = false;
