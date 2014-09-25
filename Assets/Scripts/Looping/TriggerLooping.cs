@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TriggerLooping : MonoBehaviour {
 
 	public List<GameObject> listOfObjectsToLoop = new List<GameObject>();
-
+	public GameObject player;
 
 	public enum ColliderLocation{Top,Bottom,Left,Right};
 	public ColliderLocation colliderLocation;
@@ -27,14 +27,16 @@ public class TriggerLooping : MonoBehaviour {
 		switch(colliderLocation)
 		{
 		case ColliderLocation.Top:
-			loopMoveDistance.y = 400f;
+			loopMoveDistance.y = 398f;
 			break;
 		case ColliderLocation.Bottom:
-			loopMoveDistance.y = -400f;
+			loopMoveDistance.y = -398f;
 			break;
 		case ColliderLocation.Left:
+			loopMoveDistance.x = -398f;
 			break;
 		case ColliderLocation.Right:
+			loopMoveDistance.x = 398f;
 			break;
 		}
 
@@ -61,9 +63,10 @@ public class TriggerLooping : MonoBehaviour {
 
 	//TODO: CLEAN THIS UP AND MAKE IT WORK FOR RIGHT AND LEFT
 
-	void OnTriggerExit(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag == "Converser")
+		//Debug.Log("Trigger");
+		if(other.gameObject == player)
 		{
 			//Get all gameobjects in the scene and then filter to get only loopable objects//
 			GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
@@ -99,18 +102,43 @@ public class TriggerLooping : MonoBehaviour {
 				}
 				else
 				{
-					if(lo.GetComponent<LoopTag>().moveRoot)
-						lo.transform.root.position += loopMoveDistance;
-					else
-						lo.transform.position += loopMoveDistance;
+				
+						if(lo.GetComponent<LoopTag>().moveRoot)
+							lo.transform.root.position += loopMoveDistance;
+						else
+							lo.transform.position += loopMoveDistance;
 
-					MoveOffScreen(lo);							
+					if(OutSideBounds(lo))
+						lo.transform.position -= loopMoveDistance;
+
+							MoveOffScreen(lo);
+
+
+
+												
 
 				}
 			}
 
 			listOfObjectsToLoop.Clear();
 		}
+	}
+
+	private bool OutSideBounds(GameObject lo)
+	{
+		switch (colliderLocation)
+		{
+		case ColliderLocation.Top:
+			return lo.transform.position.y > transform.position.y;
+		case ColliderLocation.Bottom:
+			return lo.transform.position.y < transform.position.y;
+		case ColliderLocation.Left:
+			return lo.transform.position.x < transform.position.x;
+		case ColliderLocation.Right:
+			return lo.transform.position.x > transform.position.x;
+		}
+
+		return false;
 	}
 
 	private bool OnScreen(GameObject lo)
@@ -120,7 +148,6 @@ public class TriggerLooping : MonoBehaviour {
 		bool onScreen = false;
 		if(newPos.x > -0.01f && newPos.x < 1.01f && newPos.y > -0.01f && newPos.y < 1.01f)
 			onScreen = true;
-
 		return onScreen;
 
 	}
@@ -130,7 +157,7 @@ public class TriggerLooping : MonoBehaviour {
 
 		if (OnScreen(lo))
 		{
-			var camHeight = Camera.main.orthographicSize * 2f;
+			var camHeight = Camera.main.orthographicSize;
 			var camWidth = camHeight * Camera.main.aspect;
 			//Switch to see which direction to move by viewport size
 			switch (colliderLocation)
