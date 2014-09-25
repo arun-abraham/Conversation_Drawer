@@ -1989,6 +1989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfObjectsToLoop: []
+  listOfCollidersToMove: []
   player: {fileID: 1819569566}
   colliderLocation: 2
 --- !u!65 &597016835
@@ -2652,6 +2653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfObjectsToLoop: []
+  listOfCollidersToMove: []
   player: {fileID: 1819569566}
   colliderLocation: 0
 --- !u!65 &1245303653
@@ -2879,6 +2881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfObjectsToLoop: []
+  listOfCollidersToMove: []
   player: {fileID: 1819569566}
   colliderLocation: 1
 --- !u!65 &1379205407
@@ -3410,7 +3413,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1687348086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -180, y: 0, z: .100000001}
+  m_LocalPosition: {x: -160, y: 0, z: .100000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 374753965}
@@ -3820,6 +3823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfObjectsToLoop: []
+  listOfCollidersToMove: []
   player: {fileID: 1819569566}
   colliderLocation: 3
 --- !u!65 &1894923226

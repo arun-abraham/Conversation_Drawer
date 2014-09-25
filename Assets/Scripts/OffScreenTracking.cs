@@ -52,6 +52,9 @@ public class OffScreenTracking : MonoBehaviour {
 			if(go.transform != transform)
 				conversersList.Add(go);
 		}
+
+		var test = Camera.main.orthographicSize * Camera.main.aspect;
+		Debug.Log(test);
 	
 	}
 	
@@ -228,15 +231,28 @@ public class OffScreenTracking : MonoBehaviour {
 	{
 		//Top Boundary
 		converserDistanceToTop = Mathf.Abs(topBoundary.transform.position.y - converser.transform.position.y);// + Camera.main.orthographicSize;
+
+		if(converserDistanceToTop < (Camera.main.orthographicSize))
+			converserDistanceToTop += (Camera.main.orthographicSize);
 		
 		//Bottom Boundary
 		converserDistanceToBottom = Mathf.Abs(bottomBoundary.transform.position.y - converser.transform.position.y);//+ Camera.main.orthographicSize;
+
+
+		if(converserDistanceToBottom < (Camera.main.orthographicSize))
+			converserDistanceToBottom += (Camera.main.orthographicSize);
 		
 		//Left Boundary
 		converserDistanceToLeft = Mathf.Abs(leftBoundary.transform.position.x - converser.transform.position.x);// + (Camera.main.orthographicSize * Camera.main.aspect);
+
+		if(converserDistanceToLeft < (Camera.main.orthographicSize * Camera.main.aspect))
+			converserDistanceToLeft += (Camera.main.orthographicSize * Camera.main.aspect);
 		
 		//Right Boundary
 		converserDistanceToRight = Mathf.Abs(rightBoundary.transform.position.x - converser.transform.position.x);// + (Camera.main.orthographicSize * Camera.main.aspect);
+
+		if(converserDistanceToRight < (Camera.main.orthographicSize * Camera.main.aspect))
+			converserDistanceToRight += (Camera.main.orthographicSize * Camera.main.aspect);
 
 	}
 

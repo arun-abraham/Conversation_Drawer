@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class TriggerLooping : MonoBehaviour {
 
 	public List<GameObject> listOfObjectsToLoop = new List<GameObject>();
+	public List<GameObject> listOfCollidersToMove = new List<GameObject>();
 	public GameObject player;
 
 	public enum ColliderLocation{Top,Bottom,Left,Right};
@@ -74,19 +75,21 @@ public class TriggerLooping : MonoBehaviour {
 			{
 				if(go.GetComponent<LoopTag>() != null)
 				{
-					listOfObjectsToLoop.Add(go);
+					if(go.GetComponent<LoopTag>().boundaryCollider)
+						listOfCollidersToMove.Add(go);
+					else
+						listOfObjectsToLoop.Add(go);
 				}
+			}
+
+			foreach(GameObject lo in listOfCollidersToMove)
+			{
+				lo.transform.position += loopMoveDistance;			
 			}
 
 			//////////////////Handle moving the loopable objects//////////////////////////////
 			foreach(GameObject lo in listOfObjectsToLoop)
 			{
-				//If we are moving the world boundaries, skip everything else
-				if(lo.GetComponent<LoopTag>().boundaryCollider)
-				{
-					lo.transform.position += loopMoveDistance;			
-					continue;
-				}
 					
 				//Check if the object is on screen
 				if (OnScreen(lo))
@@ -112,15 +115,13 @@ public class TriggerLooping : MonoBehaviour {
 						lo.transform.position -= loopMoveDistance;
 
 							MoveOffScreen(lo);
-
-
-
 												
 
 				}
 			}
 
 			listOfObjectsToLoop.Clear();
+			listOfCollidersToMove.Clear();
 		}
 	}
 
