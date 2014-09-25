@@ -4,6 +4,7 @@ using System.Collections;
 public class CursorSeek : SimpleSeek {
 	public bool useController = false;
 	public Camera gameCamera = null;
+	public GameObject geometry;
 	public bool directVelocity;
 	private bool seeking;
 	public GameObject cursor;
@@ -111,6 +112,9 @@ public class CursorSeek : SimpleSeek {
 			dragForward = cursor.GetComponent<ControllerSeek>().forward;
 		}
 
+		/*float tempZ = dragForward.z;
+		dragForward.z = dragForward.y;
+		dragForward.y = tempZ;*/
 		if (directVelocity)
 		{
 			mover.Move(dragForward, mover.maxSpeed, true);
@@ -119,6 +123,7 @@ public class CursorSeek : SimpleSeek {
 		{
 			mover.Accelerate(dragForward);
 		}
+		geometry.transform.LookAt(transform.position + mover.velocity, geometry.transform.up);
 	}
 
 	private Vector3 MousePointInWorld()

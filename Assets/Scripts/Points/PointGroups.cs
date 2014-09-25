@@ -3,9 +3,12 @@ using System.Collections;
 
 public class PointGroups : MonoBehaviour {
 
-	public bool imCreated = false;
+	public bool fading = false;
+	public bool bright = false;
 
-	public GameObject myParent;
+	private float myAlpha;
+	private float fadeConst = 0.2f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -17,11 +20,33 @@ public class PointGroups : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(myParent.GetComponent<CastPoints>().isCreated)
+		if(fading == true)
 		{
-			transform.position = new Vector3(0,0,0);
-
+		BroadcastMessage("IsFading",SendMessageOptions.DontRequireReceiver);
 		}
-	
+
+		if(bright == true)
+		{
+		BroadcastMessage("IsBright",SendMessageOptions.DontRequireReceiver);
+		}
+
+		/*
+		for(int i = transform.childCount-1;i>0;i--)
+		{
+			if (transform.GetChild(i).renderer != null)
+			transform.GetChild(i).renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
+		}*/
+	}
+
+	public void IsFading()
+	{
+		fading = true;
+		bright = false;
+	}
+
+	public void IsBright()
+	{
+		fading = false;
+		bright = true;
 	}
 }

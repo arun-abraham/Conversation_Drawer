@@ -107,6 +107,15 @@ public class Tracer : MonoBehaviour {
 		return nearestIndex;
 	}
 
+	public void MoveVertices(Vector3 alteration)
+	{
+		for (int i = 0; i < vertices.Count; i++)
+		{
+			vertices[i] += alteration;
+			lineRenderer.SetPosition(i, vertices[i]);
+		}
+	}
+
 	public Vector3 GetVertex(int index, bool negateZOffset = true)
 	{
 		Vector3 vertex = vertices[index];
