@@ -425,6 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partnerLink: {fileID: 11400014}
   mover: {fileID: 0}
+  trigger: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -493,6 +494,8 @@ MonoBehaviour:
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
+  orbit: 0
+  orbitRadius: 5
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,6 +543,8 @@ MonoBehaviour:
   endYieldProximity: 2
   yieldSpeedModifier: -.100000001
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1

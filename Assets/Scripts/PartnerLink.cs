@@ -79,6 +79,9 @@ public class PartnerLink : MonoBehaviour {
 		}
 	}
 
+	public bool linkBroken;
+	public float timerTime = 5;
+
 	void Awake()
 	{
 		if (mover == null)
@@ -154,6 +157,28 @@ public class PartnerLink : MonoBehaviour {
 				}
 			}
 		}
+
+		if(linkBroken == true)
+		{
+			if (timerTime > 0)
+			timerTime -= Time.deltaTime;
+			SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
+			//print (timerTime);
+		}
+		
+		if(timerTime <= 0)
+		{
+			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+			conversation = null;
+			linkBroken = false;
+			//print("destroyed points");
+		}
+
+
+	}
+
+	void FixedUpdate()
+	{
 	}
 
 	public void SetPartner(PartnerLink partner)
@@ -162,14 +187,29 @@ public class PartnerLink : MonoBehaviour {
 
 		if (partner != null)
 		{
+			linkBroken = false;
+			timerTime = 5;
+			//print (timerTime);
 			conversation = ConversationManger.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
+			SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
 		}
+		else if (partner == null)
+		{
+			linkBroken = true;
+			//print ("LinkBroken");
+			//SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
+		}
+		
+		/*
 		else
 		{
 			conversation = null;
-			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
-		}
+			//SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+		} */
+
+
+
 	}
 
 	public void SetLeading(bool isLead, bool updatePartner = true)
@@ -212,4 +252,5 @@ public class PartnerLink : MonoBehaviour {
 		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
 		return !far || !behind;
 	}
+
 }
