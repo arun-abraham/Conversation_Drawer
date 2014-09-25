@@ -1727,6 +1727,8 @@ MonoBehaviour:
   endYieldProximity: 2
   yieldSpeedModifier: -.100000001
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
 --- !u!120 &120367383
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2363,7 +2365,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
       propertyPath: conversations.Array.data[1].title
@@ -2960,6 +2962,69 @@ MeshFilter:
   m_PrefabInternal: {fileID: 463407086}
   m_GameObject: {fileID: 1349180277}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1357089981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1357089983}
+  - 108: {fileID: 1357089982}
+  m_Layer: 0
+  m_Name: Directional light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1357089982
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357089981}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: .5
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
+--- !u!4 &1357089983
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357089981}
+  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
+  m_LocalPosition: {x: 1.69499969, y: 21.2180023, z: 69.5303345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &1503511571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,7 +3090,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 33.6791039
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3044,7 +3109,7 @@ Transform:
   m_PrefabInternal: {fileID: 463407086}
   m_GameObject: {fileID: 1503511571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1148883475}
@@ -3294,7 +3359,7 @@ MonoBehaviour:
   maxSpeed: 15
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 50
+  handling: 30
   dampening: .899999976
   dampeningThreshold: 0
   externalSpeedMultiplier: 1
@@ -3328,6 +3393,8 @@ MonoBehaviour:
   endYieldProximity: 3
   yieldSpeedModifier: -.100000001
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
 --- !u!54 &1609370465
 Rigidbody:
   m_ObjectHideFlags: 0

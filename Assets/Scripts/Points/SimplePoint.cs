@@ -18,17 +18,37 @@ public class SimplePoint : MonoBehaviour {
 
 	public float rotSpeed;
 	private Vector3 rotVect;
+
+	private float myAlpha;
+	private float fadeConst = 0.2f;
+	public bool fading = false;
+	public bool bright = false;
 	
 	// Use this for initialization
 	void Start () {
 
 		rotSpeed = 4.0f;
-		rotVect = new Vector3(0,0,1);
+		rotVect = new Vector3(0,0,1);	
+		myAlpha = 1;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
+
+		if(fading == true)
+		{
+			if(myAlpha >= 0)
+				myAlpha -= Time.deltaTime * fadeConst;
+		}
+		
+		if(bright == true)
+		{
+			if(myAlpha <=1)
+				myAlpha += Time.deltaTime * fadeConst;
+		}
 
 		transform.Rotate(rotVect * rotSpeed * Time.deltaTime);
 
@@ -45,6 +65,20 @@ public class SimplePoint : MonoBehaviour {
 
 		}
 	
+	}
+
+	public void IsFading()
+	{
+		fading = true;
+		bright = false;
+		//print ("Is fading");
+	}
+	
+	public void IsBright()
+	{
+		fading = false;
+		bright = true;
+		//print ("Is Bright");
 	}
 
 }

@@ -111,16 +111,35 @@ public class CastPoints : MonoBehaviour {
 
 	void EndLeading()
 	{
-		DestroyPoints();
+		/*
+		createdPoints.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
+		Invoke("DestroyPoints",5.0f);
+		*/
 	}
-
+	
+	void PointsFade()
+	{
+		if(createdPoints != null)
+		{
+		createdPoints.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
+		}
+	}
+	
+	void PointsBright()
+	{
+		if(createdPoints != null)
+		{
+		createdPoints.SendMessage("IsBright",SendMessageOptions.DontRequireReceiver);
+		}
+	}
+	
 	void  UnlinkPartner()
 	{
 		DestroyPoints();
 	}
-
+	
 	private void DestroyPoints()
-	{ 
+	{  
 		if (createdPoints != null)
 		{
 			Destroy(createdPoints);
@@ -129,3 +148,4 @@ public class CastPoints : MonoBehaviour {
 		isCreated = false;
 	}
 }
+
