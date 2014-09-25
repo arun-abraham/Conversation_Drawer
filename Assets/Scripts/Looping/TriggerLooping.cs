@@ -66,6 +66,7 @@ public class TriggerLooping : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
+
 		//Debug.Log("Trigger");
 		if(other.gameObject == player)
 		{
@@ -122,6 +123,22 @@ public class TriggerLooping : MonoBehaviour {
 
 			listOfObjectsToLoop.Clear();
 			listOfCollidersToMove.Clear();
+		}
+
+		//Debug.Log(other.transform.name);
+		if(other.tag == "Converser" && other.transform != player.transform)
+		{
+			//Debug.Log("HERE");
+			if (!OnScreen(other.gameObject))
+			{
+				
+				if(other.gameObject.GetComponent<LoopTag>().moveRoot)
+					other.gameObject.transform.root.position -= loopMoveDistance;
+				else
+					other.gameObject.transform.position -= loopMoveDistance;
+
+				MoveOffScreen(other.gameObject);
+			}
 		}
 	}
 

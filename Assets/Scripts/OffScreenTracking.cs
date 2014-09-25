@@ -54,7 +54,7 @@ public class OffScreenTracking : MonoBehaviour {
 		}
 
 		var test = Camera.main.orthographicSize * Camera.main.aspect;
-		Debug.Log(test);
+		//Debug.Log(test);
 	
 	}
 	
@@ -71,8 +71,7 @@ public class OffScreenTracking : MonoBehaviour {
 		{
 			//Convert the object we are tracking to viewport coordinates
 			Vector3 v3Screen = Camera.main.WorldToViewportPoint(go.transform.position);
-			Vector3 v3ScreenHorizontal = v3Screen;
-			Vector3 v3ScreenVertical = v3Screen;
+
 			var horizontalTracker = go.transform.Find("HorizontalTracker");
 			var verticalTracker = go.transform.Find("VerticalTracker");
 
@@ -110,7 +109,7 @@ public class OffScreenTracking : MonoBehaviour {
 
 				//Debug.Log(playerDistanceToLeft);
 				//var test = playerDistanceToRight + converserDistanceToLeft;
-				var testt = playerDistanceToLeft + converserDistanceToRight;
+				//var testt = playerDistanceToLeft + converserDistanceToRight;
 				//Debug.Log("P Right, C Left: " +test);
 				//Debug.Log("P Left, C Right: " +testt);
 				//Debug.Log("P to C: " + playerConverserDistanceWidth);
@@ -119,7 +118,10 @@ public class OffScreenTracking : MonoBehaviour {
 				//Debug.Log("ShortestY: " +shortestY);
 				//var testt = (Mathf.Pow(drawDistance, 2f));
 				//Debug.Log("Draw Distance: "+testt);
-				
+
+
+				Vector3 v3ScreenHorizontal = v3Screen;
+				Vector3 v3ScreenVertical = v3Screen;
 				if((Mathf.Pow(shortestX,2f) + Mathf.Pow(shortestY,2f)) < Mathf.Pow(drawDistance, 2f))
 				{
 					//Check tracking on top and bottom of screen
