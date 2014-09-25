@@ -7,6 +7,7 @@ public class TriggerLooping : MonoBehaviour {
 	public List<GameObject> listOfObjectsToLoop = new List<GameObject>();
 	public List<GameObject> listOfCollidersToMove = new List<GameObject>();
 	public GameObject player;
+	public float moveDistance;
 
 	public enum ColliderLocation{Top,Bottom,Left,Right};
 	public ColliderLocation colliderLocation;
@@ -28,16 +29,16 @@ public class TriggerLooping : MonoBehaviour {
 		switch(colliderLocation)
 		{
 		case ColliderLocation.Top:
-			loopMoveDistance.y = 398f;
+			loopMoveDistance.y = moveDistance;
 			break;
 		case ColliderLocation.Bottom:
-			loopMoveDistance.y = -398f;
+			loopMoveDistance.y = -moveDistance;
 			break;
 		case ColliderLocation.Left:
-			loopMoveDistance.x = -398f;
+			loopMoveDistance.x = -moveDistance;
 			break;
 		case ColliderLocation.Right:
-			loopMoveDistance.x = 398f;
+			loopMoveDistance.x = moveDistance;
 			break;
 		}
 
@@ -122,11 +123,9 @@ public class TriggerLooping : MonoBehaviour {
 			listOfObjectsToLoop.Clear();
 			listOfCollidersToMove.Clear();
 		}
-
-		//Debug.Log(other.transform.name);
+		
 		if(other.tag == "Converser" && other.transform != player.transform)
 		{
-			//Debug.Log("HERE");
 			if (!OnScreen(other.gameObject))
 			{
 				Tracer otherTracer = other.GetComponent<Tracer>();
