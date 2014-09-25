@@ -432,13 +432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f9766a1248ce5458d2dcfef70d7213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
-  showWaypoints: 0
-  current: 0
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
   tracer: {fileID: 0}
   tail: {fileID: 11400014}
+  waypoints: []
+  showWaypoints: 0
+  current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 0}
   moveWithoutPartner: 0

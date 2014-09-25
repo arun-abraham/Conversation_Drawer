@@ -8,8 +8,7 @@ public class TouchySubject : MonoBehaviour {
 	private bool cooldown = false;
 	public float cooldownTimer = 0.3f;
 	private float timer;
-	private CursorSeek cursor;
-	private WaypointSeek wayP;
+	private SimpleSeek seeker;
 
 	// Use this for initialization
 	void Start () {
@@ -26,10 +25,8 @@ public class TouchySubject : MonoBehaviour {
 			{
 				timer = cooldownTimer;
 				cooldown = false;
-				if(cursor != null)
-					cursor.enabled = true;
-				if(wayP != null)
-					wayP.enabled = true;
+				if(seeker != null)
+					seeker.enabled = true;
 				mover.maxSpeed = originalMaxSpeed;
 				Destroy(gameObject);
 			}
@@ -41,19 +38,15 @@ public class TouchySubject : MonoBehaviour {
 			return;
 
 		mover = col.GetComponent<SimpleMover>();
-		cursor = col.GetComponent<CursorSeek>();
-		wayP = col.GetComponent<WaypointSeek>();
+		seeker = col.GetComponent<SimpleSeek>();
 		originalMaxSpeed = mover.maxSpeed;
 
 		originalMaxSpeed = mover.maxSpeed;
 		Vector3 pushDirection = col.gameObject.transform.position - transform.position;
 		mover.maxSpeed = 50;
 		mover.Move(pushDirection, mover.maxSpeed);
-		if(cursor!= null)
-			cursor.enabled = false;
-		if(wayP!= null)
-			wayP.enabled = false;
-	//	rigidbody.AddForce(transform.forward * 100, ForceMode.VelocityChange);
+		if(seeker != null)
+			seeker.enabled = false;
 		if(!cooldown)
 			cooldown = true;
 

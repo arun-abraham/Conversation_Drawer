@@ -4,9 +4,8 @@ using System.Collections;
 public class OneWayPartner : MonoBehaviour {
 
 	private PartnerLink partnerlink;
-	private PartnerLink targetPartnerLink;
-	private WaypointSeek seeker;
-	public GameObject target;
+	private SimpleSeek seeker;
+	public PartnerLink target;
 	public bool followTarget = false;
 	private bool following = false;
 
@@ -14,23 +13,19 @@ public class OneWayPartner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		partnerlink = GetComponent<PartnerLink>();
-		if (targetPartnerLink != null)
-		{
-			targetPartnerLink = target.GetComponent<PartnerLink>();
-		}
-		seeker = GetComponent<WaypointSeek>();
+		seeker = GetComponent<SimpleSeek>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (targetPartnerLink != null)
+		if (target != null)
 		{
 			if (followTarget && partnerlink.Partner == null)
 			{
-				partnerlink.SetPartner(targetPartnerLink);
+				partnerlink.SetPartner(target);
 				following = true;
 			}
-			else if (targetPartnerLink.Partner != partnerlink && !followTarget && following)
+			else if (target.Partner != partnerlink && !followTarget && following)
 			{
 				partnerlink.SetPartner(null);
 				following = false;
