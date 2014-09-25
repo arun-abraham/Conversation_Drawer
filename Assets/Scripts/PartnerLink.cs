@@ -12,7 +12,7 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return conversation; }
 	}
-	public bool leading;
+	private bool leading;
 	public bool Leading
 	{
 		get { return leading; }
@@ -55,6 +55,8 @@ public class PartnerLink : MonoBehaviour {
 	public float startYieldProximity = 1;
 	public float endYieldProximity = 2;
 	public float yieldSpeedModifier = -0.5f;
+	public float timeToOvertake = 3;
+	public float timeToYield = 3;
 	public bool inWake = false;
 	public bool InWake
 	{

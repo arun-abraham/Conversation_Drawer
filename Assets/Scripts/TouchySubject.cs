@@ -8,13 +8,11 @@ public class TouchySubject : MonoBehaviour {
 	private bool cooldown = false;
 	public float cooldownTimer = 0.3f;
 	private float timer;
-	private CursorSeek cursor;
+	private SimpleSeek seeker;
 
 	// Use this for initialization
 	void Start () {
-		mover = GetComponent<SimpleMover>();
-		cursor = GetComponent<CursorSeek>();
-		originalMaxSpeed = mover.maxSpeed;
+
 		timer = cooldownTimer;
 	}
 	
@@ -27,22 +25,28 @@ public class TouchySubject : MonoBehaviour {
 			{
 				timer = cooldownTimer;
 				cooldown = false;
-				cursor.enabled = true;
+				if(seeker != null)
+					seeker.enabled = true;
 				mover.maxSpeed = originalMaxSpeed;
+				Destroy(gameObject);
 			}
 		}
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if(col.gameObject.tag != "TouchySubject")
+		if(col.gameObject.tag != "Converser")
 			return;
 
+		mover = col.GetComponent<SimpleMover>();
+		seeker = col.GetComponent<SimpleSeek>();
 		originalMaxSpeed = mover.maxSpeed;
-		Vector3 pushDirection = transform.position - col.gameObject.transform.position;
+
+		originalMaxSpeed = mover.maxSpeed;
+		Vector3 pushDirection = col.gameObject.transform.position - transform.position;
 		mover.maxSpeed = 50;
 		mover.Move(pushDirection, mover.maxSpeed);
-		cursor.enabled = false;
-	//	rigidbody.AddForce(transform.forward * 100, ForceMode.VelocityChange);
+		if(seeker != null)
+			seeker.enabled = false;
 		if(!cooldown)
 			cooldown = true;
 
