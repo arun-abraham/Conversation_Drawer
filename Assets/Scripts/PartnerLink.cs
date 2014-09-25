@@ -12,7 +12,7 @@ public class PartnerLink : MonoBehaviour {
 	{
 		get { return conversation; }
 	}
-	public bool leading;
+	private bool leading;
 	public bool Leading
 	{
 		get { return leading; }

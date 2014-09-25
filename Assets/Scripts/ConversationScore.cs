@@ -6,6 +6,8 @@ public class ConversationScore : MonoBehaviour {
 	public PartnerLink partnerLink;
 	public Tracer tracer;
 	public Tracer partnerTracer;
+	public GameObject sprite;
+	public GameObject headFill;
 	public int oldNearestIndex = 0;
 	public float score = 0;
 	public float scorePortionExponent = 1;
@@ -35,6 +37,7 @@ public class ConversationScore : MonoBehaviour {
 			tracer = GetComponent<Tracer>();
 		}
 		startSpeed = mover.maxSpeed;
+		headFill.transform.localScale = Vector3.zero;
 	}
 	
 	void Update()
@@ -146,6 +149,11 @@ public class ConversationScore : MonoBehaviour {
 				{
 					score += Time.deltaTime;
 				}
+				if (!partnerLink.Leading)
+				{
+					float leadPortionReady = score / scoreToLead;
+					headFill.transform.localScale = new Vector3(leadPortionReady,leadPortionReady,leadPortionReady);
+				}
 			}
 
 			// Boost speed if score exceeds requirement.
@@ -185,6 +193,8 @@ public class ConversationScore : MonoBehaviour {
 				}
 			}
 		}
+
+		headFill.renderer.material.color = sprite.renderer.material.color;
 	}
 
 	private void LinkPartner()
@@ -200,5 +210,15 @@ public class ConversationScore : MonoBehaviour {
 	{
 		partnerTracer = null;
 		canTakeLead = false;
+	}
+
+	private void StartLeading()
+	{
+		headFill.transform.localScale = new Vector3(1, 1, 1);
+	}
+
+	private void EndLeading()
+	{
+		headFill.transform.localScale = Vector3.zero;
 	}
 }

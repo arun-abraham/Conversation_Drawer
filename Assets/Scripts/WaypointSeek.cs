@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WaypointSeek : SimpleSeek {
-	
+
+	public GameObject geometry;
 	[SerializeField]
 	public List<Waypoint> waypoints;
 	public bool showWaypoints;
@@ -135,6 +136,7 @@ public class WaypointSeek : SimpleSeek {
 				tail.trigger.enabled = true;
 			}
 		}
+		geometry.transform.LookAt(transform.position + mover.velocity, geometry.transform.up);
 
 		if (tracer != null)
 		{
