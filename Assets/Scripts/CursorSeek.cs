@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CursorSeek : MonoBehaviour {
+public class CursorSeek : SimpleSeek {
 	public bool useController = false;
 	public Camera gameCamera = null;
 	public SimpleMover mover;

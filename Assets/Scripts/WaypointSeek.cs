@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class WaypointSeek : MonoBehaviour {
+public class WaypointSeek : SimpleSeek {
 	
 	[SerializeField]
 	public List<Waypoint> waypoints;

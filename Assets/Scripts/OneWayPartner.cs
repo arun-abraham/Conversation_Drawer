@@ -13,22 +13,30 @@ public class OneWayPartner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		partnerlink = gameObject.GetComponent<PartnerLink>();
-		targetPartnerLink = target.GetComponent<PartnerLink>();
+		partnerlink = GetComponent<PartnerLink>();
+		if (targetPartnerLink != null)
+		{
+			targetPartnerLink = target.GetComponent<PartnerLink>();
+		}
 		seeker = GetComponent<WaypointSeek>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(followTarget && partnerlink.Partner == null){
-			partnerlink.SetPartner(targetPartnerLink);
-			following = true;
+		if (targetPartnerLink != null)
+		{
+			if (followTarget && partnerlink.Partner == null)
+			{
+				partnerlink.SetPartner(targetPartnerLink);
+				following = true;
+			}
+			else if (targetPartnerLink.Partner != partnerlink && !followTarget && following)
+			{
+				partnerlink.SetPartner(null);
+				following = false;
+			}
+			if (followTarget && following)
+				seeker.SeekPartner();
 		}
-		else if(targetPartnerLink.Partner != partnerlink && !followTarget && following){
-			partnerlink.SetPartner(null);
-			following = false;
-		}
-		if(followTarget && following)
-			seeker.SeekPartner();
 	}
 }
