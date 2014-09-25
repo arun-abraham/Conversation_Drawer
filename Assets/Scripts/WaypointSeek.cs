@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class WaypointSeek : MonoBehaviour {
+public class WaypointSeek : SimpleSeek {
 	
 	[SerializeField]
 	public List<Waypoint> waypoints;
@@ -10,11 +10,6 @@ public class WaypointSeek : MonoBehaviour {
 	public int current;
 	private int previous;
 	private bool collideWithWaypoint = false;
-	public SimpleMover mover;
-	public PartnerLink partnerLink;
-	public Tracer tracer;
-	public Tail tail;
-	private Collider tailTrigger;
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
@@ -27,7 +22,7 @@ public class WaypointSeek : MonoBehaviour {
 	public bool orbit = false;
 	public float orbitRadius = 5.0f;
 	
-	void Start()
+	protected override void Start()
 	{
 		if (mover == null)
 		{
@@ -41,11 +36,7 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			tracer = GetComponent<Tracer>();
 		}
-		if (tail != null)
-		{
-			tailTrigger = tail.trigger;
-		}
-		
+
 		if (waypointContainer != null)
 		{
 			Waypoint[] waypointObjects = waypointContainer.GetComponentsInChildren<Waypoint>();
@@ -232,7 +223,7 @@ public class WaypointSeek : MonoBehaviour {
 		}
 	}
 
-	public void SeekPartner()
+	public override void SeekPartner()
 	{
 		Mathf.Clamp(desireToLead, 0, 1);
 		Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;

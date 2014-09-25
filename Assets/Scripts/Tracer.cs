@@ -107,9 +107,14 @@ public class Tracer : MonoBehaviour {
 		return nearestIndex;
 	}
 
-	public Vector3 GetVertex(int index)
+	public Vector3 GetVertex(int index, bool negateZOffset = true)
 	{
-		return vertices[index];
+		Vector3 vertex = vertices[index];
+		if (negateZOffset)
+		{
+			vertex.z -= zOffset;
+		}
+		return vertex;
 	}
 
 	public int GetVertexCount()
