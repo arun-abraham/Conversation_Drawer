@@ -11,6 +11,7 @@ public class Tracer : MonoBehaviour {
 	private Vector3 lastDirection = Vector3.zero;
 	public float trailNearWidth = 1;
 	public float trailFarWidth = 1;
+	public float zOffset = 10;
 	
 	void Start() 
 	{
@@ -26,6 +27,7 @@ public class Tracer : MonoBehaviour {
 	}
 
 	public void AddVertex(Vector3 position) {	
+		position.z += zOffset;
 		/* Line Presevation.
 		if (vertices.Count > 1) {
 			// Preserve look of the most recent line segement if the new vertex

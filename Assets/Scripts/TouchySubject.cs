@@ -12,9 +12,7 @@ public class TouchySubject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		mover = GetComponent<SimpleMover>();
-		cursor = GetComponent<CursorSeek>();
-		originalMaxSpeed = mover.maxSpeed;
+
 		timer = cooldownTimer;
 	}
 	
@@ -34,11 +32,15 @@ public class TouchySubject : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if(col.gameObject.tag != "TouchySubject")
+		if(col.gameObject.tag != "Converser")
 			return;
 
+		mover = col.GetComponent<SimpleMover>();
+		cursor = col.GetComponent<CursorSeek>();
 		originalMaxSpeed = mover.maxSpeed;
-		Vector3 pushDirection = transform.position - col.gameObject.transform.position;
+
+		originalMaxSpeed = mover.maxSpeed;
+		Vector3 pushDirection = col.gameObject.transform.position - transform.position;
 		mover.maxSpeed = 50;
 		mover.Move(pushDirection, mover.maxSpeed);
 		cursor.enabled = false;

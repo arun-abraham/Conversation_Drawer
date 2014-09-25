@@ -490,6 +490,7 @@ MonoBehaviour:
   lineMakerPrefab: {fileID: 100000, guid: c891b65162786984b82eac5b567f21f4, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
+  zOffset: 10
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
