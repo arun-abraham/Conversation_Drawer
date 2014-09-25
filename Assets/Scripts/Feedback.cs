@@ -130,10 +130,13 @@ public class Feedback : MonoBehaviour {
 			player.renderer.material.color = startColor;
 		}
 		tracer.lineRenderer.material.color = player.renderer.material.color;
-		colExp = (GameObject)Instantiate(colorExplosionPrefab);
-		colExp.particleSystem.startColor = player.renderer.material.color;
-		colExp.transform.position = player.transform.position;
-		Destroy(colExp, 3.1f);
+		if(colExp == null)
+		{
+			colExp = (GameObject)Instantiate(colorExplosionPrefab);
+			colExp.particleSystem.startColor = player.renderer.material.color;
+			colExp.transform.position = player.transform.position;
+			Destroy(colExp, 3.1f);
+		}
 	}
 
 	private void EnterWake()
