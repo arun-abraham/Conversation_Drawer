@@ -112,6 +112,9 @@ public class CursorSeek : SimpleSeek {
 			dragForward = cursor.GetComponent<ControllerSeek>().forward;
 		}
 
+		/*float tempZ = dragForward.z;
+		dragForward.z = dragForward.y;
+		dragForward.y = tempZ;*/
 		if (directVelocity)
 		{
 			mover.Move(dragForward, mover.maxSpeed, true);

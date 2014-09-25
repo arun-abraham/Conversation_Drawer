@@ -53,7 +53,7 @@ public class OffScreenTracking : MonoBehaviour {
 				conversersList.Add(go);
 		}
 
-		var test = Camera.main.orthographicSize * Camera.main.aspect;
+		//var test = Camera.main.orthographicSize * Camera.main.aspect;
 		//Debug.Log(test);
 	
 	}
@@ -134,18 +134,13 @@ public class OffScreenTracking : MonoBehaviour {
 							v3ScreenHorizontal.x = Mathf.Clamp (v3ScreenHorizontal.x, 0.00f, 1f);
 							v3ScreenHorizontal.y = Mathf.Clamp (v3ScreenHorizontal.y, 0f, 1f);
 							if(playerConverserDistanceWidth != shortestX)
-							{
-								//if(shortestY == (playerDistanceToBottom + converserDistanceToTop))
 								v3ScreenHorizontal.x = 1f - v3ScreenHorizontal.x;
-							}
+							
 							v3ScreenHorizontal.y = Mathf.Round(v3ScreenHorizontal.y);
 
 						}
 						else
 						{
-							//Debug.Log ("IN");
-
-							//Debug.Log(v3ScreenHorizontal);
 							//Point to top of screen (use player distance to bottom to make sure the tracker goes past the top boundary
 							v3ScreenHorizontal.y *= -1;
 							//Round the y to either 0 or 1 (Top or Bottom of the screen)
@@ -192,11 +187,10 @@ public class OffScreenTracking : MonoBehaviour {
 							v3ScreenVertical.x = Mathf.Clamp(v3ScreenVertical.x, 0f, 1f);
 							v3ScreenVertical.y = Mathf.Clamp(v3ScreenVertical.y, 0f, 1f);
 							v3ScreenVertical.x = Mathf.Round(v3ScreenVertical.x);
-							//Debug.Log("Boundary to Boundary: "+v3ScreenVertical);
 						}					
 						//Set the tracker's position
 						verticalTracker.transform.position = Camera.main.ViewportToWorldPoint (v3ScreenVertical);
-						verticalTracker.transform.localScale = new Vector3(verticalTracker.transform.localScale.x,verticalTrackerScale,verticalTracker.transform.localScale.z);					
+						verticalTracker.transform.localScale = new Vector3(verticalTracker.transform.localScale.x, verticalTracker.transform.localScale.y, verticalTrackerScale);					
 					}
 					else
 						verticalTracker.renderer.enabled = false;

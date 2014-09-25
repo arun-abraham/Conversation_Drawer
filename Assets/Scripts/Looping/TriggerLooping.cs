@@ -11,8 +11,8 @@ public class TriggerLooping : MonoBehaviour {
 	public enum ColliderLocation{Top,Bottom,Left,Right};
 	public ColliderLocation colliderLocation;
 
-	private float orthoSize = 0;
-	private float aspect = 0;
+	//private float orthoSize = 0;
+	//private float aspect = 0;
 
 	/*Debug Variables
 	public float xCollider = 1;
@@ -66,8 +66,6 @@ public class TriggerLooping : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-
-		//Debug.Log("Trigger");
 		if(other.gameObject == player)
 		{
 			//Get all gameobjects in the scene and then filter to get only loopable objects//
@@ -131,13 +129,19 @@ public class TriggerLooping : MonoBehaviour {
 			//Debug.Log("HERE");
 			if (!OnScreen(other.gameObject))
 			{
-				
-				if(other.gameObject.GetComponent<LoopTag>().moveRoot)
+				Tracer otherTracer = other.GetComponent<Tracer>();
+				Vector3 oldPosition = other.transform.position;
+				if (other.gameObject.GetComponent<LoopTag>().moveRoot)
+				{
 					other.gameObject.transform.root.position -= loopMoveDistance;
+				}
 				else
+				{
 					other.gameObject.transform.position -= loopMoveDistance;
+				}
 
 				MoveOffScreen(other.gameObject);
+				otherTracer.MoveVertices(other.transform.position - oldPosition);
 			}
 		}
 	}
