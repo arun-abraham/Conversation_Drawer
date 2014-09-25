@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seekingPartner: 0
-  converseDistance: 20
+  converseDistance: 5
   warningThreshold: 1.5
   breakingThreshold: 3
   partnerLineSize: .25
@@ -579,10 +579,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b0f58affdedc74185d1be54789c64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 15
+  maxSpeed: 16
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 50
+  handling: 30
   dampening: .949999988
   dampeningThreshold: 1.5
   externalSpeedMultiplier: 1
@@ -2299,7 +2299,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: maxSpeed
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: endYieldProximity
@@ -2331,7 +2331,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: converseDistance
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: m_Name
@@ -2384,6 +2384,14 @@ Prefab:
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: moveWithoutPartner
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: handling
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 400014, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .00999999978
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400018, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -3595,7 +3603,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
       propertyPath: conversations.Array.data[0].partner1Leads
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
@@ -4005,7 +4013,7 @@ MonoBehaviour:
   - title: A Story
     partner1: {fileID: 1719802095}
     partner2: {fileID: 103414805}
-    partner1Leads: 1
+    partner1Leads: 0
     inProgress: 0
     initiateDistance: 0
     warningDistance: 0
@@ -5224,7 +5232,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1687348086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -29.3560009, z: .100000001}
+  m_LocalPosition: {x: 0, y: -86.5299988, z: .100000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 374753965}
@@ -5315,7 +5323,6 @@ GameObject:
   - 114: {fileID: 1719802096}
   - 114: {fileID: 1719802107}
   - 114: {fileID: 1719802104}
-  - 114: {fileID: 1719802106}
   m_Layer: 0
   m_Name: Head
   m_TagString: Converser
@@ -5574,18 +5581,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1719802106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1719802093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2a6342a94cbb7c42b1e04ae24fafc6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToShow: []
 --- !u!114 &1719802107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7151,7 +7146,7 @@ Transform:
   m_GameObject: {fileID: 1850641026}
   m_LocalRotation: {x: .5, y: .5, z: -.5, w: .5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .100000001, y: 1, z: .75}
+  m_LocalScale: {x: .100000001, y: .00999999978, z: .75}
   m_Children: []
   m_Father: {fileID: 659477473}
   m_RootOrder: 1
