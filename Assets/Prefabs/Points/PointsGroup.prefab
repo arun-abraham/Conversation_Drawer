@@ -4188,6 +4188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7096c3b35fef4de0b2ac9bd2b0e62dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolEvent: {fileID: 0}
   Gong: {fileID: 8300000, guid: 9b6b416b6be71439c9ec0e1eab0bc11a, type: 3}
   pointMade: 0
   lilPoint1: {fileID: 100014}
