@@ -6,6 +6,7 @@ public class Tail : MonoBehaviour {
 	public SimpleMover mover;
 	private bool following = false;
 	public Collider trigger;
+	public GameObject colorMimicTarget;
 
 	void Awake()
 	{
@@ -54,7 +55,7 @@ public class Tail : MonoBehaviour {
 
 			// Render and align to movement.
 			renderer.enabled = true;
-			renderer.material.color = partnerLink.renderer.material.color;
+			renderer.material.color = colorMimicTarget.renderer.material.color;
 
 			if (fromHead.sqrMagnitude > 0)
 			{

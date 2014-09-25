@@ -2,19 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class WaypointSeek : MonoBehaviour {
-	
+public class WaypointSeek : SimpleSeek {
+
+	public GameObject geometry;
 	[SerializeField]
 	public List<Waypoint> waypoints;
 	public bool showWaypoints;
 	public int current;
 	private int previous;
 	private bool collideWithWaypoint = false;
-	public SimpleMover mover;
-	public PartnerLink partnerLink;
-	public Tracer tracer;
-	public Tail tail;
-	private Collider tailTrigger;
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
@@ -27,7 +23,7 @@ public class WaypointSeek : MonoBehaviour {
 	public bool orbit = false;
 	public float orbitRadius = 5.0f;
 	
-	void Start()
+	protected override void Start()
 	{
 		if (mover == null)
 		{
@@ -41,11 +37,7 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			tracer = GetComponent<Tracer>();
 		}
-		if (tail != null)
-		{
-			tailTrigger = tail.trigger;
-		}
-		
+
 		if (waypointContainer != null)
 		{
 			Waypoint[] waypointObjects = waypointContainer.GetComponentsInChildren<Waypoint>();
@@ -72,6 +64,7 @@ public class WaypointSeek : MonoBehaviour {
 		}
 		
 		SeekNextWaypoint();
+		collideWithWaypoint = false;
 		if (previous >= 0 && previous < waypoints.Count)
 		{
 			transform.position = waypoints[previous].transform.position;
@@ -91,7 +84,11 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			if (partnerLink.Leading)
 			{
-				Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				Vector3 destination = transform.position;
+				if (current < waypoints.Count)
+				{
+					destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				}
 				
 				Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
 				fromPartner.z = 0;
@@ -114,31 +111,7 @@ public class WaypointSeek : MonoBehaviour {
 			}
 			else
 			{
-				Mathf.Clamp(desireToLead, 0, 1);
-				Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
-				Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
-				if (partnerLink.Yielding)
-				{
-					mover.Accelerate(partnerLink.Partner.mover.velocity);
-				}
-				else if(orbit)
-				{
-					BeginOrbit();
-				}
-				else if (partnerLink.InWake)
-				{
-					mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
-					desireToLead += inWakeLeadGrowth * Time.deltaTime;
-				}
-				else
-				{
-					mover.Accelerate(toPartner);
-					desireToLead += outWakeLeadGrowth * Time.deltaTime;
-				}
-				if (tracer.lineRenderer == null && tail == null)
-				{
-					tracer.StartLine();
-				}
+				SeekPartner();
 			}
 		}
 		else if (moveWithoutPartner)
@@ -163,6 +136,7 @@ public class WaypointSeek : MonoBehaviour {
 				tail.trigger.enabled = true;
 			}
 		}
+		geometry.transform.LookAt(transform.position + mover.velocity, geometry.transform.up);
 
 		if (tracer != null)
 		{
@@ -179,7 +153,7 @@ public class WaypointSeek : MonoBehaviour {
 	
 	public Vector3 FindSeekingPoint(Vector3 velocity)
 	{
-		if (waypoints == null || waypoints.Count <= 0 && current >= waypoints.Count)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return transform.position;
 		}
@@ -199,12 +173,20 @@ public class WaypointSeek : MonoBehaviour {
 	
 	private void SeekNextWaypoint()
 	{
-		if (waypoints == null || waypoints.Count <= 0)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return;
 		}
-		
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(1, 1, 1, 1);
+		}
+
 		previous = current;
+		collideWithWaypoint = false;
+
+		
 		
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
@@ -236,14 +218,47 @@ public class WaypointSeek : MonoBehaviour {
 			
 		}
 		current = previous + 1;
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(0, 1, 0, 1);
+		}
+	}
+
+	public override void SeekPartner()
+	{
+		Mathf.Clamp(desireToLead, 0, 1);
+		Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
+		Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
+		if (partnerLink.Yielding)
+		{
+			mover.Accelerate(partnerLink.Partner.mover.velocity);
+		}
+		else if(orbit)
+		{
+			BeginOrbit();
+		}
+		else if (partnerLink.InWake)
+		{
+			mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
+			desireToLead += inWakeLeadGrowth * Time.deltaTime;
+		}
+		else
+		{
+			mover.Accelerate(toPartner);
+			desireToLead += outWakeLeadGrowth * Time.deltaTime;
+		}
+		if (tracer.lineRenderer == null && tail == null)
+		{
+			tracer.StartLine();
+		}
 	}
 
 	void BeginOrbit()
 	{
 		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
-		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
-		mover.MoveTo(partnerLink.Partner.transform.position + destination);
-		mover.maxSpeed += Time.deltaTime;
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, transform.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
+		mover.Move((partnerLink.Partner.transform.position + destination) - transform.position, mover.maxSpeed);
 	}
 	
 	void OnTriggerEnter(Collider otherCol)
@@ -257,7 +272,7 @@ public class WaypointSeek : MonoBehaviour {
 	private void StartLeading()
 	{
 		desireToLead = minDesireToLead;
-		Vector3 waypointOffset = transform.position - waypoints[current].transform.position;
+		Vector3 waypointOffset = transform.position - waypoints[previous].transform.position;
 		for (int i = 0; i < waypoints.Count; i++)
 		{
 			waypoints[i].transform.position += waypointOffset;
