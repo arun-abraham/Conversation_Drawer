@@ -66,7 +66,7 @@ public class Feedback : MonoBehaviour {
 			
 			currentDir = player.transform.position - prevPos;
 			
-			altPSys.particleSystem.emissionRate = (currentDir.magnitude/Time.deltaTime)*2;
+			altPSys.particleSystem.emissionRate = (currentDir.magnitude/Time.deltaTime)*10;
 			
 			currentDir.Normalize();
 	
@@ -153,7 +153,10 @@ public class Feedback : MonoBehaviour {
 	}
 
 	public void AlternateTrail(){
-		altPSys = (GameObject)Instantiate(colorfulTrailPrefab);
-		altPSys.transform.position = player.transform.position;
+		if (altPSys == null)
+		{
+			altPSys = (GameObject)Instantiate(colorfulTrailPrefab);
+			altPSys.transform.position = player.transform.position;
+		}
 	}
 }
