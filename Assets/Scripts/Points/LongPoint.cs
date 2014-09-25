@@ -3,6 +3,7 @@ using System.Collections;
 
 public class LongPoint : MonoBehaviour {
 
+	public CoolEvent coolEvent;
 	public bool pointMade;
 
 	public AudioClip Gong;
@@ -56,12 +57,17 @@ public class LongPoint : MonoBehaviour {
 		   lilPoint5.GetComponent<LongDetail>().isHit && lilPoint6.GetComponent<LongDetail>().isHit && lilPoint7.GetComponent<LongDetail>().isHit && lilPoint8.GetComponent<LongDetail>().isHit) 
 		{
 			renderer.material.color = Color.cyan;
-			print("Good Point");
+			//print("Good Point");
 			pointMade = true;
 			rotSpeed = 50.0f;
 			audio.PlayOneShot(Gong);
 			rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
+
+			if (coolEvent != null)
+			{
+				coolEvent.BeCool();
+			}
 		}
 		
 	}

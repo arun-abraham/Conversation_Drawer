@@ -565,6 +565,8 @@ MonoBehaviour:
   timeToOvertake: 2
   timeToYield: 3
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
 --- !u!114 &103414806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,6 +986,8 @@ MonoBehaviour:
   timeToOvertake: 2
   timeToYield: 2
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
 --- !u!114 &174839615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3591,7 +3595,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
       propertyPath: conversations.Array.data[0].partner1Leads
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
@@ -4001,7 +4005,7 @@ MonoBehaviour:
   - title: A Story
     partner1: {fileID: 1719802095}
     partner2: {fileID: 103414805}
-    partner1Leads: 0
+    partner1Leads: 1
     inProgress: 0
     initiateDistance: 0
     warningDistance: 0
@@ -5311,6 +5315,7 @@ GameObject:
   - 114: {fileID: 1719802096}
   - 114: {fileID: 1719802107}
   - 114: {fileID: 1719802104}
+  - 114: {fileID: 1719802106}
   m_Layer: 0
   m_Name: Head
   m_TagString: Converser
@@ -5362,6 +5367,8 @@ MonoBehaviour:
   timeToOvertake: 2
   timeToYield: 2
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
 --- !u!114 &1719802096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5567,6 +5574,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1719802106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1719802093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a6342a94cbb7c42b1e04ae24fafc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToShow: []
 --- !u!114 &1719802107
 MonoBehaviour:
   m_ObjectHideFlags: 0

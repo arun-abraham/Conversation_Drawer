@@ -3,7 +3,6 @@ using System.Collections;
 
 public class SimplePoint : MonoBehaviour {
 
-	public CoolEvent coolEvent;
 	public AudioClip Gong;
 
 	public bool pointMade;
@@ -63,11 +62,6 @@ public class SimplePoint : MonoBehaviour {
 			audio.PlayOneShot(Gong);
 			rotVect.y = 1;
 			BroadcastMessage("IsHitOff");
-
-			if (coolEvent != null)
-			{
-				coolEvent.BeCool();
-			}
 		}
 	
 	}
