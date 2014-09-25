@@ -9,12 +9,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
+  - 64: {fileID: 6400000}
   - 23: {fileID: 2300000}
-  - 135: {fileID: 13500000}
   - 114: {fileID: 11400000}
+  - 65: {fileID: 6500000}
   m_Layer: 0
-  m_Name: Touchy Subject
-  m_TagString: TouchySubject
+  m_Name: Orb Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,8 +27,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.862999, y: 20.7450008, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalPosition: {x: -2.0338912, y: 15.5578146, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +44,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f0b82197d4e9bb64c96126bca48e3526, type: 2}
+  - {fileID: 2100000, guid: 7e9c1ccabc78fa843880d81755e9a7b1, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -57,21 +58,22 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11400000
-MonoBehaviour:
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &6400000
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4aaeafbdc9df843829cf62dd1a8f51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTimer: .300000012
---- !u!135 &13500000
-SphereCollider:
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &6500000
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -80,8 +82,21 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .550000012
+  m_Size: {x: 1, y: 1, z: 6.1232336e-17}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de907e4077fd8c4f908cca879291cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
+  colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

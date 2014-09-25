@@ -21,6 +21,8 @@ public class Feedback : MonoBehaviour {
 	private int boostLevel = 0;
 	private Tracer tracer;
 	public bool showParticleTrail;
+	public GameObject colorfulTrailPrefab;
+	private GameObject altPSys;
 
 	// Use this for initialization
 	void Start () {
@@ -42,20 +44,36 @@ public class Feedback : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		pSys.transform.position = player.transform.position;
-		pSys.particleSystem.startColor = player.renderer.material.color;
+		if(altPSys == null)
+		{
+			pSys.transform.position = player.transform.position;
+			pSys.particleSystem.startColor = player.renderer.material.color;
 
-		currentDir = player.transform.position - prevPos;
+			currentDir = player.transform.position - prevPos;
 
-		pSys.particleSystem.emissionRate = (currentDir.magnitude/Time.deltaTime)*2;
+			pSys.particleSystem.emissionRate = (currentDir.magnitude/Time.deltaTime)*2;
 
-		currentDir.Normalize();
+			currentDir.Normalize();
 
 
-		if(currentDir.sqrMagnitude != 0)
-			pSys.transform.rotation = Quaternion.LookRotation(-currentDir, pSys.transform.up);
-		prevPos = player.transform.position;
-
+			if(currentDir.sqrMagnitude != 0)
+				pSys.transform.rotation = Quaternion.LookRotation(-currentDir, pSys.transform.up);
+			prevPos = player.transform.position;
+		}
+		else
+		{
+			altPSys.transform.position = player.transform.position;
+			
+			currentDir = player.transform.position - prevPos;
+			
+			altPSys.particleSystem.emissionRate = (currentDir.magnitude/Time.deltaTime)*10;
+			
+			currentDir.Normalize();
+	
+			if(currentDir.sqrMagnitude != 0)
+				altPSys.transform.rotation = Quaternion.LookRotation(-currentDir, altPSys.transform.up);
+			prevPos = player.transform.position;
+		}
 
 
 		if(currentDir.magnitude <= 0.01f)
@@ -131,6 +149,14 @@ public class Feedback : MonoBehaviour {
 		if (pSys.particleSystem.enableEmission)
 		{
 			pSys.particleSystem.enableEmission = false;
+		}
+	}
+
+	public void AlternateTrail(){
+		if (altPSys == null)
+		{
+			altPSys = (GameObject)Instantiate(colorfulTrailPrefab);
+			altPSys.transform.position = player.transform.position;
 		}
 	}
 }

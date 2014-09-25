@@ -210,7 +210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 1.64349997, y: 10.1260004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -329,7 +329,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
+  m_BackGroundColor: {r: .126513854, g: .187119782, b: .33088237, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -577,6 +577,7 @@ MonoBehaviour:
   lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
+  zOffset: 10
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -652,6 +653,7 @@ MonoBehaviour:
   colorExplosionPrefab: {fileID: 100000, guid: c6a6e7c52293d89439685d40b2f7764a, type: 2}
   controllerFeedback: {fileID: 11400016}
   showParticleTrail: 0
+  colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
