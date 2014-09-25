@@ -354,7 +354,7 @@ MonoBehaviour:
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 0
+  orbit: 1
   orbitRadius: 5
 --- !u!54 &103414804
 Rigidbody:
@@ -1666,7 +1666,12 @@ Prefab:
       propertyPath: showWaypoints
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11400010, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11400018, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 659477472}
   m_IsPrefabParent: 0
@@ -1979,12 +1984,13 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 591178102}
   m_GameObject: {fileID: 771223049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6af52120cf7c39b40b69d189695f1319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
+  partnerLink: {fileID: 0}
   player: {fileID: 0}
 --- !u!135 &771223051
 SphereCollider:

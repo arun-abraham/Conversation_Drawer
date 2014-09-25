@@ -102,6 +102,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: Head
   m_TagString: Converser
@@ -154,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -472,8 +473,6 @@ MonoBehaviour:
   startYieldProximity: 3
   endYieldProximity: 2
   yieldSpeedModifier: -.100000001
-  timeToOvertake: 3
-  timeToYield: 3
   inWake: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -530,7 +529,7 @@ MonoBehaviour:
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 0
+  orbit: 1
   orbitRadius: 5
 --- !u!114 &11400008
 MonoBehaviour:
@@ -543,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b0f58affdedc74185d1be54789c64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 15
+  maxSpeed: 20
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
   handling: 50
@@ -584,6 +583,8 @@ MonoBehaviour:
   partnerTracer: {fileID: 0}
   oldNearestIndex: 0
   score: 0
+  scoreToLead: -1
+  proximityToLead: .949999988
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
   rewardSpeedBoost: 2
@@ -627,6 +628,19 @@ MonoBehaviour:
     velocityX: 0
     velocityY: 0
     velocityZ: 1
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
