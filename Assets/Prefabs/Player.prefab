@@ -644,6 +644,7 @@ MonoBehaviour:
   partnerLink: {fileID: 0}
   tracer: {fileID: 0}
   partnerTracer: {fileID: 0}
+  sprite: {fileID: 100026}
   headFill: {fileID: 100022}
   oldNearestIndex: 0
   score: 0
@@ -653,7 +654,7 @@ MonoBehaviour:
   boostLevels: 4
   changeTime: .5
   startSpeed: 0
-  gameCamera: {fileID: 0}
+  gameCamera: {fileID: 2000000}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -725,7 +726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56d86b5491f62f46b8990126f139f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leading: 0
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
