@@ -34,9 +34,9 @@ public class CameraShake : MonoBehaviour {
 
 	public void ShakeCamera(float shakeAmount)
 	{
-		shaking = true;
-		this.shakeAmount = shakeAmount;
-		stableLocalPosition = transform.localPosition;
+			shaking = true;
+			this.shakeAmount = shakeAmount;
+			stableLocalPosition = transform.localPosition;
 	}
 
 	public void StopShaking()
