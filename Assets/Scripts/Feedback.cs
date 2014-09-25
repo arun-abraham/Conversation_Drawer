@@ -86,8 +86,12 @@ public class Feedback : MonoBehaviour {
 	{
 		if (cameraShake != null)
 		{
-			controllerFeedback.SetVibration(0.5f, 0.5f);
+
 			cameraShake.ShakeCamera(cameraShakeFactor);
+		}
+		if (controllerFeedback != null) 
+		{
+			controllerFeedback.SetVibration(0.5f, 0.5f);
 		}
 		ChangeBoost(1);
 	}
