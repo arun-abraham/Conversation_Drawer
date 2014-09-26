@@ -883,7 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partnerLink: {fileID: 11400010}
   mover: {fileID: 0}
-  trigger: {fileID: 0}
+  trigger: {fileID: 6500002}
   colorMimicTarget: {fileID: 100026}
 --- !u!114 &11400032
 MonoBehaviour:
