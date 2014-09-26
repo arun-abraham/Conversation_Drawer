@@ -62,7 +62,7 @@ void Update () {
 
 			if(isHit == true)
 				setHitOn();
-
+			if(allDone == false)
 			audio.Play();
 		}
 		
