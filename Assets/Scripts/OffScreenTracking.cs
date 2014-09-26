@@ -53,6 +53,30 @@ public class OffScreenTracking : MonoBehaviour {
 				conversersList.Add(go);
 		}
 
+		GameObject[] boundaries = GameObject.FindGameObjectsWithTag("World Boundary");
+		for (int i = 0; i < boundaries.Length; i++)
+		{
+			TriggerLooping boundary = boundaries[i].GetComponent<TriggerLooping>();
+			if (boundary != null)
+			{
+				switch(boundary.colliderLocation)
+				{
+					case TriggerLooping.ColliderLocation.Top:
+						topBoundary = boundary.gameObject;
+						break;
+					case TriggerLooping.ColliderLocation.Bottom:
+						bottomBoundary = boundary.gameObject;
+						break;
+					case TriggerLooping.ColliderLocation.Left:
+						leftBoundary = boundary.gameObject;
+						break;
+					case TriggerLooping.ColliderLocation.Right:
+						rightBoundary = boundary.gameObject;
+						break;
+				}
+			}
+		}
+
 		//var test = Camera.main.orthographicSize * Camera.main.aspect;
 		//Debug.Log(test);
 	
