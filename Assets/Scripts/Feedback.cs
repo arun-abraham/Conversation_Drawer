@@ -18,6 +18,7 @@ public class Feedback : MonoBehaviour {
 	private Color boostColorTwo;
 	private Color boostColorThree;
 	private Color boostColorFour;
+	private Color currentColor;
 	private int boostLevel = 0;
 	private Tracer tracer;
 	public bool showParticleTrail;
@@ -37,6 +38,7 @@ public class Feedback : MonoBehaviour {
 		pSys.particleSystem.enableEmission = false;
 		prevPos = transform.position;
 		startColor = sprite.renderer.material.color;
+		currentColor = startColor;
 		boostColorOne = new Color(0.3f, 0.2f, 0.5f, 1.0f);
 		boostColorTwo = new Color(0.3f, 0.6f, 0.3f, 1.0f);
 		boostColorThree = new Color(0.95f, 0.5f, 0.0f, 1.0f);
@@ -84,7 +86,14 @@ public class Feedback : MonoBehaviour {
 			conversation = ConversationManger.Instance.FindConversation(partnerLink, partnerLink.Partner);
 			percentToBreaking = ((transform.position - partnerLink.Partner.transform.position).sqrMagnitude)/conversation.breakingDistance;
 
-		//	sprite.renderer.material.color *= percentToBreaking;
+			sprite.renderer.material.color = currentColor;
+			percentToBreaking = 1 - percentToBreaking;
+
+			float red = sprite.renderer.material.color.r*percentToBreaking;
+			float green = sprite.renderer.material.color.g*percentToBreaking;
+			float blue = sprite.renderer.material.color.b*percentToBreaking;
+
+			sprite.renderer.material.color = new Color(red, green, blue);
 		}
 
 		if(currentDir.magnitude <= 0.01f)
@@ -127,22 +136,27 @@ public class Feedback : MonoBehaviour {
 		if (boostLevel == 4)
 		{
 			sprite.renderer.material.color = boostColorFour;
+			currentColor = boostColorFour;
 		}
 		else if (boostLevel == 3)
 		{
 			sprite.renderer.material.color = boostColorThree;
+			currentColor = boostColorThree;
 		}
 		else if (boostLevel == 2)
 		{
 			sprite.renderer.material.color = boostColorTwo;
+			currentColor = boostColorTwo;
 		}
 		else if (boostLevel == 1)
 		{
 			sprite.renderer.material.color = boostColorOne;
+			currentColor = boostColorOne;
 		}
 		else if (boostLevel == 0)
 		{
 			sprite.renderer.material.color = startColor;
+			currentColor = startColor;
 		}
 		tracer.lineRenderer.material.color = sprite.renderer.material.color;
 		if(colExp == null)
