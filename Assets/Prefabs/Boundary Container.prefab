@@ -12,8 +12,13 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Boundary
   m_TagString: Untagged
+=======
+  m_Name: Right Boundary
+  m_TagString: World Boundary
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +35,13 @@ GameObject:
   - 65: {fileID: 6500002}
   - 114: {fileID: 11400002}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Boundary
   m_TagString: Untagged
+=======
+  m_Name: Left Boundary
+  m_TagString: World Boundary
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +58,13 @@ GameObject:
   - 65: {fileID: 6500004}
   - 114: {fileID: 11400004}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Boundary
   m_TagString: Untagged
+=======
+  m_Name: Bottom Boundary
+  m_TagString: World Boundary
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,8 +81,13 @@ GameObject:
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400006}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Boundary
   m_TagString: Untagged
+=======
+  m_Name: Top Boundary
+  m_TagString: World Boundary
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

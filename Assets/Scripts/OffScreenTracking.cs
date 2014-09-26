@@ -52,6 +52,7 @@ public class OffScreenTracking : MonoBehaviour {
 			if(go.transform != transform)
 				conversersList.Add(go);
 		}
+<<<<<<< HEAD
 
 		//var test = Camera.main.orthographicSize * Camera.main.aspect;
 		//Debug.Log(test);
@@ -75,6 +76,55 @@ public class OffScreenTracking : MonoBehaviour {
 			var horizontalTracker = go.transform.Find("HorizontalTracker");
 			var verticalTracker = go.transform.Find("VerticalTracker");
 
+=======
+
+		GameObject[] boundaries = GameObject.FindGameObjectsWithTag("World Boundary");
+		for (int i = 0; i < boundaries.Length; i++)
+		{
+			TriggerLooping boundary = boundaries[i].GetComponent<TriggerLooping>();
+			if (boundary != null)
+			{
+				switch(boundary.colliderLocation)
+				{
+					case TriggerLooping.ColliderLocation.Top:
+						topBoundary = boundary.gameObject;
+						break;
+					case TriggerLooping.ColliderLocation.Bottom:
+						bottomBoundary = boundary.gameObject;
+						break;
+					case TriggerLooping.ColliderLocation.Left:
+						leftBoundary = boundary.gameObject;
+						break;
+					case TriggerLooping.ColliderLocation.Right:
+						rightBoundary = boundary.gameObject;
+						break;
+				}
+			}
+		}
+
+		//var test = Camera.main.orthographicSize * Camera.main.aspect;
+		//Debug.Log(test);
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+		drawDistanceY = drawDistance + Camera.main.orthographicSize;
+		drawDistanceX = drawDistance + (Camera.main.orthographicSize * Camera.main.aspect);
+
+		PlayerDistanceToBoundaries();
+		//Debug.Log("To Top: " + playerDistanceToTop);
+
+		foreach(GameObject go in conversersList)
+		{
+			//Convert the object we are tracking to viewport coordinates
+			Vector3 v3Screen = Camera.main.WorldToViewportPoint(go.transform.position);
+
+			var horizontalTracker = go.transform.Find("HorizontalTracker");
+			var verticalTracker = go.transform.Find("VerticalTracker");
+
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 			//Debug.Log(v3Screen);
 			//Debug.Log(v3Screen.y);
 			//Check if the object is on screen
@@ -203,10 +253,17 @@ public class OffScreenTracking : MonoBehaviour {
 			}
 
 		}
+<<<<<<< HEAD
 
 	
 	}
 
+=======
+
+	
+	}
+
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 	private void PlayerDistanceToBoundaries()
 	{
 		//Top Boundary
@@ -227,6 +284,7 @@ public class OffScreenTracking : MonoBehaviour {
 	{
 		//Top Boundary
 		converserDistanceToTop = Mathf.Abs(topBoundary.transform.position.y - converser.transform.position.y);// + Camera.main.orthographicSize;
+<<<<<<< HEAD
 
 		if(converserDistanceToTop < (Camera.main.orthographicSize))
 			converserDistanceToTop += (Camera.main.orthographicSize);
@@ -250,6 +308,31 @@ public class OffScreenTracking : MonoBehaviour {
 		if(converserDistanceToRight < (Camera.main.orthographicSize * Camera.main.aspect))
 			converserDistanceToRight += (Camera.main.orthographicSize * Camera.main.aspect);
 
+=======
+
+		if(converserDistanceToTop < (Camera.main.orthographicSize))
+			converserDistanceToTop += (Camera.main.orthographicSize);
+		
+		//Bottom Boundary
+		converserDistanceToBottom = Mathf.Abs(bottomBoundary.transform.position.y - converser.transform.position.y);//+ Camera.main.orthographicSize;
+
+
+		if(converserDistanceToBottom < (Camera.main.orthographicSize))
+			converserDistanceToBottom += (Camera.main.orthographicSize);
+		
+		//Left Boundary
+		converserDistanceToLeft = Mathf.Abs(leftBoundary.transform.position.x - converser.transform.position.x);// + (Camera.main.orthographicSize * Camera.main.aspect);
+
+		if(converserDistanceToLeft < (Camera.main.orthographicSize * Camera.main.aspect))
+			converserDistanceToLeft += (Camera.main.orthographicSize * Camera.main.aspect);
+		
+		//Right Boundary
+		converserDistanceToRight = Mathf.Abs(rightBoundary.transform.position.x - converser.transform.position.x);// + (Camera.main.orthographicSize * Camera.main.aspect);
+
+		if(converserDistanceToRight < (Camera.main.orthographicSize * Camera.main.aspect))
+			converserDistanceToRight += (Camera.main.orthographicSize * Camera.main.aspect);
+
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 	}
 
 	

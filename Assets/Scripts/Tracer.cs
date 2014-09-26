@@ -85,7 +85,7 @@ public class Tracer : MonoBehaviour {
 		{
 			vertices.Clear();
 			lineRenderer.SetVertexCount(0);
-			GameObject.Destroy(lineRenderer);
+			GameObject.Destroy(lineRenderer.gameObject);
 			lineRenderer = null;
 		}
 	}

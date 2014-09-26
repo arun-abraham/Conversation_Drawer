@@ -38,7 +38,10 @@ public class Feedback : MonoBehaviour {
 		pSys.particleSystem.enableEmission = false;
 		prevPos = transform.position;
 		startColor = sprite.renderer.material.color;
+<<<<<<< HEAD
 		currentColor = startColor;
+=======
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		boostColorOne = new Color(0.3f, 0.2f, 0.5f, 1.0f);
 		boostColorTwo = new Color(0.3f, 0.6f, 0.3f, 1.0f);
 		boostColorThree = new Color(0.95f, 0.5f, 0.0f, 1.0f);
@@ -107,8 +110,17 @@ public class Feedback : MonoBehaviour {
 	{
 		if (cameraShake != null)
 		{
+<<<<<<< HEAD
 			if(colExp == null)
 				cameraShake.ShakeCamera(cameraShakeFactor);
+		}
+		if (controllerFeedback != null) 
+		{
+			controllerFeedback.SetVibration(0.5f, 0.5f);
+=======
+
+			cameraShake.ShakeCamera(cameraShakeFactor);
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
 		if (controllerFeedback != null) 
 		{
@@ -136,26 +148,39 @@ public class Feedback : MonoBehaviour {
 		if (boostLevel == 4)
 		{
 			sprite.renderer.material.color = boostColorFour;
+<<<<<<< HEAD
 			currentColor = boostColorFour;
+=======
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
 		else if (boostLevel == 3)
 		{
 			sprite.renderer.material.color = boostColorThree;
+<<<<<<< HEAD
 			currentColor = boostColorThree;
+=======
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
 		else if (boostLevel == 2)
 		{
 			sprite.renderer.material.color = boostColorTwo;
+<<<<<<< HEAD
 			currentColor = boostColorTwo;
+=======
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
 		else if (boostLevel == 1)
 		{
 			sprite.renderer.material.color = boostColorOne;
+<<<<<<< HEAD
 			currentColor = boostColorOne;
+=======
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
 		else if (boostLevel == 0)
 		{
 			sprite.renderer.material.color = startColor;
+<<<<<<< HEAD
 			currentColor = startColor;
 		}
 		tracer.lineRenderer.material.color = sprite.renderer.material.color;
@@ -166,6 +191,14 @@ public class Feedback : MonoBehaviour {
 			colExp.transform.position = transform.position;
 			Destroy(colExp, 3.1f);
 		}
+=======
+		}
+		tracer.lineRenderer.material.color = sprite.renderer.material.color;
+		colExp = (GameObject)Instantiate(colorExplosionPrefab);
+		colExp.particleSystem.startColor = sprite.renderer.material.color;
+		colExp.transform.position = transform.position;
+		Destroy(colExp, 3.1f);
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 	}
 
 	private void EnterWake()

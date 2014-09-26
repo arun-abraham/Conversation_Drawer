@@ -49,6 +49,8 @@ public class ConversationScore : MonoBehaviour {
 		}
 		else if (partnerLink.Leading)
 		{
+			headFill.transform.localScale = new Vector3(1, 1, 1);
+
 			// TODO Should not have to do this every frame.
 			mover.maxSpeed = startSpeed;
 
@@ -105,7 +107,6 @@ public class ConversationScore : MonoBehaviour {
 			float indexPortion = (float)nearestIndex / partnerTracer.GetVertexCount();
 			float followThreshold = (((indexPortion * partnerTracer.trailNearWidth) + ((1 - indexPortion) * partnerTracer.trailFarWidth))) / 2;
 			float accuracyFactor = Mathf.Max(1 - (followerToPathDist / followThreshold), -1);
-			//score += Mathf.Max(accuracyFactor * Time.deltaTime, 0);
 			
 			// Show if player is in partner wake or not.
 			if (accuracyFactor > 0)
@@ -155,6 +156,10 @@ public class ConversationScore : MonoBehaviour {
 					headFill.transform.localScale = new Vector3(leadPortionReady,leadPortionReady,leadPortionReady);
 				}
 			}
+
+			// Fill up head based on score.
+			float leadPortionReady = score / scoreToLead;
+			headFill.transform.localScale = new Vector3(leadPortionReady,leadPortionReady,leadPortionReady);
 
 			// Boost speed if score exceeds requirement.
 			if (!partnerLink.Yielding)

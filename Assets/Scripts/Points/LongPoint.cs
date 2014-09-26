@@ -19,6 +19,7 @@ public class LongPoint : MonoBehaviour {
 	
 	public float rotSpeed;
 	private Vector3 rotVect;
+	public float timeConst = 50;
 	
 	private float myAlpha;
 	private float fadeConst = 0.2f;
@@ -59,9 +60,13 @@ public class LongPoint : MonoBehaviour {
 			renderer.material.color = Color.cyan;
 			//print("Good Point");
 			pointMade = true;
-			rotSpeed = 50.0f;
+			rotSpeed = 200.0f;
+			if(rotSpeed > 50.0f)
+			{
+				rotSpeed -= Time.deltaTime * timeConst;
+			}
 			audio.PlayOneShot(Gong);
-			rotVect.y = 2;
+			//rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
 
 			if (coolEvent != null)

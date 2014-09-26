@@ -53,7 +53,10 @@ public class TextFading : MonoBehaviour {
 
 		if(player != null)
 		{
+<<<<<<< HEAD
 			
+=======
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 			if (conversation != null)
 			{
 				var distance = Vector3.Distance(player.transform.position, transform.position);
@@ -90,4 +93,12 @@ public class TextFading : MonoBehaviour {
 		}
 		
 	}
+<<<<<<< HEAD
+=======
+
+	void UnlinkPartner()
+	{
+		convoStart = false;
+	}
+>>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 }
