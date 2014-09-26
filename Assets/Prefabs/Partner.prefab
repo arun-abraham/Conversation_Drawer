@@ -103,7 +103,7 @@ GameObject:
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400022}
   m_Layer: 0
-  m_Name: Head
+  m_Name: PartnerHead
   m_TagString: Converser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 196.800339, y: -281.44928, z: -.200000003}
+  m_LocalPosition: {x: 0, y: 18.4941063, z: -.200000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -495,6 +495,9 @@ MonoBehaviour:
   timeToOvertake: 2
   timeToYield: 2
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
+  PointsGlobal: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -574,7 +577,7 @@ MonoBehaviour:
   maxSpeed: 15
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 50
+  handling: 45
   dampening: .949999988
   dampeningThreshold: 1.5
   externalSpeedMultiplier: 1

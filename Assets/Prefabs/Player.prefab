@@ -158,8 +158,9 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400036}
+  - 114: {fileID: 11400038}
   m_Layer: 0
-  m_Name: Head
+  m_Name: PlayerHead
   m_TagString: Converser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -742,6 +743,9 @@ MonoBehaviour:
   timeToOvertake: 2
   timeToYield: 2
   inWake: 0
+  linkBroken: 0
+  timerTime: 5
+  PointsGlobal: {fileID: 0}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -945,6 +949,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawDistance: 200
+  topBoundary: {fileID: 0}
+  bottomBoundary: {fileID: 0}
+  leftBoundary: {fileID: 0}
+  rightBoundary: {fileID: 0}
+--- !u!114 &11400038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fdc66d13dc674b47a6df498ae9a6e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawDistance: 100
   topBoundary: {fileID: 0}
   bottomBoundary: {fileID: 0}
   leftBoundary: {fileID: 0}

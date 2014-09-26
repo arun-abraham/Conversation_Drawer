@@ -9,11 +9,15 @@ public class PointGroups : MonoBehaviour {
 	private float myAlpha;
 	private float fadeConst = 0.2f;
 
+	public GameObject PointsGlobal;
+
 
 	// Use this for initialization
 	void Start () {
 
-		//gameObject.SetActive(false);
+		PointsGlobal = GameObject.Find("GlobalPoints");
+
+		transform.parent = PointsGlobal.transform;
 	
 	}
 	
@@ -30,12 +34,6 @@ public class PointGroups : MonoBehaviour {
 		BroadcastMessage("IsBright",SendMessageOptions.DontRequireReceiver);
 		}
 
-		/*
-		for(int i = transform.childCount-1;i>0;i--)
-		{
-			if (transform.GetChild(i).renderer != null)
-			transform.GetChild(i).renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
-		}*/
 	}
 
 	public void IsFading()

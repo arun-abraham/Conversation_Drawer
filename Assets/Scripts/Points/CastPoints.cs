@@ -4,7 +4,9 @@ using System.Collections;
 public class CastPoints : MonoBehaviour {
 
 	public SimpleMover mover;
+
 	public GameObject points;
+
 	private GameObject createdPoints;
 
 	private Vector3 pointsPos;
@@ -76,9 +78,9 @@ public class CastPoints : MonoBehaviour {
 	
 	}
 
-	void StartLeading()
+	void StartPoints()
 	{
-		if(!isCreated && createdPoints == null)
+		if(!isCreated)
 		{
 			isCreated = true;
 			if(n)
@@ -112,43 +114,11 @@ public class CastPoints : MonoBehaviour {
 		}
 	}
 
-	void EndLeading()
+	public void CanCreate()
 	{
-		/*
-		createdPoints.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
-		Invoke("DestroyPoints",5.0f);
-		*/
-	}
-	
-	void PointsFade()
-	{
-		if(createdPoints != null)
-		{
-		createdPoints.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
-		}
-	}
-	
-	void PointsBright()
-	{
-		if(createdPoints != null)
-		{
-		createdPoints.SendMessage("IsBright",SendMessageOptions.DontRequireReceiver);
-		}
-	}
-	
-	void  UnlinkPartner()
-	{
-		DestroyPoints();
-	}
-	
-	private void DestroyPoints()
-	{  
-		if (createdPoints != null)
-		{
-			Destroy(createdPoints);
-			createdPoints = null;	
-		}
 		isCreated = false;
 	}
+
+
 }
 

@@ -18,6 +18,7 @@ public GameObject lilPoint8;
 
 public float rotSpeed;
 private Vector3 rotVect;
+public float timeConst = 50;
 
 private float myAlpha;
 private float fadeConst = 0.2f;
@@ -58,9 +59,13 @@ void Update () {
 		renderer.material.color = Color.cyan;
 		print("Good Point");
 		pointMade = true;
-		rotSpeed = 50.0f;
+		rotSpeed = 200.0f;
+		if(rotSpeed > 50.0f)
+		{
+			rotSpeed -= Time.deltaTime * timeConst;
+		}
 		audio.PlayOneShot(Gong);
-		rotVect.y = 3;
+		//rotVect.y = 3;
 		BroadcastMessage("IsHitOff");
 	}
 	

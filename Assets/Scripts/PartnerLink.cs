@@ -82,6 +82,8 @@ public class PartnerLink : MonoBehaviour {
 	public bool linkBroken;
 	public float timerTime = 5;
 
+	public GameObject PointsGlobal = null;
+
 	void Awake()
 	{
 		if (mover == null)
@@ -98,6 +100,8 @@ public class PartnerLink : MonoBehaviour {
 		}
 
 		partnerLine = GetComponent<LineRenderer>();
+
+		PointsGlobal = GameObject.Find("GlobalPoints");
 	}
 
 	void Update()
@@ -158,17 +162,18 @@ public class PartnerLink : MonoBehaviour {
 			}
 		}
 
+		//Handles Time between Unlink Occurs and the Points are destroyed
 		if(linkBroken == true)
 		{
 			if (timerTime > 0)
 			timerTime -= Time.deltaTime;
-			SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
+			PointsGlobal.SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
 			//print (timerTime);
 		}
 		
 		if(timerTime <= 0)
 		{
-			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+			PointsGlobal.SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
 			conversation = null;
 			linkBroken = false;
 			//print("destroyed points");
@@ -192,15 +197,14 @@ public class PartnerLink : MonoBehaviour {
 			//print (timerTime);
 			conversation = ConversationManger.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
-			SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
+			// Makes Alpha of All Objects in PointsGroup 1
+			PointsGlobal.SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
 		}
 		else if (partner == null)
 		{
 			linkBroken = true;
-			//print ("LinkBroken");
-			//SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
-		}
 		
+		}
 		/*
 		else
 		{
@@ -226,11 +230,21 @@ public class PartnerLink : MonoBehaviour {
 				conversation.partner1Leads = false;
 			}
 			SendMessage("StartLeading", SendMessageOptions.DontRequireReceiver);
+			// Cast Points if PLayer
+			if(this.gameObject.name == "PlayerHead")
+			{
+				SendMessage("StartPoints", SendMessageOptions.DontRequireReceiver);
+			}
+			if(this.gameObject.name == "PartnerHead")
+			{
+				GameObject.Find("PlayerHead").SendMessage("CanCreate",SendMessageOptions.DontRequireReceiver);
+			}
 		}
 		else
 		{
-			SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
+			//SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
 		}
+
 		if (partner != null && updatePartner)
 		{
 			partner.SetLeading(!isLead, false);

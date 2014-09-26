@@ -17,12 +17,14 @@ public class SimplePoint : MonoBehaviour {
 	public GameObject lilPoint8;
 
 	public float rotSpeed;
+	public float timeConst = 50;
 	private Vector3 rotVect;
 
 	private float myAlpha;
 	private float fadeConst = 0.2f;
 	public bool fading = false;
 	public bool bright = false;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -58,9 +60,13 @@ public class SimplePoint : MonoBehaviour {
 			renderer.material.color = Color.cyan;
 			//print("Good Point");
 			pointMade = true;
-			rotSpeed = 50.0f;
 			audio.PlayOneShot(Gong);
-			rotVect.y = 1;
+			//rotVect.y = 1;
+			rotSpeed = 200.0f;
+			if(rotSpeed > 50.0f)
+			{
+				rotSpeed -= Time.deltaTime * timeConst;
+			}
 			BroadcastMessage("IsHitOff");
 		}
 	
