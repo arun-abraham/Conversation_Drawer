@@ -6,6 +6,7 @@ public class MiniPointCluster : MonoBehaviour {
 	public AudioClip Gong;
 	public float rotSpeed;
 	private Vector3 rotDir;
+	public float timeConst = 50;
 
 	public GameObject point1;
 	public GameObject point2;
@@ -27,9 +28,13 @@ public class MiniPointCluster : MonoBehaviour {
 
 		if(point1.GetComponent<MiniPoint>().isHit && point2.GetComponent<MiniPoint>().isHit && point3.GetComponent<MiniPoint>().isHit && point4.GetComponent<MiniPoint>().isHit)
 		{
-			//audio.PlayOneShot(Gong);
-			rotSpeed = 50.0f;
-			rotDir.y = 1;
+			audio.PlayOneShot(Gong);
+			rotSpeed = 200.0f;
+			if(rotSpeed > 50.0f)
+			{
+				rotSpeed -= Time.deltaTime * timeConst;
+			}
+			//rotDir.y = 1;
 			//BroadcastMessage("IsHitOff");
 		}
 		
