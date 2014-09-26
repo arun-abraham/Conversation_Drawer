@@ -106,15 +106,11 @@ public class CastPoints : MonoBehaviour {
 
 			if(nw)
 				createdPoints = (GameObject)Instantiate(points, pointsPos, Quaternion.Euler(0, 0, 315));
-			if (createdPoints != null)
-			{
-				GameObject.FindGameObjectWithTag("EndConversation").GetComponent<LongPoint>().coolEvent = GetComponent<CoolEvent>();
-			}
-
+			
 		}
 	}
 
-	public void CanCreate()
+	public void CanCreatePoints()
 	{
 		isCreated = false;
 	}

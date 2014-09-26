@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PartnerLink : MonoBehaviour {
+	public bool isPlayer = false;
 	private PartnerLink partner;
 	public PartnerLink Partner
 	{
@@ -82,7 +83,7 @@ public class PartnerLink : MonoBehaviour {
 	public bool linkBroken;
 	public float timerTime = 5;
 
-	public GameObject PointsGlobal = null;
+	public GameObject pointsGlobal = null;
 
 	void Awake()
 	{
@@ -101,7 +102,7 @@ public class PartnerLink : MonoBehaviour {
 
 		partnerLine = GetComponent<LineRenderer>();
 
-		PointsGlobal = GameObject.Find("GlobalPoints");
+		pointsGlobal = GameObject.FindGameObjectWithTag("Global Points");
 	}
 
 	void Update()
@@ -166,18 +167,35 @@ public class PartnerLink : MonoBehaviour {
 		if(linkBroken == true)
 		{
 			if (timerTime > 0)
-			timerTime -= Time.deltaTime;
-			PointsGlobal.SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
-			//print (timerTime);
+			{
+				timerTime -= Time.deltaTime;
+			}
+
+			if (timerTime <= 0)
+			{
+				if (pointsGlobal != null)
+				{
+					pointsGlobal.SendMessage("DestoryPoints", SendMessageOptions.DontRequireReceiver);
+				}
+				conversation = null;
+				linkBroken = false;
+			}
+
+			if (pointsGlobal != null)
+			{
+				pointsGlobal.SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
+			}
 		}
 		
-		if(timerTime <= 0)
-		{
-			PointsGlobal.SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
-			conversation = null;
-			linkBroken = false;
-			//print("destroyed points");
-		}
+		//if(timerTime <= 0)
+		//{
+			/*if (pointsGlobal != null)
+			{
+				pointsGlobal.SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+			}*/
+		//	conversation = null;
+		//	linkBroken = false;
+		//}
 
 
 	}
@@ -194,23 +212,20 @@ public class PartnerLink : MonoBehaviour {
 		{
 			linkBroken = false;
 			timerTime = 5;
-			//print (timerTime);
 			conversation = ConversationManger.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
 			// Makes Alpha of All Objects in PointsGroup 1
-			PointsGlobal.SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
+			if (pointsGlobal != null)
+			{
+				pointsGlobal.SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
+			}
 		}
-		else if (partner == null)
-		{
-			linkBroken = true;
-		
-		}
-		/*
 		else
 		{
+			linkBroken = true;
 			conversation = null;
-			//SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
-		} */
+			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
+		}
 
 
 
@@ -231,13 +246,13 @@ public class PartnerLink : MonoBehaviour {
 			}
 			SendMessage("StartLeading", SendMessageOptions.DontRequireReceiver);
 			// Cast Points if PLayer
-			if(this.gameObject.name == "PlayerHead")
+			if(isPlayer)
 			{
 				SendMessage("StartPoints", SendMessageOptions.DontRequireReceiver);
 			}
-			if(this.gameObject.name == "PartnerHead")
+			else if(partner != null && partner.isPlayer)
 			{
-				GameObject.Find("PlayerHead").SendMessage("CanCreate",SendMessageOptions.DontRequireReceiver);
+				partner.SendMessage("CanCreatePoints",SendMessageOptions.DontRequireReceiver);
 			}
 		}
 		else

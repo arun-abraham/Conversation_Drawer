@@ -15,7 +15,7 @@ public class PointGroups : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		PointsGlobal = GameObject.Find("GlobalPoints");
+		PointsGlobal = GameObject.FindGameObjectWithTag("Global Points");
 
 		transform.parent = PointsGlobal.transform;
 	
@@ -26,12 +26,12 @@ public class PointGroups : MonoBehaviour {
 
 		if(fading == true)
 		{
-		BroadcastMessage("IsFading",SendMessageOptions.DontRequireReceiver);
+			BroadcastMessage("IsFading",SendMessageOptions.DontRequireReceiver);
 		}
 
 		if(bright == true)
 		{
-		BroadcastMessage("IsBright",SendMessageOptions.DontRequireReceiver);
+			BroadcastMessage("IsBright",SendMessageOptions.DontRequireReceiver);
 		}
 
 	}

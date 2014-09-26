@@ -4,7 +4,7 @@ using System.Collections;
 public class GlobalPoints : MonoBehaviour {
 
 	public GameObject currentPoints = null;
-	private int i;
+	private int recentPoints;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +14,7 @@ public class GlobalPoints : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		i = transform.childCount - 1;
+		recentPoints = transform.childCount - 1;
 	
 	}
 
@@ -29,24 +29,25 @@ public class GlobalPoints : MonoBehaviour {
 	
 	void PointsFade()
 	{
-		transform.GetChild(i).gameObject.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
-	
+		if (recentPoints >= 0 && recentPoints < transform.childCount)
+		{
+			transform.GetChild(recentPoints).gameObject.SendMessage("IsFading", SendMessageOptions.DontRequireReceiver);
+		}
 	}
 	
 	void PointsBright()
 	{
-		transform.GetChild(i).gameObject.SendMessage("IsBright",SendMessageOptions.DontRequireReceiver);
-	
+		if (recentPoints >= 0 && recentPoints < transform.childCount)
+		{
+			transform.GetChild(recentPoints).gameObject.SendMessage("IsBright", SendMessageOptions.DontRequireReceiver);
+		}
 	}
-	
-	void  UnlinkPartner()
-	{
-		DestroyPoints();
-	}
-	
+
 	private void DestroyPoints()
-	{  
-		Destroy(transform.GetChild(i).gameObject);
-	
+	{
+		if (recentPoints >= 0 && recentPoints < transform.childCount)
+		{
+			Destroy(transform.GetChild(recentPoints).gameObject);
+		}
 	}
 }
