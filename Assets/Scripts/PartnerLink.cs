@@ -19,7 +19,7 @@ public class PartnerLink : MonoBehaviour {
 		get { return leading; }
 	}
 	public bool seekingPartner;
-	public float tance;
+	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
 	private LineRenderer partnerLine;
@@ -260,7 +260,7 @@ public class PartnerLink : MonoBehaviour {
 			//SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
 		}
 
-		if (partner != null && updatePartner)conversedis
+		if (partner != null && updatePartner)
 		{
 			partner.SetLeading(!isLead, false);
 		}

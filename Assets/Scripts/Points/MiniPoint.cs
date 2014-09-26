@@ -4,7 +4,6 @@ using System.Collections;
 public class MiniPoint : MonoBehaviour {
 
 	public bool isHit = false;
-	public bool isplayed = false;
 
 	private float myAlpha;
 	private float fadeConst = 0.2f;
@@ -59,11 +58,7 @@ public class MiniPoint : MonoBehaviour {
 		{
 			isHit = true;
 			renderer.material.color = Color.cyan;
-
-			if(isplayed == false)
 			audio.Play();
-
-			isplayed = true;
 		}
 		
 	}
