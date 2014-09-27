@@ -609,9 +609,8 @@ MonoBehaviour:
   rewardSpeedBoost: 2
   boostLevels: 4
   changeTime: .5
-  startSpeed: 0
   gameCamera: {fileID: 0}
-  leadBoostPercentage: .200000003
+  leadBoostPercentage: .100000001
   boostRate: 1
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -714,9 +713,7 @@ LineRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     startWidth: .200000003
     endWidth: .200000003

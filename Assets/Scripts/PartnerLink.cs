@@ -242,7 +242,8 @@ public class PartnerLink : MonoBehaviour {
 				conversation.partner1Leads = false;
 			}
 			SendMessage("StartLeading", SendMessageOptions.DontRequireReceiver);
-			// Cast Points if PLayer
+
+			// Cast Points if Player
 			if(isPlayer)
 			{
 				SendMessage("StartPoints", SendMessageOptions.DontRequireReceiver);
@@ -254,7 +255,7 @@ public class PartnerLink : MonoBehaviour {
 		}
 		else
 		{
-			//SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
+			SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
 		}
 
 		if (partner != null && updatePartner)

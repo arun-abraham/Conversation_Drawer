@@ -639,9 +639,8 @@ MonoBehaviour:
   rewardSpeedBoost: 2
   boostLevels: 4
   changeTime: .5
-  startSpeed: 0
   gameCamera: {fileID: 2000000}
-  leadBoostPercentage: .5
+  leadBoostPercentage: .200000003
   boostRate: 1
   drainRate: .0166599993
   breakingChangeRate: .5

@@ -10,6 +10,7 @@ public class ConversingSpeed : MonoBehaviour {
 	private float boostLeft;
 	private float boostIncrement;
 	private float startMaxSpeed;
+	private string boostName = "";
 
 	public enum BoostStatus
 	{
@@ -50,7 +51,7 @@ public class ConversingSpeed : MonoBehaviour {
 				}
 				if (boostEnded || boostLeft <= 0)
 				{
-					SendMessage("EndSpeedBoost", SendMessageOptions.DontRequireReceiver);
+					SendMessage("EndSpeedBoost", boostName, SendMessageOptions.DontRequireReceiver);
 					boostEnded = true;
 				}
 			}
@@ -63,7 +64,7 @@ public class ConversingSpeed : MonoBehaviour {
 				}
 				if (boostEnded || boostLeft <= 0)
 				{
-					SendMessage("EndSpeedDrainEnd", SendMessageOptions.DontRequireReceiver);
+					SendMessage("EndSpeedDrainEnd", boostName, SendMessageOptions.DontRequireReceiver);
 					boostEnded = true;
 				}
 			}
@@ -73,29 +74,36 @@ public class ConversingSpeed : MonoBehaviour {
 				boostLeft = 0;
 				boostIncrement = 0;
 				boostStatus = BoostStatus.STABLE;
-				SendMessage("EndSpeedChange", SendMessageOptions.DontRequireReceiver);
+				SendMessage("EndSpeedChange", boostName, SendMessageOptions.DontRequireReceiver);
+				boostName = "";
 			}
 		}
 	}
 
-	public void TargetRelativeSpeed(float boostPercentage, float changeRate)
+	public void TargetRelativeSpeed(float boostPercentage, float changeRate, string boostName = "")
 	{
 		targetSpeed = mover.maxSpeed * (1 + boostPercentage);
 		TargetAbsoluteSpeed(targetSpeed, changeRate);
 	}
 
-	public void TargetAbsoluteSpeed(float targetSpeed, float changeRate)
+	public void TargetAbsoluteSpeed(float targetSpeed, float changeRate, string boostName = "")
 	{
-		InterruptSpeedChange();
+		Interrupt();
 
 		this.targetSpeed = targetSpeed;
+		if (boostName == null)
+		{
+			boostName = "";
+		}
+		this.boostName = boostName;
 
 		if (changeRate <= 0)
 		{
 			boostLeft = 0;
 			boostIncrement = 0;
 			boostStatus = BoostStatus.STABLE;
-			SendMessage("EndSpeedChange", SendMessageOptions.DontRequireReceiver);
+			SendMessage("EndSpeedChange", boostName, SendMessageOptions.DontRequireReceiver);
+			boostName = "";
 			return;
 		}
 
@@ -107,35 +115,31 @@ public class ConversingSpeed : MonoBehaviour {
 		}
 		else
 		{
-
 			boostLeft = 1 / changeRate;
 			boostIncrement = (targetSpeed - mover.maxSpeed) * changeRate;
 			boostStatus = BoostStatus.DRAIN;
 		}
-
 	}
 
-	private void InterruptSpeedChange()
+	private void Interrupt()
 	{
 		bool interrupted = false;
 		switch (boostStatus)
 		{
-			case BoostStatus.BOOST:
-				SendMessage("InterruptSpeedBoost", SendMessageOptions.DontRequireReceiver);
-				SendMessage("EndSpeedBoost", SendMessageOptions.DontRequireReceiver);
-				interrupted = true;
-				break;
-			case BoostStatus.DRAIN:
-				SendMessage("InterruptSpeedDrain", SendMessageOptions.DontRequireReceiver);
-				SendMessage("EndSpeedDrain", SendMessageOptions.DontRequireReceiver);
-				interrupted = true;
-				break;
+		case BoostStatus.BOOST:
+			SendMessage("InterruptSpeedBoost", boostName, SendMessageOptions.DontRequireReceiver);
+			interrupted = true;
+			break;
+		case BoostStatus.DRAIN:
+			SendMessage("InterruptSpeedDrain", boostName, SendMessageOptions.DontRequireReceiver);
+			interrupted = true;
+			break;
 		}
 
 		if (interrupted)
 		{
-			SendMessage("InterruptSpeedChange", SendMessageOptions.DontRequireReceiver);
-			SendMessage("EndSpeedChange", SendMessageOptions.DontRequireReceiver);
+			SendMessage("InterruptSpeedChange", boostName, SendMessageOptions.DontRequireReceiver);
 		}
+		boostName = "";
 	}
 }

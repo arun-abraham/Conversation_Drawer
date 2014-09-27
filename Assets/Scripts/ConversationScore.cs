@@ -19,7 +19,7 @@ public class ConversationScore : MonoBehaviour {
 	private bool changingBoostLevel = false;
 	public float changeTime;
 	private float changeTimeElapsed;
-	public float startSpeed;
+	private float startSpeed;
 	public Camera gameCamera = null;
 	private bool canTakeLead = false;
 	public float leadBoostPercentage;
@@ -204,7 +204,7 @@ public class ConversationScore : MonoBehaviour {
 				}
 			}*/
 		}
-
+		
 		headFill.renderer.material.color = sprite.renderer.material.color;
 	}
 
@@ -221,7 +221,7 @@ public class ConversationScore : MonoBehaviour {
 	{
 		partnerTracer = null;
 		canTakeLead = false;
-		//conversingSpeed.TargetAbsoluteSpeed(startSpeed, breakingChangeRate);
+		conversingSpeed.TargetAbsoluteSpeed(startSpeed, breakingChangeRate);
 	}
 
 	private void StartLeading()
@@ -234,17 +234,18 @@ public class ConversationScore : MonoBehaviour {
 		headFill.transform.localScale = Vector3.zero;
 	}
 
-	private void EndSpeedChange()
+	private void EndSpeedChange(string changeName)
 	{
+		string persistentDrain = "PersistentDrain";
 		if (partnerLink.Partner != null)
 		{
 			if (mover.maxSpeed <= minMaxSpeed)
 			{
 				SendMessage("MinMaxSpeedReached", SendMessageOptions.DontRequireReceiver);
 			}
-			else
+			else if (changeName != persistentDrain)
 			{
-				conversingSpeed.TargetAbsoluteSpeed(minMaxSpeed, drainRate);
+				conversingSpeed.TargetAbsoluteSpeed(minMaxSpeed, drainRate, persistentDrain);
 			}
 		}
 	}
