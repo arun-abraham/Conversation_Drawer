@@ -101,6 +101,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400022}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: Partner Head
   m_TagString: Converser
@@ -596,6 +597,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
   tracer: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   partnerTracer: {fileID: 0}
   sprite: {fileID: 100008}
   headFill: {fileID: 100016}
@@ -608,6 +610,7 @@ MonoBehaviour:
   changeTime: .5
   startSpeed: 0
   gameCamera: {fileID: 0}
+  leadBoostPercentage: .5
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -645,6 +648,21 @@ MonoBehaviour:
     velocityX: 0
     velocityY: 0
     velocityZ: 1
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1176eceef8847440b4cb5112890bd39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 0}
+  partnerLink: {fileID: 0}
+  boostRate: 1
+  drainRate: 1
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
