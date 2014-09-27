@@ -24,10 +24,7 @@ public class SimplePoint : MonoBehaviour {
 	private float fadeConst = 0.2f;
 	public bool fading = false;
 	public bool bright = false;
-<<<<<<< HEAD
-=======
 
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 	
 	// Use this for initialization
 	void Start () {

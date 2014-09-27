@@ -83,11 +83,8 @@ public class PartnerLink : MonoBehaviour {
 	public bool linkBroken;
 	public float timerTime = 5;
 
-<<<<<<< HEAD
-=======
 	public GameObject pointsGlobal = null;
 
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 	void Awake()
 	{
 		if (mover == null)
@@ -166,23 +163,6 @@ public class PartnerLink : MonoBehaviour {
 			}
 		}
 
-<<<<<<< HEAD
-		if(linkBroken == true)
-		{
-			if (timerTime > 0)
-			timerTime -= Time.deltaTime;
-			SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
-			//print (timerTime);
-		}
-		
-		if(timerTime <= 0)
-		{
-			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
-			conversation = null;
-			linkBroken = false;
-			//print("destroyed points");
-		}
-=======
 		//Handles Time between Unlink Occurs and the Points are destroyed
 		if(linkBroken == true)
 		{
@@ -216,7 +196,6 @@ public class PartnerLink : MonoBehaviour {
 		//	conversation = null;
 		//	linkBroken = false;
 		//}
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 
 
 	}
@@ -233,12 +212,6 @@ public class PartnerLink : MonoBehaviour {
 		{
 			linkBroken = false;
 			timerTime = 5;
-<<<<<<< HEAD
-			//print (timerTime);
-			conversation = ConversationManger.Instance.FindConversation(this, partner);
-			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
-			SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
-=======
 			conversation = ConversationManger.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
 			// Makes Alpha of All Objects in PointsGroup 1
@@ -246,27 +219,13 @@ public class PartnerLink : MonoBehaviour {
 			{
 				pointsGlobal.SendMessage("PointsBright", SendMessageOptions.DontRequireReceiver);
 			}
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
-		else if (partner == null)
-		{
-			linkBroken = true;
-			//print ("LinkBroken");
-			//SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
-		}
-		
-		/*
 		else
 		{
 			linkBroken = true;
 			conversation = null;
-<<<<<<< HEAD
-			//SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
-		} */
-=======
 			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
 		}
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 
 
 

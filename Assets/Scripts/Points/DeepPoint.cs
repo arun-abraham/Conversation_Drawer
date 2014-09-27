@@ -25,11 +25,6 @@ private float fadeConst = 0.2f;
 public bool fading = false;
 public bool bright = false;
 
-private float myAlpha;
-private float fadeConst = 0.2f;
-public bool fading = false;
-public bool bright = false;
-
 // Use this for initialization
 void Start () {
 	

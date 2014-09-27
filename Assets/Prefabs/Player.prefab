@@ -340,10 +340,6 @@ Transform:
   - {fileID: 400002}
   - {fileID: 400004}
   - {fileID: 400006}
-<<<<<<< HEAD
-  - {fileID: 400014}
-=======
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   - {fileID: 400020}
   m_Father: {fileID: 400000}
   m_RootOrder: 0
@@ -378,11 +374,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-=======
   m_LocalPosition: {x: 0, y: 0, z: -.5}
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400020}
@@ -399,14 +391,9 @@ Transform:
   m_Children:
   - {fileID: 400022}
   - {fileID: 400018}
-<<<<<<< HEAD
-  m_Father: {fileID: 400012}
-  m_RootOrder: 4
-=======
   - {fileID: 400014}
   m_Father: {fileID: 400012}
   m_RootOrder: 3
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 --- !u!4 &400022
 Transform:
   m_ObjectHideFlags: 1
@@ -414,11 +401,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-=======
   m_LocalPosition: {x: 0, y: 0, z: -.5}
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400020}
@@ -535,26 +518,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2300008
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 3104c057573cc4c48a6a0388c3b5c4d2, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -581,16 +544,6 @@ MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 100018}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &3300008
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-=======
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   m_GameObject: {fileID: 100026}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &5400000
@@ -757,10 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56d86b5491f62f46b8990126f139f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-=======
   isPlayer: 1
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -771,11 +721,7 @@ MonoBehaviour:
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
   startYieldProximity: 1
-<<<<<<< HEAD
-  endYieldProximity: 4
-=======
   endYieldProximity: 2
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   yieldSpeedModifier: -.100000001
   timeToOvertake: 2
   timeToYield: 2
@@ -937,11 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partnerLink: {fileID: 11400010}
   mover: {fileID: 0}
-<<<<<<< HEAD
-  trigger: {fileID: 13500002}
-=======
   trigger: {fileID: 6500002}
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
   colorMimicTarget: {fileID: 100026}
 --- !u!114 &11400032
 MonoBehaviour:

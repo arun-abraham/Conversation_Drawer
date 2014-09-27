@@ -150,11 +150,6 @@ public class ConversationScore : MonoBehaviour {
 				{
 					score += Time.deltaTime;
 				}
-				if (!partnerLink.Leading)
-				{
-					float leadPortionReady = score / scoreToLead;
-					headFill.transform.localScale = new Vector3(leadPortionReady,leadPortionReady,leadPortionReady);
-				}
 			}
 
 			// Fill up head based on score.

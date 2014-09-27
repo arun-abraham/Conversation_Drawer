@@ -106,62 +106,15 @@ public class CastPoints : MonoBehaviour {
 
 			if(nw)
 				createdPoints = (GameObject)Instantiate(points, pointsPos, Quaternion.Euler(0, 0, 315));
-<<<<<<< HEAD
-			if (createdPoints != null)
-			{
-				GameObject.FindGameObjectWithTag("EndConversation").GetComponent<LongPoint>().coolEvent = GetComponent<CoolEvent>();
-			}
-
-=======
 			
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 		}
 	}
 
 	public void CanCreatePoints()
 	{
-<<<<<<< HEAD
-		/*
-		createdPoints.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
-		Invoke("DestroyPoints",5.0f);
-		*/
-	}
-	
-	void PointsFade()
-	{
-		if(createdPoints != null)
-		{
-		createdPoints.SendMessage("IsFading",SendMessageOptions.DontRequireReceiver);
-		}
-	}
-	
-	void PointsBright()
-	{
-		if(createdPoints != null)
-		{
-		createdPoints.SendMessage("IsBright",SendMessageOptions.DontRequireReceiver);
-		}
-	}
-	
-	void  UnlinkPartner()
-	{
-		DestroyPoints();
-	}
-	
-	private void DestroyPoints()
-	{  
-		if (createdPoints != null)
-		{
-			Destroy(createdPoints);
-			createdPoints = null;	
-		}
-		isCreated = false;
-	}
-=======
 		isCreated = false;
 	}
 
 
->>>>>>> b18246a33356c4de08256a233f49aa5b0444e615
 }
 
