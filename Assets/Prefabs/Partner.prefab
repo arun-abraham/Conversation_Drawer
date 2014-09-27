@@ -547,6 +547,7 @@ MonoBehaviour:
   desireToLead: .5
   orbit: 0
   orbitRadius: 5
+  likesConversation: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -610,7 +611,11 @@ MonoBehaviour:
   changeTime: .5
   startSpeed: 0
   gameCamera: {fileID: 0}
-  leadBoostPercentage: .5
+  leadBoostPercentage: .200000003
+  boostRate: 1
+  drainRate: .0166599993
+  breakingChangeRate: .5
+  minMaxSpeed: 5
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -661,8 +666,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
-  boostRate: 1
-  drainRate: 1
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1

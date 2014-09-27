@@ -23,6 +23,10 @@ public class ConversationScore : MonoBehaviour {
 	public Camera gameCamera = null;
 	private bool canTakeLead = false;
 	public float leadBoostPercentage;
+	public float boostRate;
+	public float drainRate;
+	public float breakingChangeRate;
+	public float minMaxSpeed;
 
 	void Start()
 	{
@@ -147,7 +151,7 @@ public class ConversationScore : MonoBehaviour {
 				else if (scoreToLead >= 0 && score > scoreToLead)
 				{
 					partnerLink.SetLeading(true);
-					conversingSpeed.TargetRelativeSpeed(leadBoostPercentage);
+					conversingSpeed.TargetRelativeSpeed(leadBoostPercentage, boostRate);
 					//mover.maxSpeed = startSpeed;
 					//SendMessage("SpeedNormal", SendMessageOptions.DontRequireReceiver);
 					partnerLink.Partner.SendMessage("StartYielding", SendMessageOptions.DontRequireReceiver);
@@ -217,6 +221,7 @@ public class ConversationScore : MonoBehaviour {
 	{
 		partnerTracer = null;
 		canTakeLead = false;
+		//conversingSpeed.TargetAbsoluteSpeed(startSpeed, breakingChangeRate);
 	}
 
 	private void StartLeading()
@@ -227,5 +232,20 @@ public class ConversationScore : MonoBehaviour {
 	private void EndLeading()
 	{
 		headFill.transform.localScale = Vector3.zero;
+	}
+
+	private void EndSpeedChange()
+	{
+		if (partnerLink.Partner != null)
+		{
+			if (mover.maxSpeed <= minMaxSpeed)
+			{
+				SendMessage("MinMaxSpeedReached", SendMessageOptions.DontRequireReceiver);
+			}
+			else
+			{
+				conversingSpeed.TargetAbsoluteSpeed(minMaxSpeed, drainRate);
+			}
+		}
 	}
 }

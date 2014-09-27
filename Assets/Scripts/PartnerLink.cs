@@ -226,9 +226,6 @@ public class PartnerLink : MonoBehaviour {
 			conversation = null;
 			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
 		}
-
-
-
 	}
 
 	public void SetLeading(bool isLead, bool updatePartner = true)

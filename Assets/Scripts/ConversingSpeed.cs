@@ -4,8 +4,6 @@ using System.Collections;
 public class ConversingSpeed : MonoBehaviour {
 	public SimpleMover mover;
 	public PartnerLink partnerLink;
-	public float boostRate;
-	public float drainRate;
 	private float targetSpeed;
 	private BoostStatus boostStatus;
 	private bool draining;
@@ -52,13 +50,22 @@ public class ConversingSpeed : MonoBehaviour {
 				}
 				if (boostEnded || boostLeft <= 0)
 				{
-					SendMessage("SpeedBoostEnded", SendMessageOptions.DontRequireReceiver);
+					SendMessage("EndSpeedBoost", SendMessageOptions.DontRequireReceiver);
 					boostEnded = true;
 				}
 			}
 			else
 			{
-				//mover.maxSpeed = Mathf.Min(mover.maxSpeed - (mover.maxSpeed * drainRate), 0);
+				if (mover.maxSpeed <= targetSpeed)
+				{
+					mover.maxSpeed = targetSpeed;
+					boostEnded = true;
+				}
+				if (boostEnded || boostLeft <= 0)
+				{
+					SendMessage("EndSpeedDrainEnd", SendMessageOptions.DontRequireReceiver);
+					boostEnded = true;
+				}
 			}
 
 			if (boostEnded)
@@ -66,30 +73,46 @@ public class ConversingSpeed : MonoBehaviour {
 				boostLeft = 0;
 				boostIncrement = 0;
 				boostStatus = BoostStatus.STABLE;
+				SendMessage("EndSpeedChange", SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}
 
-	public void TargetRelativeSpeed(float boostPercentage)
+	public void TargetRelativeSpeed(float boostPercentage, float changeRate)
 	{
 		targetSpeed = mover.maxSpeed * (1 + boostPercentage);
-		TargetAbsoluteSpeed(targetSpeed);
+		TargetAbsoluteSpeed(targetSpeed, changeRate);
 	}
 
-	public void TargetAbsoluteSpeed(float targetSpeed)
+	public void TargetAbsoluteSpeed(float targetSpeed, float changeRate)
 	{
 		InterruptSpeedChange();
-		boostStatus = BoostStatus.BOOST;
+
+		this.targetSpeed = targetSpeed;
+
+		if (changeRate <= 0)
+		{
+			boostLeft = 0;
+			boostIncrement = 0;
+			boostStatus = BoostStatus.STABLE;
+			SendMessage("EndSpeedChange", SendMessageOptions.DontRequireReceiver);
+			return;
+		}
+
 		if (targetSpeed >= mover.maxSpeed)
 		{
-			boostLeft = 1 / boostRate;
-			boostIncrement = (targetSpeed - mover.maxSpeed) * boostRate;
+			boostLeft = 1 / changeRate;
+			boostIncrement = (targetSpeed - mover.maxSpeed) * changeRate;
+			boostStatus = BoostStatus.BOOST;
 		}
 		else
 		{
-			boostLeft = 1 / drainRate;
-			boostIncrement = (targetSpeed - mover.maxSpeed) * boostRate;
+
+			boostLeft = 1 / changeRate;
+			boostIncrement = (targetSpeed - mover.maxSpeed) * changeRate;
+			boostStatus = BoostStatus.DRAIN;
 		}
+
 	}
 
 	private void InterruptSpeedChange()
@@ -98,18 +121,21 @@ public class ConversingSpeed : MonoBehaviour {
 		switch (boostStatus)
 		{
 			case BoostStatus.BOOST:
-				SendMessage("SpeedBoostInterrupted", SendMessageOptions.DontRequireReceiver);
+				SendMessage("InterruptSpeedBoost", SendMessageOptions.DontRequireReceiver);
+				SendMessage("EndSpeedBoost", SendMessageOptions.DontRequireReceiver);
 				interrupted = true;
 				break;
 			case BoostStatus.DRAIN:
-				SendMessage("SpeedDrainInterrupted", SendMessageOptions.DontRequireReceiver);
+				SendMessage("InterruptSpeedDrain", SendMessageOptions.DontRequireReceiver);
+				SendMessage("EndSpeedDrain", SendMessageOptions.DontRequireReceiver);
 				interrupted = true;
 				break;
 		}
 
 		if (interrupted)
 		{
-			SendMessage("SpeedChangeInterrupted", SendMessageOptions.DontRequireReceiver);
+			SendMessage("InterruptSpeedChange", SendMessageOptions.DontRequireReceiver);
+			SendMessage("EndSpeedChange", SendMessageOptions.DontRequireReceiver);
 		}
 	}
 }
