@@ -42,7 +42,6 @@ public class Detail : MonoBehaviour {
 		
 		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
-			Debug.Log(collide.gameObject + " " + creator);
 			isHit = true;
 			renderer.material.color = Color.blue;
 

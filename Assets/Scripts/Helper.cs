@@ -18,4 +18,19 @@ public class Helper {
 		Vector3 projection = baseDirection * projecteeMag * projecteeDotBase;
 		return projection;
 	}
+
+	public static float AngleDegrees(Vector3 baseVector, Vector3 targetVector, Vector3 axis)
+	{
+		float angle = Vector3.Angle(baseVector, targetVector);
+		if (Vector3.Dot(Vector3.Cross(baseVector, targetVector), axis) < 0)
+		{
+			angle *= -1;
+		}
+		return angle;
+	}
+
+	public static float AngleRadians(Vector3 baseVector, Vector3 targetVector, Vector3 axis)
+	{
+		return AngleDegrees(baseVector, targetVector, axis) * Mathf.Deg2Rad;
+	}
 }

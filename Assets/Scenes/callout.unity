@@ -484,7 +484,7 @@ MonoBehaviour:
   tail: {fileID: 561002643}
   geometry: {fileID: 1138187660}
   waypoints: []
-  showWaypoints: 1
+  showWaypoints: 0
   current: 0
   partnerWeight: .699999988
   waypointContainer: {fileID: 374753964}
@@ -2623,11 +2623,11 @@ MonoBehaviour:
   loopBacks: 0
   pointSpawns:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: 1, y: 2, z: 0}
+    offset: {x: 2, y: -3, z: 0}
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: 3, y: -1, z: 0}
+    offset: {x: 4, y: 0, z: 0}
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: 3, y: -4, z: 0}
+    offset: {x: 2, y: 3, z: 0}
 --- !u!1 &918191249
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,10 +3317,6 @@ Prefab:
       propertyPath: waypointContainer
       value: 
       objectReference: {fileID: 374753964}
-    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
-      propertyPath: showWaypoints
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 1766441965}
@@ -3626,11 +3622,11 @@ MonoBehaviour:
   loopBacks: 0
   pointSpawns:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: -3, y: 2, z: 0}
+    offset: {x: -2, y: -3, z: 0}
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: -3, y: -1, z: 0}
+    offset: {x: -4, y: 0, z: 0}
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: -1, y: -4, z: 0}
+    offset: {x: -2, y: 3, z: 0}
 --- !u!1 &1665620723
 GameObject:
   m_ObjectHideFlags: 0
