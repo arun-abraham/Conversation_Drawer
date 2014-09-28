@@ -30,11 +30,12 @@ public class Tail : MonoBehaviour {
 	void Update()
 	{
 		// Set speed proportional to head's speed to slowly wait for yield proximity.
-		Vector3 targetPos = partnerLink.transform.position + new Vector3(0, 0, (transform.localScale.z / 2));
+		Vector3 targetPos = partnerLink.transform.position - new Vector3(0, 0, (transform.localScale.z / 2));
 		Vector3 fromHead = transform.position - targetPos;
+		float fromHeadDistance = fromHead.magnitude;
 		fromHead.z = 0;
-		float yieldProximityPortion = fromHead.magnitude / partnerLink.startYieldProximity;
-		mover.maxSpeed = partnerLink.mover.maxSpeed * yieldProximityPortion / 2;
+		float yieldProximityPortion = fromHeadDistance / partnerLink.startYieldProximity;
+		mover.maxSpeed = Mathf.Min(partnerLink.mover.maxSpeed * (yieldProximityPortion / 2), fromHeadDistance / Time.deltaTime);
 		mover.Move(-fromHead, mover.maxSpeed);
 
 		if (following)
