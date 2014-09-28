@@ -51,7 +51,10 @@ public class LongDetail : MonoBehaviour {
 		if (collide.gameObject.tag == "Converser")
 		{
 			setHitOn();
+
+			if (allDone == false)
 			audio.Play();
+
 			Invoke("setHitOff",5.0f);
 		}
 		

@@ -76,15 +76,14 @@ public class PartnerLink : MonoBehaviour {
 					SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
 				}
 			}
-
 		}
 	}
-
+	
 	public bool linkBroken;
 	public float timerTime = 5;
-
+	
 	public GameObject pointsGlobal = null;
-
+	
 	void Awake()
 	{
 		if (mover == null)
@@ -99,12 +98,12 @@ public class PartnerLink : MonoBehaviour {
 		{
 			conversationScore = GetComponent<ConversationScore>();
 		}
-
+		
 		partnerLine = GetComponent<LineRenderer>();
-
+		
 		pointsGlobal = GameObject.FindGameObjectWithTag("Global Points");
 	}
-
+	
 	void Update()
 	{
 		// Find a partner.
@@ -121,7 +120,7 @@ public class PartnerLink : MonoBehaviour {
 				}
 			}
 		}
-
+		
 		// Handle partners seperating.
 		if (partner != null && seekingPartner)
 		{
@@ -162,7 +161,7 @@ public class PartnerLink : MonoBehaviour {
 				}
 			}
 		}
-
+		
 		//Handles Time between Unlink Occurs and the Points are destroyed
 		if(linkBroken == true)
 		{
@@ -170,7 +169,7 @@ public class PartnerLink : MonoBehaviour {
 			{
 				timerTime -= Time.deltaTime;
 			}
-
+			
 			if (timerTime <= 0)
 			{
 				if (pointsGlobal != null)
@@ -180,7 +179,7 @@ public class PartnerLink : MonoBehaviour {
 				conversation = null;
 				linkBroken = false;
 			}
-
+			
 			if (pointsGlobal != null)
 			{
 				pointsGlobal.SendMessage("PointsFade", SendMessageOptions.DontRequireReceiver);
@@ -189,25 +188,25 @@ public class PartnerLink : MonoBehaviour {
 		
 		//if(timerTime <= 0)
 		//{
-			/*if (pointsGlobal != null)
+		/*if (pointsGlobal != null)
 			{
 				pointsGlobal.SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
 			}*/
 		//	conversation = null;
 		//	linkBroken = false;
 		//}
-
-
+		
+		
 	}
-
+	
 	void FixedUpdate()
 	{
 	}
-
+	
 	public void SetPartner(PartnerLink partner)
 	{
 		this.partner = partner;
-
+		
 		if (partner != null)
 		{
 			linkBroken = false;
@@ -226,8 +225,11 @@ public class PartnerLink : MonoBehaviour {
 			conversation = null;
 			SendMessage("UnlinkPartner", SendMessageOptions.DontRequireReceiver);
 		}
+		
+		
+		
 	}
-
+	
 	public void SetLeading(bool isLead, bool updatePartner = true)
 	{
 		leading = isLead;
@@ -257,13 +259,13 @@ public class PartnerLink : MonoBehaviour {
 		{
 			SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
 		}
-
+		
 		if (partner != null && updatePartner)
 		{
 			partner.SetLeading(!isLead, false);
 		}
 	}
-
+	
 	public bool ShouldLead(PartnerLink leader)
 	{
 		Vector3 toLeader = leader.transform.position - transform.position;
@@ -271,7 +273,7 @@ public class PartnerLink : MonoBehaviour {
 		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
 		return !far || !behind;
 	}
-
+	
 	public bool ShouldYield(PartnerLink leader)
 	{
 		Vector3 toLeader = leader.transform.position - transform.position;
@@ -279,5 +281,5 @@ public class PartnerLink : MonoBehaviour {
 		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
 		return !far || !behind;
 	}
-
+	
 }
