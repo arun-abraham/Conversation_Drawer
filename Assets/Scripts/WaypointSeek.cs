@@ -23,6 +23,7 @@ public class WaypointSeek : SimpleSeek {
 	public bool orbit = false;
 	public float orbitRadius = 5.0f;
 	public bool likesConversation = true;
+	private GameObject[] recentPoints;
 	
 	protected override void Start()
 	{
@@ -193,8 +194,6 @@ public class WaypointSeek : SimpleSeek {
 		previous = current;
 		collideWithWaypoint = false;
 
-		
-		
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
 		{
@@ -225,6 +224,31 @@ public class WaypointSeek : SimpleSeek {
 			
 		}
 		current = previous + 1;
+
+		// Spawn points attached to waypoint being sought, after despawning most recently created points.
+		if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
+		{
+			if (recentPoints != null)
+			{
+				for (int i = 0; i < recentPoints.Length; i++)
+				{
+					Destroy(recentPoints[i]);
+				}
+			}
+
+			recentPoints = new GameObject[waypoints[current].pointSpawns.Count];
+			for (int i = 0; i < recentPoints.Length; i++)
+			{
+				PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
+				GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + newPointSpawn.offset, Quaternion.identity);
+				recentPoints[i] = newPoint;
+				MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+				if (newMiniPoint != null)
+				{
+					newMiniPoint.creator = gameObject;
+				}
+			}
+		}
 
 		if (showWaypoints)
 		{

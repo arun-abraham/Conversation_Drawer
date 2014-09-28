@@ -10,6 +10,7 @@ public class MiniPoint : MonoBehaviour {
 	private float fadeConst = 0.2f;
 	public bool fading = false;
 	public bool bright = false;
+	public GameObject creator;
 
 	// Use this for initialization
 	void Start () {
@@ -55,7 +56,7 @@ public class MiniPoint : MonoBehaviour {
 
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Converser")
+		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
 			isHit = true;
 			renderer.material.color = Color.cyan;
