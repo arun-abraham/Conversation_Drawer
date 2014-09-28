@@ -109,6 +109,24 @@ public class ConversationManager : MonoBehaviour
 		}
 		return foundConversation;
 	}
+
+	public Conversation[] FindConversations(PartnerLink participant)
+	{
+		List<Conversation> foundConversations = new List<Conversation>();
+		for (int i = 0; i < conversations.Count; i++)
+		{
+			if (conversations[i].partner1 == participant || conversations[i].partner2 == participant)
+			{
+				foundConversations.Add(conversations[i]);
+			}
+		}
+		Conversation[] conversationArray = new Conversation[foundConversations.Count];
+		for (int i = 0; i < foundConversations.Count; i++)
+		{
+			conversationArray[i] = foundConversations[i];
+		}
+		return conversationArray;
+	}
 }
 
 [System.Serializable]
