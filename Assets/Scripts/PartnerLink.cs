@@ -32,6 +32,7 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	public GameObject callout;
 	private bool yielding;
 	public bool Yielding
 	{
@@ -107,17 +108,43 @@ public class PartnerLink : MonoBehaviour {
 	void Update()
 	{
 		// Find a partner.
-		if (seekingPartner && partner == null)
+		if (partner == null && seekingPartner)
 		{
-			GameObject[] potentials = GameObject.FindGameObjectsWithTag("Converser");
-			for (int i = 0; i < potentials.Length; i++)
+			// Find the nearest potential partner that could be conversed with.
+			bool enableCallout = false;
+			Conversation[] potentialConversations = ConversationManager.Instance.FindConversations(this);
+			Conversation nearestConversation = null;
+			float minSqrDist = -1;
+			for (int i = 0; i < potentialConversations.Length; i++)
 			{
-				PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
-				Conversation potentionalConversation = ConversationManger.Instance.FindConversation(this, potentialPartner);
-				if (potentionalConversation != null && potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(potentionalConversation.initiateDistance, 2))
+				if (potentialConversations[i].partner1.seekingPartner && potentialConversations[i].partner2.seekingPartner)
 				{
-					ConversationManger.Instance.StartConversation(this, potentialPartner);
+					float sqrDist = (potentialConversations[i].partner1.transform.position - potentialConversations[i].partner2.transform.position).sqrMagnitude;
+					if (sqrDist < minSqrDist || (minSqrDist < 0 && sqrDist <= Mathf.Pow(potentialConversations[i].breakingDistance, 2)))
+					{
+						nearestConversation = potentialConversations[i];
+						minSqrDist = sqrDist;
+					}
 				}
+			}
+
+			// Determine if the potential partner is actually close enough to converse with.
+			if (nearestConversation != null)
+			{
+				if (minSqrDist <= Mathf.Pow(nearestConversation.initiateDistance, 2))
+				{
+					ConversationManager.Instance.StartConversation(nearestConversation.partner1, nearestConversation.partner2);
+				}
+				else
+				{
+					enableCallout = true;
+				}
+			}
+
+			// Enable callout if needed.
+			if (callout != null)
+			{
+				callout.SetActive(enableCallout);
 			}
 		}
 		
@@ -128,7 +155,7 @@ public class PartnerLink : MonoBehaviour {
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
 			if (sqrDist > Mathf.Pow(conversation.breakingDistance, 2))
 			{
-				ConversationManger.Instance.EndConversation(this, partner);
+				ConversationManager.Instance.EndConversation(this, partner);
 				if (partnerLine != null)
 				{
 					partnerLine.SetVertexCount(0);
@@ -211,7 +238,7 @@ public class PartnerLink : MonoBehaviour {
 		{
 			linkBroken = false;
 			timerTime = 5;
-			conversation = ConversationManger.Instance.FindConversation(this, partner);
+			conversation = ConversationManager.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
 			// Makes Alpha of All Objects in PointsGroup 1
 			if (pointsGlobal != null)

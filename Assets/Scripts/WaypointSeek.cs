@@ -26,6 +26,7 @@ public class WaypointSeek : SimpleSeek {
 	
 	protected override void Start()
 	{
+		base.Start();
 		if (mover == null)
 		{
 			mover = GetComponent<SimpleMover>();

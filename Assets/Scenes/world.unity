@@ -567,7 +567,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -3310,7 +3310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -4263,7 +4263,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -7400,7 +7400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -9246,7 +9246,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -11301,7 +11301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -16147,7 +16147,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -16531,7 +16531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -17051,7 +17051,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -17597,7 +17597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -20512,7 +20512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -24799,6 +24799,106 @@ MeshFilter:
   m_PrefabInternal: {fileID: 908731050}
   m_GameObject: {fileID: 655931920}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &661112366
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[13].title
+      value: Homecoming
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[1].title
+      value: A Quick Chat
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[2].title
+      value: Not My Best Day
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[3].title
+      value: Something Fishy ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[4].title
+      value: Going Hunting
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[5].title
+      value: Philosophy Class
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[6].title
+      value: Blah Blah Blah
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[7].title
+      value: Interview
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[8].title
+      value: Tea Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[9].title
+      value: Controversy
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[10].title
+      value: Leave Me Alone
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[11].title
+      value: I <3 You
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+      propertyPath: conversations.Array.data[12].title
+      value: Homecoming
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
+  m_RootGameObject: {fileID: 1247359234}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &664516849
 GameObject:
   m_ObjectHideFlags: 0
@@ -26608,7 +26708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -32304,7 +32404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -34304,7 +34404,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -36514,206 +36614,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1484561089}
   m_RootOrder: 1
---- !u!1001 &1004473745
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.size
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -231.286041
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 104.485626
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[1].title
-      value: A Quick Chat
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[2].title
-      value: Not My Best Day
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[3].title
-      value: Something Fishy ...
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[4].title
-      value: Going Hunting
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[5].title
-      value: Philosophy Class
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[6].title
-      value: Blah Blah Blah
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[7].title
-      value: Interview
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[8].title
-      value: Tea Time
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[9].title
-      value: Controversy
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[10].title
-      value: Leave Me Alone
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[11].title
-      value: I <3 You
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[12].title
-      value: Homecoming
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[0].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[1].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[2].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[3].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[4].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[5].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[6].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[7].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[8].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[9].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[10].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[11].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[12].partner1
-      value: 
-      objectReference: {fileID: 120367382}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[1].partner2
-      value: 
-      objectReference: {fileID: 407821125}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[0].partner2
-      value: 
-      objectReference: {fileID: 1609370464}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[2].partner2
-      value: 
-      objectReference: {fileID: 1796275355}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[3].partner2
-      value: 
-      objectReference: {fileID: 1915819113}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[4].partner2
-      value: 
-      objectReference: {fileID: 543811441}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[5].partner2
-      value: 
-      objectReference: {fileID: 1114742435}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[6].partner2
-      value: 
-      objectReference: {fileID: 158371611}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[7].partner2
-      value: 
-      objectReference: {fileID: 255279308}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[8].partner2
-      value: 
-      objectReference: {fileID: 863844806}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[9].partner2
-      value: 
-      objectReference: {fileID: 1681973401}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[10].partner2
-      value: 
-      objectReference: {fileID: 708079143}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[11].partner2
-      value: 
-      objectReference: {fileID: 441769106}
-    - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-      propertyPath: conversations.Array.data[12].partner2
-      value: 
-      objectReference: {fileID: 59321321}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-  m_RootGameObject: {fileID: 1247359234}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1004933395
 GameObject:
   m_ObjectHideFlags: 0
@@ -40038,7 +39938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -42405,7 +42305,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -44032,7 +43932,7 @@ SphereCollider:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-  m_PrefabInternal: {fileID: 1004473745}
+  m_PrefabInternal: {fileID: 661112366}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1247359236}
@@ -44049,11 +43949,11 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30,
     type: 2}
-  m_PrefabInternal: {fileID: 1004473745}
+  m_PrefabInternal: {fileID: 661112366}
   m_GameObject: {fileID: 1247359234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4463abb99485db4489f65618f6e9706, type: 3}
+  m_Script: {fileID: 11500000, guid: b98b854f183c6ea4894bed48e4da7f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   conversations:
@@ -44165,10 +44065,10 @@ MonoBehaviour:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
-  m_PrefabInternal: {fileID: 1004473745}
+  m_PrefabInternal: {fileID: 661112366}
   m_GameObject: {fileID: 1247359234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -231.286041, y: 104.485626, z: .100000001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -48201,7 +48101,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -49991,7 +49891,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -55267,7 +55167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -58019,7 +57919,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -58403,7 +58303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -60609,7 +60509,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
@@ -62970,7 +62870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -66683,7 +66583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -68934,7 +68834,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
