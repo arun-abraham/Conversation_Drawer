@@ -3,7 +3,6 @@ using System.Collections;
 
 public class LongPoint : MonoBehaviour {
 
-	public CoolEvent coolEvent;
 	public bool pointMade;
 
 	public AudioClip Gong;
@@ -68,11 +67,6 @@ public class LongPoint : MonoBehaviour {
 			audio.PlayOneShot(Gong);
 			//rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
-
-			if (coolEvent != null)
-			{
-				coolEvent.BeCool();
-			}
 		}
 		
 	}
