@@ -480,6 +480,7 @@ GameObject:
   - 114: {fileID: 103414803}
   - 114: {fileID: 103414812}
   - 114: {fileID: 103414811}
+  - 114: {fileID: 103414813}
   m_Layer: 0
   m_Name: Storyteller Head
   m_TagString: Converser
@@ -516,7 +517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 500
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 5
   trailFarWidth: 30
   zOffset: 10
@@ -535,6 +536,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
   tracer: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   partnerTracer: {fileID: 0}
   sprite: {fileID: 1184607}
   headFill: {fileID: 1846841246}
@@ -545,8 +547,12 @@ MonoBehaviour:
   rewardSpeedBoost: 2
   boostLevels: 4
   changeTime: .5
-  startSpeed: 0
   gameCamera: {fileID: 0}
+  leadBoostPercentage: .100000001
+  boostRate: 2
+  drainRate: .0166599993
+  breakingChangeRate: .5
+  minMaxSpeed: 5
 --- !u!114 &103414803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,6 +583,7 @@ MonoBehaviour:
   desireToLead: .5
   orbit: 0
   orbitRadius: 5
+  likesConversation: 1
 --- !u!54 &103414804
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -716,9 +723,7 @@ LineRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     startWidth: .200000003
     endWidth: .200000003
@@ -759,6 +764,20 @@ MonoBehaviour:
   loopOnCamera: 0
   moveRoot: 1
   boundaryCollider: 0
+--- !u!114 &103414813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 704326627}
+  m_GameObject: {fileID: 103414799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1176eceef8847440b4cb5112890bd39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 0}
+  partnerLink: {fileID: 0}
 --- !u!1 &129347009
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +1011,7 @@ GameObject:
   - 114: {fileID: 174839617}
   - 114: {fileID: 174839616}
   - 114: {fileID: 174839615}
+  - 114: {fileID: 174839618}
   m_Layer: 0
   m_Name: Partner Head
   m_TagString: Converser
@@ -1105,6 +1125,21 @@ MonoBehaviour:
   desireToLead: .5
   orbit: 0
   orbitRadius: 5
+  likesConversation: 1
+--- !u!114 &174839618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1665879833}
+  m_GameObject: {fileID: 174839612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1176eceef8847440b4cb5112890bd39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 0}
+  partnerLink: {fileID: 0}
 --- !u!114 &174839619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,9 +1196,7 @@ LineRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     startWidth: .200000003
     endWidth: .200000003
@@ -1205,6 +1238,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
   tracer: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   partnerTracer: {fileID: 0}
   sprite: {fileID: 2063637660}
   headFill: {fileID: 619006125}
@@ -1215,8 +1249,12 @@ MonoBehaviour:
   rewardSpeedBoost: 2
   boostLevels: 4
   changeTime: .5
-  startSpeed: 0
   gameCamera: {fileID: 0}
+  leadBoostPercentage: .100000001
+  boostRate: 2
+  drainRate: .0166599993
+  breakingChangeRate: .5
+  minMaxSpeed: 5
 --- !u!114 &174839624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,7 +1292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -1453,8 +1491,8 @@ GameObject:
   - 65: {fileID: 272260317}
   - 114: {fileID: 272260316}
   m_Layer: 0
-  m_Name: Boundary
-  m_TagString: Untagged
+  m_Name: Right Boundary
+  m_TagString: World Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1909,8 +1947,8 @@ GameObject:
   - 65: {fileID: 373254840}
   - 114: {fileID: 373254839}
   m_Layer: 0
-  m_Name: Boundary
-  m_TagString: Untagged
+  m_Name: Left Boundary
+  m_TagString: World Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4250,7 +4288,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1247359234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4463abb99485db4489f65618f6e9706, type: 3}
+  m_Script: {fileID: 11500000, guid: b98b854f183c6ea4894bed48e4da7f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   conversations:
@@ -4604,8 +4642,8 @@ GameObject:
   - 65: {fileID: 1419849776}
   - 114: {fileID: 1419849775}
   m_Layer: 0
-  m_Name: Boundary
-  m_TagString: Untagged
+  m_Name: Bottom Boundary
+  m_TagString: World Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4679,8 +4717,8 @@ GameObject:
   - 114: {fileID: 1430846598}
   - 114: {fileID: 1430846597}
   m_Layer: 0
-  m_Name: Boundary
-  m_TagString: Untagged
+  m_Name: Top Boundary
+  m_TagString: World Boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5359,6 +5397,7 @@ GameObject:
   - 114: {fileID: 1719802096}
   - 114: {fileID: 1719802107}
   - 114: {fileID: 1719802104}
+  - 114: {fileID: 1719802106}
   m_Layer: 0
   m_Name: Player Head
   m_TagString: Converser
@@ -5533,6 +5572,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
   tracer: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   partnerTracer: {fileID: 0}
   sprite: {fileID: 918191249}
   headFill: {fileID: 136597954}
@@ -5543,8 +5583,12 @@ MonoBehaviour:
   rewardSpeedBoost: 2
   boostLevels: 4
   changeTime: .5
-  startSpeed: 0
   gameCamera: {fileID: 51258267}
+  leadBoostPercentage: .200000003
+  boostRate: 1
+  drainRate: .0166599993
+  breakingChangeRate: .5
+  minMaxSpeed: 5
 --- !u!114 &1719802102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5616,6 +5660,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1719802106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400038, guid: 1ccc0e99af2cf6b47a3f4f25558fb029,
+    type: 2}
+  m_PrefabInternal: {fileID: 1076811653}
+  m_GameObject: {fileID: 1719802093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1176eceef8847440b4cb5112890bd39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 0}
+  partnerLink: {fileID: 0}
 --- !u!114 &1719802107
 MonoBehaviour:
   m_ObjectHideFlags: 0

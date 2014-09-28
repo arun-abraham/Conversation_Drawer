@@ -495,7 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -611,7 +611,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  boostRate: 1
+  boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5

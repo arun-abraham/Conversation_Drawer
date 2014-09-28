@@ -45,7 +45,7 @@ public class TextFading : MonoBehaviour {
 
 	void Start()
 	{
-		conversation = ConversationManger.Instance.FindConversation(partnerLink, player);
+		conversation = ConversationManager.Instance.FindConversation(partnerLink, player);
 	}
 	
 	// Update is called once per frame

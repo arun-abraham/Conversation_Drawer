@@ -113,10 +113,10 @@ public class PartnerLink : MonoBehaviour {
 			for (int i = 0; i < potentials.Length; i++)
 			{
 				PartnerLink potentialPartner = potentials[i].GetComponent<PartnerLink>();
-				Conversation potentionalConversation = ConversationManger.Instance.FindConversation(this, potentialPartner);
+				Conversation potentionalConversation = ConversationManager.Instance.FindConversation(this, potentialPartner);
 				if (potentionalConversation != null && potentials[i] != gameObject && (transform.position - potentials[i].transform.position).sqrMagnitude <= Mathf.Pow(potentionalConversation.initiateDistance, 2))
 				{
-					ConversationManger.Instance.StartConversation(this, potentialPartner);
+					ConversationManager.Instance.StartConversation(this, potentialPartner);
 				}
 			}
 		}
@@ -128,7 +128,7 @@ public class PartnerLink : MonoBehaviour {
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
 			if (sqrDist > Mathf.Pow(conversation.breakingDistance, 2))
 			{
-				ConversationManger.Instance.EndConversation(this, partner);
+				ConversationManager.Instance.EndConversation(this, partner);
 				if (partnerLine != null)
 				{
 					partnerLine.SetVertexCount(0);
@@ -211,7 +211,7 @@ public class PartnerLink : MonoBehaviour {
 		{
 			linkBroken = false;
 			timerTime = 5;
-			conversation = ConversationManger.Instance.FindConversation(this, partner);
+			conversation = ConversationManager.Instance.FindConversation(this, partner);
 			SendMessage("LinkPartner", SendMessageOptions.DontRequireReceiver);
 			// Makes Alpha of All Objects in PointsGroup 1
 			if (pointsGlobal != null)
