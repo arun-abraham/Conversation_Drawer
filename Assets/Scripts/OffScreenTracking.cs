@@ -56,7 +56,7 @@ public class OffScreenTracking : MonoBehaviour {
 		GameObject[] boundaries = GameObject.FindGameObjectsWithTag("World Boundary");
 		for (int i = 0; i < boundaries.Length; i++)
 		{
-			TriggerLooping boundary = boundaries[i].GetComponent<TriggerLooping>();
+			Boundary boundary = boundaries[i].GetComponent<Boundary>();
 			if (boundary != null)
 			{
 				switch(boundary.colliderLocation)

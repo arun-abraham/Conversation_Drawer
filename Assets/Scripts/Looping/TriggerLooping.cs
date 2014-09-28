@@ -1,151 +1,159 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class TriggerLooping : MonoBehaviour {
-
-	public List<GameObject> listOfObjectsToLoop = new List<GameObject>();
-	public List<GameObject> listOfCollidersToMove = new List<GameObject>();
+	
 	public GameObject player;
-	public float moveDistance;
+
+	private float moveDistanceVertical = 0;
+	private float moveDistanceHorizontal = 0;
 
 	public enum ColliderLocation{Top,Bottom,Left,Right};
-	public ColliderLocation colliderLocation;
 
-	//private float orthoSize = 0;
-	//private float aspect = 0;
-
-	/*Debug Variables
-	public float xCollider = 1;
-	public float yCollider = 1;
-	private float cameraHeight = 0;
-	private float cameraWidth = 0;*/
-
-	private Vector3 loopMoveDistance = Vector3.zero;
+	public float worldWidth = 200f;
+	public float worldHeight = 200f;
 
 	void Start()
 	{
-
-		switch(colliderLocation)
-		{
-		case ColliderLocation.Top:
-			loopMoveDistance.y = moveDistance;
-			break;
-		case ColliderLocation.Bottom:
-			loopMoveDistance.y = -moveDistance;
-			break;
-		case ColliderLocation.Left:
-			loopMoveDistance.x = -moveDistance;
-			break;
-		case ColliderLocation.Right:
-			loopMoveDistance.x = moveDistance;
-			break;
-		}
-
+		ChangeWorldSize(200f, 200f);
 	}
 
 	void Update()
 	{
-		//boundaryCollider.size = new Vector3(xCollider, yCollider, 10);
-
-
-		//World Measurements
-		//cameraHeight = Camera.main.orthographicSize * 2f;
-		//cameraWidth = cameraHeight * Camera.main.aspect;
-
-		/* Debug Tests
-		Debug.Log ("Orthographic Size: "+Camera.main.orthographicSize);
-		Debug.Log ("Aspect Ratio: "+Camera.main.aspect);
-		Debug.Log ("Camera Height: " + cameraHeight);
-		Debug.Log ("Camera Width: " + cameraWidth);
-		*/
-
-
+		ChangeWorldSize(worldWidth, worldHeight);
 	}
 
-	//TODO: CLEAN THIS UP AND MAKE IT WORK FOR RIGHT AND LEFT
-
-	void OnTriggerEnter(Collider other)
+	void ChangeWorldSize(float worldWidth, float worldHeight)
 	{
-		if(other.gameObject == player)
+		foreach(Transform child in transform)
 		{
+			
+			switch(child.GetComponent<Boundary>().colliderLocation)
+			{
+				case ColliderLocation.Top:
+					//Resize Collider
+					child.GetComponent<BoxCollider>().size = new Vector3(worldWidth, 1.0f, 1.0f);
+					child.transform.localPosition = new Vector3(0f, worldHeight/2, 0f);
+					break;
+				case ColliderLocation.Bottom:
+					//Resize Collider
+					child.GetComponent<BoxCollider>().size = new Vector3(worldWidth, 1.0f, 1.0f);
+					child.transform.localPosition = new Vector3(0f, -worldHeight/2, 0f);
+					break;
+				case ColliderLocation.Left:
+					//Resize Collider
+					child.GetComponent<BoxCollider>().size = new Vector3(1.0f, worldHeight, 1.0f);
+					child.transform.localPosition = new Vector3(-worldWidth/2, 0f, 0f);
+					break;
+				case ColliderLocation.Right:
+					//Resize Collider
+					child.GetComponent<BoxCollider>().size = new Vector3(1.0f, worldHeight, 1.0f);
+					child.transform.localPosition = new Vector3(worldWidth/2, 0f, 0f);
+					break;
+			}
+		}
+
+		moveDistanceHorizontal = worldWidth - 10f;
+		moveDistanceVertical = worldHeight - 10f;
+	}
+
+
+	public void MoveWorld(ColliderLocation location)
+	{
+		Vector3 moveDistance = Vector3.zero;
+
+		switch(location)
+		{
+			case ColliderLocation.Top:
+				moveDistance = new Vector3(0f, moveDistanceVertical, 0f);
+				break;
+			case ColliderLocation.Bottom:
+			moveDistance = new Vector3(0f, -moveDistanceVertical, 0f);
+				break;
+			case ColliderLocation.Left:
+			moveDistance = new Vector3(-moveDistanceHorizontal, 0f, 0f);
+				break;
+			case ColliderLocation.Right:
+			moveDistance = new Vector3(moveDistanceHorizontal,0f,0f);
+				break;
+		}
+
+		//Move the boundaries
+		transform.position += moveDistance;
+
 			//Get all gameobjects in the scene and then filter to get only loopable objects//
 			GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+			List<GameObject> loopableObjects = new List<GameObject>();
 			foreach(GameObject go in allObjects)
 			{
-				if(go.GetComponent<LoopTag>() != null)
-				{
-					if(go.GetComponent<LoopTag>().boundaryCollider)
-						listOfCollidersToMove.Add(go);
-					else
-						listOfObjectsToLoop.Add(go);
-				}
+				if(go.GetComponent<LoopTag>() != null)				
+						loopableObjects.Add(go);
 			}
 
-			foreach(GameObject lo in listOfCollidersToMove)
+			foreach(GameObject lo in loopableObjects)
 			{
-				lo.transform.position += loopMoveDistance;			
-			}
-
-			//////////////////Handle moving the loopable objects//////////////////////////////
-			foreach(GameObject lo in listOfObjectsToLoop)
-			{
-					
-				//Check if the object is on screen
-				if (OnScreen(lo))
-				{
-					if(lo.GetComponent<LoopTag>().loopOnCamera)
-					{
-						if(lo.GetComponent<LoopTag>().moveRoot)
-							lo.transform.root.position += loopMoveDistance;
-						else
-							lo.transform.position += loopMoveDistance;
-
-					}
-				}
-				else
-				{
 				
-						if(lo.GetComponent<LoopTag>().moveRoot)
-							lo.transform.root.position += loopMoveDistance;
-						else
-							lo.transform.position += loopMoveDistance;
+				//Check if the object is on screen
+				if (!OnScreen(lo))
+				{
+					if(lo.GetComponent<LoopTag>().moveRoot)
+						lo.transform.root.position += moveDistance;
+					else
+						lo.transform.position += moveDistance;
 
-					if(OutSideBounds(lo))
-						lo.transform.position -= loopMoveDistance;
+					if(OutSideBounds(lo,location))
+						lo.transform.position -= moveDistance;
 
-							MoveOffScreen(lo);
-												
-
+				Debug.Log(OnScreen(lo));
+					MoveOffScreen(lo, location);	
 				}
 			}
 
-			listOfObjectsToLoop.Clear();
-			listOfCollidersToMove.Clear();
-		}
 		
-		if(other.tag == "Converser" && other.transform != player.transform)
-		{
-			if (!OnScreen(other.gameObject))
-			{
-				Tracer otherTracer = other.GetComponent<Tracer>();
-				Vector3 oldPosition = other.transform.position;
-				if (other.gameObject.GetComponent<LoopTag>().moveRoot)
-				{
-					other.gameObject.transform.root.position -= loopMoveDistance;
-				}
-				else
-				{
-					other.gameObject.transform.position -= loopMoveDistance;
-				}
-
-				MoveOffScreen(other.gameObject);
-				otherTracer.MoveVertices(other.transform.position - oldPosition);
-			}
-		}
 	}
 
-	private bool OutSideBounds(GameObject lo)
+	public void MoveIndividual(ColliderLocation location, GameObject individual)
+	{
+
+			if (!OnScreen(individual))
+			{
+				Vector3 moveDistance = Vector3.zero;
+				switch(location)
+				{
+				case ColliderLocation.Top:
+					moveDistance = new Vector3(0f, moveDistanceVertical, 0f);
+					break;
+				case ColliderLocation.Bottom:
+					moveDistance = new Vector3(0f, -moveDistanceVertical, 0f);
+					break;
+				case ColliderLocation.Left:
+					moveDistance = new Vector3(-moveDistanceHorizontal, 0f, 0f);
+					break;
+				case ColliderLocation.Right:
+					moveDistance = new Vector3(moveDistanceHorizontal,0f,0f);
+					break;
+				}
+
+				Tracer otherTracer = individual.GetComponent<Tracer>();
+				Vector3 oldPosition = individual.transform.position;
+
+			if (individual.gameObject.GetComponent<LoopTag>().moveRoot)
+				{
+					individual.gameObject.transform.root.position -= moveDistance;
+				}
+				else
+				{
+					individual.gameObject.transform.position -= moveDistance;
+				}
+				
+				MoveOffScreen(individual.gameObject,location);
+				otherTracer.MoveVertices(individual.transform.position - oldPosition);
+			}
+
+	}
+
+	private bool OutSideBounds(GameObject lo, ColliderLocation colliderLocation)
 	{
 		switch (colliderLocation)
 		{
@@ -173,8 +181,9 @@ public class TriggerLooping : MonoBehaviour {
 
 	}
 
-	private void MoveOffScreen(GameObject lo)
+	private void MoveOffScreen(GameObject lo, ColliderLocation colliderLocation)
 	{
+		Debug.Log(moveDistanceVertical);
 
 		if (OnScreen(lo))
 		{
@@ -184,7 +193,10 @@ public class TriggerLooping : MonoBehaviour {
 			switch (colliderLocation)
 			{
 			case ColliderLocation.Top:
-				lo.transform.position += new Vector3(0, camHeight, 0);
+				Debug.Log (camHeight);
+				Debug.Log(lo.transform.position);
+				lo.transform.root.position += new Vector3(0, camHeight, 0);
+				Debug.Log(lo.transform.position);
 				break;
 			case ColliderLocation.Bottom:
 				lo.transform.position -= new Vector3(0,camHeight, 0);
@@ -196,6 +208,11 @@ public class TriggerLooping : MonoBehaviour {
 				lo.transform.position += new Vector3(camWidth, 0, 0);
 				break;
 			}
+		}
+
+		if(OnScreen(lo))
+		{
+			MoveOffScreen(lo, colliderLocation);
 		}
 	}
 

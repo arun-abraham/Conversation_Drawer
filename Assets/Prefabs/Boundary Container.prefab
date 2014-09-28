@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400008}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   m_Layer: 0
@@ -26,7 +25,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  - 114: {fileID: 11400010}
   - 65: {fileID: 6500002}
   - 114: {fileID: 11400002}
   m_Layer: 0
@@ -44,7 +42,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
-  - 114: {fileID: 11400012}
   - 65: {fileID: 6500004}
   - 114: {fileID: 11400004}
   m_Layer: 0
@@ -63,7 +60,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 65: {fileID: 6500006}
-  - 114: {fileID: 11400014}
   - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Top Boundary
@@ -80,6 +76,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400008}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: Boundary Container
   m_TagString: Untagged
@@ -207,12 +204,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 3
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,12 +216,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 2
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,12 +228,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 1
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,76 +240,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100008}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
   player: {fileID: 0}
-  moveDistance: 190
-  colliderLocation: 3
---- !u!114 &11400010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 0}
-  moveDistance: 190
-  colliderLocation: 2
---- !u!114 &11400012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 0}
-  moveDistance: 190
-  colliderLocation: 1
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 0}
-  moveDistance: 190
-  colliderLocation: 0
+  worldWidth: 200
+  worldHeight: 200
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
