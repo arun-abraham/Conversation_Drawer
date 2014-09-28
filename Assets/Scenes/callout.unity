@@ -661,7 +661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   maxVertices: 200
-  lineMakerPrefab: {fileID: 100000, guid: fa1341b29202ddd499b88cb363b0f4c6, type: 2}
+  lineMakerPrefab: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
   trailNearWidth: 1
   trailFarWidth: 12
   zOffset: 10
@@ -1149,6 +1149,10 @@ Prefab:
       propertyPath: leadBoostPercentage
       value: .100000001
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: lineMakerPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: b238b9a97951bf24ab89ca3a0703a489, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 1766441965}
