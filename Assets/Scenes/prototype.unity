@@ -1580,6 +1580,7 @@ GameObject:
   - 114: {fileID: 103414803}
   - 114: {fileID: 103414812}
   - 114: {fileID: 103414811}
+  - 114: {fileID: 103414813}
   m_Layer: 0
   m_Name: Storyteller Head
   m_TagString: Converser
@@ -1859,6 +1860,18 @@ MonoBehaviour:
   loopOnCamera: 0
   moveRoot: 1
   boundaryCollider: 0
+--- !u!114 &103414813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 704326627}
+  m_GameObject: {fileID: 103414799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &120816935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,6 +4305,7 @@ GameObject:
   - 114: {fileID: 174839617}
   - 114: {fileID: 174839616}
   - 114: {fileID: 174839615}
+  - 114: {fileID: 174839618}
   m_Layer: 0
   m_Name: Partner Head
   m_TagString: Converser
@@ -4405,6 +4419,18 @@ MonoBehaviour:
   desireToLead: .5
   orbit: 0
   orbitRadius: 5
+--- !u!114 &174839618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1665879833}
+  m_GameObject: {fileID: 174839612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &174839619
 MonoBehaviour:
   m_ObjectHideFlags: 0
