@@ -9,7 +9,6 @@ public class TextFading : MonoBehaviour {
 	public PartnerLink partnerLink;
 	public PartnerLink player;
 	private Conversation conversation;
-	private GameObject converser;
 	private bool convoStart = false;
 
 	// Use this for initialization
@@ -45,7 +44,7 @@ public class TextFading : MonoBehaviour {
 
 	void Start()
 	{
-		conversation = ConversationManger.Instance.FindConversation(partnerLink, player);
+		conversation = ConversationManager.Instance.FindConversation(partnerLink, player);
 	}
 	
 	// Update is called once per frame
@@ -61,13 +60,13 @@ public class TextFading : MonoBehaviour {
 				{
 					if (!convoStart)
 					{
-						alpha = Mathf.Clamp(1 - (distance / (conversation.breakingDistance)), 0, 1);
+						alpha = Mathf.Clamp(1 - (distance / (conversation.warningDistance)), 0, 1);
 						if (distance <= conversation.initiateDistance)
 						{
 							convoStart = true;
 							text.text = conversation.title;
 						}
-						else if (distance <= (conversation.breakingDistance))
+						else if (distance <= (conversation.warningDistance))
 						{
 							text.color = new Color(1f, 0f, 1f, alpha);
 							text.text = conversation.title;

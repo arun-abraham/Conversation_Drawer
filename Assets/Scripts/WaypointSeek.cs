@@ -22,9 +22,11 @@ public class WaypointSeek : SimpleSeek {
 	private bool yielding = false;
 	public bool orbit = false;
 	public float orbitRadius = 5.0f;
+	public bool likesConversation = true;
 	
 	protected override void Start()
 	{
+		base.Start();
 		if (mover == null)
 		{
 			mover = GetComponent<SimpleMover>();
@@ -111,18 +113,23 @@ public class WaypointSeek : SimpleSeek {
 			}
 			else
 			{
-				SeekPartner();
+				if (likesConversation)
+				{
+					SeekPartner();
+				}
+				else if(moveWithoutPartner)
+				{
+					MoveWithoutPartner();
+				}
+				else
+				{
+					mover.SlowDown();
+				}
 			}
 		}
 		else if (moveWithoutPartner)
 		{
-			Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
-			mover.Accelerate(destination - transform.position);
-			mover.Accelerate(destination - transform.position);
-			if (tracer.lineRenderer == null && tail == null)
-			{
-				tracer.StartLine();
-			}
+			MoveWithoutPartner();
 		}
 		else
 		{
@@ -254,6 +261,17 @@ public class WaypointSeek : SimpleSeek {
 		}
 	}
 
+	private void MoveWithoutPartner()
+	{
+		Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+		mover.Accelerate(destination - transform.position);
+		mover.Accelerate(destination - transform.position);
+		if (tracer.lineRenderer == null && tail == null)
+		{
+			tracer.StartLine();
+		}
+	}
+
 	void BeginOrbit()
 	{
 		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
@@ -302,5 +320,15 @@ public class WaypointSeek : SimpleSeek {
 		{
 			tracer.DestroyLine();
 		}
+	}
+
+	private void LinkPartner()
+	{
+		likesConversation = true;
+	}
+
+	private void MinMaxSpeedReached()
+	{
+		likesConversation = false;
 	}
 }

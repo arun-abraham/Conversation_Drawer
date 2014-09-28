@@ -82,7 +82,7 @@ public class Feedback : MonoBehaviour {
 		}
 	}
 
-	void SpeedBoost()
+	/*void SpeedBoost()
 	{
 		if (cameraShake != null)
 		{
@@ -137,7 +137,7 @@ public class Feedback : MonoBehaviour {
 		colExp.particleSystem.startColor = sprite.renderer.material.color;
 		colExp.transform.position = transform.position;
 		Destroy(colExp, 3.1f);
-	}
+	}*/
 
 	private void EnterWake()
 	{
