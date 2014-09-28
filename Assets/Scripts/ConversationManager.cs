@@ -2,15 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ConversationManger : MonoBehaviour {
-	private static ConversationManger instance;
-	public static ConversationManger Instance
+public class ConversationManager : MonoBehaviour
+{
+	private static ConversationManager instance;
+	public static ConversationManager Instance
 	{
 		get
 		{
 			if (instance == null)
 			{
-				instance = GameObject.FindGameObjectWithTag("Globals").GetComponent<ConversationManger>();
+				instance = GameObject.FindGameObjectWithTag("Globals").GetComponent<ConversationManager>();
 			}
 			return instance;
 		}
@@ -47,7 +48,7 @@ public class ConversationManger : MonoBehaviour {
 			conversation.warningDistance = Mathf.Max(conversation.partner1.converseDistance * conversation.partner1.warningThreshold, conversation.partner2.converseDistance * conversation.partner2.warningThreshold);
 			conversation.breakingDistance = Mathf.Max(conversation.partner1.converseDistance * conversation.partner1.breakingThreshold, conversation.partner2.converseDistance * conversation.partner2.breakingThreshold);
 		}
-		
+
 	}
 
 	public bool StartConversation(PartnerLink partner1, PartnerLink partner2)
@@ -61,7 +62,7 @@ public class ConversationManger : MonoBehaviour {
 
 		// Start conversation and setup parameters.
 		startedConversation.inProgress = true;
-		
+
 		partner1.SetPartner(partner2);
 		partner2.SetPartner(partner1);
 		if (startedConversation.partner1Leads)
@@ -74,7 +75,7 @@ public class ConversationManger : MonoBehaviour {
 			startedConversation.partner1.SetLeading(false);
 			startedConversation.partner2.SetLeading(true);
 		}
-		
+
 		return true;
 	}
 
@@ -107,6 +108,24 @@ public class ConversationManger : MonoBehaviour {
 			}
 		}
 		return foundConversation;
+	}
+
+	public Conversation[] FindConversations(PartnerLink participant)
+	{
+		List<Conversation> foundConversations = new List<Conversation>();
+		for (int i = 0; i < conversations.Count; i++)
+		{
+			if (conversations[i].partner1 == participant || conversations[i].partner2 == participant)
+			{
+				foundConversations.Add(conversations[i]);
+			}
+		}
+		Conversation[] conversationArray = new Conversation[foundConversations.Count];
+		for (int i = 0; i < foundConversations.Count; i++)
+		{
+			conversationArray[i] = foundConversations[i];
+		}
+		return conversationArray;
 	}
 }
 

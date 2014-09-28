@@ -24,6 +24,7 @@ public class SimpleMover : MonoBehaviour {
 			velocity = velocity.normalized * maxSpeed * externalSpeedMultiplier;
 		}
 
+		ApplyFreezes();
 		transform.position += velocity * Time.deltaTime;
 
 		if (velocity.sqrMagnitude < Mathf.Pow(dampeningThreshold, 2)) {
