@@ -19,11 +19,6 @@ public class TriggerLooping : MonoBehaviour {
 		ChangeWorldSize(200f, 200f);
 	}
 
-	void Update()
-	{
-		ChangeWorldSize(worldWidth, worldHeight);
-	}
-
 	void ChangeWorldSize(float worldWidth, float worldHeight)
 	{
 		foreach(Transform child in transform)
