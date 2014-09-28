@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PartnerLink : MonoBehaviour {
 	public bool isPlayer = false;
-	private PartnerLink partner;
+	public PartnerLink partner;
 	public PartnerLink Partner
 	{
 		get { return partner; }
