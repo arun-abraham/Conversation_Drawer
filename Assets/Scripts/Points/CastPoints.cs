@@ -107,6 +107,17 @@ public class CastPoints : MonoBehaviour {
 			if(nw)
 				createdPoints = (GameObject)Instantiate(points, pointsPos, Quaternion.Euler(0, 0, 315));
 			
+			// Store creator of points.
+			Detail[] details = createdPoints.GetComponentsInChildren<Detail>();
+			for (int i = 0; i < details.Length; i++)
+			{
+				details[i].creator = gameObject;
+			}
+			MiniPoint[] miniPoints = createdPoints.GetComponentsInChildren<MiniPoint>();
+			for (int i = 0; i < miniPoints.Length; i++)
+			{
+				miniPoints[i].creator = gameObject;
+			}
 		}
 	}
 

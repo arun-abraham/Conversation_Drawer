@@ -138,13 +138,21 @@ public class PartnerLink : MonoBehaviour {
 				else
 				{
 					enableCallout = true;
+					
+					if (callout != null)
+					{
+						
+					}
 				}
 			}
 
 			// Enable callout if needed.
 			if (callout != null)
 			{
-				callout.SetActive(enableCallout);
+				if (callout.activeInHierarchy != enableCallout)
+				{
+					callout.SetActive(enableCallout);
+				}
 			}
 		}
 		
