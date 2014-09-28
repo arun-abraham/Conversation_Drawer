@@ -23,6 +23,7 @@ public class WaypointSeek : SimpleSeek {
 	public bool orbit = false;
 	public float orbitRadius = 5.0f;
 	public bool likesConversation = true;
+	private GameObject[] recentPoints;
 	
 	protected override void Start()
 	{
@@ -193,8 +194,6 @@ public class WaypointSeek : SimpleSeek {
 		previous = current;
 		collideWithWaypoint = false;
 
-		
-		
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
 		{
@@ -225,6 +224,9 @@ public class WaypointSeek : SimpleSeek {
 			
 		}
 		current = previous + 1;
+
+		// Spawn points attached to waypoint being sought, after despawning most recently created points.
+		SpawnPoints();
 
 		if (showWaypoints)
 		{
@@ -277,6 +279,36 @@ public class WaypointSeek : SimpleSeek {
 		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
 		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, transform.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
 		mover.Move((partnerLink.Partner.transform.position + destination) - transform.position, mover.maxSpeed);
+	}
+
+	private void SpawnPoints()
+	{
+		if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
+		{
+			if (recentPoints != null)
+			{
+				for (int i = 0; i < recentPoints.Length; i++)
+				{
+					Destroy(recentPoints[i]);
+				}
+			}
+
+			recentPoints = new GameObject[waypoints[current].pointSpawns.Count];
+			float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[current].transform.position - waypoints[previous].transform.position, Vector3.forward);
+			Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
+			for (int i = 0; i < recentPoints.Length; i++)
+			{
+				PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
+				Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+				GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + offset, Quaternion.identity);
+				recentPoints[i] = newPoint;
+				MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+				if (newMiniPoint != null)
+				{
+					newMiniPoint.creator = gameObject;
+				}
+			}
+		}
 	}
 	
 	void OnTriggerEnter(Collider otherCol)

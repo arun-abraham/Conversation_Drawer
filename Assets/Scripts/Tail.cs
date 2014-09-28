@@ -63,11 +63,7 @@ public class Tail : MonoBehaviour {
 			if (fromHead.sqrMagnitude > 0)
 			{
 				// Rotated around world z axis to look at target position.
-				float angle = Vector3.Angle(transform.forward, -fromHead);
-				if (Vector3.Dot(Vector3.Cross(transform.forward, -fromHead), Vector3.forward) < 0)
-				{
-					angle *=-1;
-				}
+				float angle = Helper.AngleDegrees(transform.forward, -fromHead, Vector3.forward);
 				transform.Rotate(Vector3.forward, angle, Space.World);
 			}
 		}
