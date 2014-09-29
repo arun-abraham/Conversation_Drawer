@@ -186,10 +186,10 @@ public class TriggerLooping : MonoBehaviour {
 			switch (colliderLocation)
 			{
 			case ColliderLocation.Top:
-				Debug.Log (camHeight);
-				Debug.Log(lo.transform.position);
+				//Debug.Log (camHeight);
+				//Debug.Log(lo.transform.position);
 				lo.transform.root.position += new Vector3(0, camHeight, 0);
-				Debug.Log(lo.transform.position);
+				//Debug.Log(lo.transform.position);
 				break;
 			case ColliderLocation.Bottom:
 				lo.transform.position -= new Vector3(0,camHeight, 0);

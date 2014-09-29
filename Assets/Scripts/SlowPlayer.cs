@@ -4,12 +4,13 @@ using System.Collections;
 public class SlowPlayer : MonoBehaviour {
 
 	private bool slowing = false;
-	private SimpleMover mover;
+	private SimpleMover targetMover;
 	private WaypointSeek seeker;
 	private PartnerLink partnerLink;
 	private static int otherPartners = 0;
 	private float decayRate = 0.9f;
 	public float slowRate = 0.2f;
+	public float slowDistance;
 
 	// Use this for initialization
 	void Start () {
@@ -19,26 +20,29 @@ public class SlowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(seeker == null || mover == null)
+		if(seeker == null || targetMover == null)
 			return;
-		if(seeker.orbit == true && slowing == false)
+		if(seeker.orbit == true && (transform.position - targetMover.transform.position).sqrMagnitude <= Mathf.Pow(slowDistance, 2))
 		{
-			slowing = true;
-			otherPartners++;
-			mover.externalSpeedMultiplier -= slowRate * otherPartners * decayRate;
+			if (slowing == false)
+			{
+				slowing = true;
+				targetMover.externalSpeedMultiplier -= slowRate * Mathf.Pow(decayRate, otherPartners);
+				otherPartners++;
+			}
 		}
-		else if(seeker.orbit == false && slowing == true)
+		else if (slowing == true)
 		{
 			slowing = false;
-			mover.externalSpeedMultiplier += slowRate*otherPartners*decayRate;
+			targetMover.externalSpeedMultiplier += slowRate * Mathf.Pow(decayRate, otherPartners);
 			otherPartners--;
 		}
 	}
 
 	void LinkPartner(){
-		if (partnerLink.Partner != null)
+		if (partnerLink != null && partnerLink.Partner != null)
 		{
-			mover = partnerLink.Partner.GetComponent<SimpleMover>();
+			targetMover = partnerLink.Partner.GetComponent<SimpleMover>();
 		}
 	}
 }
