@@ -157,17 +157,21 @@ public class PartnerLink : MonoBehaviour {
 		}
 		
 		// Handle partners seperating.
-		if (partner != null && seekingPartner)
+		if (partner != null)
 		{
 			// Show that partners are close to separating.
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
 			if (sqrDist > Mathf.Pow(conversation.breakingDistance, 2))
 			{
-				ConversationManager.Instance.EndConversation(this, partner);
 				if (partnerLine != null)
 				{
 					partnerLine.SetVertexCount(0);
 				}
+				if (partner.partnerLine != null)
+				{
+					partner.partnerLine.SetVertexCount(0);
+				}
+				ConversationManager.Instance.EndConversation(this, partner);
 			}
 			else if (sqrDist > Mathf.Pow(conversation.warningDistance, 2))
 			{
