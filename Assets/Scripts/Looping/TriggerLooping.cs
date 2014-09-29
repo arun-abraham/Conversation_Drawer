@@ -16,7 +16,7 @@ public class TriggerLooping : MonoBehaviour {
 
 	void Start()
 	{
-		ChangeWorldSize(200f, 200f);
+		ChangeWorldSize(worldWidth, worldHeight);
 	}
 
 	void ChangeWorldSize(float worldWidth, float worldHeight)
@@ -77,30 +77,44 @@ public class TriggerLooping : MonoBehaviour {
 		//Move the boundaries
 		transform.position += moveDistance;
 
-			//Get all gameobjects in the scene and then filter to get only loopable objects//
-			GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-			List<GameObject> loopableObjects = new List<GameObject>();
-			foreach(GameObject go in allObjects)
-			{
-				if(go.GetComponent<LoopTag>() != null)
-						loopableObjects.Add(go);
-			}
+		//Get all gameobjects in the scene and then filter to get only loopable objects//
+		GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+		List<GameObject> loopableObjects = new List<GameObject>();
+		foreach(GameObject go in allObjects)
+		{
+			if(go.GetComponent<LoopTag>() != null)
+					loopableObjects.Add(go);
+		}
 
-			foreach(GameObject lo in loopableObjects)
+		foreach(GameObject lo in loopableObjects)
+		{
+			
+			//Check if the object is on screen
+			if (!OnScreen(lo) && (lo.GetComponent<LoopTag>().stayOutsideBounds || !OutSideBounds(lo,location,moveDistance)))
 			{
-				
-				//Check if the object is on screen
-				if (!OnScreen(lo) && (lo.GetComponent<LoopTag>().stayOutsideBounds || !OutSideBounds(lo,location,moveDistance)))
+				Vector3 oldPosition = lo.transform.position;
+
+				if(lo.GetComponent<LoopTag>().moveRoot)
+					lo.transform.root.position += moveDistance;
+				else
+					lo.transform.position += moveDistance;
+
+				//Debug.Log(OnScreen(lo));
+				MoveOffScreen(lo, location);
+
+				GameObject tracerGameObject = lo;
+				Tracer tracer = lo.GetComponent<Tracer>();
+				while (tracer == null && tracerGameObject != tracerGameObject.transform.root)
 				{
-					if(lo.GetComponent<LoopTag>().moveRoot)
-						lo.transform.root.position += moveDistance;
-					else
-						lo.transform.position += moveDistance;
-
-					//Debug.Log(OnScreen(lo));
-					MoveOffScreen(lo, location);	
+					tracerGameObject = tracerGameObject.transform.parent.gameObject;
+					tracer = tracerGameObject.GetComponent<Tracer>();
+				}
+				if (tracer != null)
+				{
+					tracer.MoveVertices(lo.transform.position - oldPosition);
 				}
 			}
+		}
 
 		
 	}

@@ -2857,7 +2857,7 @@ Transform:
   - {fileID: 416083744}
   - {fileID: 116264562}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &136597954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,13 +3688,13 @@ MonoBehaviour:
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 374753964}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -3827,6 +3827,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &174839624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3982,7 +3983,7 @@ Transform:
   - {fileID: 1019301983}
   - {fileID: 1756895732}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
 --- !u!1 &185037854
 GameObject:
   m_ObjectHideFlags: 0
@@ -5120,8 +5121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1719802093}
-  worldWidth: 200
-  worldHeight: 200
+  worldWidth: 400
+  worldHeight: 400
 --- !u!4 &272260319
 Transform:
   m_ObjectHideFlags: 0
@@ -10797,13 +10798,13 @@ MonoBehaviour:
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 1474657455}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -10922,6 +10923,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &519964508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12322,6 +12324,10 @@ Prefab:
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -15101,6 +15107,10 @@ Prefab:
       propertyPath: showWaypoints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 1830246571}
@@ -17142,7 +17152,7 @@ Transform:
   - {fileID: 420123960}
   - {fileID: 1830246572}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1001 &801803996
 Prefab:
   m_ObjectHideFlags: 0
@@ -18217,6 +18227,50 @@ Prefab:
   m_RootGameObject: {fileID: 2146092100}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1001 &868926612
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.26007271
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -132.379593
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+  m_RootGameObject: {fileID: 918075818}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &870647869
 GameObject:
   m_ObjectHideFlags: 0
@@ -18765,13 +18819,13 @@ MonoBehaviour:
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 870647869}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -18890,6 +18944,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &884748151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19408,6 +19463,109 @@ Prefab:
   m_RootGameObject: {fileID: 1166220641}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &918075818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 918075824}
+  - 33: {fileID: 918075823}
+  - 64: {fileID: 918075822}
+  - 23: {fileID: 918075821}
+  - 114: {fileID: 918075820}
+  - 65: {fileID: 918075819}
+  m_Layer: 0
+  m_Name: Orb Pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &918075819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 6.1232336e-17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &918075820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de907e4077fd8c4f908cca879291cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
+  colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
+--- !u!23 &918075821
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 7e9c1ccabc78fa843880d81755e9a7b1, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!64 &918075822
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &918075823
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &918075824
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.26007271, y: -132.379593, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &918191249
 GameObject:
   m_ObjectHideFlags: 0
@@ -19607,6 +19765,14 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1719802093}
+    - target: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
+      propertyPath: worldWidth
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
+      propertyPath: worldHeight
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
   m_RootGameObject: {fileID: 1359708941}
@@ -24498,7 +24664,7 @@ Transform:
   - {fileID: 603066000}
   - {fileID: 677168464}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!1 &1093282030
 GameObject:
   m_ObjectHideFlags: 0
@@ -24971,6 +25137,10 @@ Prefab:
       propertyPath: lineMakerPrefab
       value: 
       objectReference: {fileID: 100000, guid: 0ac6e1784fa75ac4dbd95540ef244aec, type: 2}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 514085610}
@@ -27023,13 +27193,13 @@ MonoBehaviour:
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 416083743}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -27186,6 +27356,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1149398286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29570,6 +29741,10 @@ Prefab:
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -32964,6 +33139,10 @@ Prefab:
       propertyPath: showWaypoints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 1766441965}
@@ -33807,7 +33986,7 @@ Transform:
   - {fileID: 412355781}
   - {fileID: 1096746849}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1 &1413431073
 GameObject:
   m_ObjectHideFlags: 0
@@ -40761,7 +40940,7 @@ Transform:
   - {fileID: 374753965}
   - {fileID: 1766441966}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1687944884
 GameObject:
   m_ObjectHideFlags: 0
@@ -41232,7 +41411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1718651130
 GameObject:
   m_ObjectHideFlags: 0
@@ -41340,6 +41519,7 @@ GameObject:
   - 114: {fileID: 1719802107}
   - 114: {fileID: 1719802104}
   - 114: {fileID: 1719802106}
+  - 114: {fileID: 1719802108}
   m_Layer: 0
   m_Name: Player Head
   m_TagString: Converser
@@ -41529,7 +41709,7 @@ MonoBehaviour:
   score: 0
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
-  rewardSpeedBoost: 2
+  rewardSpeedBoost: 5
   boostLevels: 4
   changeTime: .5
   gameCamera: {fileID: 51258267}
@@ -41538,6 +41718,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1719802102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41638,6 +41819,22 @@ MonoBehaviour:
   target: {fileID: 0}
   followTarget: 0
   followDistance: 0
+--- !u!114 &1719802108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1719802093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114c99c986871754c877d7240e59ea7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tripDuration: 5
+  tripDurationDampening: .899999976
+  tripBoost: .300000012
+  headRenderer: {fileID: 918191251}
+  minColor: {r: .200000003, g: .200000003, b: .200000003, a: 1}
 --- !u!1 &1721719288
 GameObject:
   m_ObjectHideFlags: 0
@@ -41815,6 +42012,10 @@ Prefab:
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -45469,13 +45670,13 @@ MonoBehaviour:
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 1019301979}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -45632,6 +45833,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1872137356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48646,7 +48848,7 @@ Transform:
   - {fileID: 870647870}
   - {fileID: 514085611}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1 &2015897077
 GameObject:
   m_ObjectHideFlags: 0
@@ -50469,7 +50671,7 @@ Transform:
   - {fileID: 1474657456}
   - {fileID: 601579588}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1 &2117553748
 GameObject:
   m_ObjectHideFlags: 0
@@ -51195,13 +51397,13 @@ MonoBehaviour:
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 420123959}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -51358,6 +51560,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &2144510087
 MonoBehaviour:
   m_ObjectHideFlags: 0
