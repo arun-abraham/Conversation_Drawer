@@ -512,7 +512,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 199654094}
-  - 114: {fileID: 199654097}
   - 65: {fileID: 199654096}
   - 114: {fileID: 199654095}
   m_Layer: 0
@@ -543,12 +542,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 199654093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 2
 --- !u!65 &199654096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -562,23 +559,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 200, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &199654097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400010, guid: f10e6c7ee3f0c424cac0415ce07b1859,
-    type: 2}
-  m_PrefabInternal: {fileID: 1482934952}
-  m_GameObject: {fileID: 199654093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 1151294867}
-  moveDistance: 190
-  colliderLocation: 2
 --- !u!1 &210771521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,6 +2075,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 604880690}
+  - 114: {fileID: 936127718}
   m_Layer: 0
   m_Name: Boundary Container
   m_TagString: Untagged
@@ -2776,6 +2757,7 @@ Transform:
   - {fileID: 527200073}
   - {fileID: 2123302270}
   - {fileID: 769717039}
+  - {fileID: 1607415274}
   m_Father: {fileID: 1236702709}
   m_RootOrder: 0
 --- !u!1001 &910472551
@@ -2998,7 +2980,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 936127719}
-  - 114: {fileID: 936127718}
   - 65: {fileID: 936127717}
   - 114: {fileID: 936127716}
   m_Layer: 0
@@ -3017,12 +2998,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 936127715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 3
 --- !u!65 &936127717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3042,17 +3021,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859,
     type: 2}
   m_PrefabInternal: {fileID: 1482934952}
-  m_GameObject: {fileID: 936127715}
+  m_GameObject: {fileID: 604880689}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
   player: {fileID: 1151294867}
-  moveDistance: 190
-  colliderLocation: 3
+  worldWidth: 200
+  worldHeight: 200
 --- !u!4 &936127719
 Transform:
   m_ObjectHideFlags: 0
@@ -3393,13 +3370,14 @@ GameObject:
   - 4: {fileID: 1141563912}
   - 198: {fileID: 1141563914}
   - 199: {fileID: 1141563913}
+  - 82: {fileID: 1141563915}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1141563912
 Transform:
   m_ObjectHideFlags: 0
@@ -3407,10 +3385,10 @@ Transform:
   m_PrefabInternal: {fileID: 705202231}
   m_GameObject: {fileID: 1141563911}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2034568416}
+  m_Father: {fileID: 1162158689}
   m_RootOrder: 3
 --- !u!199 &1141563913
 ParticleSystemRenderer:
@@ -3694,9 +3672,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -4498,6 +4476,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &1141563915
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 705202231}
+  m_GameObject: {fileID: 1141563911}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1142227058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4540,7 +4577,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3180dd73da46b4fdb823d7c0860733fa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -4738,7 +4775,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .300000012
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4753,7 +4790,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
+          value: .100000001
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4799,13 +4836,13 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 4
+    type: 5
     radius: 100
     angle: 45
     length: 5
-    boxX: 1
-    boxY: 1
-    boxZ: 1
+    boxX: 1000
+    boxY: 1000
+    boxZ: 1000
     placementMode: 0
     m_Mesh: {fileID: 0}
     randomDirection: 1
@@ -4892,7 +4929,7 @@ ParticleSystem:
   RotationModule:
     enabled: 1
     curve:
-      scalar: 3.49065852
+      scalar: 1.74532926
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5949,6 +5986,7 @@ Transform:
   - {fileID: 1299429493}
   - {fileID: 1921284063}
   - {fileID: 1988253553}
+  - {fileID: 1141563912}
   m_Father: {fileID: 2034568416}
   m_RootOrder: 0
 --- !u!1 &1236702708
@@ -5993,7 +6031,6 @@ Transform:
   - {fileID: 905850267}
   - {fileID: 990667494}
   - {fileID: 220781559}
-  - {fileID: 1607415274}
   m_Father: {fileID: 1104712169}
   m_RootOrder: 0
 --- !u!114 &1236702710
@@ -6063,7 +6100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
 --- !u!114 &1236702713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7268,13 +7304,14 @@ GameObject:
   - 4: {fileID: 1607415274}
   - 198: {fileID: 1607415276}
   - 199: {fileID: 1607415275}
+  - 82: {fileID: 1607415277}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1607415274
 Transform:
   m_ObjectHideFlags: 0
@@ -7282,10 +7319,10 @@ Transform:
   m_PrefabInternal: {fileID: 456209394}
   m_GameObject: {fileID: 1607415273}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1236702709}
+  m_Father: {fileID: 905850267}
   m_RootOrder: 3
 --- !u!199 &1607415275
 ParticleSystemRenderer:
@@ -7569,9 +7606,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -8373,6 +8410,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &1607415277
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 456209394}
+  m_GameObject: {fileID: 1607415273}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1663078617
 GameObject:
   m_ObjectHideFlags: 0
@@ -8791,7 +8887,7 @@ Prefab:
     - target: {fileID: 19900000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 3180dd73da46b4fdb823d7c0860733fa, type: 2}
     - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: RotationBySpeedModule.curve.scalar
       value: 3.49065852
@@ -8866,7 +8962,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: InitialModule.startSize.scalar
-      value: .300000012
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: InitialModule.startSize.maxCurve.m_Curve.Array.data[0].value
@@ -8874,11 +8970,31 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: RotationModule.curve.scalar
-      value: 3.49065852
+      value: 1.74532926
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: RotationModule.enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: InitialModule.startSize.minCurve.m_Curve.Array.data[0].value
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: ShapeModule.type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: ShapeModule.boxX
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: ShapeModule.boxY
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: ShapeModule.boxZ
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
@@ -9516,7 +9632,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1979672230}
   - 65: {fileID: 1979672233}
-  - 114: {fileID: 1979672232}
   - 114: {fileID: 1979672231}
   m_Layer: 0
   m_Name: Top Boundary
@@ -9546,28 +9661,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1979672229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
---- !u!114 &1979672232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400014, guid: f10e6c7ee3f0c424cac0415ce07b1859,
-    type: 2}
-  m_PrefabInternal: {fileID: 1482934952}
-  m_GameObject: {fileID: 1979672229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 1151294867}
-  moveDistance: 190
   colliderLocation: 0
 --- !u!65 &1979672233
 BoxCollider:
@@ -9665,7 +9761,6 @@ Transform:
   - {fileID: 1162158689}
   - {fileID: 290546369}
   - {fileID: 1122806767}
-  - {fileID: 1141563912}
   m_Father: {fileID: 994173096}
   m_RootOrder: 0
 --- !u!114 &2034568417
@@ -9735,7 +9830,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
 --- !u!114 &2034568420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10183,7 +10277,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2108151872}
-  - 114: {fileID: 2108151875}
   - 65: {fileID: 2108151874}
   - 114: {fileID: 2108151873}
   m_Layer: 0
@@ -10214,12 +10307,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2108151871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 1
 --- !u!65 &2108151874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10233,23 +10324,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 200, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2108151875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400012, guid: f10e6c7ee3f0c424cac0415ce07b1859,
-    type: 2}
-  m_PrefabInternal: {fileID: 1482934952}
-  m_GameObject: {fileID: 2108151871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 1151294867}
-  moveDistance: 190
-  colliderLocation: 1
 --- !u!1 &2123302269
 GameObject:
   m_ObjectHideFlags: 0
