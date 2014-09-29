@@ -22,9 +22,9 @@ public class Tail : MonoBehaviour {
 
 	void Start()
 	{
-		Vector3 localScale = transform.localScale;
+		/*Vector3 localScale = transform.localScale;
 		localScale.y = partnerLink.tracer.trailNearWidth;
-		transform.localScale = localScale;
+		transform.localScale = localScale;*/
 	}
 	
 	void Update()
@@ -37,11 +37,8 @@ public class Tail : MonoBehaviour {
 		float yieldProximityPortion = fromHeadDistance / partnerLink.startYieldProximity;
 
 		float targetSpeed = partnerLink.mover.maxSpeed;
-		if (partnerLink.mover.velocity.sqrMagnitude < Mathf.Pow(targetSpeed, 2))
-		{
-			targetSpeed = partnerLink.mover.velocity.magnitude;
-		}
 		mover.maxSpeed = Mathf.Min(targetSpeed * (yieldProximityPortion / 2), fromHeadDistance / Time.deltaTime);
+		mover.externalSpeedMultiplier = partnerLink.mover.externalSpeedMultiplier;
 		mover.Move(-fromHead, mover.maxSpeed);
 
 		if (following)

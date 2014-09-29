@@ -643,7 +643,7 @@ MonoBehaviour:
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
-  orbit: 1
+  orbit: 0
   orbitRadius: 7
   orbitBoost: 0
   likesConversation: 1
@@ -777,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
+  stayOutsideBounds: 1
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
