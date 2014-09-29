@@ -11,6 +11,7 @@ public class Detail : MonoBehaviour {
 	public bool fading = false;
 	public bool bright = false;
 	public GameObject creator;
+	public float informationFactor;
 
 	// Use this for initialization
 	void Start () {
@@ -49,6 +50,7 @@ public class Detail : MonoBehaviour {
 			audio.Play();
 
 			isplayed = true;
+			collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
 		}
 	}
 

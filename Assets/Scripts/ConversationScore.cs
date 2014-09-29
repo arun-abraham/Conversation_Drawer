@@ -27,6 +27,7 @@ public class ConversationScore : MonoBehaviour {
 	public float drainRate;
 	public float breakingChangeRate;
 	public float minMaxSpeed;
+	public float understandingFactor = 0;
 
 	void Start()
 	{
@@ -110,7 +111,8 @@ public class ConversationScore : MonoBehaviour {
 			float followerToPathDist = (transform.position - pointOnPath).magnitude;
 
 			// Determine how the required score to get a reward speed boost.
-			Vector3 toPartner = (partnerTracer.transform.position - transform.position);
+			Vector3 followOffset =  partnerLink.Partner.mover.velocity.normalized * ((partnerLink.Partner.startYieldProximity + partnerLink.endYieldProximity) * Mathf.Max(1 - understandingFactor, 0));
+			Vector3 toPartner = ((partnerLink.Partner.transform.position - followOffset) - transform.position);
 			float scorePortion = 1 - toPartner.magnitude / (partnerLink.Conversation.initiateDistance);
 
 			// Update score based on accuracy.
@@ -170,9 +172,15 @@ public class ConversationScore : MonoBehaviour {
 			// Boost speed if score exceeds requirement.
 			if (!partnerLink.Yielding)
 			{
+				float boostDirection = 1;
+				float toDotVelocity = Vector3.Dot(toPartner, partnerLink.Partner.mover.velocity);
+				if (toDotVelocity <= 0)
+				{
+					boostDirection = -1;
+				}
 				if (accuracyFactor > 0)
 				{
-					mover.maxSpeed = partnerLink.Partner.mover.maxSpeed + rewardSpeedBoost * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
+					mover.maxSpeed = partnerLink.Partner.mover.maxSpeed + rewardSpeedBoost * boostDirection * (Mathf.Min(Mathf.Max(1 - scorePortion, 0), 1));
 				}
 				else
 				{
@@ -232,6 +240,7 @@ public class ConversationScore : MonoBehaviour {
 	private void EndLeading()
 	{
 		headFill.transform.localScale = Vector3.zero;
+		understandingFactor = 0;
 	}
 
 	private void EndSpeedChange(string changeName)
@@ -248,5 +257,10 @@ public class ConversationScore : MonoBehaviour {
 				conversingSpeed.TargetAbsoluteSpeed(minMaxSpeed, drainRate, persistentDrain);
 			}
 		}
+	}
+
+	private void UnderstandPoint(float understanding)
+	{
+		understandingFactor += understanding;
 	}
 }

@@ -297,7 +297,6 @@ public class WaypointSeek : SimpleSeek {
 		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
 		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), (mover.maxSpeed / orbitRadius) * Time.deltaTime, 0);
 		mover.Move((partnerLink.Partner.transform.position + destination) - transform.position, mover.maxSpeed);
-		//mover.Accelerate((partnerLink.Partner.transform.position + destination) - transform.position);
 	}
 
 	private void SpawnPoints()
@@ -325,6 +324,10 @@ public class WaypointSeek : SimpleSeek {
 				if (newMiniPoint != null)
 				{
 					newMiniPoint.creator = gameObject;
+					if (newPointSpawn.setInformationFactor)
+					{
+						newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+					}
 				}
 			}
 		}
