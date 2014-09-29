@@ -26,7 +26,7 @@ public class OneWayPartner : MonoBehaviour {
 				partnerlink.SetPartner(target);
 				following = true;
 			}
-			else
+			else if (following)
 			{
 				partnerlink.SetPartner(null);
 				following = false;

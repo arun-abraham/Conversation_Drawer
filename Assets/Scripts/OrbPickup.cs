@@ -24,8 +24,8 @@ public class OrbPickup : MonoBehaviour {
 		if(col.gameObject.tag == "Converser")
 		{
 			// Trigger if the collider is not orbiting.
-			WaypointSeek waypointSeek = col.gameObject.GetComponent<WaypointSeek>();
-			if (waypointSeek == null || !waypointSeek.orbit)
+			OrbReaction reaction = col.gameObject.GetComponent<OrbReaction>();
+			if (reaction != null && reaction.StartTrip())
 			{
 				feedback = col.gameObject.GetComponent<Feedback>();
 				feedback.AlternateTrail();
