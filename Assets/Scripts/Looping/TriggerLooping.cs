@@ -92,7 +92,6 @@ public class TriggerLooping : MonoBehaviour {
 				//Check if the object is on screen
 				if (!OnScreen(lo) && (lo.GetComponent<LoopTag>().stayOutsideBounds || !OutSideBounds(lo,location,moveDistance)))
 				{
-					Debug.Log(lo);
 					if(lo.GetComponent<LoopTag>().moveRoot)
 						lo.transform.root.position += moveDistance;
 					else

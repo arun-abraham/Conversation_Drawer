@@ -72,7 +72,9 @@ public class WaypointSeek : SimpleSeek {
 		collideWithWaypoint = false;
 		if (previous >= 0 && previous < waypoints.Count)
 		{
-			transform.position = waypoints[previous].transform.position;
+			Vector3 toWaypoint = waypoints[previous].transform.position - transform.position;
+			transform.position += toWaypoint;
+			tail.transform.position += toWaypoint;
 		}
 
 		for (int i = 0; i < waypoints.Count; i++)
