@@ -245,13 +245,13 @@ public class PartnerLink : MonoBehaviour {
 			{
 			isgaining = true;
 			islagging = false;
-			print("is gaining");
+			//print("is gaining");
 			}
 			else if (plpaDist > plpaDist2)
 			{
 			isgaining = false;
 			islagging = true;
-			print("is not gaining");
+			//print("is not gaining");
 			}
 
 			plpaDist2 = plpaDist;

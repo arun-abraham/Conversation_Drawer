@@ -146,7 +146,7 @@ public class WaypointSeek : SimpleSeek {
 				tail.trigger.enabled = true;
 			}
 		}
-		geometry.transform.LookAt(transform.position + mover.velocity, geometry.transform.up);
+		geometry.transform.LookAt(transform.position + mover.velocity * Time.deltaTime, -Vector3.forward);
 
 		if (tracer != null)
 		{
