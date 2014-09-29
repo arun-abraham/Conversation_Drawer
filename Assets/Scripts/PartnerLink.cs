@@ -126,7 +126,7 @@ public class PartnerLink : MonoBehaviour {
 			float minSqrDist = -1;
 			for (int i = 0; i < potentialConversations.Length; i++)
 			{
-				if (potentialConversations[i].partner1.seekingPartner && potentialConversations[i].partner2.seekingPartner)
+				if ((potentialConversations[i].partner1 != null && potentialConversations[i].partner1.seekingPartner) && (potentialConversations[i].partner2 != null && potentialConversations[i].partner2.seekingPartner))
 				{
 					float sqrDist = (potentialConversations[i].partner1.transform.position - potentialConversations[i].partner2.transform.position).sqrMagnitude;
 					if (sqrDist < minSqrDist || (minSqrDist < 0 && sqrDist <= Mathf.Pow(potentialConversations[i].breakingDistance, 2)))

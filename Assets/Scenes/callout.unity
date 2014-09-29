@@ -5054,13 +5054,12 @@ GameObject:
   - 114: {fileID: 661762719}
   - 114: {fileID: 661762718}
   - 114: {fileID: 661762717}
-  - 114: {fileID: 661762716}
   - 114: {fileID: 661762715}
   - 114: {fileID: 661762714}
   - 114: {fileID: 661762713}
   - 114: {fileID: 661762712}
   m_Layer: 0
-  m_Name: Partner Head
+  m_Name: Orbit Partner Head
   m_TagString: Converser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5139,20 +5138,6 @@ MonoBehaviour:
   text: {fileID: 0}
   partnerLink: {fileID: 0}
   player: {fileID: 0}
---- !u!114 &661762716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400020, guid: c8077d0d1d430374082e48ffd920e536,
-    type: 2}
-  m_PrefabInternal: {fileID: 1055750191}
-  m_GameObject: {fileID: 661762710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loopOnCamera: 0
-  moveRoot: 1
 --- !u!114 &661762717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6755,7 +6740,12 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: .707106829
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 100010, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_Name
+      value: Orbit Partner Head
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11400020, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 1220886711}
   m_IsPrefabParent: 0
@@ -6807,6 +6797,10 @@ Prefab:
       propertyPath: waypointContainer
       value: 
       objectReference: {fileID: 374753964}
+    - target: {fileID: 100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 1766441965}
@@ -7708,6 +7702,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1353386340}
+  - 114: {fileID: 1353386341}
   m_Layer: 0
   m_Name: Geometry
   m_TagString: Untagged
@@ -7731,6 +7726,19 @@ Transform:
   - {fileID: 1994607130}
   m_Father: {fileID: 661762711}
   m_RootOrder: 0
+--- !u!114 &1353386341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1353386339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopOnCamera: 0
+  moveRoot: 1
 --- !u!1 &1359708941
 GameObject:
   m_ObjectHideFlags: 0
