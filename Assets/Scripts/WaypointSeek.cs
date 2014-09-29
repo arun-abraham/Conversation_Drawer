@@ -20,8 +20,10 @@ public class WaypointSeek : SimpleSeek {
 	public float outWakeLeadGrowth = 0.1f;
 	public float desireToLead;
 	private bool yielding = false;
+	private bool wasOrbit = false;
 	public bool orbit = false;
 	public float orbitRadius = 5.0f;
+	public float orbitBoost = 0.3f;
 	public bool likesConversation = true;
 	private GameObject[] recentPoints;
 	
@@ -157,6 +159,20 @@ public class WaypointSeek : SimpleSeek {
 				tracer.AddVertex(transform.position);
 			}
 		}
+
+		if (orbit != wasOrbit)
+		{
+			if (orbit)
+			{
+				mover.externalSpeedMultiplier += orbitBoost;
+			}
+			else
+			{
+				mover.externalSpeedMultiplier -= orbitBoost;
+			}
+			wasOrbit = orbit;
+		}
+		
 	}
 	
 	public Vector3 FindSeekingPoint(Vector3 velocity)
@@ -245,7 +261,7 @@ public class WaypointSeek : SimpleSeek {
 		}
 		else if(orbit)
 		{
-			BeginOrbit();
+			OrbitLeader();
 		}
 		else if (partnerLink.InWake)
 		{
@@ -274,11 +290,12 @@ public class WaypointSeek : SimpleSeek {
 		}
 	}
 
-	void BeginOrbit()
+	void OrbitLeader()
 	{
 		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
-		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, transform.forward), mover.maxSpeed / orbitRadius * Time.deltaTime, 0);
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), (mover.maxSpeed / orbitRadius) * Time.deltaTime, 0);
 		mover.Move((partnerLink.Partner.transform.position + destination) - transform.position, mover.maxSpeed);
+		//mover.Accelerate((partnerLink.Partner.transform.position + destination) - transform.position);
 	}
 
 	private void SpawnPoints()

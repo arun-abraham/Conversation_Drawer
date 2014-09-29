@@ -35,7 +35,13 @@ public class Tail : MonoBehaviour {
 		float fromHeadDistance = fromHead.magnitude;
 		fromHead.z = 0;
 		float yieldProximityPortion = fromHeadDistance / partnerLink.startYieldProximity;
-		mover.maxSpeed = Mathf.Min(partnerLink.mover.maxSpeed * (yieldProximityPortion / 2), fromHeadDistance / Time.deltaTime);
+
+		float targetSpeed = partnerLink.mover.maxSpeed;
+		if (partnerLink.mover.velocity.sqrMagnitude < Mathf.Pow(targetSpeed, 2))
+		{
+			targetSpeed = partnerLink.mover.velocity.magnitude;
+		}
+		mover.maxSpeed = Mathf.Min(targetSpeed * (yieldProximityPortion / 2), fromHeadDistance / Time.deltaTime);
 		mover.Move(-fromHead, mover.maxSpeed);
 
 		if (following)

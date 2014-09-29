@@ -99,8 +99,8 @@ public class TriggerLooping : MonoBehaviour {
 
 					if(OutSideBounds(lo,location))
 						lo.transform.position -= moveDistance;
-
-				Debug.Log(OnScreen(lo));
+					
+					//Debug.Log(OnScreen(lo));
 					MoveOffScreen(lo, location);	
 				}
 			}
@@ -178,8 +178,6 @@ public class TriggerLooping : MonoBehaviour {
 
 	private void MoveOffScreen(GameObject lo, ColliderLocation colliderLocation)
 	{
-		Debug.Log(moveDistanceVertical);
-
 		if (OnScreen(lo))
 		{
 			var camHeight = Camera.main.orthographicSize;

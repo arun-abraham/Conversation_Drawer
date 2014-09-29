@@ -157,7 +157,7 @@ public class PartnerLink : MonoBehaviour {
 		}
 		
 		// Handle partners seperating.
-		if (partner != null)
+		if (partner != null && conversation != null)
 		{
 			// Show that partners are close to separating.
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
