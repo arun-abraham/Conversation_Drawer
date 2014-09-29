@@ -79,12 +79,20 @@ public class PartnerLink : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	//Points Related Values
 	public bool linkBroken;
 	public float timerTime = 5;
-	
 	public GameObject pointsGlobal = null;
-	
+
+	//Camera and Tail Related values
+	public bool isLeadingnow;
+	public float plpaDist = 0;
+	public float plpaDist2 = 0;
+	public bool isgaining;
+	public bool islagging;
+	// // // // // //
+
 	void Awake()
 	{
 		if (mover == null)
@@ -107,6 +115,7 @@ public class PartnerLink : MonoBehaviour {
 	
 	void Update()
 	{
+
 		// Find a partner.
 		if (partner == null && seekingPartner)
 		{
@@ -138,21 +147,13 @@ public class PartnerLink : MonoBehaviour {
 				else
 				{
 					enableCallout = true;
-					
-					if (callout != null)
-					{
-						
-					}
 				}
 			}
 
 			// Enable callout if needed.
 			if (callout != null)
 			{
-				if (callout.activeInHierarchy != enableCallout)
-				{
-					callout.SetActive(enableCallout);
-				}
+				callout.SetActive(enableCallout);
 			}
 		}
 		
@@ -231,8 +232,28 @@ public class PartnerLink : MonoBehaviour {
 		//	linkBroken = false;
 		//}
 		
-		
-	}
+		//Distance btw Player and Partner for Tail and Camera
+		if(partner != null)
+		{
+			plpaDist = Vector3.Distance(transform.position, partner.transform.position);
+
+			if(plpaDist < plpaDist2)
+			{
+			isgaining = true;
+			islagging = false;
+			print("is gaining");
+			}
+			else if (plpaDist > plpaDist2)
+			{
+			isgaining = false;
+			islagging = true;
+			print("is not gaining");
+			}
+
+			plpaDist2 = plpaDist;
+		}
+
+	} //End of Update
 	
 	void FixedUpdate()
 	{
@@ -273,6 +294,7 @@ public class PartnerLink : MonoBehaviour {
 			if (conversation.partner1 == this)
 			{
 				conversation.partner1Leads = true;
+				isLeadingnow = true;
 			}
 			else
 			{
@@ -293,6 +315,7 @@ public class PartnerLink : MonoBehaviour {
 		else
 		{
 			SendMessage("EndLeading", SendMessageOptions.DontRequireReceiver);
+			isLeadingnow = false;
 		}
 		
 		if (partner != null && updatePartner)

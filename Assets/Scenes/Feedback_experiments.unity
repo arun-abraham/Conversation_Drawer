@@ -159,6 +159,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &33988856
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +245,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &60725936
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +331,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &118163413
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +417,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &193631171
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +503,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &199654093
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +792,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &241496319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1040,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &290546368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,6 +1184,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &456209394
 Prefab:
   m_ObjectHideFlags: 0
@@ -1447,6 +1455,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &520824809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1541,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &527200070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1713,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &555275375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1840,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &581731695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,6 +1926,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &587154440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2012,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &587398418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,6 +2203,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &639206391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,6 +2289,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &665700036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,6 +2375,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &692197992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,6 +2496,10 @@ Prefab:
       propertyPath: maxVertices
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: handling
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 994173095}
@@ -2569,6 +2590,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &769717038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,6 +2747,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &905850266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3295,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1104712168
 GameObject:
   m_ObjectHideFlags: 0
@@ -5636,6 +5660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -5655,6 +5680,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &1151294870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5942,6 +5972,7 @@ GameObject:
   - 114: {fileID: 1236702712}
   - 114: {fileID: 1236702711}
   - 114: {fileID: 1236702722}
+  - 114: {fileID: 1236702723}
   m_Layer: 0
   m_Name: Partner Head
   m_TagString: Converser
@@ -5978,6 +6009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -5997,6 +6029,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &1236702711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6241,6 +6278,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
+--- !u!114 &1236702723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400024, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 456209394}
+  m_GameObject: {fileID: 1236702708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1246240646
 GameObject:
   m_ObjectHideFlags: 0
@@ -6326,6 +6375,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 554247997}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1246858707
 GameObject:
   m_ObjectHideFlags: 0
@@ -6442,6 +6492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568068a17fbd7426da2c2a63a6e9eacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1151294867}
 --- !u!1001 &1247792373
 Prefab:
   m_ObjectHideFlags: 0
@@ -6847,6 +6898,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &1338507927
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6971,6 +7023,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1461920674
 GameObject:
   m_ObjectHideFlags: 0
@@ -7144,6 +7197,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1482934952
 Prefab:
   m_ObjectHideFlags: 0
@@ -8404,6 +8458,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1696502601
 GameObject:
   m_ObjectHideFlags: 0
@@ -8489,6 +8544,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1704715402
 GameObject:
   m_ObjectHideFlags: 0
@@ -8574,6 +8630,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1730013799
 GameObject:
   m_ObjectHideFlags: 0
@@ -8659,6 +8716,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 1338507926}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1787296804
 Prefab:
   m_ObjectHideFlags: 0
@@ -8912,6 +8970,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 554247997}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1820038257
 GameObject:
   m_ObjectHideFlags: 0
@@ -9101,6 +9160,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 1338507926}
   maxLoopBacks: 1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1875634710
 GameObject:
   m_ObjectHideFlags: 0
@@ -9186,6 +9246,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1877791050
 GameObject:
   m_ObjectHideFlags: 0
@@ -9271,6 +9332,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1887148027
 GameObject:
   m_ObjectHideFlags: 0
@@ -9444,6 +9506,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1979672229
 GameObject:
   m_ObjectHideFlags: 0
@@ -9581,6 +9644,7 @@ GameObject:
   - 114: {fileID: 2034568419}
   - 114: {fileID: 2034568418}
   - 114: {fileID: 2034568429}
+  - 114: {fileID: 2034568430}
   m_Layer: 0
   m_Name: Storyteller Head
   m_TagString: Converser
@@ -9617,6 +9681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 10
   warningThreshold: 1.5
@@ -9636,6 +9701,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &2034568418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9827,7 +9897,7 @@ MonoBehaviour:
   maxSpeed: 15
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 30
+  handling: 45
   dampening: .949999988
   dampeningThreshold: 1.5
   externalSpeedMultiplier: 1
@@ -9880,6 +9950,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mover: {fileID: 0}
   partnerLink: {fileID: 0}
+--- !u!114 &2034568430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400024, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 705202231}
+  m_GameObject: {fileID: 2034568415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2036044259
 GameObject:
   m_ObjectHideFlags: 0
@@ -9965,6 +10047,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &2101743805
 GameObject:
   m_ObjectHideFlags: 0
@@ -10050,6 +10133,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &2102206230
 GameObject:
   m_ObjectHideFlags: 0
