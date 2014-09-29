@@ -6,6 +6,7 @@ public class Tail : MonoBehaviour {
 	public SimpleMover mover;
 	private bool following = false;
 	public Collider trigger;
+	public GameObject colorMimicTarget;
 
 	void Awake()
 	{
@@ -21,18 +22,24 @@ public class Tail : MonoBehaviour {
 
 	void Start()
 	{
-		Vector3 localScale = transform.localScale;
+		/*Vector3 localScale = transform.localScale;
 		localScale.y = partnerLink.tracer.trailNearWidth;
-		transform.localScale = localScale;
+		transform.localScale = localScale;*/
 	}
 	
 	void Update()
 	{
 		// Set speed proportional to head's speed to slowly wait for yield proximity.
-		Vector3 fromHead = (transform.position - partnerLink.transform.position);
-		float yieldProximityPortion = fromHead.magnitude / partnerLink.startYieldProximity;
-		mover.maxSpeed = partnerLink.mover.maxSpeed * yieldProximityPortion / 2;
-		mover.Move(partnerLink.mover.transform.position - transform.position, mover.maxSpeed);
+		Vector3 targetPos = partnerLink.transform.position - new Vector3(0, 0, (transform.localScale.z / 2));
+		Vector3 fromHead = transform.position - targetPos;
+		float fromHeadDistance = fromHead.magnitude;
+		fromHead.z = 0;
+		float yieldProximityPortion = fromHeadDistance / partnerLink.startYieldProximity;
+
+		float targetSpeed = partnerLink.mover.maxSpeed;
+		mover.maxSpeed = Mathf.Min(targetSpeed * (yieldProximityPortion / 2), fromHeadDistance / Time.deltaTime);
+		mover.externalSpeedMultiplier = partnerLink.mover.externalSpeedMultiplier;
+		mover.Move(-fromHead, mover.maxSpeed);
 
 		if (following)
 		{
@@ -54,11 +61,13 @@ public class Tail : MonoBehaviour {
 
 			// Render and align to movement.
 			renderer.enabled = true;
-			renderer.material.color = partnerLink.renderer.material.color;
+			renderer.material.color = colorMimicTarget.renderer.material.color;
 
 			if (fromHead.sqrMagnitude > 0)
 			{
-				transform.LookAt(transform.position - fromHead.normalized, Vector3.right);
+				// Rotated around world z axis to look at target position.
+				float angle = Helper.AngleDegrees(transform.forward, -fromHead, Vector3.forward);
+				transform.Rotate(Vector3.forward, angle, Space.World);
 			}
 		}
 		else
