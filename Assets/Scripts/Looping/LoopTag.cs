@@ -8,6 +8,4 @@ public class LoopTag : MonoBehaviour {
 
 	//Move the parent object or just the child?
 	public bool moveRoot = true;
-
-	public bool boundaryCollider = false;
 }
