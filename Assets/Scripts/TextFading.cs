@@ -5,20 +5,46 @@ using UnityEngine.UI;
 public class TextFading : MonoBehaviour {
 	
 	public Text text;
-	
-	
 	private float alpha = 0;
-	
-	public GameObject player;
-
-	private GameObject converser;
-
+	public PartnerLink partnerLink;
+	public PartnerLink player;
+	private Conversation conversation;
 	private bool convoStart = false;
 
 	// Use this for initialization
-	void Start () {
-		
-		text.color = new Color(1f, 0f, 1f, 0);
+	void Awake () 
+	{
+		if (partnerLink == null)
+		{
+			partnerLink = GetComponent<PartnerLink>();
+		}
+		if (text == null)
+		{
+			text = GameObject.FindGameObjectWithTag("ConversationTitle").GetComponent<Text>();
+		}
+		if (player == null && text != null)
+		{
+			Transform maybePlayer = text.transform;
+			while (maybePlayer.tag != "Converser" && maybePlayer != transform.root)
+			{
+				maybePlayer = maybePlayer.parent;
+			}
+			if (maybePlayer.tag == "Converser")
+			{
+				player = maybePlayer.GetComponent<PartnerLink>();
+			}
+		}
+
+		if (text != null)
+		{
+			text.color = new Color(1f, 0f, 1f, 0);
+			text.text = "";
+		}
+	}
+
+	void Start()
+	{
+		conversation = ConversationManager.Instance.FindConversation(partnerLink, player);
 	}
 	
 	// Update is called once per frame
@@ -26,51 +52,45 @@ public class TextFading : MonoBehaviour {
 
 		if(player != null)
 		{
-			var distance = Vector3.Distance(player.transform.position, transform.position) - 5f;
-
-			if(!convoStart)
+			if (conversation != null)
 			{
-				alpha = 1 - (distance/20);
+				var distance = Vector3.Distance(player.transform.position, transform.position);
 
-				if(distance <=20)
+				if (text != null)
 				{
-					text.color = new Color(1f, 0f, 1f, alpha);
-					
+					if (!convoStart)
+					{
+						alpha = Mathf.Clamp(1 - (distance / (conversation.warningDistance)), 0, 1);
+						if (distance <= conversation.initiateDistance)
+						{
+							convoStart = true;
+							text.text = conversation.title;
+						}
+						else if (distance <= (conversation.warningDistance))
+						{
+							text.color = new Color(1f, 0f, 1f, alpha);
+							text.text = conversation.title;
+						}
+						
+						else
+						{
+							text.text = "";
+						}
+					}
+
+					if (alpha > 0 && convoStart)
+					{
+						alpha = Mathf.Max(alpha - Time.deltaTime, 0);
+						text.color = new Color(1f, 0.92f, 0.016f, alpha);
+					}
 				}
-				if(distance < 2f)
-				{
-					convoStart = true;
-				}
-			}
-			
-			if(alpha > 0 && convoStart)
-			{
-				alpha -= .01f;
-				text.color = new Color(1f, 0.92f, 0.016f, alpha);
 			}
 		}
 		
 	}
 
-	void OnTriggerEnter(Collider other)
+	void UnlinkPartner()
 	{
-		if(other.tag == "Converser" && other.gameObject != transform.parent.gameObject)
-		{
-			player = other.gameObject;
-
-			Conversation conversation = ConversationManger.Instance.FindConversation(transform.parent.GetComponent<PartnerLink>(), player.GetComponent<PartnerLink>());
-			text.text = conversation.title;
-		}		
+		convoStart = false;
 	}
-	
-	void OnTriggerExit(Collider other)
-	{
-		if(other.tag == "Converser" && other.gameObject != transform.parent.gameObject)
-		{
-			player = null;
-			convoStart = false;
-		}
-
-	}
-
 }
