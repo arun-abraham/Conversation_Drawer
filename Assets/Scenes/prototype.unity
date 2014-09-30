@@ -370,15 +370,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -5, y: -5, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -15, y: -5, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1001 &25255561
 Prefab:
   m_ObjectHideFlags: 0
@@ -2593,15 +2590,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: 5, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -20, y: 10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &103920057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,7 +3033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &136134097
 Transform:
   m_ObjectHideFlags: 0
@@ -3283,7 +3277,10 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .00999999978
 --- !u!1001 &145365398
 Prefab:
   m_ObjectHideFlags: 0
@@ -4337,7 +4334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &185018488
 Transform:
   m_ObjectHideFlags: 0
@@ -5432,7 +5429,16 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 8, y: -4, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 10, y: 0, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 8, y: 4, z: 0}
+    informationFactor: .0199999996
 --- !u!1 &271891478
 GameObject:
   m_ObjectHideFlags: 0
@@ -6649,15 +6655,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -20, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &340791091
 GameObject:
   m_ObjectHideFlags: 0
@@ -12279,15 +12282,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -5, y: -10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: -20, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &554156877
 GameObject:
   m_ObjectHideFlags: 0
@@ -13703,15 +13703,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: -10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: -20, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1001 &613438362
 Prefab:
   m_ObjectHideFlags: 0
@@ -14383,15 +14380,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -20, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &632615238
 GameObject:
   m_ObjectHideFlags: 0
@@ -15047,7 +15041,10 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .00999999978
 --- !u!1 &641593129
 GameObject:
   m_ObjectHideFlags: 0
@@ -15305,7 +15302,10 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .00999999978
 --- !u!1 &646455242
 GameObject:
   m_ObjectHideFlags: 0
@@ -16933,15 +16933,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -20, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1001 &733519949
 Prefab:
   m_ObjectHideFlags: 0
@@ -18028,15 +18025,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -5, y: 5, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: 10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1001 &788572145
 Prefab:
   m_ObjectHideFlags: 0
@@ -18139,7 +18133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &793044998
 Transform:
   m_ObjectHideFlags: 0
@@ -18239,7 +18233,16 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -8, y: -4, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -8, y: 4, z: 0}
+    informationFactor: .0199999996
 --- !u!1 &800548163
 GameObject:
   m_ObjectHideFlags: 0
@@ -19327,15 +19330,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: -5, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: -10, y: -15, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &860188212
 GameObject:
   m_ObjectHideFlags: 0
@@ -22298,16 +22298,13 @@ MonoBehaviour:
   pointSpawns:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
-    informationFactor: .100000001
-    setInformationFactor: 1
+    informationFactor: .0199999996
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 10, z: 0}
-    informationFactor: .100000001
-    setInformationFactor: 1
+    informationFactor: .0199999996
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 20, z: 0}
-    informationFactor: .100000001
-    setInformationFactor: 1
+    informationFactor: .0199999996
 --- !u!1 &964930799
 GameObject:
   m_ObjectHideFlags: 0
@@ -25923,7 +25920,16 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -8, y: -4, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -8, y: 4, z: 0}
+    informationFactor: .0199999996
 --- !u!1 &1065774071
 GameObject:
   m_ObjectHideFlags: 0
@@ -26193,15 +26199,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 5, y: -10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 5, y: -20, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &1074648775
 GameObject:
   m_ObjectHideFlags: 0
@@ -26377,7 +26380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1093037568
 Transform:
   m_ObjectHideFlags: 0
@@ -36264,7 +36267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1411992432
 Transform:
   m_ObjectHideFlags: 0
@@ -36557,15 +36560,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: -10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: -20, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &1414126841
 GameObject:
   m_ObjectHideFlags: 0
@@ -39347,10 +39347,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 1971534702}
+  loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .00999999978
 --- !u!1001 &1543211327
 Prefab:
   m_ObjectHideFlags: 0
@@ -42721,7 +42724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStart: 0
   loopBackTo: {fileID: 1664708810}
-  maxLoopBacks: 1
+  maxLoopBacks: 0
   loopBacks: 0
   pointSpawns: []
 --- !u!1 &1625216312
@@ -44689,7 +44692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1687348087
 Transform:
   m_ObjectHideFlags: 0
@@ -46049,7 +46052,16 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -8, y: -4, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .0199999996
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -8, y: 4, z: 0}
+    informationFactor: .0199999996
 --- !u!1001 &1736993300
 Prefab:
   m_ObjectHideFlags: 0
@@ -48867,15 +48879,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 5, y: 5, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 10, y: 10, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1001 &1838602776
 Prefab:
   m_ObjectHideFlags: 0
@@ -49535,7 +49544,10 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .00999999978
 --- !u!1001 &1870727786
 Prefab:
   m_ObjectHideFlags: 0
@@ -50166,15 +50178,12 @@ MonoBehaviour:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 6, y: 7, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 15, z: 0}
     informationFactor: .100000001
-    setInformationFactor: 0
 --- !u!1 &1877422418
 GameObject:
   m_ObjectHideFlags: 0
@@ -53144,7 +53153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2012803937
 Transform:
   m_ObjectHideFlags: 0
@@ -56255,7 +56264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2116839346
 Transform:
   m_ObjectHideFlags: 0
