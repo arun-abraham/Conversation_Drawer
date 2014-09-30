@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class OrbReaction : MonoBehaviour {
 	private bool onTrip;
@@ -8,6 +9,8 @@ public class OrbReaction : MonoBehaviour {
 		get { return onTrip; }
 	}
 	public float tripDuration;
+	public float recoverDuration;
+	private float trips = 0;
 	private float startTripDuration;
 	public float tripDurationDampening;
 	private float tripElapsed;
@@ -16,6 +19,8 @@ public class OrbReaction : MonoBehaviour {
 	private Color startColor;
 	public Renderer headRenderer;
 	public Color minColor = new Color(0.2f, 0.2f, 0.2f, 1);
+	public GameObject extraReponse;
+	public List<SlowPlayer> intervenors;
 
 	void Start()
 	{
@@ -51,6 +56,18 @@ public class OrbReaction : MonoBehaviour {
 			mover.externalSpeedMultiplier += tripBoost;
 			tripDuration *= tripDurationDampening;
 			headRenderer.material.color = Color.white;
+			if (extraReponse != null && ! extraReponse.activeInHierarchy)
+			{
+				extraReponse.SetActive(true);
+			}
+			if (intervenors != null)
+			{
+				for (int i = 0; i < intervenors.Count; i++)
+				{
+					intervenors[i].RespondTransgression();
+				}
+			}
+			trips++;
 			return true;
 		}
 		return false;
