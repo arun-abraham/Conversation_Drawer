@@ -19,32 +19,43 @@ public class MiniPoint : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		myAlpha = 1;
+		myAlpha = 0;
+		bright = true;
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		plpaDist = Vector3.Distance(transform.position, creator.GetComponent<PartnerLink>().partner.transform.position);
 		//print(plpaDist);
 
 		//PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
 
 		if(creator.GetComponent<WaypointSeek>())
 		{
-			if(plpaDist > 30.0f)
+			plpaDist = Vector3.Distance(transform.position, creator.GetComponent<PartnerLink>().partner.transform.position);
+
+			if(plpaDist > 20.0f)
 			{	
 				if(myAlpha > 0)
 				{
 				myAlpha -= Time.deltaTime * appearConst;
 				}
 			}
-			else if(plpaDist < 30.0f)
+			else if(plpaDist < 20.0f)
 			{
 				if(myAlpha < 1)
 				{
 				myAlpha += Time.deltaTime * appearConst;
+				}
+			}
+
+			if(creator.GetComponent<PartnerLink>().partner.GetComponent<PartnerLink>().Leading)
+			{
+				if(myAlpha > 0)
+				{
+					myAlpha -= Time.deltaTime * appearConst;
 				}
 			}
 		}

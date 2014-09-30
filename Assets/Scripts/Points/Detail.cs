@@ -16,7 +16,9 @@ public class Detail : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		myAlpha = 1;
+		myAlpha = 0;
+		bright = true;
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
 	
 	}
 	

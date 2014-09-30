@@ -34,7 +34,10 @@ public class SimplePoint : MonoBehaviour {
 
 		rotSpeed = 4.0f;
 		rotVect = new Vector3(0,0,1);	
-		myAlpha = 1;
+
+		myAlpha = 0;
+		bright = true;
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
 	
 	}
 	

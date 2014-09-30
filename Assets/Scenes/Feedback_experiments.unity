@@ -2187,11 +2187,11 @@ MonoBehaviour:
   pointSpawns:
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 0, z: 0}
-    informationFactor: .25
+    informationFactor: .5
     setInformationFactor: 1
   - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
     offset: {x: 0, y: 10, z: 0}
-    informationFactor: .25
+    informationFactor: .5
     setInformationFactor: 1
 --- !u!1 &639206391
 GameObject:
@@ -2393,7 +2393,7 @@ Transform:
   - {fileID: 1151294868}
   - {fileID: 241496320}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1001 &705202231
 Prefab:
   m_ObjectHideFlags: 0
@@ -2809,7 +2809,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: cdf4b73be7b343141bc01fb2f6d82e30, type: 2}
       propertyPath: conversations.Array.data[1].title
@@ -6601,7 +6601,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cf26d28f7f9e34c818cfbc1fc030ae5a, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: cf26d28f7f9e34c818cfbc1fc030ae5a, type: 2}
       propertyPath: m_Name
@@ -6682,7 +6682,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1299429492
 GameObject:
   m_ObjectHideFlags: 0
@@ -7305,7 +7305,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
       propertyPath: player

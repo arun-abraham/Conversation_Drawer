@@ -40,6 +40,7 @@ public class PointGroups : MonoBehaviour {
 	{
 		fading = true;
 		bright = false;
+		print ("is fading");
 	}
 
 	public void IsBright()
