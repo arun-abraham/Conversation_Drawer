@@ -1014,7 +1014,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 0efd2753bf4b0492eaa07442ced1d70a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .100000001
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1088,6 +1088,7 @@ MonoBehaviour:
   fading: 0
   bright: 0
   advance: 0
+  creator: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1250,6 +1251,7 @@ MonoBehaviour:
   fading: 0
   bright: 0
   informationFactor: 0
+  creator: {fileID: 0}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
