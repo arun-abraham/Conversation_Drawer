@@ -326,7 +326,7 @@ public class WaypointSeek : SimpleSeek {
 					if (newMiniPoint != null)
 					{
 						newMiniPoint.creator = gameObject;
-						if (newPointSpawn.setInformationFactor)
+						if (true)//newPointSpawn.setInformationFactor)
 						{
 							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
 						}
