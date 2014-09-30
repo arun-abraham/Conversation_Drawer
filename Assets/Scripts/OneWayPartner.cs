@@ -8,6 +8,7 @@ public class OneWayPartner : MonoBehaviour {
 	public PartnerLink target;
 	public bool followTarget = false;
 	private bool following = false;
+	public float followDistance;
 
 
 	// Use this for initialization
@@ -20,16 +21,17 @@ public class OneWayPartner : MonoBehaviour {
 	void Update () {
 		if (target != null)
 		{
-			if (followTarget && partnerlink.Partner == null)
+			if (followTarget && partnerlink.Partner == null && (transform.position - target.transform.position).sqrMagnitude <= Mathf.Pow(followDistance, 2))
 			{
 				partnerlink.SetPartner(target);
 				following = true;
 			}
-			else if (target.Partner != partnerlink && !followTarget && following)
+			else if (following)
 			{
 				partnerlink.SetPartner(null);
 				following = false;
 			}
+
 			if (followTarget && following)
 				seeker.SeekPartner();
 		}

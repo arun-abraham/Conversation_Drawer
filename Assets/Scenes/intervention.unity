@@ -233,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &17059078
 Renderer:
   m_ObjectHideFlags: 0
@@ -365,6 +366,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -5, y: -5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -15, y: -5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &25255561
 Prefab:
   m_ObjectHideFlags: 0
@@ -498,6 +512,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &27007546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1177,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &52875167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,6 +1860,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &84565691
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2293,6 +2310,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &99797681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,6 +2370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &99797685
 Renderer:
   m_ObjectHideFlags: 0
@@ -2484,6 +2503,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &103920057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,6 +2808,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &128340495
 Prefab:
   m_ObjectHideFlags: 0
@@ -2848,7 +2881,7 @@ Transform:
   - {fileID: 416083744}
   - {fileID: 116264562}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &136597954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,6 +3593,7 @@ GameObject:
   - 114: {fileID: 174839616}
   - 114: {fileID: 174839615}
   - 114: {fileID: 174839618}
+  - 114: {fileID: 174839628}
   - 114: {fileID: 174839627}
   m_Layer: 0
   m_Name: Partner Head
@@ -3581,7 +3615,6 @@ Transform:
   - {fileID: 1138187661}
   - {fileID: 1680260175}
   - {fileID: 1238749204}
-  - {fileID: 431219851}
   m_Father: {fileID: 1766441966}
   m_RootOrder: 0
 --- !u!114 &174839614
@@ -3597,6 +3630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -3616,6 +3650,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &174839615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3645,7 +3684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
+  stayOutsideBounds: 1
 --- !u!114 &174839617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3669,18 +3708,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 374753964}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &174839618
 MonoBehaviour:
@@ -3811,6 +3851,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &174839624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3877,6 +3918,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
+--- !u!114 &174839628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1385452966}
+  m_GameObject: {fileID: 174839612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1001 &184073222
 Prefab:
   m_ObjectHideFlags: 0
@@ -3949,7 +4007,7 @@ Transform:
   - {fileID: 1019301983}
   - {fileID: 1756895732}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
 --- !u!1 &185037854
 GameObject:
   m_ObjectHideFlags: 0
@@ -4343,6 +4401,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &230448288
 GameObject:
   m_ObjectHideFlags: 0
@@ -4432,6 +4491,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &234851091
 Prefab:
   m_ObjectHideFlags: 0
@@ -4753,6 +4813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &255500906
 Renderer:
   m_ObjectHideFlags: 0
@@ -5036,7 +5097,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 272260319}
-  - 114: {fileID: 272260318}
   - 65: {fileID: 272260317}
   - 114: {fileID: 272260316}
   m_Layer: 0
@@ -5055,12 +5115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 272260315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 3
 --- !u!65 &272260317
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5080,17 +5138,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859,
     type: 2}
   m_PrefabInternal: {fileID: 922380584}
-  m_GameObject: {fileID: 272260315}
+  m_GameObject: {fileID: 1359708941}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
   player: {fileID: 1719802093}
-  moveDistance: 190
-  colliderLocation: 3
+  worldWidth: 400
+  worldHeight: 400
 --- !u!4 &272260319
 Transform:
   m_ObjectHideFlags: 0
@@ -5192,6 +5248,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &279397680
 Prefab:
   m_ObjectHideFlags: 0
@@ -5454,6 +5511,7 @@ Transform:
   - {fileID: 1256819629}
   - {fileID: 373348221}
   - {fileID: 52875168}
+  - {fileID: 1146011756}
   m_Father: {fileID: 519964496}
   m_RootOrder: 0
 --- !u!1 &309654401
@@ -5761,6 +5819,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &314595389
 GameObject:
   m_ObjectHideFlags: 0
@@ -5787,7 +5846,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 314595389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.48699999, y: 2.22860003, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 420123960}
@@ -5847,9 +5906,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 84565690}
+  loopBackTo: {fileID: 98058228}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &320177217
 GameObject:
   m_ObjectHideFlags: 0
@@ -6155,6 +6215,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &345962759
 Prefab:
   m_ObjectHideFlags: 0
@@ -6388,6 +6461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &358545257
 Renderer:
   m_ObjectHideFlags: 0
@@ -6647,6 +6721,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &373254837
 GameObject:
   m_ObjectHideFlags: 0
@@ -6655,7 +6730,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 373254838}
-  - 114: {fileID: 373254841}
   - 65: {fileID: 373254840}
   - 114: {fileID: 373254839}
   m_Layer: 0
@@ -6686,12 +6760,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 373254837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 2
 --- !u!65 &373254840
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6705,23 +6777,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 200, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &373254841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400010, guid: f10e6c7ee3f0c424cac0415ce07b1859,
-    type: 2}
-  m_PrefabInternal: {fileID: 922380584}
-  m_GameObject: {fileID: 373254837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 1719802093}
-  moveDistance: 190
-  colliderLocation: 2
 --- !u!1 &373348218
 GameObject:
   m_ObjectHideFlags: 0
@@ -7002,6 +7057,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &376564706
 GameObject:
   m_ObjectHideFlags: 0
@@ -7797,6 +7853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &415727955
 Renderer:
   m_ObjectHideFlags: 0
@@ -8040,6 +8097,7 @@ Transform:
   - {fileID: 1972993966}
   - {fileID: 843393507}
   - {fileID: 50107199}
+  - {fileID: 997663370}
   m_Father: {fileID: 2144510075}
   m_RootOrder: 0
 --- !u!1 &431219850
@@ -8052,13 +8110,14 @@ GameObject:
   - 4: {fileID: 431219851}
   - 198: {fileID: 431219853}
   - 199: {fileID: 431219852}
+  - 82: {fileID: 431219854}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &431219851
 Transform:
   m_ObjectHideFlags: 0
@@ -8066,10 +8125,10 @@ Transform:
   m_PrefabInternal: {fileID: 1385452966}
   m_GameObject: {fileID: 431219850}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 174839613}
+  m_Father: {fileID: 1138187661}
   m_RootOrder: 3
 --- !u!199 &431219852
 ParticleSystemRenderer:
@@ -8353,9 +8412,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -9157,6 +9216,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &431219854
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1385452966}
+  m_GameObject: {fileID: 431219850}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1001 &434117792
 Prefab:
   m_ObjectHideFlags: 0
@@ -9707,6 +9825,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &455480380
 Prefab:
   m_ObjectHideFlags: 0
@@ -9940,6 +10059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &480200205
 Renderer:
   m_ObjectHideFlags: 0
@@ -10214,6 +10334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &486968772
 Renderer:
   m_ObjectHideFlags: 0
@@ -10566,6 +10687,7 @@ GameObject:
   - 114: {fileID: 519964501}
   - 114: {fileID: 519964500}
   - 114: {fileID: 519964499}
+  - 114: {fileID: 519964511}
   - 114: {fileID: 519964498}
   m_Layer: 0
   m_Name: Partner Head
@@ -10587,7 +10709,6 @@ Transform:
   - {fileID: 300863570}
   - {fileID: 73969772}
   - {fileID: 296001996}
-  - {fileID: 1146011756}
   m_Father: {fileID: 601579588}
   m_RootOrder: 0
 --- !u!114 &519964497
@@ -10603,6 +10724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -10622,6 +10744,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &519964498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10634,6 +10761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
 --- !u!114 &519964499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10677,7 +10806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
+  stayOutsideBounds: 1
 --- !u!114 &519964502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10701,18 +10830,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 1474657455}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &519964503
 MonoBehaviour:
@@ -10829,6 +10959,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &519964508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10883,6 +11014,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &519964511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 570622082}
+  m_GameObject: {fileID: 519964495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1001 &521898374
 Prefab:
   m_ObjectHideFlags: 0
@@ -11320,6 +11466,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &543774503
 GameObject:
   m_ObjectHideFlags: 0
@@ -11583,6 +11730,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -5, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &554156877
 GameObject:
   m_ObjectHideFlags: 0
@@ -11728,6 +11888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &557241033
 Renderer:
   m_ObjectHideFlags: 0
@@ -12117,6 +12278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &565439325
 Renderer:
   m_ObjectHideFlags: 0
@@ -12209,7 +12371,11 @@ Prefab:
       objectReference: {fileID: 1474657455}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -12349,6 +12515,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &584461223
 GameObject:
   m_ObjectHideFlags: 0
@@ -12580,6 +12747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &593347805
 Renderer:
   m_ObjectHideFlags: 0
@@ -12711,6 +12879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &603066003
 Renderer:
   m_ObjectHideFlags: 0
@@ -12887,6 +13056,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &611084119
 GameObject:
   m_ObjectHideFlags: 0
@@ -12976,6 +13146,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &613438362
 Prefab:
   m_ObjectHideFlags: 0
@@ -13165,6 +13348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &618392128
 Renderer:
   m_ObjectHideFlags: 0
@@ -13642,6 +13826,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &632615238
 GameObject:
   m_ObjectHideFlags: 0
@@ -13805,6 +14002,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &634026555
 GameObject:
   m_ObjectHideFlags: 0
@@ -14124,6 +14322,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &640328151
 GameObject:
   m_ObjectHideFlags: 0
@@ -14582,7 +14781,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 657581579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.55530024, y: 2.26659989, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 1019301983}
@@ -14642,9 +14841,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 1877422420}
+  loopBackTo: {fileID: 25910997}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &668088658
 GameObject:
   m_ObjectHideFlags: 0
@@ -14734,6 +14934,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &677168463
 GameObject:
   m_ObjectHideFlags: 0
@@ -14793,6 +14994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &677168467
 Renderer:
   m_ObjectHideFlags: 0
@@ -14925,6 +15127,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &679903403
 Prefab:
   m_ObjectHideFlags: 0
@@ -14974,7 +15177,11 @@ Prefab:
       objectReference: {fileID: 420123959}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -15070,6 +15277,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &684252254
 Prefab:
   m_ObjectHideFlags: 0
@@ -15305,6 +15513,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &698221546
 GameObject:
   m_ObjectHideFlags: 0
@@ -15724,6 +15933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &720803059
 Renderer:
   m_ObjectHideFlags: 0
@@ -15900,6 +16110,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &733519949
 Prefab:
   m_ObjectHideFlags: 0
@@ -16337,6 +16560,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 956690498}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &757592786
 Prefab:
   m_ObjectHideFlags: 0
@@ -16572,6 +16796,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &776282994
 GameObject:
   m_ObjectHideFlags: 0
@@ -16761,6 +16986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &782305044
 Renderer:
   m_ObjectHideFlags: 0
@@ -16893,6 +17119,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -5, y: 5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &788572145
 Prefab:
   m_ObjectHideFlags: 0
@@ -17009,7 +17248,7 @@ Transform:
   - {fileID: 420123960}
   - {fileID: 1830246572}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1001 &801803996
 Prefab:
   m_ObjectHideFlags: 0
@@ -17143,6 +17382,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &815196557
 GameObject:
   m_ObjectHideFlags: 0
@@ -17492,6 +17732,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &827067109
 Prefab:
   m_ObjectHideFlags: 0
@@ -17799,6 +18040,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &843393504
 GameObject:
   m_ObjectHideFlags: 0
@@ -17946,6 +18188,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: -5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: -15, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &860802505
 GameObject:
   m_ObjectHideFlags: 0
@@ -18035,6 +18290,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &867156488
 Prefab:
   m_ObjectHideFlags: 0
@@ -18077,6 +18333,50 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3965b4d43745b5c48a5a8110d9315242, type: 2}
   m_RootGameObject: {fileID: 2146092100}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+--- !u!1001 &868926612
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.26007271
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -132.379593
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+  m_RootGameObject: {fileID: 918075818}
   m_IsPrefabParent: 0
   m_IsExploded: 1
 --- !u!1 &870647869
@@ -18227,6 +18527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &880234139
 Renderer:
   m_ObjectHideFlags: 0
@@ -18479,6 +18780,7 @@ GameObject:
   - 114: {fileID: 884748144}
   - 114: {fileID: 884748143}
   - 114: {fileID: 884748142}
+  - 114: {fileID: 884748154}
   - 114: {fileID: 884748141}
   m_Layer: 0
   m_Name: Partner Head
@@ -18500,7 +18802,6 @@ Transform:
   - {fileID: 1571273616}
   - {fileID: 1546604986}
   - {fileID: 929633118}
-  - {fileID: 1581144244}
   m_Father: {fileID: 514085611}
   m_RootOrder: 0
 --- !u!114 &884748140
@@ -18516,6 +18817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -18535,6 +18837,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &884748141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18547,6 +18854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
 --- !u!114 &884748142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18590,7 +18899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
+  stayOutsideBounds: 1
 --- !u!114 &884748145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18616,16 +18925,17 @@ MonoBehaviour:
   - {fileID: 0}
   showWaypoints: 0
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 870647869}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &884748146
 MonoBehaviour:
@@ -18742,6 +19052,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &884748151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18796,6 +19107,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &884748154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1119477355}
+  m_GameObject: {fileID: 884748138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1 &885070195
 GameObject:
   m_ObjectHideFlags: 0
@@ -19027,6 +19353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &894102137
 Renderer:
   m_ObjectHideFlags: 0
@@ -19244,6 +19571,109 @@ Prefab:
   m_RootGameObject: {fileID: 1166220641}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &918075818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 918075824}
+  - 33: {fileID: 918075823}
+  - 64: {fileID: 918075822}
+  - 23: {fileID: 918075821}
+  - 114: {fileID: 918075820}
+  - 65: {fileID: 918075819}
+  m_Layer: 0
+  m_Name: Orb Pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &918075819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 6.1232336e-17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &918075820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de907e4077fd8c4f908cca879291cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
+  colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
+--- !u!23 &918075821
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 7e9c1ccabc78fa843880d81755e9a7b1, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!64 &918075822
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &918075823
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122,
+    type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &918075824
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 802e4d1c22d9b1345ab5d3cdcebf8122, type: 2}
+  m_PrefabInternal: {fileID: 868926612}
+  m_GameObject: {fileID: 918075818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.26007271, y: -132.379593, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &918191249
 GameObject:
   m_ObjectHideFlags: 0
@@ -19443,6 +19873,14 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1719802093}
+    - target: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
+      propertyPath: worldWidth
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
+      propertyPath: worldHeight
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f10e6c7ee3f0c424cac0415ce07b1859, type: 2}
   m_RootGameObject: {fileID: 1359708941}
@@ -19943,6 +20381,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &953653009
 GameObject:
   m_ObjectHideFlags: 0
@@ -20164,6 +20603,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &956690499
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20464,6 +20904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &964930803
 Renderer:
   m_ObjectHideFlags: 0
@@ -20579,6 +21020,7 @@ Transform:
   - {fileID: 710260790}
   - {fileID: 693262210}
   - {fileID: 1688948576}
+  - {fileID: 1206887352}
   m_Father: {fileID: 1149398274}
   m_RootOrder: 0
 --- !u!1 &979092408
@@ -20842,6 +21284,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &988415645
 GameObject:
   m_ObjectHideFlags: 0
@@ -21061,6 +21504,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &997663369
 GameObject:
   m_ObjectHideFlags: 0
@@ -21071,13 +21515,14 @@ GameObject:
   - 4: {fileID: 997663370}
   - 198: {fileID: 997663372}
   - 199: {fileID: 997663371}
+  - 82: {fileID: 997663373}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &997663370
 Transform:
   m_ObjectHideFlags: 0
@@ -21085,10 +21530,10 @@ Transform:
   m_PrefabInternal: {fileID: 679903403}
   m_GameObject: {fileID: 997663369}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2144510075}
+  m_Father: {fileID: 424781070}
   m_RootOrder: 3
 --- !u!199 &997663371
 ParticleSystemRenderer:
@@ -21372,9 +21817,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -22176,6 +22621,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &997663373
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 679903403}
+  m_GameObject: {fileID: 997663369}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1002467693
 GameObject:
   m_ObjectHideFlags: 0
@@ -22533,6 +23037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1008147603
 Renderer:
   m_ObjectHideFlags: 0
@@ -22665,6 +23170,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1015227550
 GameObject:
   m_ObjectHideFlags: 0
@@ -22777,7 +23283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1015649410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.40959978, y: 2.28609991, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 416083744}
@@ -22837,9 +23343,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 2003401110}
+  loopBackTo: {fileID: 1591036476}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1015727295
 GameObject:
   m_ObjectHideFlags: 0
@@ -22929,6 +23436,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1019301979
 GameObject:
   m_ObjectHideFlags: 0
@@ -23152,6 +23660,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1025733605
 Prefab:
   m_ObjectHideFlags: 0
@@ -23387,6 +23896,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1034445504
 GameObject:
   m_ObjectHideFlags: 0
@@ -23476,6 +23986,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1035055953
 GameObject:
   m_ObjectHideFlags: 0
@@ -23953,6 +24464,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1066183128
 GameObject:
   m_ObjectHideFlags: 0
@@ -24128,6 +24640,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 5, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 5, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &1074648775
 GameObject:
   m_ObjectHideFlags: 0
@@ -24259,7 +24784,7 @@ Transform:
   - {fileID: 603066000}
   - {fileID: 677168464}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!1 &1093282030
 GameObject:
   m_ObjectHideFlags: 0
@@ -24319,6 +24844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1093282034
 Renderer:
   m_ObjectHideFlags: 0
@@ -24524,6 +25050,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &1097909015
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24730,6 +25257,10 @@ Prefab:
       propertyPath: lineMakerPrefab
       value: 
       objectReference: {fileID: 100000, guid: 0ac6e1784fa75ac4dbd95540ef244aec, type: 2}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 514085610}
@@ -24824,6 +25355,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1128656592
 GameObject:
   m_ObjectHideFlags: 0
@@ -24883,6 +25415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1128656596
 Renderer:
   m_ObjectHideFlags: 0
@@ -25084,6 +25617,7 @@ Transform:
   - {fileID: 2063637661}
   - {fileID: 619006126}
   - {fileID: 502771567}
+  - {fileID: 431219851}
   m_Father: {fileID: 174839613}
   m_RootOrder: 0
 --- !u!1 &1138997569
@@ -25312,13 +25846,14 @@ GameObject:
   - 4: {fileID: 1146011756}
   - 198: {fileID: 1146011758}
   - 199: {fileID: 1146011757}
+  - 82: {fileID: 1146011759}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1146011756
 Transform:
   m_ObjectHideFlags: 0
@@ -25326,10 +25861,10 @@ Transform:
   m_PrefabInternal: {fileID: 570622082}
   m_GameObject: {fileID: 1146011755}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 519964496}
+  m_Father: {fileID: 300863570}
   m_RootOrder: 3
 --- !u!199 &1146011757
 ParticleSystemRenderer:
@@ -25613,9 +26148,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -26417,6 +26952,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &1146011759
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 570622082}
+  m_GameObject: {fileID: 1146011755}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1146220069
 GameObject:
   m_ObjectHideFlags: 0
@@ -26610,6 +27204,7 @@ GameObject:
   - 114: {fileID: 1149398278}
   - 114: {fileID: 1149398277}
   - 114: {fileID: 1149398276}
+  - 114: {fileID: 1149398289}
   - 114: {fileID: 1149398275}
   m_Layer: 0
   m_Name: Partner Head
@@ -26631,7 +27226,6 @@ Transform:
   - {fileID: 977006929}
   - {fileID: 1030939661}
   - {fileID: 763713885}
-  - {fileID: 1206887352}
   m_Father: {fileID: 116264562}
   m_RootOrder: 0
 --- !u!114 &1149398275
@@ -26646,6 +27240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
 --- !u!114 &1149398276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26689,7 +27285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
+  stayOutsideBounds: 1
 --- !u!114 &1149398279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26713,18 +27309,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 416083743}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &1149398280
 MonoBehaviour:
@@ -26806,6 +27403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -26825,6 +27423,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!54 &1149398284
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26873,6 +27476,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1149398286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26927,6 +27531,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1149398289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1733201572}
+  m_GameObject: {fileID: 1149398273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1 &1152751714
 GameObject:
   m_ObjectHideFlags: 0
@@ -27534,6 +28153,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1183082616
 GameObject:
   m_ObjectHideFlags: 0
@@ -27623,6 +28243,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1183831555
 GameObject:
   m_ObjectHideFlags: 0
@@ -27842,6 +28463,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &1190467621
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -27938,13 +28560,14 @@ GameObject:
   - 4: {fileID: 1206887352}
   - 198: {fileID: 1206887354}
   - 199: {fileID: 1206887353}
+  - 82: {fileID: 1206887355}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1206887352
 Transform:
   m_ObjectHideFlags: 0
@@ -27952,10 +28575,10 @@ Transform:
   m_PrefabInternal: {fileID: 1733201572}
   m_GameObject: {fileID: 1206887351}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1149398274}
+  m_Father: {fileID: 977006929}
   m_RootOrder: 3
 --- !u!199 &1206887353
 ParticleSystemRenderer:
@@ -28239,9 +28862,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -29043,6 +29666,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &1206887355
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1733201572}
+  m_GameObject: {fileID: 1206887351}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1209028569
 GameObject:
   m_ObjectHideFlags: 0
@@ -29178,7 +29860,11 @@ Prefab:
       objectReference: {fileID: 1019301979}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -29274,6 +29960,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1219662121
 GameObject:
   m_ObjectHideFlags: 0
@@ -29419,6 +30106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1220714983
 Renderer:
   m_ObjectHideFlags: 0
@@ -29662,6 +30350,7 @@ Transform:
   - {fileID: 256506722}
   - {fileID: 1621884607}
   - {fileID: 1383674897}
+  - {fileID: 1534254222}
   m_Father: {fileID: 1872137344}
   m_RootOrder: 0
 --- !u!1 &1238749203
@@ -29880,7 +30569,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1244802501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.43270016, y: 2.19580007, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 1474657456}
@@ -29940,9 +30629,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 1190467620}
+  loopBackTo: {fileID: 982064093}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1246442623
 Prefab:
   m_ObjectHideFlags: 0
@@ -30353,6 +31043,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1267195676
 GameObject:
   m_ObjectHideFlags: 0
@@ -31378,6 +32069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1305590739
 Renderer:
   m_ObjectHideFlags: 0
@@ -31510,6 +32202,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1313966917
 GameObject:
   m_ObjectHideFlags: 0
@@ -31741,6 +32434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1318263258
 Renderer:
   m_ObjectHideFlags: 0
@@ -32033,6 +32727,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1354493818
 Prefab:
   m_ObjectHideFlags: 0
@@ -32171,6 +32866,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1359708942}
+  - 114: {fileID: 272260318}
   m_Layer: 0
   m_Name: Boundary Container
   m_TagString: Untagged
@@ -32427,6 +33123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1379884853
 Renderer:
   m_ObjectHideFlags: 0
@@ -32560,7 +33257,11 @@ Prefab:
       objectReference: {fileID: 374753964}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -32700,6 +33401,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1387113205
 GameObject:
   m_ObjectHideFlags: 0
@@ -32918,6 +33620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1395113244
 Renderer:
   m_ObjectHideFlags: 0
@@ -33119,7 +33822,6 @@ MonoBehaviour:
   cursor: {fileID: 1405120385}
   parent: {fileID: 1336827187}
   forward: {x: 0, y: 0, z: 0}
-  active: 0
 --- !u!1 &1408329976
 GameObject:
   m_ObjectHideFlags: 0
@@ -33404,7 +34106,7 @@ Transform:
   - {fileID: 412355781}
   - {fileID: 1096746849}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1 &1413431073
 GameObject:
   m_ObjectHideFlags: 0
@@ -33494,6 +34196,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &1414126841
 GameObject:
   m_ObjectHideFlags: 0
@@ -33588,7 +34303,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1419849774}
-  - 114: {fileID: 1419849777}
   - 65: {fileID: 1419849776}
   - 114: {fileID: 1419849775}
   m_Layer: 0
@@ -33619,12 +34333,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419849773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
+  colliderLocation: 1
 --- !u!65 &1419849776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33638,23 +34350,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 200, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1419849777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400012, guid: f10e6c7ee3f0c424cac0415ce07b1859,
-    type: 2}
-  m_PrefabInternal: {fileID: 922380584}
-  m_GameObject: {fileID: 1419849773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 1719802093}
-  moveDistance: 190
-  colliderLocation: 1
 --- !u!1 &1420425398
 GameObject:
   m_ObjectHideFlags: 0
@@ -33794,7 +34489,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1430846596}
   - 65: {fileID: 1430846599}
-  - 114: {fileID: 1430846598}
   - 114: {fileID: 1430846597}
   m_Layer: 0
   m_Name: Top Boundary
@@ -33824,28 +34518,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1430846595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3ead4491847746b77c094adefb64c, type: 3}
+  m_Script: {fileID: 11500000, guid: 034a77cf6b198804792cd9df6a960872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopOnCamera: 1
-  moveRoot: 0
-  boundaryCollider: 1
---- !u!114 &1430846598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400014, guid: f10e6c7ee3f0c424cac0415ce07b1859,
-    type: 2}
-  m_PrefabInternal: {fileID: 922380584}
-  m_GameObject: {fileID: 1430846595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ef9a8930bdf0c4f91643478bdf3ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listOfObjectsToLoop: []
-  listOfCollidersToMove: []
-  player: {fileID: 1719802093}
-  moveDistance: 190
   colliderLocation: 0
 --- !u!65 &1430846599
 BoxCollider:
@@ -34095,6 +34770,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1452250202
 Prefab:
   m_ObjectHideFlags: 0
@@ -34272,6 +34948,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1465165532
 GameObject:
   m_ObjectHideFlags: 0
@@ -34749,6 +35426,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1512355146
 GameObject:
   m_ObjectHideFlags: 0
@@ -34924,6 +35602,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1534254221
 GameObject:
   m_ObjectHideFlags: 0
@@ -34934,13 +35613,14 @@ GameObject:
   - 4: {fileID: 1534254222}
   - 198: {fileID: 1534254224}
   - 199: {fileID: 1534254223}
+  - 82: {fileID: 1534254225}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1534254222
 Transform:
   m_ObjectHideFlags: 0
@@ -34948,10 +35628,10 @@ Transform:
   m_PrefabInternal: {fileID: 1214827607}
   m_GameObject: {fileID: 1534254221}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1872137344}
+  m_Father: {fileID: 1232794006}
   m_RootOrder: 3
 --- !u!199 &1534254223
 ParticleSystemRenderer:
@@ -35235,9 +35915,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -36039,6 +36719,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &1534254225
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1214827607}
+  m_GameObject: {fileID: 1534254221}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1546604985
 GameObject:
   m_ObjectHideFlags: 0
@@ -36649,6 +37388,7 @@ Transform:
   - {fileID: 880532928}
   - {fileID: 63082112}
   - {fileID: 1393948814}
+  - {fileID: 1581144244}
   m_Father: {fileID: 884748139}
   m_RootOrder: 0
 --- !u!1 &1574254887
@@ -36740,6 +37480,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1580021030
 Prefab:
   m_ObjectHideFlags: 0
@@ -36794,13 +37535,14 @@ GameObject:
   - 4: {fileID: 1581144244}
   - 198: {fileID: 1581144246}
   - 199: {fileID: 1581144245}
+  - 82: {fileID: 1581144247}
   m_Layer: 0
   m_Name: Callout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1581144244
 Transform:
   m_ObjectHideFlags: 0
@@ -36808,10 +37550,10 @@ Transform:
   m_PrefabInternal: {fileID: 1119477355}
   m_GameObject: {fileID: 1581144243}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: -.25}
+  m_LocalPosition: {x: 0, y: 0, z: -.250000507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 884748139}
+  m_Father: {fileID: 1571273616}
   m_RootOrder: 3
 --- !u!199 &1581144245
 ParticleSystemRenderer:
@@ -37095,9 +37837,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 3
-    radius: .100000001
-    angle: 25
+    type: 7
+    radius: .300000012
+    angle: 82.0228958
     length: 5
     boxX: 1
     boxY: 1
@@ -37899,6 +38641,65 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!82 &1581144247
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1119477355}
+  m_GameObject: {fileID: 1581144243}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 848c7d5e51e6cb74c9075b3ab33d520d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1001 &1581952055
 Prefab:
   m_ObjectHideFlags: 0
@@ -38118,6 +38919,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1590703872
 Prefab:
   m_ObjectHideFlags: 0
@@ -38251,6 +39053,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1592665028
 GameObject:
   m_ObjectHideFlags: 0
@@ -38340,6 +39143,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1596885784
 Prefab:
   m_ObjectHideFlags: 0
@@ -38559,6 +39363,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1619468166
 Prefab:
   m_ObjectHideFlags: 0
@@ -39553,6 +40358,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1658033086
 GameObject:
   m_ObjectHideFlags: 0
@@ -39612,6 +40418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1658033090
 Renderer:
   m_ObjectHideFlags: 0
@@ -39725,7 +40532,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1665620723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -2.98079991, y: -7.04199982, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 374753965}
@@ -39788,6 +40595,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 1687944889}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1667775724
 Prefab:
   m_ObjectHideFlags: 0
@@ -40264,7 +41072,7 @@ Transform:
   - {fileID: 374753965}
   - {fileID: 1766441966}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1687944884
 GameObject:
   m_ObjectHideFlags: 0
@@ -40354,6 +41162,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1688948575
 GameObject:
   m_ObjectHideFlags: 0
@@ -40454,6 +41263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1689913385
 Renderer:
   m_ObjectHideFlags: 0
@@ -40733,7 +41543,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1718651130
 GameObject:
   m_ObjectHideFlags: 0
@@ -40841,6 +41651,7 @@ GameObject:
   - 114: {fileID: 1719802107}
   - 114: {fileID: 1719802104}
   - 114: {fileID: 1719802106}
+  - 114: {fileID: 1719802108}
   m_Layer: 0
   m_Name: Player Head
   m_TagString: Converser
@@ -40877,6 +41688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -40896,6 +41708,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &1719802096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41024,7 +41841,7 @@ MonoBehaviour:
   score: 0
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
-  rewardSpeedBoost: 2
+  rewardSpeedBoost: 5
   boostLevels: 4
   changeTime: .5
   gameCamera: {fileID: 51258267}
@@ -41033,6 +41850,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1719802102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41132,6 +41950,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   followTarget: 0
+  followDistance: 0
+--- !u!114 &1719802108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1719802093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114c99c986871754c877d7240e59ea7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tripDuration: 5
+  tripDurationDampening: .899999976
+  tripBoost: .300000012
+  headRenderer: {fileID: 918191251}
+  minColor: {r: .200000003, g: .200000003, b: .200000003, a: 1}
 --- !u!1 &1721719288
 GameObject:
   m_ObjectHideFlags: 0
@@ -41308,7 +42143,11 @@ Prefab:
       objectReference: {fileID: 416083743}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: moveWithoutPartner
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
@@ -41664,6 +42503,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1746185848
 GameObject:
   m_ObjectHideFlags: 0
@@ -43263,6 +44103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1796059359
 Renderer:
   m_ObjectHideFlags: 0
@@ -43365,6 +44206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1802150701
 Renderer:
   m_ObjectHideFlags: 0
@@ -43585,6 +44427,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1810989924
 Prefab:
   m_ObjectHideFlags: 0
@@ -44047,6 +44890,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1830246571
 GameObject:
   m_ObjectHideFlags: 0
@@ -44209,6 +45053,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 5, y: 5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 10, y: 10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &1838602776
 Prefab:
   m_ObjectHideFlags: 0
@@ -44342,6 +45199,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1841512170
 Prefab:
   m_ObjectHideFlags: 0
@@ -44605,6 +45463,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1856540139
 GameObject:
   m_ObjectHideFlags: 0
@@ -44694,6 +45553,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1858431211
 GameObject:
   m_ObjectHideFlags: 0
@@ -44845,6 +45705,7 @@ GameObject:
   - 114: {fileID: 1872137348}
   - 114: {fileID: 1872137347}
   - 114: {fileID: 1872137346}
+  - 114: {fileID: 1872137359}
   - 114: {fileID: 1872137345}
   m_Layer: 0
   m_Name: Partner Head
@@ -44866,7 +45727,6 @@ Transform:
   - {fileID: 1232794006}
   - {fileID: 1434012475}
   - {fileID: 634026556}
-  - {fileID: 1534254222}
   m_Father: {fileID: 1756895732}
   m_RootOrder: 0
 --- !u!114 &1872137345
@@ -44881,6 +45741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
 --- !u!114 &1872137346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44924,7 +45786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
+  stayOutsideBounds: 1
 --- !u!114 &1872137349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44948,18 +45810,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 1019301979}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &1872137350
 MonoBehaviour:
@@ -45041,6 +45904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -45060,6 +45924,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!54 &1872137354
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45108,6 +45977,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1872137356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45162,6 +46032,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1872137359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 1214827607}
+  m_GameObject: {fileID: 1872137343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1 &1875657218
 GameObject:
   m_ObjectHideFlags: 0
@@ -45381,6 +46266,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 6, y: 7, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 15, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &1877422418
 GameObject:
   m_ObjectHideFlags: 0
@@ -45428,6 +46326,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &1877422421
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -45492,7 +46391,7 @@ Transform:
   m_PrefabInternal: {fileID: 1969398895}
   m_GameObject: {fileID: 1888407374}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -121.059998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1719802094}
@@ -45762,6 +46661,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1914691418
 Prefab:
   m_ObjectHideFlags: 0
@@ -45983,6 +46883,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1918902069
 Prefab:
   m_ObjectHideFlags: 0
@@ -46116,6 +47017,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1922704691
 Prefab:
   m_ObjectHideFlags: 0
@@ -46693,7 +47595,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -121.059998
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: m_LocalPosition.z
@@ -46837,6 +47739,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &1972993965
 GameObject:
   m_ObjectHideFlags: 0
@@ -47072,6 +47975,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &1978668747
 Prefab:
   m_ObjectHideFlags: 0
@@ -47219,6 +48123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   largeExplosionPrefab: {fileID: 100004, guid: b557081b4c0820b48a75457fc0f1dffa, type: 2}
   colorfulTrailPrefab: {fileID: 100002, guid: 863a2afcfab861042b8ab97eb069e356, type: 2}
+  slowDistance: 0
 --- !u!23 &1994019336
 Renderer:
   m_ObjectHideFlags: 0
@@ -47856,6 +48761,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &2003401111
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -48098,7 +49004,7 @@ Transform:
   - {fileID: 870647870}
   - {fileID: 514085611}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1 &2015897077
 GameObject:
   m_ObjectHideFlags: 0
@@ -48318,6 +49224,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &2020751088
 GameObject:
   m_ObjectHideFlags: 0
@@ -49920,7 +50827,7 @@ Transform:
   - {fileID: 1474657456}
   - {fileID: 601579588}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1 &2117553748
 GameObject:
   m_ObjectHideFlags: 0
@@ -50096,6 +51003,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1 &2124917844
 GameObject:
   m_ObjectHideFlags: 0
@@ -50357,6 +51265,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!1001 &2143823779
 Prefab:
   m_ObjectHideFlags: 0
@@ -50535,6 +51444,7 @@ GameObject:
   - 114: {fileID: 2144510079}
   - 114: {fileID: 2144510078}
   - 114: {fileID: 2144510077}
+  - 114: {fileID: 2144510090}
   - 114: {fileID: 2144510076}
   m_Layer: 0
   m_Name: Partner Head
@@ -50556,7 +51466,6 @@ Transform:
   - {fileID: 424781070}
   - {fileID: 1297229847}
   - {fileID: 97030260}
-  - {fileID: 997663370}
   m_Father: {fileID: 1830246572}
   m_RootOrder: 0
 --- !u!114 &2144510076
@@ -50571,6 +51480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
 --- !u!114 &2144510077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50614,7 +51525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  boundaryCollider: 0
+  stayOutsideBounds: 1
 --- !u!114 &2144510080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50638,18 +51549,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 420123959}
-  moveWithoutPartner: 0
+  moveWithoutPartner: 1
   maxDesireToLead: 1
   minDesireToLead: 0
   inWakeLeadGrowth: .100000001
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &2144510081
 MonoBehaviour:
@@ -50731,6 +51643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -50750,6 +51663,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!54 &2144510085
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50798,6 +51716,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &2144510087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50852,6 +51771,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2144510090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 679903403}
+  m_GameObject: {fileID: 2144510074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1 &2146092100
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,7 +126,7 @@ public class PartnerLink : MonoBehaviour {
 			float minSqrDist = -1;
 			for (int i = 0; i < potentialConversations.Length; i++)
 			{
-				if (potentialConversations[i].partner1.seekingPartner && potentialConversations[i].partner2.seekingPartner)
+				if ((potentialConversations[i].partner1 != null && potentialConversations[i].partner1.seekingPartner) && (potentialConversations[i].partner2 != null && potentialConversations[i].partner2.seekingPartner))
 				{
 					float sqrDist = (potentialConversations[i].partner1.transform.position - potentialConversations[i].partner2.transform.position).sqrMagnitude;
 					if (sqrDist < minSqrDist || (minSqrDist < 0 && sqrDist <= Mathf.Pow(potentialConversations[i].breakingDistance, 2)))
@@ -158,7 +158,7 @@ public class PartnerLink : MonoBehaviour {
 		}
 		
 		// Handle partners seperating.
-		if (partner != null)
+		if (partner != null && conversation != null)
 		{
 			// Show that partners are close to separating.
 			float sqrDist = (transform.position - partner.transform.position).sqrMagnitude;
@@ -245,13 +245,13 @@ public class PartnerLink : MonoBehaviour {
 			{
 			isgaining = true;
 			islagging = false;
-			print("is gaining");
+			//print("is gaining");
 			}
 			else if (plpaDist > plpaDist2)
 			{
 			isgaining = false;
 			islagging = true;
-			print("is not gaining");
+			//print("is not gaining");
 			}
 
 			plpaDist2 = plpaDist;

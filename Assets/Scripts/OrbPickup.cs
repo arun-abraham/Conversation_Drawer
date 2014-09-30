@@ -8,6 +8,7 @@ public class OrbPickup : MonoBehaviour {
 	private GameObject largeExplosion;
 	private GameObject colorfulTrail;
 	private Feedback feedback;
+	public float slowDistance;
 
 	// Use this for initialization
 	void Start () {
@@ -22,12 +23,17 @@ public class OrbPickup : MonoBehaviour {
 	void OnTriggerEnter(Collider col) {
 		if(col.gameObject.tag == "Converser")
 		{
-			feedback = col.gameObject.GetComponent<Feedback>();
-			feedback.AlternateTrail();
-			largeExplosion = (GameObject)Instantiate(largeExplosionPrefab);
-			largeExplosion.transform.position = col.transform.position;
+			// Trigger if the collider is not orbiting.
+			OrbReaction reaction = col.gameObject.GetComponent<OrbReaction>();
+			if (reaction != null && reaction.StartTrip())
+			{
+				feedback = col.gameObject.GetComponent<Feedback>();
+				feedback.AlternateTrail();
+				largeExplosion = (GameObject)Instantiate(largeExplosionPrefab);
+				largeExplosion.transform.position = col.transform.position;
 
-			Destroy(gameObject);
+				Destroy(gameObject);
+			}
 		}
 	}
 }

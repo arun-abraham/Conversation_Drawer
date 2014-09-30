@@ -11,6 +11,7 @@ public class MiniPoint : MonoBehaviour {
 	public bool fading = false;
 	public bool bright = false;
 	public GameObject creator;
+	public float informationFactor;
 
 	// Use this for initialization
 	void Start () {
@@ -58,13 +59,20 @@ public class MiniPoint : MonoBehaviour {
 	{
 		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
-			isHit = true;
-			renderer.material.color = Color.cyan;
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			PartnerLink colliderLink = collide.gameObject.GetComponent<PartnerLink>();
+			if (creatorLink != null && colliderLink != null && creatorLink.Partner == colliderLink)
+			{
+				isHit = true;
+				renderer.material.color = Color.cyan;
 
-			if(isplayed == false)
-			audio.Play();
+				if(isplayed == false)
+				audio.Play();
 
-			isplayed = true;
+				isplayed = true;
+
+				collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
+			}
 		}
 		
 	}

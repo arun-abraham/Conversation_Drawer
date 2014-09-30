@@ -9,12 +9,14 @@ public class Boundary : MonoBehaviour {
 	{
 		if(other.tag == "Converser")
 		{
-			if(other.transform == transform.parent.GetComponent<TriggerLooping>().player.transform)
+			if (other.GetComponent<PartnerLink>().isPlayer)
 				transform.parent.GetComponent<TriggerLooping>().MoveWorld(colliderLocation);
-			else
-				transform.parent.GetComponent<TriggerLooping>().MoveIndividual(colliderLocation, other.gameObject);
-
+			else 
+			{
+				LoopTag loopTag = other.GetComponentInChildren<LoopTag>();
+				if (loopTag != null)
+					transform.parent.GetComponent<TriggerLooping>().MoveIndividual(colliderLocation, loopTag.gameObject, other.GetComponent<Tracer>());
+			}
 		}
 	}
-
 }

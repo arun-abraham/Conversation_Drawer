@@ -162,4 +162,13 @@ public class Feedback : MonoBehaviour {
 			altPSys.transform.position = transform.position;
 		}
 	}
+
+	public void DestroyAlternateTrail()
+	{
+		if (altPSys != null)
+		{
+			Destroy(altPSys.gameObject);
+			altPSys = null;
+		}
+	}
 }

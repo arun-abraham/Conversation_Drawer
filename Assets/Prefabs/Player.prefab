@@ -636,7 +636,7 @@ MonoBehaviour:
   score: 0
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
-  rewardSpeedBoost: 2
+  rewardSpeedBoost: 5
   boostLevels: 4
   changeTime: .5
   gameCamera: {fileID: 2000000}
@@ -645,6 +645,7 @@ MonoBehaviour:
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -717,6 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  partner: {fileID: 0}
   seekingPartner: 1
   converseDistance: 5
   warningThreshold: 1.5
@@ -726,6 +728,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  callout: {fileID: 0}
   startYieldProximity: 1
   endYieldProximity: 2
   yieldSpeedModifier: -.100000001
@@ -735,6 +738,11 @@ MonoBehaviour:
   linkBroken: 0
   timerTime: 5
   pointsGlobal: {fileID: 0}
+  isLeadingnow: 0
+  plpaDist: 0
+  plpaDist2: 0
+  isgaining: 0
+  islagging: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -791,7 +799,6 @@ MonoBehaviour:
   cursor: {fileID: 100008}
   parent: {fileID: 100006}
   forward: {x: 0, y: 0, z: 0}
-  active: 0
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -926,6 +933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   followTarget: 0
+  followDistance: 0
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
