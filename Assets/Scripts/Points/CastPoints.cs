@@ -118,6 +118,31 @@ public class CastPoints : MonoBehaviour {
 			{
 				miniPoints[i].creator = gameObject;
 			}
+			LongDetail[] longdetails = createdPoints.GetComponentsInChildren<LongDetail>();
+			for (int i = 0; i < longdetails.Length; i++)
+			{
+				longdetails[i].creator = gameObject;
+			}
+			LongPoint[] longPoints = createdPoints.GetComponentsInChildren<LongPoint>();
+			for (int i = 0; i < longPoints.Length; i++)
+			{
+				longPoints[i].creator = gameObject;
+			}
+			DeepDetail[] deepdetails = createdPoints.GetComponentsInChildren<DeepDetail>();
+			for (int i = 0; i < deepdetails.Length; i++)
+			{
+				deepdetails[i].creator = gameObject;
+			}
+			DeepPoint[] deepPoints = createdPoints.GetComponentsInChildren<DeepPoint>();
+			for (int i = 0; i < deepPoints.Length; i++)
+			{
+				deepPoints[i].creator = gameObject;
+			}
+			FinalPoint[] finalPoints = createdPoints.GetComponentsInChildren<FinalPoint>();
+			for (int i = 0; i < finalPoints.Length; i++)
+			{
+				finalPoints[i].creator = gameObject;
+			}
 		}
 	}
 

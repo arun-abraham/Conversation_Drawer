@@ -25,12 +25,18 @@ public class LongPoint : MonoBehaviour {
 	public bool fading = false;
 	public bool bright = false;
 
+	public float informationFactor;
+	public GameObject creator;
+
 	// Use this for initialization
 	void Start () {
 		
 		rotSpeed = 5.0f;
 		rotVect = new Vector3(0,0,1);
-		myAlpha = 1;
+
+		myAlpha = 0;
+		bright = true;
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
 		
 	}
 	
@@ -67,7 +73,9 @@ public class LongPoint : MonoBehaviour {
 			audio.PlayOneShot(Gong);
 			//rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
+			lilPoint1.GetComponent<LongDetail>().creator.BroadcastMessage("UnderstandPoint", informationFactor);
 		}
+	
 		
 	}
 
