@@ -28,13 +28,16 @@ public class LongDetail : MonoBehaviour {
 
 		if(fading == true)
 		{
-			if(myAlpha >= 0)
+			if(myAlpha > 0)
 				myAlpha -= Time.deltaTime * fadeConst;
+			//print (myAlpha);
+			//print (renderer.material.color);
+			//print (gameObject);
 		}
 		
 		if(bright == true)
 		{
-			if(myAlpha <=1)
+			if(myAlpha < 1)
 				myAlpha += Time.deltaTime * fadeConst;
 		}
 
@@ -55,7 +58,7 @@ public class LongDetail : MonoBehaviour {
 			if (allDone == false)
 			audio.Play();
 
-			Invoke("setHitOff",5.0f);
+			Invoke("setHitOff",8.0f);
 		}
 		
 	}
@@ -90,6 +93,11 @@ public class LongDetail : MonoBehaviour {
 		fading = false;
 		bright = true;
 		//print ("Is Bright");
+	}
+
+	public void TurnOff()
+	{
+		renderer.enabled = false;
 	}
 	
 }

@@ -81,6 +81,11 @@ public class WaypointSeek : SimpleSeek {
 		{
 			waypoints[i].renderer.enabled = showWaypoints;
 		}
+
+		if (showWaypoints)
+		{
+			SpawnPoints();
+		}
 	}
 	
 	void Update()
@@ -244,7 +249,10 @@ public class WaypointSeek : SimpleSeek {
 		current = previous + 1;
 
 		// Spawn points attached to waypoint being sought, after despawning most recently created points.
-		SpawnPoints();
+		if (!showWaypoints)
+		{
+			SpawnPoints();
+		}
 
 		if (showWaypoints)
 		{
@@ -301,9 +309,35 @@ public class WaypointSeek : SimpleSeek {
 
 	private void SpawnPoints()
 	{
-		if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
+		if (showWaypoints)
+		{	
+			for (int j = 0; j < waypoints.Count; j++)
+			{
+				recentPoints = new GameObject[waypoints[j].pointSpawns.Count];
+				float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[j].transform.position - waypoints[previous].transform.position, Vector3.forward);
+				Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
+				for (int i = 0; i < recentPoints.Length; i++)
+				{
+					PointSpawn newPointSpawn = waypoints[j].pointSpawns[i];
+					Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+					GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[j].transform.position + offset, Quaternion.identity);
+					recentPoints[i] = newPoint;
+					MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+					if (newMiniPoint != null)
+					{
+						newMiniPoint.creator = gameObject;
+						if (newPointSpawn.setInformationFactor)
+						{
+							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						}
+					}
+				}
+			}
+		}
+
+		else if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0 && partnerLink.Partner != null)
 		{
-			if (recentPoints != null)
+			if (recentPoints != null && !showWaypoints)
 			{
 				for (int i = 0; i < recentPoints.Length; i++)
 				{
