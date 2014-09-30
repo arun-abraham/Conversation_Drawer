@@ -377,6 +377,12 @@ public class WaypointSeek : SimpleSeek {
 
 	private void StartLeading()
 	{
+		// Rotate waypoints to heading.
+		float directionAngle = Helper.AngleDegrees(waypoints[current].transform.position - waypoints[previous].transform.position, geometry.transform.forward, Vector3.forward);
+		Vector3 pivotPosition = waypoints[previous].transform.position;
+		waypointContainer.transform.Rotate(Vector3.forward, directionAngle, Space.World);
+
+		// Move waypoints to position.
 		desireToLead = minDesireToLead;
 		Vector3 waypointOffset = transform.position - waypoints[previous].transform.position;
 		for (int i = 0; i < waypoints.Count; i++)
