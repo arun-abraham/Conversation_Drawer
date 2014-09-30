@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	void LevelEvent()
+	public void LevelEvent()
 	{
 		if (evented)
 		{

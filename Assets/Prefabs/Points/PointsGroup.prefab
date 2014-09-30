@@ -4701,6 +4701,7 @@ MonoBehaviour:
   bright: 0
   informationFactor: 0
   creator: {fileID: 0}
+  endConversation: 1
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4898,6 +4899,7 @@ MonoBehaviour:
   bright: 0
   informationFactor: 0
   creator: {fileID: 0}
+  endConversation: 0
 --- !u!114 &11400100
 MonoBehaviour:
   m_ObjectHideFlags: 1
