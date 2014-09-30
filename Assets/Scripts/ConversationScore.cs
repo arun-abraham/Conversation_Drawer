@@ -23,6 +23,7 @@ public class ConversationScore : MonoBehaviour {
 	public Camera gameCamera = null;
 	private bool canTakeLead = false;
 	public float leadBoostPercentage;
+	public float pointBoostPercentage;
 	public float boostRate;
 	public float drainRate;
 	public float breakingChangeRate;
@@ -262,5 +263,9 @@ public class ConversationScore : MonoBehaviour {
 	private void UnderstandPoint(float understanding)
 	{
 		understandingFactor += understanding;
+		if (partnerLink.Partner != null)
+		{
+			partnerLink.Partner.conversingSpeed.TargetRelativeSpeed(partnerLink.Partner.conversationScore.pointBoostPercentage, partnerLink.Partner.conversationScore.boostRate);
+		}
 	}
 }

@@ -28,7 +28,7 @@ public bool fading = false;
 public bool bright = false;
 
 public float informationFactor;
-	public GameObject creator;
+public GameObject creator;
 
 // Use this for initialization
 void Start () {

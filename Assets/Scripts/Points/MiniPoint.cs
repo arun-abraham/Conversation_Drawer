@@ -8,10 +8,13 @@ public class MiniPoint : MonoBehaviour {
 
 	private float myAlpha;
 	private float fadeConst = 0.2f;
+	private float appearConst = 0.6f;
 	public bool fading = false;
 	public bool bright = false;
 	public GameObject creator;
 	public float informationFactor;
+
+	private float plpaDist;
 
 	// Use this for initialization
 	void Start () {
@@ -23,18 +26,46 @@ public class MiniPoint : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
+		plpaDist = Vector3.Distance(transform.position, creator.GetComponent<PartnerLink>().partner.transform.position);
+		//print(plpaDist);
+
+		//PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+
+		if(creator.GetComponent<WaypointSeek>())
+		{
+			if(plpaDist > 30.0f)
+			{	
+				if(myAlpha > 0)
+				{
+				myAlpha -= Time.deltaTime * appearConst;
+				}
+			}
+			else if(plpaDist < 30.0f)
+			{
+				if(myAlpha < 1)
+				{
+				myAlpha += Time.deltaTime * appearConst;
+				}
+			}
+		}
+
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
+
+		if(creator.GetComponent<CastPoints>())
+		{
 	
 		if(fading == true)
 		{
-			if(myAlpha >= 0)
+			if(myAlpha > 0)
 				myAlpha -= Time.deltaTime * fadeConst;
 		}
 		
 		if(bright == true)
 		{
-			if(myAlpha <=1)
+			if(myAlpha < 1)
 				myAlpha += Time.deltaTime * fadeConst;
+		}
+
 		}
 		/*
 

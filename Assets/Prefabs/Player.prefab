@@ -641,6 +641,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 2000000}
   leadBoostPercentage: .200000003
+  pointBoostPercentage: .0500000007
   boostRate: 1
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -728,6 +729,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 0}
   startYieldProximity: 1
   endYieldProximity: 2

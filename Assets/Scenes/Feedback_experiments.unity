@@ -2184,7 +2184,15 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .25
+    setInformationFactor: 1
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 10, z: 0}
+    informationFactor: .25
+    setInformationFactor: 1
 --- !u!1 &639206391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,7 +2387,7 @@ Transform:
   m_PrefabInternal: {fileID: 1787296804}
   m_GameObject: {fileID: 692197992}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -111.099998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1151294868}
@@ -5707,6 +5715,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 0}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -5753,6 +5762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   followTarget: 0
+  followDistance: 0
 --- !u!114 &1151294872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5881,15 +5891,17 @@ MonoBehaviour:
   score: 0
   scorePortionExponent: 2
   scoreDeboostOffset: .100000001
-  rewardSpeedBoost: 2
+  rewardSpeedBoost: 5
   boostLevels: 4
   changeTime: .5
   gameCamera: {fileID: 1246858708}
   leadBoostPercentage: .200000003
+  pointBoostPercentage: .0500000007
   boostRate: 1
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1151294878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6010,6 +6022,7 @@ GameObject:
   - 114: {fileID: 1236702712}
   - 114: {fileID: 1236702711}
   - 114: {fileID: 1236702722}
+  - 114: {fileID: 1236702724}
   - 114: {fileID: 1236702723}
   m_Layer: 0
   m_Name: Partner Head
@@ -6056,6 +6069,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 1607415273}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -6100,6 +6114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
+  stayOutsideBounds: 1
 --- !u!114 &1236702713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6120,7 +6135,7 @@ MonoBehaviour:
   waypoints: []
   showWaypoints: 0
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 1820038257}
   moveWithoutPartner: 0
   maxDesireToLead: 1
@@ -6129,7 +6144,8 @@ MonoBehaviour:
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &1236702714
 MonoBehaviour:
@@ -6242,10 +6258,12 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &1236702719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6326,6 +6344,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
+--- !u!114 &1236702724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 456209394}
+  m_GameObject: {fileID: 1236702708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1 &1246240646
 GameObject:
   m_ObjectHideFlags: 0
@@ -7118,7 +7153,6 @@ MonoBehaviour:
   cursor: {fileID: 1461920674}
   parent: {fileID: 540267469}
   forward: {x: 0, y: 0, z: 0}
-  active: 0
 --- !u!23 &1461920678
 Renderer:
   m_ObjectHideFlags: 0
@@ -8826,7 +8860,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -111.099998
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9622,7 +9656,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .25
+    setInformationFactor: 1
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 10, z: 0}
+    informationFactor: .25
+    setInformationFactor: 1
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 20, z: 0}
+    informationFactor: .25
+    setInformationFactor: 1
 --- !u!1 &1979672229
 GameObject:
   m_ObjectHideFlags: 0
@@ -9740,6 +9786,7 @@ GameObject:
   - 114: {fileID: 2034568419}
   - 114: {fileID: 2034568418}
   - 114: {fileID: 2034568429}
+  - 114: {fileID: 2034568431}
   - 114: {fileID: 2034568430}
   m_Layer: 0
   m_Name: Storyteller Head
@@ -9786,6 +9833,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 1141563911}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -9830,6 +9878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
+  stayOutsideBounds: 1
 --- !u!114 &2034568420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9850,7 +9899,7 @@ MonoBehaviour:
   waypoints: []
   showWaypoints: 0
   current: 0
-  partnerWeight: .699999988
+  partnerWeight: 0
   waypointContainer: {fileID: 1820038257}
   moveWithoutPartner: 0
   maxDesireToLead: 1
@@ -9859,7 +9908,8 @@ MonoBehaviour:
   outWakeLeadGrowth: .100000001
   desireToLead: .5
   orbit: 0
-  orbitRadius: 5
+  orbitRadius: 7
+  orbitBoost: 0
   likesConversation: 1
 --- !u!114 &2034568421
 MonoBehaviour:
@@ -9972,10 +10022,12 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
   minMaxSpeed: 5
+  understandingFactor: 0
 --- !u!114 &2034568426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10056,6 +10108,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff732a65e1051a1459f0471d36e67dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowRate: .200000003
+  slowDistance: 0
+--- !u!114 &2034568431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: c8077d0d1d430374082e48ffd920e536,
+    type: 2}
+  m_PrefabInternal: {fileID: 705202231}
+  m_GameObject: {fileID: 2034568415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dabf0e72a016744594992368b329398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTarget: 0
+  followDistance: 10
 --- !u!1 &2036044259
 GameObject:
   m_ObjectHideFlags: 0

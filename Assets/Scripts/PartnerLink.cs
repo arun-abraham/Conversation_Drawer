@@ -32,6 +32,8 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	[HideInInspector]
+	public ConversingSpeed conversingSpeed;
 	public GameObject callout;
 	private bool yielding;
 	public bool Yielding
@@ -106,6 +108,10 @@ public class PartnerLink : MonoBehaviour {
 		if (conversationScore == null)
 		{
 			conversationScore = GetComponent<ConversationScore>();
+		}
+		if (conversingSpeed == null)
+		{
+			conversingSpeed = GetComponent<ConversingSpeed>();
 		}
 		
 		partnerLine = GetComponent<LineRenderer>();
