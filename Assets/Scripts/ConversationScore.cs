@@ -9,6 +9,7 @@ public class ConversationScore : MonoBehaviour {
 	public Tracer partnerTracer;
 	public GameObject sprite;
 	public GameObject headFill;
+	public GameObject leadFeedback;
 	public int oldNearestIndex = 0;
 	public float score = 0;
 	public float scorePortionExponent = 1;
@@ -69,7 +70,7 @@ public class ConversationScore : MonoBehaviour {
 			SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
 			canTakeLead = false;
 		}
-		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
+		else if (partnerTracer != null && partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
 			if (!canTakeLead)
 			{
@@ -236,12 +237,20 @@ public class ConversationScore : MonoBehaviour {
 	private void StartLeading()
 	{
 		headFill.transform.localScale = new Vector3(1, 1, 1);
+		if (leadFeedback != null)
+		{
+			leadFeedback.SetActive(true);
+		}
 	}
 
 	private void EndLeading()
 	{
 		headFill.transform.localScale = Vector3.zero;
 		understandingFactor = 0;
+		if (leadFeedback != null)
+		{
+			leadFeedback.SetActive(false);
+		}
 	}
 
 	private void EndSpeedChange(string changeName)

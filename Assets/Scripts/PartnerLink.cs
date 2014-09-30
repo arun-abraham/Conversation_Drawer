@@ -20,6 +20,11 @@ public class PartnerLink : MonoBehaviour {
 	}
 	public bool seekingPartner;
 	public float seekingSlow = 0.25f;
+	public float fadingTime = 3.0f;
+	public bool fading = false;
+	public Renderer headRenderer;
+	public Renderer tailRenderer;
+	public Renderer fillRenderer;
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
@@ -122,6 +127,26 @@ public class PartnerLink : MonoBehaviour {
 	
 	void Update()
 	{
+		// Fade out if needed.
+		/*if (fading)
+		{
+			if (partner != null)
+			{
+				ConversationManager.Instance.EndConversation(this, partner);
+			}
+			seekingPartner = false;
+			Color fadeColor = headRenderer.material.color;
+			fadeColor.a -= Time.deltaTime / fadingTime;
+			Color noColor = fadeColor;
+			noColor.a = 0;
+			//headRenderer.renderer.material.color = fadeColor;
+			mover.maxSpeed -= mover.maxSpeed * (Time.deltaTime / fadingTime);
+			mover.SlowDown();
+			//tailRenderer.gameObject.SetActive(false);//.renderer.material.color = fadeColor;
+			//tracer.DestroyLine();//.lineRenderer.SetColors(noColor, fadeColor);
+			//tracer.maxVertices = 0;
+		}*/
+
 		// Find a partner.
 		if (partner == null && seekingPartner)
 		{
@@ -360,5 +385,4 @@ public class PartnerLink : MonoBehaviour {
 		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
 		return !far || !behind;
 	}
-	
 }

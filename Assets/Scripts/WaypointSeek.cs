@@ -335,7 +335,7 @@ public class WaypointSeek : SimpleSeek {
 			}
 		}
 
-		else if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0 && partnerLink.Partner != null)
+		else if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
 		{
 			DestroyRecentPoints();
 
@@ -344,17 +344,20 @@ public class WaypointSeek : SimpleSeek {
 			Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
 			for (int i = 0; i < recentPoints.Length; i++)
 			{
-				PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
-				Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
-				GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + offset, Quaternion.identity);
-				recentPoints[i] = newPoint;
-				MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
-				if (newMiniPoint != null)
+				if (!waypoints[current].pointSpawns[i].requirePartner || partnerLink.Partner != null)
 				{
-					newMiniPoint.creator = gameObject;
-					if (true)//newPointSpawn.setInformationFactor)
+					PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
+					Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+					GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + offset, Quaternion.identity);
+					recentPoints[i] = newPoint;
+					MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+					if (newMiniPoint != null)
 					{
-						newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						newMiniPoint.creator = gameObject;
+						if (true)//newPointSpawn.setInformationFactor)
+						{
+							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						}
 					}
 				}
 			}
