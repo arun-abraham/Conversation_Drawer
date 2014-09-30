@@ -59,15 +59,20 @@ public class MiniPoint : MonoBehaviour {
 	{
 		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
-			isHit = true;
-			renderer.material.color = Color.cyan;
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			PartnerLink colliderLink = collide.gameObject.GetComponent<PartnerLink>();
+			if (creatorLink != null && colliderLink != null && creatorLink.Partner == colliderLink)
+			{
+				isHit = true;
+				renderer.material.color = Color.cyan;
 
-			if(isplayed == false)
-			audio.Play();
+				if(isplayed == false)
+				audio.Play();
 
-			isplayed = true;
+				isplayed = true;
 
-			collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
+				collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
+			}
 		}
 		
 	}
