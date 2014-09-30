@@ -25,6 +25,9 @@ public class SimplePoint : MonoBehaviour {
 	public bool fading = false;
 	public bool bright = false;
 
+	public float informationFactor;
+	public GameObject creator;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -68,6 +71,7 @@ public class SimplePoint : MonoBehaviour {
 				rotSpeed -= Time.deltaTime * timeConst;
 			}
 			BroadcastMessage("IsHitOff");
+			lilPoint1.GetComponent<Detail>().creator.BroadcastMessage("UnderstandPoint", informationFactor);
 		}
 	
 	}

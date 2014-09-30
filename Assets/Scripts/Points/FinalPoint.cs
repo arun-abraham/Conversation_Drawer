@@ -26,6 +26,7 @@ public class FinalPoint : MonoBehaviour {
 	public bool bright = false;
 
 	public bool advance = false;
+	public GameObject creator;
 	
 	// Use this for initialization
 	void Start () {

@@ -13,6 +13,8 @@ public class LongDetail : MonoBehaviour {
 	private float fadeConst = 0.2f;
 	public bool fading = false;
 	public bool bright = false;
+
+	public GameObject creator;
 	
 	// Use this for initialization
 	void Start () {
@@ -51,8 +53,12 @@ public class LongDetail : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Converser")
+		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			PartnerLink colliderLink = collide.gameObject.GetComponent<PartnerLink>();
+			if (creatorLink != null && colliderLink != null && creatorLink.Partner == colliderLink)
+			{
 			setHitOn();
 
 			if (allDone == false)
@@ -61,6 +67,7 @@ public class LongDetail : MonoBehaviour {
 			Invoke("setHitOff",8.0f);
 		}
 		
+	}
 	}
 	
 	void setHitOn ()

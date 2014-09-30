@@ -54,7 +54,7 @@ public class Detail : MonoBehaviour {
 				audio.Play();
 
 				isplayed = true;
-				collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
+				//collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
 			}
 		}
 	}
