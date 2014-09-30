@@ -34,7 +34,7 @@ public class MiniPoint : MonoBehaviour {
 
 		if(creator.GetComponent<WaypointSeek>())
 		{
-			plpaDist = Vector3.Distance(transform.position, creator.GetComponent<PartnerLink>().partner.transform.position);
+			plpaDist = Vector3.Distance(transform.position, creator.GetComponent<PartnerLink>().Partner.transform.position);
 
 			if(plpaDist > 20.0f)
 			{	
@@ -51,7 +51,7 @@ public class MiniPoint : MonoBehaviour {
 				}
 			}
 
-			if(creator.GetComponent<PartnerLink>().partner.GetComponent<PartnerLink>().Leading)
+			if(creator.GetComponent<PartnerLink>().Partner.GetComponent<PartnerLink>().Leading)
 			{
 				if(myAlpha > 0)
 				{

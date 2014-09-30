@@ -3894,6 +3894,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 431219850}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -4102,6 +4103,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -11195,6 +11197,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 1146011755}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -11417,6 +11420,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -14086,7 +14090,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1969398895}
   m_GameObject: {fileID: 623255805}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -20047,6 +20051,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 1581144243}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -20269,6 +20274,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -29165,6 +29171,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 1206887351}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -29224,6 +29231,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -42966,6 +42974,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 2065008213}
   startYieldProximity: 4
   endYieldProximity: 5
@@ -43198,6 +43207,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -45417,6 +45427,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 0}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -45565,6 +45576,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 51258267}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -49822,6 +49834,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 1534254221}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -49881,6 +49894,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -51635,6 +51649,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
       propertyPath: leadBoostPercentage
       value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400028, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ccc0e99af2cf6b47a3f4f25558fb029, type: 2}
@@ -57104,6 +57122,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   tracer: {fileID: 0}
   conversationScore: {fileID: 0}
+  conversingSpeed: {fileID: 0}
   callout: {fileID: 997663369}
   startYieldProximity: 1
   endYieldProximity: 2
@@ -57163,6 +57182,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
+  pointBoostPercentage: 0
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
