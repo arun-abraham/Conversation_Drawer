@@ -19,6 +19,7 @@ public class PartnerLink : MonoBehaviour {
 		get { return leading; }
 	}
 	public bool seekingPartner;
+	public float seekingSlow = 0.25f;
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
@@ -121,7 +122,6 @@ public class PartnerLink : MonoBehaviour {
 	
 	void Update()
 	{
-
 		// Find a partner.
 		if (partner == null && seekingPartner)
 		{
@@ -159,7 +159,18 @@ public class PartnerLink : MonoBehaviour {
 			// Enable callout if needed.
 			if (callout != null)
 			{
-				callout.SetActive(enableCallout);
+				if (callout.activeInHierarchy != enableCallout)
+				{
+					callout.SetActive(enableCallout);
+					if (enableCallout)
+					{
+						mover.externalSpeedMultiplier -= seekingSlow;
+					}
+					else
+					{
+						mover.externalSpeedMultiplier += seekingSlow;
+					}
+				}
 			}
 		}
 		

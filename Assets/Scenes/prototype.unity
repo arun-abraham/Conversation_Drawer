@@ -3033,7 +3033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &136134097
 Transform:
   m_ObjectHideFlags: 0
@@ -4103,7 +4103,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -4336,7 +4336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &185018488
 Transform:
   m_ObjectHideFlags: 0
@@ -11420,7 +11420,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -18137,7 +18137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &793044998
 Transform:
   m_ObjectHideFlags: 0
@@ -20274,7 +20274,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -26386,7 +26386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1093037568
 Transform:
   m_ObjectHideFlags: 0
@@ -29231,7 +29231,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -36275,7 +36275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1411992432
 Transform:
   m_ObjectHideFlags: 0
@@ -43207,7 +43207,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -44702,7 +44702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1687348087
 Transform:
   m_ObjectHideFlags: 0
@@ -45576,7 +45576,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 51258267}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -49894,7 +49894,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
@@ -53171,7 +53171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2012803937
 Transform:
   m_ObjectHideFlags: 0
@@ -56282,7 +56282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2116839346
 Transform:
   m_ObjectHideFlags: 0
@@ -57182,7 +57182,7 @@ MonoBehaviour:
   changeTime: .5
   gameCamera: {fileID: 0}
   leadBoostPercentage: .100000001
-  pointBoostPercentage: 0
+  pointBoostPercentage: .0500000007
   boostRate: 2
   drainRate: .0166599993
   breakingChangeRate: .5
