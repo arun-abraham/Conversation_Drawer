@@ -25,7 +25,7 @@ public class CameraColor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		myColor = new Color(rColor,gColor,bColor,0);
+		myColor = new Color(Mathf.Max(rColor, 0.05f),Mathf.Max(rColor, 0.05f),Mathf.Max(rColor, 0.05f),0);
 		camera.backgroundColor = myColor;
 
 		if(player.GetComponent<PartnerLink>().Partner != null)
