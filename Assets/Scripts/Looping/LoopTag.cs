@@ -11,4 +11,7 @@ public class LoopTag : MonoBehaviour {
 
 	// Keep object out of bounds if it already is?
 	public bool stayOutsideBounds = true;
+
+	// Allow object to pass through boundary;
+	public bool passThrough = false;
 }

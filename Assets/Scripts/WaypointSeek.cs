@@ -337,13 +337,7 @@ public class WaypointSeek : SimpleSeek {
 
 		else if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0 && partnerLink.Partner != null)
 		{
-			if (recentPoints != null && !showWaypoints)
-			{
-				for (int i = 0; i < recentPoints.Length; i++)
-				{
-					Destroy(recentPoints[i]);
-				}
-			}
+			DestroyRecentPoints();
 
 			recentPoints = new GameObject[waypoints[current].pointSpawns.Count];
 			float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[current].transform.position - waypoints[previous].transform.position, Vector3.forward);
@@ -358,7 +352,7 @@ public class WaypointSeek : SimpleSeek {
 				if (newMiniPoint != null)
 				{
 					newMiniPoint.creator = gameObject;
-					if (newPointSpawn.setInformationFactor)
+					if (true)//newPointSpawn.setInformationFactor)
 					{
 						newMiniPoint.informationFactor = newPointSpawn.informationFactor;
 					}
@@ -366,7 +360,19 @@ public class WaypointSeek : SimpleSeek {
 			}
 		}
 	}
-	
+
+	private void DestroyRecentPoints()
+	{
+		if (recentPoints != null && !showWaypoints)
+		{
+			for (int i = 0; i < recentPoints.Length; i++)
+			{
+				Destroy(recentPoints[i]);
+			}
+			recentPoints = null;
+		}
+	}
+
 	void OnTriggerEnter(Collider otherCol)
 	{
 		if (waypoints != null && current < waypoints.Count && otherCol.gameObject == waypoints[current].gameObject)
@@ -389,6 +395,16 @@ public class WaypointSeek : SimpleSeek {
 		{
 			waypoints[i].transform.position += waypointOffset;
 		}
+	}
+
+	private void EndConversation()
+	{
+		DestroyRecentPoints();
+	}
+
+	private void EndLeading()
+	{
+		DestroyRecentPoints();
 	}
 
 	private void StartYielding()
