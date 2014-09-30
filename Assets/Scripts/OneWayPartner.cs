@@ -21,7 +21,7 @@ public class OneWayPartner : MonoBehaviour {
 	void Update () {
 		if (target != null)
 		{
-			if (followTarget && partnerlink.Partner == null && (transform.position - target.transform.position).sqrMagnitude <= Mathf.Pow(followDistance, 2))
+			if (followTarget && partnerlink.Partner == null)// && (transform.position - target.transform.position).sqrMagnitude <= Mathf.Pow(followDistance, 2))
 			{
 				partnerlink.SetPartner(target);
 				following = true;

@@ -11,6 +11,8 @@ public class SlowPlayer : MonoBehaviour {
 	private float decayRate = 0.9f;
 	public float slowRate = 0.2f;
 	public float slowDistance;
+	private int targetTransgressions = 0;
+	public int transgressionThreshold;
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +45,24 @@ public class SlowPlayer : MonoBehaviour {
 		if (partnerLink != null && partnerLink.Partner != null)
 		{
 			targetMover = partnerLink.Partner.GetComponent<SimpleMover>();
+		}
+	}
+
+	public void RespondTransgression()
+	{
+		targetTransgressions++;
+		if (targetTransgressions >= transgressionThreshold)
+		{
+			OneWayPartner follow = GetComponent<OneWayPartner>();
+			if (follow != null)
+			{
+				follow.followTarget = true;
+			}
+			WaypointSeek seek = GetComponent<WaypointSeek>();
+			if (seek != null)
+			{
+				seek.orbit = true;
+			}
 		}
 	}
 }

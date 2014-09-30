@@ -18,4 +18,5 @@ public class PointSpawn
 	public Vector3 offset;
 	public float informationFactor;
 	//public bool setInformationFactor;
+	public bool requirePartner = true;
 }

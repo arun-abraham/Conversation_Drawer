@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour {
 				partnerSeek.moveWithoutPartner = true;
 			}
 			player.Partner.seekingPartner = false;
+			//player.Partner.fading = true;
 			ConversationManager.Instance.EndConversation(player, player.Partner);
 		}
 
