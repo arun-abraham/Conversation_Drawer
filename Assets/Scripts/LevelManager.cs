@@ -60,6 +60,7 @@ public class LevelManager : MonoBehaviour {
 			{
 				loopTag.stayOutsideBounds = false;
 				loopTag.passThrough = false;
+				loopTag.trackObject = true;
 			}
 			WaypointSeek waypointSeek = enableObjects[i].GetComponent<WaypointSeek>();
 			if (waypointSeek)
@@ -76,6 +77,7 @@ public class LevelManager : MonoBehaviour {
 			{
 				loopTag.stayOutsideBounds = true;
 				loopTag.passThrough = true;
+				loopTag.trackObject = false;
 			}
 		}
 	}

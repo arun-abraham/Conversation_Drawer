@@ -85,6 +85,16 @@ public class OffScreenTracking : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if(GetComponent<PartnerLink>().Partner != null)
+		{
+			foreach(GameObject go in conversersList)
+			{
+				go.transform.Find("HorizontalTracker").renderer.enabled = false;
+				go.transform.Find("VerticalTracker").renderer.enabled = false;
+			}
+			return;
+		}
+
 		drawDistanceY = drawDistance + Camera.main.orthographicSize;
 		drawDistanceX = drawDistance + (Camera.main.orthographicSize * Camera.main.aspect);
 

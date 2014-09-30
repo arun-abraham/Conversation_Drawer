@@ -14,4 +14,7 @@ public class LoopTag : MonoBehaviour {
 
 	// Allow object to pass through boundary;
 	public bool passThrough = false;
+
+	//Track This Object?
+	public bool trackObject = false;
 }

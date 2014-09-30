@@ -10,6 +10,7 @@ public class ConversationScore : MonoBehaviour {
 	public GameObject sprite;
 	public GameObject headFill;
 	public GameObject leadFeedback;
+	public GameObject pointRipple;
 	public int oldNearestIndex = 0;
 	public float score = 0;
 	public float scorePortionExponent = 1;
@@ -274,6 +275,7 @@ public class ConversationScore : MonoBehaviour {
 		understandingFactor += understanding;
 		if (partnerLink.Partner != null)
 		{
+			partnerLink.Partner.conversationScore.pointRipple.particleSystem.Play();
 			partnerLink.Partner.conversingSpeed.TargetRelativeSpeed(partnerLink.Partner.conversationScore.pointBoostPercentage, partnerLink.Partner.conversationScore.boostRate);
 		}
 	}
