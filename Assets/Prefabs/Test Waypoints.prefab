@@ -261,6 +261,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,6 +277,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 11400004}
   maxLoopBacks: -1
   loopBacks: 0
+  pointSpawns: []
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,6 +293,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
+  pointSpawns: []
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -73,6 +73,16 @@ public class FinalPoint : MonoBehaviour {
 			audio.PlayOneShot(Gong);
 			//rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
+
+
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			creatorLink.seekingPartner = false;
+			LevelManager levelManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<LevelManager>();
+			if (levelManager != null)
+			{
+				levelManager.LevelEvent();
+			}
+			ConversationManager.Instance.EndConversation(creatorLink, creatorLink.Partner);
 		}
 
 		if(pointMade == true)

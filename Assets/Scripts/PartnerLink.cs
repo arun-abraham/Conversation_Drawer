@@ -157,7 +157,7 @@ public class PartnerLink : MonoBehaviour {
 			float minSqrDist = -1;
 			for (int i = 0; i < potentialConversations.Length; i++)
 			{
-				if ((potentialConversations[i].partner1 != null && potentialConversations[i].partner1.seekingPartner) && (potentialConversations[i].partner2 != null && potentialConversations[i].partner2.seekingPartner))
+				if ((potentialConversations[i].partner1 != null) && (potentialConversations[i].partner2 != null))
 				{
 					float sqrDist = (potentialConversations[i].partner1.transform.position - potentialConversations[i].partner2.transform.position).sqrMagnitude;
 					if (sqrDist < minSqrDist || (minSqrDist < 0 && sqrDist <= Mathf.Pow(potentialConversations[i].breakingDistance, 2)))
@@ -171,7 +171,7 @@ public class PartnerLink : MonoBehaviour {
 			// Determine if the potential partner is actually close enough to converse with.
 			if (nearestConversation != null)
 			{
-				if (minSqrDist <= Mathf.Pow(nearestConversation.initiateDistance, 2))
+				if (minSqrDist <= Mathf.Pow(nearestConversation.initiateDistance, 2) && nearestConversation.partner1.Partner == null && nearestConversation.partner2.Partner == null)
 				{
 					ConversationManager.Instance.StartConversation(nearestConversation.partner1, nearestConversation.partner2);
 				}

@@ -702,7 +702,7 @@ MonoBehaviour:
   maxSpeed: 15
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 30
+  handling: 50
   dampening: .949999988
   dampeningThreshold: 1.5
   externalSpeedMultiplier: 1

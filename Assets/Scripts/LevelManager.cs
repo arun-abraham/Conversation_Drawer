@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour {
 		evented = true;
 
 		// If debugging unlink player partner.
-		if (debugEvent && player != null && player.Partner != null)
+		if (/*debugEvent && player != null && */player.Partner != null)
 		{
 			WaypointSeek partnerSeek = player.Partner.GetComponent<WaypointSeek>();
 			if (partnerSeek != null)

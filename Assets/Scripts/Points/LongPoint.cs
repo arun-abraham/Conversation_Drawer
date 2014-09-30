@@ -27,7 +27,6 @@ public class LongPoint : MonoBehaviour {
 
 	public float informationFactor;
 	public GameObject creator;
-	public bool endConversation = false;
 
 	// Use this for initialization
 	void Start () {
@@ -75,17 +74,6 @@ public class LongPoint : MonoBehaviour {
 			//rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
 			lilPoint1.GetComponent<LongDetail>().creator.BroadcastMessage("UnderstandPoint", informationFactor);
-
-			if (endConversation)
-			{
-				PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
-				ConversationManager.Instance.EndConversation(creatorLink, creatorLink.Partner);
-				LevelManager levelManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<LevelManager>();
-				if (levelManager != null)
-				{
-					levelManager.LevelEvent();
-				}
-			}
 		}
 	
 		
