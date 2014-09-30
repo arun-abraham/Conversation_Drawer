@@ -3592,11 +3592,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns:
-  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: 0, y: 0, z: 0}
-    informationFactor: .00999999978
-    requirePartner: 1
+  pointSpawns: []
 --- !u!1001 &145365398
 Prefab:
   m_ObjectHideFlags: 0
@@ -54892,6 +54888,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400020, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: stayOutsideBounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
+      propertyPath: handling
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
   m_RootGameObject: {fileID: 340791091}
@@ -59765,7 +59769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopOnCamera: 0
   moveRoot: 1
-  stayOutsideBounds: 1
+  stayOutsideBounds: 0
   passThrough: 0
 --- !u!114 &1631488901
 MonoBehaviour:
@@ -59937,7 +59941,7 @@ MonoBehaviour:
   maxSpeed: 20
   velocity: {x: 0, y: 0, z: 0}
   acceleration: 1000
-  handling: 30
+  handling: 50
   dampening: .949999988
   dampeningThreshold: 1.5
   externalSpeedMultiplier: 1
@@ -68738,11 +68742,7 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns:
-  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
-    offset: {x: 0, y: 0, z: 0}
-    informationFactor: .00999999978
-    requirePartner: 1
+  pointSpawns: []
 --- !u!1001 &1870727786
 Prefab:
   m_ObjectHideFlags: 0

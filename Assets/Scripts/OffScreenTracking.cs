@@ -93,6 +93,8 @@ public class OffScreenTracking : MonoBehaviour {
 
 		foreach(GameObject go in conversersList)
 		{
+			if(go.GetComponent<LoopTag>().stayOutsideBounds)
+				continue;
 			//Convert the object we are tracking to viewport coordinates
 			Vector3 v3Screen = Camera.main.WorldToViewportPoint(go.transform.position);
 
