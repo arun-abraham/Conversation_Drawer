@@ -9,8 +9,12 @@ public class Tracer : MonoBehaviour {
 	public GameObject lineMakerPrefab = null;
 	private Vector3 lastVertex = Vector3.zero;
 	private Vector3 lastDirection = Vector3.zero;
+	public float trailNearWidth = 1;
+	public float trailFarWidth = 1;
+	public float zOffset = 10;
 	
-	void Start() {
+	void Start() 
+	{
 		vertices = new List<Vector3>();
 	}
 
@@ -23,6 +27,7 @@ public class Tracer : MonoBehaviour {
 	}
 
 	public void AddVertex(Vector3 position) {	
+		position.z += zOffset;
 		/* Line Presevation.
 		if (vertices.Count > 1) {
 			// Preserve look of the most recent line segement if the new vertex
@@ -70,6 +75,7 @@ public class Tracer : MonoBehaviour {
 		newLineMaker.transform.parent = transform;
 		lineRenderer = newLineMaker.GetComponent<LineRenderer>();
 		lineRenderer.SetVertexCount(0);
+		lineRenderer.SetWidth(trailFarWidth, trailNearWidth);
 		vertices = new List<Vector3>();
 	}
 
@@ -79,7 +85,7 @@ public class Tracer : MonoBehaviour {
 		{
 			vertices.Clear();
 			lineRenderer.SetVertexCount(0);
-			GameObject.Destroy(lineRenderer);
+			GameObject.Destroy(lineRenderer.gameObject);
 			lineRenderer = null;
 		}
 	}
@@ -101,9 +107,23 @@ public class Tracer : MonoBehaviour {
 		return nearestIndex;
 	}
 
-	public Vector3 GetVertex(int index)
+	public void MoveVertices(Vector3 alteration)
 	{
-		return vertices[index];
+		for (int i = 0; i < vertices.Count; i++)
+		{
+			vertices[i] += alteration;
+			lineRenderer.SetPosition(i, vertices[i]);
+		}
+	}
+
+	public Vector3 GetVertex(int index, bool negateZOffset = true)
+	{
+		Vector3 vertex = vertices[index];
+		if (negateZOffset)
+		{
+			vertex.z -= zOffset;
+		}
+		return vertex;
 	}
 
 	public int GetVertexCount()

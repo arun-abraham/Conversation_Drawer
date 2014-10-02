@@ -9,6 +9,7 @@ public class SimpleMover : MonoBehaviour {
 	public float dampening = 0.9f;
 	public float dampeningThreshold;
 	public float externalSpeedMultiplier = 1;
+	public SimpleFreeze freeze;
 	private bool moving;
 	public bool Moving
 	{
@@ -16,7 +17,16 @@ public class SimpleMover : MonoBehaviour {
 	}
 
 	void Update() {
+		externalSpeedMultiplier = Mathf.Max(externalSpeedMultiplier, 0);
+
+		if (velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2) * externalSpeedMultiplier)
+		{
+			velocity = velocity.normalized * maxSpeed * externalSpeedMultiplier;
+		}
+
+		ApplyFreezes();
 		transform.position += velocity * Time.deltaTime;
+
 		if (velocity.sqrMagnitude < Mathf.Pow(dampeningThreshold, 2)) {
 			velocity = Vector3.zero;
 			moving = false;
@@ -25,6 +35,11 @@ public class SimpleMover : MonoBehaviour {
 		{
 			moving = true;
 		}
+	}
+
+	public void Stop()
+	{
+		velocity = Vector3.zero;
 	}
 
 	public void Accelerate(Vector3 direction) {
@@ -42,24 +57,18 @@ public class SimpleMover : MonoBehaviour {
 			Vector3 parallel = Helper.ProjectVector(velocity, direction);
 			Vector3 perpendicular = direction - parallel;
 
-			//if (velocity.sqrMagnitude >= Mathf.Pow(maxSpeed, 2))
-			//{
-			//	velocity += perpendicular * handling * Time.deltaTime;
-			//}
-			//else
-			//{
-				velocity += ((parallel * acceleration) + (perpendicular * handling)) * Time.deltaTime;
-			//}
+			velocity += ((parallel * acceleration) + (perpendicular * handling)) * Time.deltaTime;
 		}
 
 		if (velocity.sqrMagnitude > Mathf.Pow(maxSpeed, 2))
 		{
 			velocity = velocity.normalized * maxSpeed;
 		}
-		velocity *= externalSpeedMultiplier;
+		velocity *= Mathf.Max(externalSpeedMultiplier, 0);
+		ApplyFreezes();
 	}
 
-	public void Move(Vector3 direction, float speed, bool clampSpeed)
+	public void Move(Vector3 direction, float speed, bool clampSpeed = true)
 	{
 		if (direction.sqrMagnitude != 1)
 		{
@@ -69,7 +78,8 @@ public class SimpleMover : MonoBehaviour {
 		{
 			speed = maxSpeed;
 		}
-		velocity = direction * speed * externalSpeedMultiplier;
+		velocity = direction * speed * Mathf.Max(externalSpeedMultiplier, 0);
+		ApplyFreezes();
 		transform.position += velocity * Time.deltaTime;
 	}
 
@@ -78,6 +88,7 @@ public class SimpleMover : MonoBehaviour {
 		if (updateVelocity && Time.deltaTime > 0)
 		{
 			velocity = (position - transform.position) / Time.deltaTime;
+			ApplyFreezes();
 		}
 		transform.position = position;
 	}
@@ -86,4 +97,28 @@ public class SimpleMover : MonoBehaviour {
 	{
 		velocity *= dampening;
 	}
+
+	private void ApplyFreezes()
+	{
+		if (freeze.velocityX)
+		{
+			velocity.x = 0;
+		}
+		if (freeze.velocityY)
+		{
+			velocity.y = 0;
+		}
+		if (freeze.velocityZ)
+		{
+			velocity.z = 0;
+		}
+	}
+}
+
+[System.Serializable]
+public class SimpleFreeze
+{
+	public bool velocityX;
+	public bool velocityY;
+	public bool velocityZ;
 }

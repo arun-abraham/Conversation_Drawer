@@ -2,24 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class WaypointSeek : MonoBehaviour {
-	
+public class WaypointSeek : SimpleSeek {
+
+	public GameObject geometry;
 	[SerializeField]
 	public List<Waypoint> waypoints;
 	public bool showWaypoints;
 	public int current;
 	private int previous;
 	private bool collideWithWaypoint = false;
-	public SimpleMover mover;
-	public PartnerLink partnerLink;
-	public Tracer tracer;
-	private bool startedLine = false;
 	public float partnerWeight;
 	public GameObject waypointContainer;
 	public bool moveWithoutPartner = false;
+	public float maxDesireToLead = 1;
+	public float minDesireToLead = 0;
+	public float inWakeLeadGrowth = 0.1f;
+	public float outWakeLeadGrowth = 0.1f;
+	public float desireToLead;
+	private bool yielding = false;
+	private bool wasOrbit = false;
+	public bool orbit = false;
+	public float orbitRadius = 5.0f;
+	public float orbitBoost = 0.3f;
+	public bool likesConversation = true;
+	private GameObject[] recentPoints;
 	
-	void Start()
+	protected override void Start()
 	{
+		base.Start();
 		if (mover == null)
 		{
 			mover = GetComponent<SimpleMover>();
@@ -32,7 +42,7 @@ public class WaypointSeek : MonoBehaviour {
 		{
 			tracer = GetComponent<Tracer>();
 		}
-		
+
 		if (waypointContainer != null)
 		{
 			Waypoint[] waypointObjects = waypointContainer.GetComponentsInChildren<Waypoint>();
@@ -59,14 +69,22 @@ public class WaypointSeek : MonoBehaviour {
 		}
 		
 		SeekNextWaypoint();
+		collideWithWaypoint = false;
 		if (previous >= 0 && previous < waypoints.Count)
 		{
-			transform.position = waypoints[previous].transform.position;
+			Vector3 toWaypoint = waypoints[previous].transform.position - transform.position;
+			transform.position += toWaypoint;
+			tail.transform.position += toWaypoint;
 		}
 
 		for (int i = 0; i < waypoints.Count; i++)
 		{
 			waypoints[i].renderer.enabled = showWaypoints;
+		}
+
+		if (showWaypoints)
+		{
+			SpawnPoints();
 		}
 	}
 	
@@ -76,15 +94,13 @@ public class WaypointSeek : MonoBehaviour {
 		
 		if (partnerLink.Partner != null)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
-
 			if (partnerLink.Leading)
 			{
-				Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				Vector3 destination = transform.position;
+				if (current < waypoints.Count)
+				{
+					destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+				}
 				
 				Vector3 fromPartner = transform.position - partnerLink.Partner.transform.position;
 				fromPartner.z = 0;
@@ -100,50 +116,75 @@ public class WaypointSeek : MonoBehaviour {
 				}
 				
 				mover.Accelerate(destination - transform.position);
-				
-				if (tracer != null)
+				if (tracer.lineRenderer == null && tail == null)
 				{
-					tracer.AddVertex(transform.position);
+					tracer.StartLine();
 				}
 			}
 			else
 			{
-				mover.Accelerate(partnerLink.Partner.transform.position - transform.position);
-				if (tracer != null)
+				if (likesConversation)
 				{
-					tracer.AddVertex(transform.position);
+					SeekPartner();
+				}
+				else if(moveWithoutPartner)
+				{
+					MoveWithoutPartner();
+				}
+				else
+				{
+					mover.SlowDown();
 				}
 			}
 		}
 		else if (moveWithoutPartner)
 		{
-			if (tracer != null && !startedLine)
-			{
-				tracer.StartLine();
-				startedLine = true;
-			}
-			Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
-			mover.Accelerate(destination - transform.position);
-			mover.Accelerate(destination - transform.position);
-			if (tracer != null)
-			{
-				tracer.AddVertex(transform.position);
-			}
+			MoveWithoutPartner();
 		}
 		else
 		{
 			mover.SlowDown();
-			if (tracer)
+			if (tail == null)
 			{
 				tracer.DestroyLine();
-				startedLine = false;
+			}
+			if (tailTrigger != null)
+			{
+				tail.trigger.enabled = true;
 			}
 		}
+		geometry.transform.LookAt(transform.position + mover.velocity * Time.deltaTime, -Vector3.forward);
+
+		if (tracer != null)
+		{
+			if (tail != null)
+			{
+				tracer.AddVertex(tail.transform.position);
+			}
+			else
+			{
+				tracer.AddVertex(transform.position);
+			}
+		}
+
+		if (orbit != wasOrbit)
+		{
+			if (orbit)
+			{
+				mover.externalSpeedMultiplier += orbitBoost;
+			}
+			else
+			{
+				mover.externalSpeedMultiplier -= orbitBoost;
+			}
+			wasOrbit = orbit;
+		}
+		
 	}
 	
 	public Vector3 FindSeekingPoint(Vector3 velocity)
 	{
-		if (waypoints == null || waypoints.Count <= 0 && current >= waypoints.Count)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return transform.position;
 		}
@@ -163,13 +204,19 @@ public class WaypointSeek : MonoBehaviour {
 	
 	private void SeekNextWaypoint()
 	{
-		if (waypoints == null || waypoints.Count <= 0)
+		if (waypoints == null || waypoints.Count <= 0 || current >= waypoints.Count)
 		{
 			return;
 		}
-		
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(1, 1, 1, 1);
+		}
+
 		previous = current;
-		
+		collideWithWaypoint = false;
+
 		// If the node loops back, place the target the waypoint being passed and move all the waypoints to create cycle.
 		if (waypoints[previous].loopBackTo != null)
 		{
@@ -200,13 +247,201 @@ public class WaypointSeek : MonoBehaviour {
 			
 		}
 		current = previous + 1;
+
+		// Spawn points attached to waypoint being sought, after despawning most recently created points.
+		if (!showWaypoints)
+		{
+			SpawnPoints();
+		}
+
+		if (showWaypoints)
+		{
+			waypoints[current].renderer.material.color = new Color(0, 1, 0, 1);
+		}
 	}
-	
+
+	public override void SeekPartner()
+	{
+		Mathf.Clamp(desireToLead, 0, 1);
+		Vector3 toPartner = partnerLink.Partner.transform.position - transform.position;
+		Vector3 toPartnerDestination = toPartner + partnerLink.Partner.mover.velocity;
+		if (partnerLink.Yielding)
+		{
+			mover.Accelerate(partnerLink.Partner.mover.velocity);
+		}
+		else if(orbit)
+		{
+			OrbitLeader();
+		}
+		else if (partnerLink.InWake)
+		{
+			mover.Accelerate(((1 - desireToLead) * toPartner) + (desireToLead * toPartnerDestination));
+			desireToLead += inWakeLeadGrowth * Time.deltaTime;
+		}
+		else
+		{
+			mover.Accelerate(toPartner);
+			desireToLead += outWakeLeadGrowth * Time.deltaTime;
+		}
+		if (tracer.lineRenderer == null && tail == null)
+		{
+			tracer.StartLine();
+		}
+	}
+
+	private void MoveWithoutPartner()
+	{
+		Vector3 destination = FindSeekingPoint((waypoints[current].transform.position - transform.position) * mover.maxSpeed);
+		mover.Accelerate(destination - transform.position);
+		mover.Accelerate(destination - transform.position);
+		if (tracer.lineRenderer == null && tail == null)
+		{
+			tracer.StartLine();
+		}
+	}
+
+	void OrbitLeader()
+	{
+		Vector3 fromTarget = transform.position - partnerLink.Partner.transform.position;
+		Vector3 destination = Vector3.RotateTowards(fromTarget.normalized * orbitRadius, Vector3.Cross(fromTarget, Vector3.forward), (mover.maxSpeed / orbitRadius) * Time.deltaTime, 0);
+		mover.Move((partnerLink.Partner.transform.position + destination) - transform.position, mover.maxSpeed);
+	}
+
+	private void SpawnPoints()
+	{
+		if (showWaypoints)
+		{	
+			for (int j = 0; j < waypoints.Count; j++)
+			{
+				recentPoints = new GameObject[waypoints[j].pointSpawns.Count];
+				float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[j].transform.position - waypoints[previous].transform.position, Vector3.forward);
+				Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
+				for (int i = 0; i < recentPoints.Length; i++)
+				{
+					PointSpawn newPointSpawn = waypoints[j].pointSpawns[i];
+					Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+					GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[j].transform.position + offset, Quaternion.identity);
+					recentPoints[i] = newPoint;
+					MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+					if (newMiniPoint != null)
+					{
+						newMiniPoint.creator = gameObject;
+						if (true)//newPointSpawn.setInformationFactor)
+						{
+							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						}
+					}
+				}
+			}
+		}
+
+		else if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
+		{
+			DestroyRecentPoints();
+
+			recentPoints = new GameObject[waypoints[current].pointSpawns.Count];
+			float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[current].transform.position - waypoints[previous].transform.position, Vector3.forward);
+			Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
+			for (int i = 0; i < recentPoints.Length; i++)
+			{
+				if (!waypoints[current].pointSpawns[i].requirePartner || partnerLink.Partner != null)
+				{
+					PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
+					Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+					GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + offset, Quaternion.identity);
+					recentPoints[i] = newPoint;
+					MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+					if (newMiniPoint != null)
+					{
+						newMiniPoint.creator = gameObject;
+						if (true)//newPointSpawn.setInformationFactor)
+						{
+							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void DestroyRecentPoints()
+	{
+		if (recentPoints != null && !showWaypoints)
+		{
+			for (int i = 0; i < recentPoints.Length; i++)
+			{
+				Destroy(recentPoints[i]);
+			}
+			recentPoints = null;
+		}
+	}
+
 	void OnTriggerEnter(Collider otherCol)
 	{
 		if (waypoints != null && current < waypoints.Count && otherCol.gameObject == waypoints[current].gameObject)
 		{
 			collideWithWaypoint = true;
 		}
+	}
+
+	private void StartLeading()
+	{
+		// Rotate waypoints to heading.
+		float directionAngle = Helper.AngleDegrees(waypoints[current].transform.position - waypoints[previous].transform.position, geometry.transform.forward, Vector3.forward);
+		Vector3 pivotPosition = waypoints[previous].transform.position;
+		waypointContainer.transform.Rotate(Vector3.forward, directionAngle, Space.World);
+
+		// Move waypoints to position.
+		desireToLead = minDesireToLead;
+		Vector3 waypointOffset = transform.position - waypoints[previous].transform.position;
+		for (int i = 0; i < waypoints.Count; i++)
+		{
+			waypoints[i].transform.position += waypointOffset;
+		}
+	}
+
+	private void EndConversation()
+	{
+		DestroyRecentPoints();
+	}
+
+	private void EndLeading()
+	{
+		DestroyRecentPoints();
+	}
+
+	private void StartYielding()
+	{
+		yielding = true;
+	}
+
+	private void TailStartFollow()
+	{
+		if (tracer != null)
+		{
+			tracer.StartLine();
+		}
+		if (tailTrigger != null)
+		{
+			tail.trigger.enabled = false;
+		}
+	}
+	
+	private void TailEndFollow()
+	{
+		if (tracer)
+		{
+			tracer.DestroyLine();
+		}
+	}
+
+	private void LinkPartner()
+	{
+		likesConversation = true;
+	}
+
+	private void MinMaxSpeedReached()
+	{
+		likesConversation = false;
 	}
 }

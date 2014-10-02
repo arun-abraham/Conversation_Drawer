@@ -69,7 +69,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: e49042c09c19b4e1e96ea3d18142adde, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .100000001
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -129,6 +129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHit: 0
+  isplayed: 0
+  fading: 0
+  bright: 0
+  creator: {fileID: 0}
+  informationFactor: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
