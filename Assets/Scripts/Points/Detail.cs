@@ -16,7 +16,9 @@ public class Detail : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		myAlpha = 1;
+		myAlpha = 0;
+		bright = true;
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
 	
 	}
 	
@@ -43,14 +45,19 @@ public class Detail : MonoBehaviour {
 		
 		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
-			isHit = true;
-			renderer.material.color = Color.blue;
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			PartnerLink colliderLink = collide.gameObject.GetComponent<PartnerLink>();
+			if (creatorLink != null && colliderLink != null && creatorLink.Partner == colliderLink)
+			{
+				isHit = true;
+				renderer.material.color = Color.blue;
 
-			if(isplayed == false)
-			audio.Play();
+				if(isplayed == false)
+				audio.Play();
 
-			isplayed = true;
-			collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
+				isplayed = true;
+				//collide.gameObject.BroadcastMessage("UnderstandPoint", informationFactor);
+			}
 		}
 	}
 

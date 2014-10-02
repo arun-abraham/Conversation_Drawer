@@ -28,7 +28,7 @@ public class CameraColor : MonoBehaviour {
 		myColor = new Color(rColor,gColor,bColor,0);
 		camera.backgroundColor = myColor;
 
-		if(player.GetComponent<PartnerLink>().partner != null)
+		if(player.GetComponent<PartnerLink>().Partner != null)
 		{
 		if(rColor < 0.2f)
 		rColor += Time.deltaTime * fadeTime;
@@ -58,7 +58,7 @@ public class CameraColor : MonoBehaviour {
 		
 		}
 
-		if(player.GetComponent<PartnerLink>().partner == null)
+		if(player.GetComponent<PartnerLink>().Partner == null)
 		{
 			if(rColor > 0)
 			rColor -= Time.deltaTime * desatTime;

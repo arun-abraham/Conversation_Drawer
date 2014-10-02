@@ -81,6 +81,11 @@ public class WaypointSeek : SimpleSeek {
 		{
 			waypoints[i].renderer.enabled = showWaypoints;
 		}
+
+		if (showWaypoints)
+		{
+			SpawnPoints();
+		}
 	}
 	
 	void Update()
@@ -244,7 +249,10 @@ public class WaypointSeek : SimpleSeek {
 		current = previous + 1;
 
 		// Spawn points attached to waypoint being sought, after despawning most recently created points.
-		SpawnPoints();
+		if (!showWaypoints)
+		{
+			SpawnPoints();
+		}
 
 		if (showWaypoints)
 		{
@@ -301,38 +309,73 @@ public class WaypointSeek : SimpleSeek {
 
 	private void SpawnPoints()
 	{
-		if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
-		{
-			if (recentPoints != null)
+		if (showWaypoints)
+		{	
+			for (int j = 0; j < waypoints.Count; j++)
 			{
+				recentPoints = new GameObject[waypoints[j].pointSpawns.Count];
+				float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[j].transform.position - waypoints[previous].transform.position, Vector3.forward);
+				Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
 				for (int i = 0; i < recentPoints.Length; i++)
 				{
-					Destroy(recentPoints[i]);
+					PointSpawn newPointSpawn = waypoints[j].pointSpawns[i];
+					Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+					GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[j].transform.position + offset, Quaternion.identity);
+					recentPoints[i] = newPoint;
+					MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+					if (newMiniPoint != null)
+					{
+						newMiniPoint.creator = gameObject;
+						if (true)//newPointSpawn.setInformationFactor)
+						{
+							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						}
+					}
 				}
 			}
+		}
+
+		else if (waypoints[current].pointSpawns != null && waypoints[current].pointSpawns.Count > 0)
+		{
+			DestroyRecentPoints();
 
 			recentPoints = new GameObject[waypoints[current].pointSpawns.Count];
 			float pathAngle = Helper.AngleDegrees(Vector3.up, waypoints[current].transform.position - waypoints[previous].transform.position, Vector3.forward);
 			Quaternion pointSpawnRotation = Quaternion.AngleAxis(pathAngle,Vector3.forward);
 			for (int i = 0; i < recentPoints.Length; i++)
 			{
-				PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
-				Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
-				GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + offset, Quaternion.identity);
-				recentPoints[i] = newPoint;
-				MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
-				if (newMiniPoint != null)
+				if (!waypoints[current].pointSpawns[i].requirePartner || partnerLink.Partner != null)
 				{
-					newMiniPoint.creator = gameObject;
-					if (newPointSpawn.setInformationFactor)
+					PointSpawn newPointSpawn = waypoints[current].pointSpawns[i];
+					Vector3 offset = pointSpawnRotation * newPointSpawn.offset;
+					GameObject newPoint = (GameObject)Instantiate(newPointSpawn.pointPrefab, waypoints[current].transform.position + offset, Quaternion.identity);
+					recentPoints[i] = newPoint;
+					MiniPoint newMiniPoint = newPoint.GetComponent<MiniPoint>();
+					if (newMiniPoint != null)
 					{
-						newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						newMiniPoint.creator = gameObject;
+						if (true)//newPointSpawn.setInformationFactor)
+						{
+							newMiniPoint.informationFactor = newPointSpawn.informationFactor;
+						}
 					}
 				}
 			}
 		}
 	}
-	
+
+	private void DestroyRecentPoints()
+	{
+		if (recentPoints != null && !showWaypoints)
+		{
+			for (int i = 0; i < recentPoints.Length; i++)
+			{
+				Destroy(recentPoints[i]);
+			}
+			recentPoints = null;
+		}
+	}
+
 	void OnTriggerEnter(Collider otherCol)
 	{
 		if (waypoints != null && current < waypoints.Count && otherCol.gameObject == waypoints[current].gameObject)
@@ -343,12 +386,28 @@ public class WaypointSeek : SimpleSeek {
 
 	private void StartLeading()
 	{
+		// Rotate waypoints to heading.
+		float directionAngle = Helper.AngleDegrees(waypoints[current].transform.position - waypoints[previous].transform.position, geometry.transform.forward, Vector3.forward);
+		Vector3 pivotPosition = waypoints[previous].transform.position;
+		waypointContainer.transform.Rotate(Vector3.forward, directionAngle, Space.World);
+
+		// Move waypoints to position.
 		desireToLead = minDesireToLead;
 		Vector3 waypointOffset = transform.position - waypoints[previous].transform.position;
 		for (int i = 0; i < waypoints.Count; i++)
 		{
 			waypoints[i].transform.position += waypointOffset;
 		}
+	}
+
+	private void EndConversation()
+	{
+		DestroyRecentPoints();
+	}
+
+	private void EndLeading()
+	{
+		DestroyRecentPoints();
 	}
 
 	private void StartYielding()

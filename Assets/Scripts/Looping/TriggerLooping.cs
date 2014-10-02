@@ -19,7 +19,7 @@ public class TriggerLooping : MonoBehaviour {
 		ChangeWorldSize(worldWidth, worldHeight);
 	}
 
-	void ChangeWorldSize(float worldWidth, float worldHeight)
+	public void ChangeWorldSize(float worldWidth, float worldHeight)
 	{
 		foreach(Transform child in transform)
 		{
@@ -90,21 +90,21 @@ public class TriggerLooping : MonoBehaviour {
 		{
 			
 			//Check if the object is on screen
-			if (!OnScreen(lo) && (lo.GetComponent<LoopTag>().stayOutsideBounds || !OutSideBounds(lo,location,moveDistance)))
+			if (lo != null && !OnScreen(lo) && (lo.GetComponent<LoopTag>().stayOutsideBounds || !OutSideBounds(lo,location,moveDistance)))
 			{
 				Vector3 oldPosition = lo.transform.position;
 
-				if(lo.GetComponent<LoopTag>().moveRoot)
+				//Debug.Log(OnScreen(lo));
+				moveDistance += MoveOffScreen(lo, Vector3.zero, location);
+
+				if (lo.GetComponent<LoopTag>().moveRoot)
 					lo.transform.root.position += moveDistance;
 				else
 					lo.transform.position += moveDistance;
 
-				//Debug.Log(OnScreen(lo));
-				MoveOffScreen(lo, location);
-
 				GameObject tracerGameObject = lo;
 				Tracer tracer = lo.GetComponent<Tracer>();
-				while (tracer == null && tracerGameObject != tracerGameObject.transform.root)
+				while (tracer == null && tracerGameObject != null && tracerGameObject.transform.parent != null)
 				{
 					tracerGameObject = tracerGameObject.transform.parent.gameObject;
 					tracer = tracerGameObject.GetComponent<Tracer>();
@@ -127,35 +127,37 @@ public class TriggerLooping : MonoBehaviour {
 				switch(location)
 				{
 				case ColliderLocation.Top:
-					moveDistance = new Vector3(0f, moveDistanceVertical, 0f);
-					break;
-				case ColliderLocation.Bottom:
 					moveDistance = new Vector3(0f, -moveDistanceVertical, 0f);
 					break;
+				case ColliderLocation.Bottom:
+					moveDistance = new Vector3(0f, moveDistanceVertical, 0f);
+					break;
 				case ColliderLocation.Left:
-					moveDistance = new Vector3(-moveDistanceHorizontal, 0f, 0f);
+					moveDistance = new Vector3(moveDistanceHorizontal, 0f, 0f);
 					break;
 				case ColliderLocation.Right:
-					moveDistance = new Vector3(moveDistanceHorizontal,0f,0f);
+					moveDistance = new Vector3(+moveDistanceHorizontal,0f,0f);
 					break;
 				}
 
 				//Tracer otherTracer = individual.GetComponent<Tracer>();
 				Vector3 oldPosition = individual.transform.position;
 
-			if (individual.gameObject.GetComponent<LoopTag>().moveRoot)
+				moveDistance += MoveOffScreen(individual.gameObject, moveDistance, location);
+				if (individual.gameObject.GetComponent<LoopTag>().moveRoot)
 				{
-					individual.gameObject.transform.root.position -= moveDistance;
+					individual.gameObject.transform.root.position += moveDistance;
 				}
 				else
 				{
-					individual.gameObject.transform.position -= moveDistance;
+					individual.gameObject.transform.position += moveDistance;
 				}
-				
-				MoveOffScreen(individual.gameObject,location);
+
 				if (tracer != null)
 				{
 					tracer.MoveVertices(individual.transform.position - oldPosition);
+					//tracer.DestroyLine();
+					//tracer.SendMessage("TailStartFollow", SendMessageOptions.DontRequireReceiver);
 				}
 			}
 	}
@@ -179,19 +181,25 @@ public class TriggerLooping : MonoBehaviour {
 
 	private bool OnScreen(GameObject lo)
 	{
-		Vector3 newPos = Camera.main.WorldToViewportPoint(lo.transform.position);
+		return OnScreen(lo, Vector3.zero);
+	}
+
+	private bool OnScreen(GameObject lo, Vector3 offset)
+	{
+		Vector3 newPos = Camera.main.WorldToViewportPoint(lo.transform.position + offset);
 
 		bool onScreen = false;
 		
 		if(newPos.x > -0.01f && newPos.x < 1.01f && newPos.y > -0.01f && newPos.y < 1.01f)
 			onScreen = true;
 		return onScreen;
-
 	}
 
-	private void MoveOffScreen(GameObject lo, ColliderLocation colliderLocation)
+	private Vector3 MoveOffScreen(GameObject lo, Vector3 offset, ColliderLocation colliderLocation)
 	{
-		if (OnScreen(lo))
+		Vector3 offScreenMove= Vector3.zero;
+
+		if (OnScreen(lo, offset))
 		{
 			var camHeight = Camera.main.orthographicSize;
 			var camWidth = camHeight * Camera.main.aspect;
@@ -201,25 +209,27 @@ public class TriggerLooping : MonoBehaviour {
 			case ColliderLocation.Top:
 				//Debug.Log (camHeight);
 				//Debug.Log(lo.transform.position);
-				lo.transform.root.position += new Vector3(0, camHeight, 0);
+				offScreenMove += new Vector3(0, camHeight, 0);
 				//Debug.Log(lo.transform.position);
 				break;
 			case ColliderLocation.Bottom:
-				lo.transform.position -= new Vector3(0,camHeight, 0);
+				offScreenMove -= new Vector3(0,camHeight, 0);
 				break;
 			case ColliderLocation.Left:
-				lo.transform.position -= new Vector3(camWidth, 0, 0);
+				offScreenMove -= new Vector3(camWidth, 0, 0);
 				break;
 			case ColliderLocation.Right:
-				lo.transform.position += new Vector3(camWidth, 0, 0);
+				offScreenMove += new Vector3(camWidth, 0, 0);
 				break;
 			}
 		}
 
-		if(OnScreen(lo))
+		if(OnScreen(lo, offset + offScreenMove))
 		{
-			MoveOffScreen(lo, colliderLocation);
+			offScreenMove += MoveOffScreen(lo, offset + offScreenMove, colliderLocation);
 		}
+
+		return offScreenMove;
 	}
 
 

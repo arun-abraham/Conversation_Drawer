@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PartnerLink : MonoBehaviour {
 	public bool isPlayer = false;
-	public PartnerLink partner;
+	private PartnerLink partner;
 	public PartnerLink Partner
 	{
 		get { return partner; }
@@ -19,6 +19,12 @@ public class PartnerLink : MonoBehaviour {
 		get { return leading; }
 	}
 	public bool seekingPartner;
+	public float seekingSlow = 0.25f;
+	public float fadingTime = 3.0f;
+	public bool fading = false;
+	public Renderer headRenderer;
+	public Renderer tailRenderer;
+	public Renderer fillRenderer;
 	public float converseDistance;
 	public float warningThreshold;
 	public float breakingThreshold;
@@ -32,6 +38,8 @@ public class PartnerLink : MonoBehaviour {
 	public Tracer tracer;
 	[HideInInspector]
 	public ConversationScore conversationScore;
+	[HideInInspector]
+	public ConversingSpeed conversingSpeed;
 	public GameObject callout;
 	private bool yielding;
 	public bool Yielding
@@ -107,6 +115,10 @@ public class PartnerLink : MonoBehaviour {
 		{
 			conversationScore = GetComponent<ConversationScore>();
 		}
+		if (conversingSpeed == null)
+		{
+			conversingSpeed = GetComponent<ConversingSpeed>();
+		}
 		
 		partnerLine = GetComponent<LineRenderer>();
 		
@@ -115,6 +127,25 @@ public class PartnerLink : MonoBehaviour {
 	
 	void Update()
 	{
+		// Fade out if needed.
+		/*if (fading)
+		{
+			if (partner != null)
+			{
+				ConversationManager.Instance.EndConversation(this, partner);
+			}
+			seekingPartner = false;
+			Color fadeColor = headRenderer.material.color;
+			fadeColor.a -= Time.deltaTime / fadingTime;
+			Color noColor = fadeColor;
+			noColor.a = 0;
+			//headRenderer.renderer.material.color = fadeColor;
+			mover.maxSpeed -= mover.maxSpeed * (Time.deltaTime / fadingTime);
+			mover.SlowDown();
+			//tailRenderer.gameObject.SetActive(false);//.renderer.material.color = fadeColor;
+			//tracer.DestroyLine();//.lineRenderer.SetColors(noColor, fadeColor);
+			//tracer.maxVertices = 0;
+		}*/
 
 		// Find a partner.
 		if (partner == null && seekingPartner)
@@ -126,7 +157,7 @@ public class PartnerLink : MonoBehaviour {
 			float minSqrDist = -1;
 			for (int i = 0; i < potentialConversations.Length; i++)
 			{
-				if ((potentialConversations[i].partner1 != null && potentialConversations[i].partner1.seekingPartner) && (potentialConversations[i].partner2 != null && potentialConversations[i].partner2.seekingPartner))
+				if ((potentialConversations[i].partner1 != null) && (potentialConversations[i].partner2 != null))
 				{
 					float sqrDist = (potentialConversations[i].partner1.transform.position - potentialConversations[i].partner2.transform.position).sqrMagnitude;
 					if (sqrDist < minSqrDist || (minSqrDist < 0 && sqrDist <= Mathf.Pow(potentialConversations[i].breakingDistance, 2)))
@@ -140,7 +171,7 @@ public class PartnerLink : MonoBehaviour {
 			// Determine if the potential partner is actually close enough to converse with.
 			if (nearestConversation != null)
 			{
-				if (minSqrDist <= Mathf.Pow(nearestConversation.initiateDistance, 2))
+				if (minSqrDist <= Mathf.Pow(nearestConversation.initiateDistance, 2) && nearestConversation.partner1.Partner == null && nearestConversation.partner2.Partner == null)
 				{
 					ConversationManager.Instance.StartConversation(nearestConversation.partner1, nearestConversation.partner2);
 				}
@@ -153,7 +184,18 @@ public class PartnerLink : MonoBehaviour {
 			// Enable callout if needed.
 			if (callout != null)
 			{
-				callout.SetActive(enableCallout);
+				if (callout.activeInHierarchy != enableCallout)
+				{
+					callout.SetActive(enableCallout);
+					if (enableCallout)
+					{
+						mover.externalSpeedMultiplier -= seekingSlow;
+					}
+					else
+					{
+						mover.externalSpeedMultiplier += seekingSlow;
+					}
+				}
 			}
 		}
 		
@@ -343,5 +385,4 @@ public class PartnerLink : MonoBehaviour {
 		bool behind = Vector3.Dot(toLeader, leader.mover.velocity) >= 0;
 		return !far || !behind;
 	}
-	
 }

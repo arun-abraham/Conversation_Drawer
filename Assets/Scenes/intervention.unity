@@ -366,7 +366,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -5, y: -5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -15, y: -5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &25255561
 Prefab:
   m_ObjectHideFlags: 0
@@ -2491,7 +2503,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &103920057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3684,7 +3708,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 374753964}
@@ -5822,7 +5846,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 314595389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.48699999, y: 2.22860003, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 420123960}
@@ -5882,7 +5906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 84565690}
+  loopBackTo: {fileID: 98058228}
   maxLoopBacks: -1
   loopBacks: 0
   pointSpawns: []
@@ -6191,7 +6215,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &345962759
 Prefab:
   m_ObjectHideFlags: 0
@@ -10794,7 +10830,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 1474657455}
@@ -11694,7 +11730,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -5, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &554156877
 GameObject:
   m_ObjectHideFlags: 0
@@ -12323,7 +12371,7 @@ Prefab:
       objectReference: {fileID: 1474657455}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: moveWithoutPartner
@@ -13098,7 +13146,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &613438362
 Prefab:
   m_ObjectHideFlags: 0
@@ -13766,7 +13826,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &632615238
 GameObject:
   m_ObjectHideFlags: 0
@@ -14709,7 +14781,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 657581579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.55530024, y: 2.26659989, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 1019301983}
@@ -14769,7 +14841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 1877422420}
+  loopBackTo: {fileID: 25910997}
   maxLoopBacks: -1
   loopBacks: 0
   pointSpawns: []
@@ -15105,7 +15177,7 @@ Prefab:
       objectReference: {fileID: 420123959}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: moveWithoutPartner
@@ -16038,7 +16110,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -20, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &733519949
 Prefab:
   m_ObjectHideFlags: 0
@@ -17035,7 +17119,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -5, y: 5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: 10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &788572145
 Prefab:
   m_ObjectHideFlags: 0
@@ -18092,7 +18188,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: -5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: -10, y: -15, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &860802505
 GameObject:
   m_ObjectHideFlags: 0
@@ -23175,7 +23283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1015649410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.40959978, y: 2.28609991, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 416083744}
@@ -23235,7 +23343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 2003401110}
+  loopBackTo: {fileID: 1591036476}
   maxLoopBacks: -1
   loopBacks: 0
   pointSpawns: []
@@ -24532,7 +24640,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 5, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 5, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &1074648775
 GameObject:
   m_ObjectHideFlags: 0
@@ -27189,7 +27309,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 416083743}
@@ -29740,7 +29860,7 @@ Prefab:
       objectReference: {fileID: 1019301979}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: moveWithoutPartner
@@ -30449,7 +30569,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1244802501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -7.43270016, y: 2.19580007, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 1474657456}
@@ -30509,7 +30629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
-  loopBackTo: {fileID: 1190467620}
+  loopBackTo: {fileID: 982064093}
   maxLoopBacks: -1
   loopBacks: 0
   pointSpawns: []
@@ -33137,7 +33257,7 @@ Prefab:
       objectReference: {fileID: 374753964}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: moveWithoutPartner
@@ -34076,7 +34196,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: -20, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &1414126841
 GameObject:
   m_ObjectHideFlags: 0
@@ -40400,7 +40532,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1665620723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62879992, y: 11.4980001, z: 0}
+  m_LocalPosition: {x: -2.98079991, y: -7.04199982, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 374753965}
@@ -42011,7 +42143,7 @@ Prefab:
       objectReference: {fileID: 416083743}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: showWaypoints
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: c8077d0d1d430374082e48ffd920e536, type: 2}
       propertyPath: moveWithoutPartner
@@ -44921,7 +45053,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 5, y: 5, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 10, y: 10, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1001 &1838602776
 Prefab:
   m_ObjectHideFlags: 0
@@ -45666,7 +45810,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 1019301979}
@@ -46122,7 +46266,19 @@ MonoBehaviour:
   loopBackTo: {fileID: 0}
   maxLoopBacks: 0
   loopBacks: 0
-  pointSpawns: []
+  pointSpawns:
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 0, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 6, y: 7, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
+  - pointPrefab: {fileID: 100000, guid: fbb047cb0cc5b449f8d538430048b1de, type: 2}
+    offset: {x: 0, y: 15, z: 0}
+    informationFactor: .100000001
+    setInformationFactor: 0
 --- !u!1 &1877422418
 GameObject:
   m_ObjectHideFlags: 0
@@ -51393,7 +51549,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  showWaypoints: 0
+  showWaypoints: 1
   current: 0
   partnerWeight: 0
   waypointContainer: {fileID: 420123959}

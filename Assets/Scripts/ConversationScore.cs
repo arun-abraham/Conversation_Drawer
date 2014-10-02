@@ -9,6 +9,8 @@ public class ConversationScore : MonoBehaviour {
 	public Tracer partnerTracer;
 	public GameObject sprite;
 	public GameObject headFill;
+	public GameObject leadFeedback;
+	public GameObject pointRipple;
 	public int oldNearestIndex = 0;
 	public float score = 0;
 	public float scorePortionExponent = 1;
@@ -23,6 +25,7 @@ public class ConversationScore : MonoBehaviour {
 	public Camera gameCamera = null;
 	private bool canTakeLead = false;
 	public float leadBoostPercentage;
+	public float pointBoostPercentage;
 	public float boostRate;
 	public float drainRate;
 	public float breakingChangeRate;
@@ -68,7 +71,7 @@ public class ConversationScore : MonoBehaviour {
 			SendMessage("ExitWake", SendMessageOptions.DontRequireReceiver);
 			canTakeLead = false;
 		}
-		else if (partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
+		else if (partnerTracer != null && partnerTracer.GetVertexCount() > 1 && tracer.GetVertexCount() > 1)
 		{
 			if (!canTakeLead)
 			{
@@ -235,12 +238,20 @@ public class ConversationScore : MonoBehaviour {
 	private void StartLeading()
 	{
 		headFill.transform.localScale = new Vector3(1, 1, 1);
+		if (leadFeedback != null)
+		{
+			leadFeedback.SetActive(true);
+		}
 	}
 
 	private void EndLeading()
 	{
 		headFill.transform.localScale = Vector3.zero;
 		understandingFactor = 0;
+		if (leadFeedback != null)
+		{
+			leadFeedback.SetActive(false);
+		}
 	}
 
 	private void EndSpeedChange(string changeName)
@@ -262,5 +273,10 @@ public class ConversationScore : MonoBehaviour {
 	private void UnderstandPoint(float understanding)
 	{
 		understandingFactor += understanding;
+		if (partnerLink.Partner != null)
+		{
+			partnerLink.Partner.conversationScore.pointRipple.particleSystem.Play();
+			partnerLink.Partner.conversingSpeed.TargetRelativeSpeed(partnerLink.Partner.conversationScore.pointBoostPercentage, partnerLink.Partner.conversationScore.boostRate);
+		}
 	}
 }
