@@ -7,6 +7,8 @@ public AudioClip Gong;
 
 public bool pointMade;
 
+
+
 public GameObject lilPoint1;
 public GameObject lilPoint2;
 public GameObject lilPoint3;
@@ -24,6 +26,9 @@ private float myAlpha;
 private float fadeConst = 0.2f;
 public bool fading = false;
 public bool bright = false;
+
+public float informationFactor;
+public GameObject creator;
 
 // Use this for initialization
 void Start () {
@@ -67,9 +72,10 @@ void Update () {
 		audio.PlayOneShot(Gong);
 		//rotVect.y = 3;
 		BroadcastMessage("IsHitOff");
+		lilPoint1.GetComponent<DeepDetail>().creator.BroadcastMessage("UnderstandPoint", informationFactor);
 	}
-	
 }
+
 
 	public void IsFading()
 	{

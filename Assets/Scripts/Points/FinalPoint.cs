@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LongPoint : MonoBehaviour {
+public class FinalPoint : MonoBehaviour {
 
 	public bool pointMade;
-
+	
 	public AudioClip Gong;
 	
 	public GameObject lilPoint1;
@@ -25,9 +25,9 @@ public class LongPoint : MonoBehaviour {
 	public bool fading = false;
 	public bool bright = false;
 
-	public float informationFactor;
+	public bool advance = false;
 	public GameObject creator;
-
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -37,14 +37,14 @@ public class LongPoint : MonoBehaviour {
 		myAlpha = 0;
 		bright = true;
 		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
-		
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
-
+		
 		if(fading == true)
 		{
 			if(myAlpha >= 0)
@@ -56,13 +56,13 @@ public class LongPoint : MonoBehaviour {
 			if(myAlpha <=1)
 				myAlpha += Time.deltaTime * fadeConst;
 		}
-
+		
 		transform.Rotate(rotVect * rotSpeed * Time.deltaTime);
 		
 		if(lilPoint1.GetComponent<LongDetail>().isHit && lilPoint2.GetComponent<LongDetail>().isHit && lilPoint3.GetComponent<LongDetail>().isHit && lilPoint4.GetComponent<LongDetail>().isHit &&
 		   lilPoint5.GetComponent<LongDetail>().isHit && lilPoint6.GetComponent<LongDetail>().isHit && lilPoint7.GetComponent<LongDetail>().isHit && lilPoint8.GetComponent<LongDetail>().isHit) 
 		{
-			renderer.material.color = Color.cyan;
+			renderer.material.color = Color.yellow;
 			//print("Good Point");
 			pointMade = true;
 			rotSpeed = 200.0f;
@@ -73,12 +73,34 @@ public class LongPoint : MonoBehaviour {
 			audio.PlayOneShot(Gong);
 			//rotVect.y = 2;
 			BroadcastMessage("IsHitOff");
-			lilPoint1.GetComponent<LongDetail>().creator.BroadcastMessage("UnderstandPoint", informationFactor);
+
+
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			creatorLink.seekingPartner = false;
+			LevelManager levelManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<LevelManager>();
+			if (levelManager != null)
+			{
+				levelManager.LevelEvent();
+			}
+			ConversationManager.Instance.EndConversation(creatorLink, creatorLink.Partner);
 		}
-	
+
+		if(pointMade == true)
+		{
+			BroadcastMessage("TurnOff");
+		}
 		
 	}
 
+	void OnTriggerEnter(Collider collide)
+	{
+		if(collide.gameObject.tag == "Converser")
+		{
+			renderer.material.color = Color.cyan;
+			advance = true;
+		}
+	}
+	
 	public void IsFading()
 	{
 		fading = true;
@@ -92,8 +114,8 @@ public class LongPoint : MonoBehaviour {
 		bright = true;
 		//print ("Is Bright");
 	}
-
-
-
+	
+	
+	
 	
 }

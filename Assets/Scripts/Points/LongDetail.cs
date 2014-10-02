@@ -13,12 +13,15 @@ public class LongDetail : MonoBehaviour {
 	private float fadeConst = 0.2f;
 	public bool fading = false;
 	public bool bright = false;
+
+	public GameObject creator;
 	
 	// Use this for initialization
 	void Start () {
-
-		myAlpha = 1;
-		
+	
+		myAlpha = 0;
+		bright = true;
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
 	}
 	
 	// Update is called once per frame
@@ -28,13 +31,16 @@ public class LongDetail : MonoBehaviour {
 
 		if(fading == true)
 		{
-			if(myAlpha >= 0)
+			if(myAlpha > 0)
 				myAlpha -= Time.deltaTime * fadeConst;
+			//print (myAlpha);
+			//print (renderer.material.color);
+			//print (gameObject);
 		}
 		
 		if(bright == true)
 		{
-			if(myAlpha <=1)
+			if(myAlpha < 1)
 				myAlpha += Time.deltaTime * fadeConst;
 		}
 
@@ -48,16 +54,21 @@ public class LongDetail : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Converser")
+		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			PartnerLink colliderLink = collide.gameObject.GetComponent<PartnerLink>();
+			if (creatorLink != null && colliderLink != null && creatorLink.Partner == colliderLink)
+			{
 			setHitOn();
 
 			if (allDone == false)
 			audio.Play();
 
-			Invoke("setHitOff",5.0f);
+			Invoke("setHitOff",10.0f);
 		}
 		
+	}
 	}
 	
 	void setHitOn ()
@@ -91,5 +102,10 @@ public class LongDetail : MonoBehaviour {
 		bright = true;
 		//print ("Is Bright");
 	}
-	
+
+	public void TurnOff()
+	{
+		renderer.enabled = false;
+	}
+
 }

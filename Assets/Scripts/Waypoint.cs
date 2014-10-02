@@ -17,5 +17,6 @@ public class PointSpawn
 	public GameObject pointPrefab;
 	public Vector3 offset;
 	public float informationFactor;
-	public bool setInformationFactor;
+	//public bool setInformationFactor;
+	public bool requirePartner = true;
 }

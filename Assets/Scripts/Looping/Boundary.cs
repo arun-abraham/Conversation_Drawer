@@ -14,7 +14,7 @@ public class Boundary : MonoBehaviour {
 			else 
 			{
 				LoopTag loopTag = other.GetComponentInChildren<LoopTag>();
-				if (loopTag != null)
+				if (loopTag != null && !loopTag.passThrough)
 					transform.parent.GetComponent<TriggerLooping>().MoveIndividual(colliderLocation, loopTag.gameObject, other.GetComponent<Tracer>());
 			}
 		}
