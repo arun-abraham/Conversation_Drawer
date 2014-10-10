@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 135: {fileID: 13500000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Touchy Subject
   m_TagString: TouchySubject
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.57599998, y: 20.7450008, z: 0}
+  m_LocalPosition: {x: 46.862999, y: 20.7450008, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -57,6 +58,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4aaeafbdc9df843829cf62dd1a8f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTimer: .300000012
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -64,7 +77,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .550000012
