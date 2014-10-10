@@ -9,16 +9,39 @@ public bool isHit = false;
 public bool allDone = false;
 private bool isHitOnce = false;
 private bool waiting = false;
+
+private float myAlpha;
+private float fadeConst = 0.2f;
+public bool fading = false;
+public bool bright = false;
+
+public GameObject creator;
 	
 // Use this for initialization
 void Start () {
-		
+
+		myAlpha = 1;
 	}
 	
 // Update is called once per frame
 void Update () {
 
-		if(allDone == true)
+
+	renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, myAlpha);
+
+		if(fading == true)
+		{
+			if(myAlpha >= 0)
+				myAlpha -= Time.deltaTime * fadeConst;
+		}
+		
+		if(bright == true)
+		{
+			if(myAlpha <=1)
+				myAlpha += Time.deltaTime * fadeConst;
+		}
+
+	if(allDone == true)
 		{
 			renderer.material.color = Color.blue;
 		}
@@ -27,8 +50,12 @@ void Update () {
 	
 	void OnTriggerEnter (Collider collide)
 	{
-		if (collide.gameObject.tag == "Converser")
+		if (collide.gameObject.tag == "Converser" && collide.gameObject != creator)
 		{
+			PartnerLink creatorLink = creator.GetComponent<PartnerLink>();
+			PartnerLink colliderLink = collide.gameObject.GetComponent<PartnerLink>();
+			if (creatorLink != null && colliderLink != null && creatorLink.Partner == colliderLink)
+			{
 			if(isHitOnce == false && isHit == false)
 			{
 				setHitOnce();
@@ -41,10 +68,11 @@ void Update () {
 
 			if(isHit == true)
 				setHitOn();
-
+			if(allDone == false)
 			audio.Play();
 		}
 		
+	}
 	}
 	
 	
@@ -52,7 +80,7 @@ void Update () {
 	{
 		isHitOnce = true;
 		renderer.material.color = Color.red; 
-		Invoke("setHitOnceOff",8.0f);
+		Invoke("setHitOnceOff",12.0f);
 	}
 	
 	void setHitOnceOff ()
@@ -65,7 +93,7 @@ void Update () {
 	{
 		isHit = true;
 		renderer.material.color = Color.blue;
-		Invoke("setHitOff",8.0f);
+		Invoke("setHitOff",12.0f);
 	}
 	
 	void setHitOff ()
@@ -86,6 +114,19 @@ void Update () {
 		allDone = true;
 	}
 
+	public void IsFading()
+	{
+		fading = true;
+		bright = false;
+		//print ("Is fading");
+	}
 	
+	public void IsBright()
+	{
+		fading = false;
+		bright = true;
+		//print ("Is Bright");
+	}
+
 	
 }

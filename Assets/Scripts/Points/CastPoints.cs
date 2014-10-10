@@ -4,7 +4,9 @@ using System.Collections;
 public class CastPoints : MonoBehaviour {
 
 	public SimpleMover mover;
+
 	public GameObject points;
+
 	private GameObject createdPoints;
 
 	private Vector3 pointsPos;
@@ -76,9 +78,9 @@ public class CastPoints : MonoBehaviour {
 	
 	}
 
-	void StartLeading()
+	void StartPoints()
 	{
-		if(!isCreated && createdPoints == null)
+		if(!isCreated)
 		{
 			isCreated = true;
 			if(n)
@@ -104,28 +106,51 @@ public class CastPoints : MonoBehaviour {
 
 			if(nw)
 				createdPoints = (GameObject)Instantiate(points, pointsPos, Quaternion.Euler(0, 0, 315));
-
-
+			
+			// Store creator of points.
+			Detail[] details = createdPoints.GetComponentsInChildren<Detail>();
+			for (int i = 0; i < details.Length; i++)
+			{
+				details[i].creator = gameObject;
+			}
+			MiniPoint[] miniPoints = createdPoints.GetComponentsInChildren<MiniPoint>();
+			for (int i = 0; i < miniPoints.Length; i++)
+			{
+				miniPoints[i].creator = gameObject;
+			}
+			LongDetail[] longdetails = createdPoints.GetComponentsInChildren<LongDetail>();
+			for (int i = 0; i < longdetails.Length; i++)
+			{
+				longdetails[i].creator = gameObject;
+			}
+			LongPoint[] longPoints = createdPoints.GetComponentsInChildren<LongPoint>();
+			for (int i = 0; i < longPoints.Length; i++)
+			{
+				longPoints[i].creator = gameObject;
+			}
+			DeepDetail[] deepdetails = createdPoints.GetComponentsInChildren<DeepDetail>();
+			for (int i = 0; i < deepdetails.Length; i++)
+			{
+				deepdetails[i].creator = gameObject;
+			}
+			DeepPoint[] deepPoints = createdPoints.GetComponentsInChildren<DeepPoint>();
+			for (int i = 0; i < deepPoints.Length; i++)
+			{
+				deepPoints[i].creator = gameObject;
+			}
+			FinalPoint[] finalPoints = createdPoints.GetComponentsInChildren<FinalPoint>();
+			for (int i = 0; i < finalPoints.Length; i++)
+			{
+				finalPoints[i].creator = gameObject;
+			}
 		}
 	}
 
-	void EndLeading()
+	public void CanCreatePoints()
 	{
-		DestroyPoints();
-	}
-
-	void  UnlinkPartner()
-	{
-		DestroyPoints();
-	}
-
-	private void DestroyPoints()
-	{ 
-		if (createdPoints != null)
-		{
-			Destroy(createdPoints);
-			createdPoints = null;	
-		}
 		isCreated = false;
 	}
+
+
 }
+

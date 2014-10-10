@@ -16,9 +16,6 @@ public class ControllerSeek : MonoBehaviour {
 	private float controllerX;
 	private float controllerY;
 
-	//cursor activity state
-	public bool active;
-
 	// Use this for initialization
 	void Start () {
 
